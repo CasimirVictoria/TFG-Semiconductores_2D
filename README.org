@@ -8,4 +8,4 @@ Este Trabajo de Fin de Grado consiste en la computación de los modos vibraciona
 
 El estudiante trabajará la bibliografía pertinente para documentarse sobre el estado de arte teórico, y aprenderá una metodología de cálculo basada en la aproximación armónica a la dinámica de una red bidimensional. Seguidamente, el estudiante implementará un modelo de constantes de fuerza para calcular los modos vibracionales de un material 2D modelo. Seguidamente podran determinarse los modos vibracionales activos Raman.
 
-Este trabajo está diseñado especialmente para estudiantes interasados en programación usando lenguages avanzados tipo Python, siempre orientados a aplicar lo aprendido en las asignaturas de Mecánica Cuántica o Física de Estado Sólido.
+Este trabajo está diseñado especialmente para estudiantes interesados en programación usando lenguages avanzados tipo Python, siempre orientados a aplicar lo aprendido en las asignaturas de Mecánica Cuántica o Física de Estado Sólido.
