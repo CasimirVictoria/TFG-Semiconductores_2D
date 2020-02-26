@@ -1,4 +1,4 @@
-% Created 2020-02-26 dc. 13:00
+% Created 2020-02-26 dc. 17:39
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -27,10 +27,13 @@
 
 \tableofcontents
 
+\begin{abstract}
+Este documento contiene algunas notas (y posiblemente algunos cálculos sencillos) de la bibliografia proporcionada así como aclaraciones y definiciones. No es el trabajo que se presentará.
+\end{abstract}
 \section{Algunos conceptos fundamentales (repaso)}
-\label{sec:orgd4beb07}
-\subsection{Estructura cristalina}
-\label{sec:orgf631ce1}
+\label{sec:org2631e9b}
+\subsection{Estructura cristalina: \href{Tema1\_Estado\_Solido.pdf}{Tema 1 Estado Solido}}
+\label{sec:org88c8526}
 \begin{itemize}
 \item Los sólidos cristalinos son aquellos en los que hay una distribución regular con orden de largo alcance de sus constituyentes atómicos. La característica esencial de la misma es que hay una repetición periódica de un único elemento de volumen que se conoce como celdilla unidad. La periodicidad espacial se describe matemáticamente por medio de la red cristalina, que es el conjunto de puntos o nudos que se obtienen por traslación de uno dado mediante vectores del tipo \(\vec R_{vec l} = l_1 a_1+ l_2 a_2+ l_3 a_3\) con coeficientes enteros, donde \(a_1\) , \(a_2\) y \(a_3\) son tres vectores base. El cristal o estructura cristalina se obtiene asociando a cada nudo de la red un determinado conjunto de átomos que se denomina base.
 
@@ -47,8 +50,8 @@
 \item La existencia de una red cristalina en el espacio de posiciones implica la existencia de otra red cristalina complementaria en el espacio de momentos o vectores de onda conocida como red \(2\pi-\text{recíproca}\). La celdilla unidad fundamental en el espacio de vectores de onda es la celdilla de Wigner-Seitz, centrada en un nudo de la red y formada por planos que bisectan la uniones de éste con sus vecinos próximos. Esta celdilla se conoce como primera zona de Brillouin y su volumen es \((2\pi)^3/V_p\) donde \(V_p\) es el volumen de la celdilla unidad en espacio real. Aquellos vectores de onda que caen sobre las superficies de las zonas de Brillouin son los que cumplen la condición de difracción.
 \end{itemize}
 
-\subsection{Vibraciones atómicas}
-\label{sec:org27b1c50}
+\subsection{Vibraciones atómicas en cristales: \href{Tema2\_Estado\_Solido.pdf}{Tema 2 Estado Sólido}}
+\label{sec:org6c9807a}
 
 Sabemos que los átomos que componen un sólido cristalino se distribuyen de manera regular en el espacio y que entre ellos existen fuerzas que los mantienen así agrupados. Ahora bien, los átomos no permanecen inmóviles sino que vibran alrededor de sus posiciones de equilibrio en la estructura cristalina. Clásicamente, estas vibraciones están relacionadas con la energía térmica, es decir, con la temperatura del cristal; en una descripción cuántica, los átomos vibran incluso en el cero absoluto. La Dinámica de Redes Cristalinas aborda el estudio de las vibraciones atómicas en los sólidos cristalinos o
 vibraciones reticulares. La información que nos proporciona este estudio permite entender las propiedades térmicas de los sólidos, la propagación de ondas elásticas como el sonido, la conducción del calor, las propiedades dieléctricas de los sólidos iónicos (o polares), \ldots{}
@@ -71,16 +74,15 @@ La relación de dispersión nos dice cuál es la frecuencia característica de c
 y no lineal, lo que indica que los sólidos cristalinos son medios dispersivos en los que ondas dedistinta frecuencia se propagan a distinta velocidad.
 
 
-
 \section{{\bfseries\sffamily TODO} Teoria}
-\label{sec:org4380863}
+\label{sec:org3dd8427}
 \subsection{Leer paper: \href{wirtz2004.pdf}{The phonon dispersion of graphite revisited}}
-\label{sec:org238f702}
+\label{sec:org3c6a681}
 \subsubsection{Abstract}
-\label{sec:org55bd6d8}
+\label{sec:orgb6153d2}
 Se revisan los calculos y medidas de la relación de dispersión del grafito. Los calculos a partir de  primeros pincipios (\emph{ab initio}, es decir, cuando sólo se asumen leyes básicas y bién establecidas, excluyendo por ejemplo tablas de parámetros externos o modelos simpificadores) uando la teoría del \textbf{funcional de densidad} concuerdan bién en genral conlos datos experimentales dado que el caracter de largo alcance de la matriz dinámica se tiene debidamente en cuenta. Calculos con una base de onda plana demuestraque para los modos opticos planos la aproximación de gradiente generalizado (GGA) produce frecuencias mas bajas en un 2\% que la aprocimación de densidad local (LDA) y está por taanto mas de acuerdo con el experimento. El caracter de largo alcance de la matriz dinámica limita la validez de las aproximaciones de las consantes de fuerza que coge solo la interacción con unos cuantos atomos de la vecindad en cuenta. Ahora bien, al ajustar las constantes de fuerza a la relación de dispersión ab initio, observamos que la popular aproximación de constantes de fuerza a los 4 primeros vecinos produce un excelente ajuste para los modos a bajas frecuencias y un ajuste moderadamente bueno (con una desviación máxima de 6\%) para los modos a altas frecuencias. Si, adicionalmente, las constantes de fuerza no diagonales para los segundos primeros vecinos son tenidas en cuent, todas las propiedades qualitativas de la dispersion a altas frecuencias pueden reproducirse y la desviación maxima se reduce al 4\%. Se presentan los nuevos parámetros como una base realizable para modelar calculos empíricos de fonones en nanoestructuras de grafito, en particular nanotunos de carbono. 
 \subsubsection{Introducción}
-\label{sec:org5cb5894}
+\label{sec:orgf6f5ab8}
 La enorme cantidad de trabajo sobre la espectroscopia vibracional de nanotubos de carbono ha revivido el interés en las propiedades vibracionales del grafito. Sorprendente, en 2004, el debte sonre la relación de dispersión y la densidad de estados de vibración (VDOS) del grafito aun no estaba cerrada.
 
 El proposito de este paper es revisar los datos teoricos y experimentales disponibles. Los autores presentan calculos ab initio usando las aproximaciones LDA y GGA y muestran que los calculos estan en muy buen acuerdo con la gran mayoria de los datos experimentales. También proporcioan un nuevo ajuste de los parametros de los modelos ampliamente usados de constantes de fuerza. En muchos calculos modelos, los parametros usados se basan solo en un ajuste a una selección de datos experimentales. Ellos realizan, en cambio, un ajuste de los parámetros de los calculos ab initio.
@@ -92,7 +94,7 @@ Los autores ajustan los parámetros de los enfoques 4NNFC y VFF a la relación d
 tubos de diámetro [1]).
 
 \subsubsection{Calculos de fonones a partir de primeros principios}
-\label{sec:orga7347dd}
+\label{sec:org2cad9bc}
 El cálculo de los modos de vibración por metodos de primeros principios comienza con la determinación de la geometria en equilibrio (es decir, las posiciones relativas de los átomos en la celda unidad que producen fuerzas nulas y las constantes de red que conducen a un tensor de estres nulo. Las frecuencias \(\omega\) como función del vector de ondas del phonon, \(\vec q\) son entonces solución a la ecuación secular:
 \begin{equation}
 det\left|\frac{1}{\sqrt{M_s M_t}}C^{\alpha\beta}_{s t}(\vec q)-\omega^2(\vec q)\right|=0
@@ -118,7 +120,7 @@ Tendremos que determinar la matriz dinámica bien en el espació real o en recí
 Alternativamente, puede usarse una teoria perturbativa del funcional de densidad (DFPT).
 
 \subsubsection{Aproximación por contantes de fuerza}
-\label{sec:orga13e156}
+\label{sec:org84a3e5d}
 
 Se muestra en el artículo que el principal objetivo del calculo preciso de fonones en grafito concuerda con los resultados experimentales, sin embargo, para la investigación de nanoestructuras de carbono, a menudo es deseable contar con una aproximación de constantes de fuerza para poder realizar cálculos rápidos, y confiables.
 Se revisan en esta sección los dos principales enfoques sobre fonones de grafito:
@@ -130,27 +132,27 @@ Se revisan en esta sección los dos principales enfoques sobre fonones de grafit
 
 
 \subsection{{\bfseries\sffamily TODO} Mirar libro: \href{Phonons\_Theory\_and\_Experiments\_I.pdf}{Phonons\(_{\text{Theory}}\)\(_{\text{and}}\)\(_{\text{Experiments}}\)\(_{\text{I}}\)}}
-\label{sec:orgaad56bc}
+\label{sec:orgd5e4329}
 \subsubsection{{\bfseries\sffamily DONE} Leer Tema 1}
-\label{sec:orga75034d}
+\label{sec:org062781a}
 \subsubsection{{\bfseries\sffamily TODO} Leer Tema 2}
-\label{sec:orgbcd546e}
+\label{sec:org9b53445}
 \begin{enumerate}
 \item {\bfseries\sffamily TODO} Estudiar fonones 2D
-\label{sec:org10ec0be}
+\label{sec:org8a04a81}
 \item {\bfseries\sffamily TODO} Matriz Dinamica
-\label{sec:org2b320b0}
+\label{sec:orgc2f8bb4}
 \item {\bfseries\sffamily TODO} Autovalores
-\label{sec:orgc54bedc}
+\label{sec:orgea810c2}
 \item {\bfseries\sffamily TODO} Constante de fuerza --> Modos de Vibración
-\label{sec:org0ed74d0}
+\label{sec:org3403c6f}
 \item {\bfseries\sffamily TODO} Cadena Lineal
-\label{sec:orgdc88b3a}
+\label{sec:org66260ca}
 \item Solución analítica
-\label{sec:org5535ce1}
+\label{sec:orgd87e2e3}
 \end{enumerate}
 \subsubsection{{\bfseries\sffamily TODO} Modelo 2D}
-\label{sec:org3524c5f}
+\label{sec:org2e52e0b}
 \subsubsection{{\bfseries\sffamily TODO} Modelo 3D}
-\label{sec:orga807167}
+\label{sec:orga00823c}
 \end{document}
