@@ -1,0 +1,100 @@
+* Algunos conceptos fundamentales (repaso) 
+** Estructura cristalina
+- Los sólidos cristalinos son aquellos en los que hay una distribución regular con orden de largo alcance de sus constituyentes atómicos. La característica esencial de la misma es que hay una repetición periódica de un único elemento de volumen que se conoce como celdilla unidad. La periodicidad espacial se describe matemáticamente por medio de la red cristalina, que es el conjunto de puntos o nudos que se obtienen por traslación de uno dado mediante vectores del tipo $\vec R_{vec l} = l_1 a_1+ l_2 a_2+ l_3 a_3$ con coeficientes enteros, donde $a_1$ , $a_2$ y $a_3$ son tres vectores base. El cristal o estructura cristalina se obtiene asociando a cada nudo de la red un determinado conjunto de átomos que se denomina base.
+
+- Según el tipo de enlaces o interacciones entre los constituyentes elementales del sólido cristalino, distinguimos entre sólidos metálicos, covalentes, iónicos y moleculares.
+
+- En aquellos casos en que las interacciones son esencialmente adireccionales, las estructuras que se adoptan principalmente son las de empaquetamiento compacto, siendo sus máximos exponentes la cúbica compacta y la hexagonal compacta.
+
+- En tres dimensiones sólo hay 14 tipos de redes cristalinas, conocidas como redes de Bravais, de lasque siete son primitivas y siete son centradas. En dos dimensiones hay 5.
+
+- Además de la simetría de traslación, los cristales poseen otros elementos de simetría. Éstos se denominan o.s.p. u o.s.e. según dejen invariante o no algún punto del espacio. La existencia de simetría de traslación, sin embargo, limita qué otros elementos de simetría pueden estar presentes. Se habla así de operaciones de simetría cristalina para denotar su compatibilidad con la existencia de una red cristalina. Los conjuntos de elementos de simetría tienen estructura algebraica de grupo. En tres dimensiones hay sólo 32 g.s.p. y 230 g.s.e. cristalinos. Éstos se organizan en siete sistemas cristalinos.
+
+- Las estructuras cristalinas se pueden determinar analizando diagramas de difracción de rayos X. En éstos, las direcciones en que se producen difracciones vienen determinadas por la red cristalina, mientras que las intensidades de los haces difractados dependen de la base asociada a cada nudo. La condición de difracción se puede expresar por medio de las ecuaciones de Laue, $\vec k'- \vec k=\vec K_{\vec h}$ , o por la ecuación de Bragg, $2d_{\vec h} \sin\theta = n\lambda$ .
+
+- La existencia de una red cristalina en el espacio de posiciones implica la existencia de otra red cristalina complementaria en el espacio de momentos o vectores de onda conocida como red $2\pi-\text{recíproca}$. La celdilla unidad fundamental en el espacio de vectores de onda es la celdilla de Wigner-Seitz, centrada en un nudo de la red y formada por planos que bisectan la uniones de éste con sus vecinos próximos. Esta celdilla se conoce como primera zona de Brillouin y su volumen es $(2\pi)^3/V_p$ donde $V_p$ es el volumen de la celdilla unidad en espacio real. Aquellos vectores de onda que caen sobre las superficies de las zonas de Brillouin son los que cumplen la condición de difracción.
+  
+** Vibraciones atómicas
+
+Sabemos que los átomos que componen un sólido cristalino se distribuyen de manera regular en el espacio y que entre ellos existen fuerzas que los mantienen así agrupados. Ahora bien, los átomos no permanecen inmóviles sino que vibran alrededor de sus posiciones de equilibrio en la estructura cristalina. Clásicamente, estas vibraciones están relacionadas con la energía térmica, es decir, con la temperatura del cristal; en una descripción cuántica, los átomos vibran incluso en el cero absoluto. La Dinámica de Redes Cristalinas aborda el estudio de las vibraciones atómicas en los sólidos cristalinos o
+vibraciones reticulares. La información que nos proporciona este estudio permite entender las propiedades térmicas de los sólidos, la propagación de ondas elásticas como el sonido, la conducción del calor, las propiedades dieléctricas de los sólidos iónicos (o polares), ...
+
+Muchas propiedades físicas de los sólidos pueden clasificarse como electrónicas o vibracionales según que estén determinadas por los electrones o por el movimiento de los átomos alrededor de sus posiciones de equilibrio.
+La aproximación adiabática establece que el estudio de las vibraciones atómicas puede realizarse obviando la respuesta de los electrones porque éstos, al tener una masa mucho menor, responden casi instantáneamente a los movimientos atómicos.
+
+La descripción de las vibraciones atómicas en términos de los modos normales de vibración permite desacoplar sus ecuaciones de movimiento. Cada modo normal tiene su frecuencia característica y se comporta independientemente de los otros modos normales.
+
+Las vibraciones atómicas en un cristal se asemejan a las que ocurrirían en las posiciones atómicas de equilibrio si la cadena se comportarse como un medio continuo en el que se propagasen simultáneamente una serie de ondas progresivas (o viajeras) de frecuencias $\omega(q)$ y vector de onda $q$.
+
+En un cristal no pueden propagarse ondas de cualquier frecuencia, sino sólo aquellas con frecuencia menor que la frecuencia de corte, la cual es del orden de $10^{13}$ rad/s. Dependiendo de la naturaleza del cristal, puede haber también gaps de frecuencias prohibidas entre 0 y la frecuencia de corte.
+
+La relación de dispersión nos dice cuál es la frecuencia característica de cada modo normal de vibración. Esta relación es periódica con la periodicidad de la red $2\pi\text{-recíproca}$
+
+\begin{equation*}
+\omega(q)=\omega(q+K_h)
+\end{equation*}
+
+y no lineal, lo que indica que los sólidos cristalinos son medios dispersivos en los que ondas dedistinta frecuencia se propagan a distinta velocidad.
+
+
+
+* TODO Teoria 
+** Leer paper: [[file:wirtz2004.pdf][The phonon dispersion of graphite revisited]]
+*** Abstract
+Se revisan los calculos y medidas de la relación de dispersión del grafito. Los calculos a partir de  primeros pincipios (/ab initio/, es decir, cuando sólo se asumen leyes básicas y bién establecidas, excluyendo por ejemplo tablas de parámetros externos o modelos simpificadores) uando la teoría del *funcional de densidad* concuerdan bién en genral conlos datos experimentales dado que el caracter de largo alcance de la matriz dinámica se tiene debidamente en cuenta. Calculos con una base de onda plana demuestraque para los modos opticos planos la aproximación de gradiente generalizado (GGA) produce frecuencias mas bajas en un 2% que la aprocimación de densidad local (LDA) y está por taanto mas de acuerdo con el experimento. El caracter de largo alcance de la matriz dinámica limita la validez de las aproximaciones de las consantes de fuerza que coge solo la interacción con unos cuantos atomos de la vecindad en cuenta. Ahora bien, al ajustar las constantes de fuerza a la relación de dispersión ab initio, observamos que la popular aproximación de constantes de fuerza a los 4 primeros vecinos produce un excelente ajuste para los modos a bajas frecuencias y un ajuste moderadamente bueno (con una desviación máxima de 6%) para los modos a altas frecuencias. Si, adicionalmente, las constantes de fuerza no diagonales para los segundos primeros vecinos son tenidas en cuent, todas las propiedades qualitativas de la dispersion a altas frecuencias pueden reproducirse y la desviación maxima se reduce al 4%. Se presentan los nuevos parámetros como una base realizable para modelar calculos empíricos de fonones en nanoestructuras de grafito, en particular nanotunos de carbono. 
+*** Introducción
+La enorme cantidad de trabajo sobre la espectroscopia vibracional de nanotubos de carbono ha revivido el interés en las propiedades vibracionales del grafito. Sorprendente, en 2004, el debte sonre la relación de dispersión y la densidad de estados de vibración (VDOS) del grafito aun no estaba cerrada.
+
+El proposito de este paper es revisar los datos teoricos y experimentales disponibles. Los autores presentan calculos ab initio usando las aproximaciones LDA y GGA y muestran que los calculos estan en muy buen acuerdo con la gran mayoria de los datos experimentales. También proporcioan un nuevo ajuste de los parametros de los modelos ampliamente usados de constantes de fuerza. En muchos calculos modelos, los parametros usados se basan solo en un ajuste a una selección de datos experimentales. Ellos realizan, en cambio, un ajuste de los parámetros de los calculos ab initio.
+
+Para describir las aproximaciones empiricas para los calculos de los phonones, la ~central quantity~ es la matriz dinámica, que puede ajustarse directamente a través de las
+constantes de fuerza que describen la interacción átomo-átomo hasta el enésim-vecino más cercano o que se puede construir utilizando el método de campo de fuerza de valencia (VFF) de Aizawa et al.
+
+Los autores ajustan los parámetros de los enfoques 4NNFC y VFF a la relación de dispersión ab initio. Los parámetros proporcionan un base simple, pero cuantitativamente confiable, para cálculos de fonones en nanoestructuras de carbono, en particular nanotubos (utilizando las correcciones de curvatura adecuadas para pequeños
+tubos de diámetro [1]).
+
+*** Calculos de fonones a partir de primeros principios 
+El cálculo de los modos de vibración por metodos de primeros principios comienza con la determinación de la geometria en equilibrio (es decir, las posiciones relativas de los átomos en la celda unidad que producen fuerzas nulas y las constantes de red que conducen a un tensor de estres nulo. Las frecuencias $\omega$ como función del vector de ondas del phonon, $\vec q$ son entonces solución a la ecuación secular:
+\begin{equation}
+det\left|\frac{1}{\sqrt{M_s M_t}}C^{\alpha\beta}_{s t}(\vec q)-\omega^2(\vec q)\right|=0
+\end{equation}
+
+donde $M_s$ y $M_t$ denotan las masas atómicas de los átomos $s$ y $t$ y la *matriz dinámica* se define como: 
+
+\begin{equation}\boxed{
+C^{\alpha\beta}_{s t}(\vec q)=\frac{\partial^2E}{\partial u^{*\alpha}_s (\vec q)\partial u^\beta_t(\vec q)}}
+\label{eq:dynamical-matrix}
+\end{equation}
+
+donde $u^\alpha_s$ denota el desplazamiento del átomo $s$ en la dirección $\alpha$. La segunda derivada de la energía en la Ec. (\ref{eq:dynamical-matrix}) corresponde al cambio de la fuerza actuando en el átomo $t$ en la dirección $\beta$ respecto al desplazamiento del átomo $s$ en la dirección $\alpha$:
+
+\begin{equation}
+C^{\alpha\beta}_{s t}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_s (\vec q)}F^\beta_t(\vec q)
+\label{eq:dynamical-matrix}
+\end{equation}
+
+Notemos la dependencia en $\vec q$ de la matriz dinámica y de los desplazamientos atómicos.
+
+Tendremos que determinar la matriz dinámica bien en el espació real o en recíproco. En la aproximación de constantes de fuerza, un conjunto reducido de $C^{\alpha\beta}_{st}(\vec R)$ son ajustados para reproducir los datos experientales. Las constantes de fuerza pueden calcularse desplazando los átomos de su posicion de equilibriom calculando la energía de la nueva configuración y obteniendo la segunda derivada de la energía mediante un método de diferencias finitas.
+Alternativamente, puede usarse una teoria perturbativa del funcional de densidad (DFPT).
+
+*** Aproximación por contantes de fuerza
+
+Se muestra en el artículo que el principal objetivo del calculo preciso de fonones en grafito concuerda con los resultados experimentales, sin embargo, para la investigación de nanoestructuras de carbono, a menudo es deseable contar con una aproximación de constantes de fuerza para poder realizar cálculos rápidos, y confiables.
+Se revisan en esta sección los dos principales enfoques sobre fonones de grafito:
+- El modelo de campo de fuerza de valencia (VFF: valence force field)
+- La parametrización directa de la diagonal de las constantes de fuerza en el espacio real hasta el 4to vecino más cercano (enfoque 4NNFC, 4 nearest-neighbor force constants aproach).
+- También se da una nuevaparametrización de ambos modelos ajustados a sus calculos a partir de primeros principios
+
+
+** TODO Mirar libro: [[file:Phonons_Theory_and_Experiments_I.pdf][Phonons_Theory_and_Experiments_I]]
+*** DONE Leer Tema 1
+*** TODO Leer Tema 2
+**** TODO Estudiar fonones 2D
+**** TODO Matriz Dinamica
+**** TODO Autovalores
+**** TODO Constante de fuerza --> Modos de Vibración
+**** TODO Cadena Lineal
+**** Solución analítica
+*** TODO Modelo 2D
+*** TODO Modelo 3D
