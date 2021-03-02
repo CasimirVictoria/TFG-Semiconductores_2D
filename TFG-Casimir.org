@@ -26,26 +26,9 @@ La redacción del TFG todavía se encuentra en una versión muy preliminar, de e
 ** Bibliografia basica
   - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]]
   - [[file:Bibliografia/Phonons_ Theory and Experiments I_ Lattice Dynamics and Models of Interatomic Forces.pdf][Phonons Theory]]
-  - [[file:Bibliografia/Mirar/OA_10.1103_PHYSREVB.80.224301.pdf][Theory of elastic and piezoelectric effects in two-dimensional hexagonal boron nitride]]
-  - [[file:Bibliografia/Mirar/Bond softening in monolayer graphite formed on transition-metal carbide surfaces.pdf]]
-  - [[file:Bibliografia/Mirar/Phonon dispersions and piezoelectricity in bulk and multilayers of hexagonal boron nitride.pdf][Phonon dispersions and piezoelectricity in bulk and multilayers of hexagonal boron nitride.pdf]]
-  - [[file:Bibliografia/Mirar/TFG_Toraya.pdf]]       
-
 ** Repaso de Estado Sólido 
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_PortadaxTema_01.pdf][Tema 1 de Estado Sólido]]
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
-* Enlaces interesantes                                         :noexport:
-  - [[https://docs.pybinding.site/en/stable/index.html][pybinding]]
-  - [[https://pymatgen.org/introduction.html][pymatgen]]
-  - [[https://gitlab.kwant-project.org/solidstate/lectures][https://gitlab.kwant-project.org/solidstate/lectures]]
-  - [[https://sagemanifolds.obspm.fr/vector_calculus.html][Vector Calculus with sagemath]]
-* Cosas de programación y tal :noexport:
-
-** Plotly
-   - [[https://plotly.com/python/3d-volume-plots/][3d-volume-plots]]
-
-
-
 
 
    
