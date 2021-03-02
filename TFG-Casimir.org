@@ -250,9 +250,62 @@ del átomo de boro de la celdilla $\vec 0$.
 Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos hasta los cuartos vecinos, mejor genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$.
 
 
+#+begin_src python :session :results output :exports both
+  from numpy import sort
+  def propiedades_atomos(l1, l2):
+     return [(k, m, i, j, R_nu(m,i,j), R_nu(m,i,j)-R_nu(k,0,0),norm(R_nu(m,i,j)-R_nu(k,0,0))) for k in [1,2] for m in [1,2] for i in range(-l1,l1+1) for j in range(-l2,l2+1)]
+
+  indices_propiedades_atomos = [('\nu\prime', int),('\nu', int),('l1', int), ('l2', int), ('Posicion', object), ('Delta R', object), ('distancia', float)]
+
+  def Atomos(l1, l2):
+     return array(propiedades_atomos(l1, l2),dtype=indices_propiedades_atomos)
+
+  def Atomos_ordenados(l1,l2):
+     return sort(Atomos(l1,l2),order='distancia')
 
 
+  print(Atomos_ordenados(1,1))
+#+end_src
 
+#+RESULTS:
+#+begin_example
+[(1, 1,  0,  0, array([0.        , 0.57735027]), array([0., 0.]), 0.        )
+ (2, 2,  0,  0, array([0.5       , 0.28867513]), array([0., 0.]), 0.        )
+ (1, 2, -1,  0, array([-0.5       ,  0.28867513]), array([-0.5       , -0.28867513]), 0.57735027)
+ (1, 2,  0,  0, array([0.5       , 0.28867513]), array([ 0.5       , -0.28867513]), 0.57735027)
+ (1, 2,  0,  1, array([0.        , 1.15470054]), array([0.        , 0.57735027]), 0.57735027)
+ (2, 1,  0, -1, array([ 0.5       , -0.28867513]), array([ 0.        , -0.57735027]), 0.57735027)
+ (2, 1,  0,  0, array([0.        , 0.57735027]), array([-0.5       ,  0.28867513]), 0.57735027)
+ (2, 1,  1,  0, array([1.        , 0.57735027]), array([0.5       , 0.28867513]), 0.57735027)
+ (1, 1, -1, -1, array([-0.5       , -0.28867513]), array([-0.5      , -0.8660254]), 1.        )
+ (1, 1,  0, -1, array([ 0.5       , -0.28867513]), array([ 0.5      , -0.8660254]), 1.        )
+ (1, 1,  0,  1, array([-0.5       ,  1.44337567]), array([-0.5      ,  0.8660254]), 1.        )
+ (1, 1,  1,  1, array([0.5       , 1.44337567]), array([0.5      , 0.8660254]), 1.        )
+ (2, 2, -1, -1, array([ 0.        , -0.57735027]), array([-0.5      , -0.8660254]), 1.        )
+ (2, 2,  0, -1, array([ 1.        , -0.57735027]), array([ 0.5      , -0.8660254]), 1.        )
+ (2, 2,  0,  1, array([0.        , 1.15470054]), array([-0.5      ,  0.8660254]), 1.        )
+ (2, 2,  1,  1, array([1.        , 1.15470054]), array([0.5      , 0.8660254]), 1.        )
+ (1, 1, -1,  0, array([-1.        ,  0.57735027]), array([-1.,  0.]), 1.        )
+ (1, 1,  1,  0, array([1.        , 0.57735027]), array([1., 0.]), 1.        )
+ (2, 2, -1,  0, array([-0.5       ,  0.28867513]), array([-1.,  0.]), 1.        )
+ (2, 2,  1,  0, array([1.5       , 0.28867513]), array([1., 0.]), 1.        )
+ (1, 2, -1, -1, array([ 0.        , -0.57735027]), array([ 0.        , -1.15470054]), 1.15470054)
+ (1, 2, -1,  1, array([-1.        ,  1.15470054]), array([-1.        ,  0.57735027]), 1.15470054)
+ (1, 2,  1,  1, array([1.        , 1.15470054]), array([1.        , 0.57735027]), 1.15470054)
+ (2, 1, -1, -1, array([-0.5       , -0.28867513]), array([-1.        , -0.57735027]), 1.15470054)
+ (2, 1,  1, -1, array([ 1.5       , -0.28867513]), array([ 1.        , -0.57735027]), 1.15470054)
+ (2, 1,  1,  1, array([0.5       , 1.44337567]), array([0.        , 1.15470054]), 1.15470054)
+ (1, 2,  0, -1, array([ 1.        , -0.57735027]), array([ 1.        , -1.15470054]), 1.52752523)
+ (2, 1,  0,  1, array([-0.5       ,  1.44337567]), array([-1.        ,  1.15470054]), 1.52752523)
+ (1, 2,  1,  0, array([1.5       , 0.28867513]), array([ 1.5       , -0.28867513]), 1.52752523)
+ (2, 1, -1,  0, array([-1.        ,  0.57735027]), array([-1.5       ,  0.28867513]), 1.52752523)
+ (1, 1, -1,  1, array([-1.5       ,  1.44337567]), array([-1.5      ,  0.8660254]), 1.73205081)
+ (1, 1,  1, -1, array([ 1.5       , -0.28867513]), array([ 1.5      , -0.8660254]), 1.73205081)
+ (2, 2, -1,  1, array([-1.        ,  1.15470054]), array([-1.5      ,  0.8660254]), 1.73205081)
+ (2, 2,  1, -1, array([ 2.        , -0.57735027]), array([ 1.5      , -0.8660254]), 1.73205081)
+ (1, 2,  1, -1, array([ 2.        , -0.57735027]), array([ 2.        , -1.15470054]), 2.30940108)
+ (2, 1, -1,  1, array([-1.5       ,  1.44337567]), array([-2.        ,  1.15470054]), 2.30940108)]
+#+end_example
 
 
 
