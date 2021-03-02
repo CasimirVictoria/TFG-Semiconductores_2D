@@ -1,0 +1,285 @@
+#+TITLE: Astrofisica. Tarea a entregar del Tema 6
+#+LaTeX_HEADER:\usepackage[a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm]{geometry}
+#+LaTeX_HEADER:\usepackage[utf8]{inputenc}
+#+LaTeX_HEADER:\usepackage{siunitx}
+#+LaTeX_HEADER:\usepackage{amsmath}
+#+LaTeX_HEADER:\usepackage{booktabs} %Publication quality tables in LaTeX.
+
+\begin{abstract}
+Los materiales bidimensionales (2D) como el grafeno son de gran interés tanto por sus
+propiedades físicas exclusivas como por sus aplicaciones potenciales. El estudio de la dinámica de la red cristalina (fonones) de estos materiales es un requisito previo para entender su estabilidad estructural y propiedades térmicas, así como sus propiedades de transporte y ópticas.
+
+
+Este Trabajo de Fin de Grado consiste en la computación de los modos vibracionales de
+materiales semiconductores 2D y su correlación con los observables relevantes para la interpretación
+de los experimentos de dispersión de luz.
+
+\end{abstract}
+
+\color{blue}
+La redacción del TFG todavía se encuentra en una versión muy preliminar, de echo es más un bloc de notas que lo que espero que sea el TFG final.
+\normalcolor
+
+\newpage
+
+* Bibliografía y apuntes de repaso                      :noexport:
+** Bibliografia basica
+  - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]]
+  - [[file:Bibliografia/Phonons_ Theory and Experiments I_ Lattice Dynamics and Models of Interatomic Forces.pdf][Phonons Theory]]
+  - [[file:Bibliografia/Mirar/OA_10.1103_PHYSREVB.80.224301.pdf][Theory of elastic and piezoelectric effects in two-dimensional hexagonal boron nitride]]
+  - [[file:Bibliografia/Mirar/Bond softening in monolayer graphite formed on transition-metal carbide surfaces.pdf]]
+  - [[file:Bibliografia/Mirar/Phonon dispersions and piezoelectricity in bulk and multilayers of hexagonal boron nitride.pdf][Phonon dispersions and piezoelectricity in bulk and multilayers of hexagonal boron nitride.pdf]]
+  - [[file:Bibliografia/Mirar/TFG_Toraya.pdf]]       
+
+** Repaso de Estado Sólido 
+  - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_PortadaxTema_01.pdf][Tema 1 de Estado Sólido]]
+  - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
+* Enlaces interesantes                                         :noexport:
+  - [[https://docs.pybinding.site/en/stable/index.html][pybinding]]
+  - [[https://pymatgen.org/introduction.html][pymatgen]]
+  - [[https://gitlab.kwant-project.org/solidstate/lectures][https://gitlab.kwant-project.org/solidstate/lectures]]
+  - [[https://sagemanifolds.obspm.fr/vector_calculus.html][Vector Calculus with sagemath]]
+* Cosas de programación y tal :noexport:
+
+** Plotly
+   - [[https://plotly.com/python/3d-volume-plots/][3d-volume-plots]]
+
+
+
+
+
+   
+* TODO Introduccion
+Las vibraciones reticulares están regidas por las fuerzas que experimentan los átomos cuando se desplazan de su posición de equilibrio. La primera hipótesis es que cada átomo tiene una posicion de equilibrio en el cristal, y consideraremos que estos átomos vibran con una amplitud pequeña alrededor de su posición de equilibrio, de manera que el sólido se encuentra en estados que corresponden a lo que macroscópicamente se conoce como /la region de comportamiento elástico lineal/, donde se verifica la ley de Hooke.
+
+Podremos por tanto aproximar la energia potencial de interaccion por el termino armónico de su desarrolo en serie de potencias del desplazamiento, y la fuerza resultante es por tanto una funcion aproximadamente lineal del desplazamiento
+
+* TODO Desarrollo del trabajo
+
+** Pruebas varias :noexport:
+
+*** Probando que funciona bien Wolfram Language 
+#+begin_src mathematica :results none :export none
+FourierTransform[Cos[x]^2,x,w] // TeXForm
+#+end_src
+
+#+RESULTS:
+: \frac{1}{2} \sqrt{\frac{\pi }{2}} \delta (w-2)+\sqrt{\frac{\pi }{2}} \delta (w)+\frac{1}{2} \sqrt{\frac{\pi }{2}} \delta (w+2)
+   
+
+** TODO Formular la matriz dinámica para el BN  monolayer
+  En el caso del BN monolayer estamos tratando con un cristal bidimensional del base diatómica, cuya celda unidad viene dada por:
+
+\begin{equation}
+\vec a_1=a(1,0);\qquad\vec a_2=a\left(-\frac{1}{2},\frac{\sqrt{3}}{2}\right)
+\end{equation}
+
+
+
+#+begin_src python :session :results output :exports both
+  import numpy as np
+  from  numpy  import array as array
+  from  numpy  import sqrt as sqrt
+  import pandas as pd
+  import matplotlib
+  from matplotlib import pyplot as plt
+  a=1 
+  a1=np.array([a,0])
+  a2=np.array([-a/2,sqrt(3)*a/2])
+#+end_src
+
+#+RESULTS:
+
+
+
+Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo de $2\pi/3$ rad.
+
+#+begin_src python :session :results output :exports both
+  from numpy import vdot
+  from numpy import pi
+  from numpy import arccos
+  from numpy.linalg import norm
+  print(arccos(vdot(a1,a2)/(norm(a1)*norm(a2))))
+#+end_src
+
+#+RESULTS:
+: 2.0943951023931957
+
+Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
+
+Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
+
+Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,
+
+#+begin_src python :session :results none :exports both
+    def nudo(l1,l2):
+     return l1*a1+l2*a2 
+
+    reddenudos=array([nudo(l1,l2) for l1 in range(-3, 4) for l2 in range(-3,4)])
+
+    x = reddenudos[:,0]
+    y = reddenudos[:,1]
+    plt.plot(x,y,"o")
+    ax = plt.axes()
+    ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(1,0)[0],nudo(1,0)[1])
+    ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(0,1)[0],nudo(0,1)[1])
+    plt.savefig("Graficas/Reddenudos.jpg")
+    plt.close()
+#+end_src
+
+
+
+
+#+ATTR_ORG: :width 480
+[[file:Graficas/Reddenudos.jpg]]
+
+
+Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio  en la celda unidad **nota: proporcionadas como datos**
+
+Los átomos estan situados en:
+
+\begin{equation}
+\begin{aligned}
+\vec R_B&=\frac{1}{3}\vec{a_1}+2\vec{a_2}\\
+\vec R_N&=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2}
+\end{aligned}
+\end{equation}
+
+#+begin_src python :session :results none :exports both
+  R_B=1/3*a1+2/3*a2
+  R_N=2/3*a1+1/3*a2
+
+  ## La gráficas las he echo usando sagemath, las volvere a hacer con matplotlib, o plotly o otra cosa si eso
+  #  Celda=plot(arrow((0,0),(a1/a),color="red")+
+  #	arrow((0,0),(a2/a),color="red")+
+  #	line([(a1/a),(a1/a+a2/a)],linestyle="--",color="red")+
+  #	line([(a2/a),(a2/a+a1/a)],linestyle="--",color="red")+
+  #	point(R_B/a, size=140,color="green")+
+  #	point(R_N/a, size=130,color="red"))
+  #  Celda.save("Celda.png")
+#+end_src
+
+#+RESULTS:
+
+#+ATTR_ORG: :width 280
+
+
+*** Cristales bidimensionales con base diatómica
+
+Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
+
+Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
+Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos diferente, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$. Notemos que aunque los átomos fuesen idénticos, tenemos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes.
+Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$ así como los desplazamientos atómicos $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
+
+#+begin_src python :session :results output :exports both
+  #Posiciones de equilibrio de los átomos
+
+  def R_nu(nu,l1,l2):
+    if nu == 1:
+      return l1*a1+l2*a2+R_B
+
+    elif nu == 2:
+      return l1*a1+l2*a2+R_N
+
+    else:
+      print("Error, nu solo puede ser 1 (Boro) o 2 (Nitrogeno)")
+
+
+  AtomosB=array([R_nu(1,l1,l2) for l1 in range(-4, 5) for l2 in range(-4,5)])
+
+  AtomosN=array([R_nu(2,l1,l2) for l1 in range(-4, 5) for l2 in range(-4,5)])
+
+  xB = AtomosB[:,0]
+  yB = AtomosB[:,1]
+  plt.plot(xB,yB,"o",color="red")
+
+  xN = AtomosN[:,0]
+  yN = AtomosN[:,1]
+  plt.plot(xN,yN,"o",color="blue")
+
+  plt.savefig("Graficas/Reddeatomos.jpg")
+  plt.close()
+#+end_src
+
+#+RESULTS:
+
+#+ATTR_ORG: :width 480
+[[file:Graficas/Reddeatomos.jpg]]
+
+
+
+Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1,2$) es el número de celdillas en la dirección $\hat a_i$. El cristal tiene tiene $N=N_1N_2$ celdillas unidad primitivas y $2N$ átomos.
+
+*La idea básica es que si la base tiene $N_\nu$ átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los $N_{\nu}$ átomos de la base de la celdilla $\vec 0$*, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de $B$ y la otra para el de $N$.
+
+La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ se puede expresar de manera aproximada como:
+
+\begin{equation*}
+F_{\nu',\vec 0,\nu,\vec l}=\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
+\end{equation*}
+
+donde $\hat R_{\nu',\nu,\vec l}$ es el vector unitario en la dirección $\vec R_{\nu',\nu,\vec l}$
+
+La ecuación de movimiento del átomo $\nu',\vec 0$ es por lo tanto:
+
+\begin{equation*}
+m_{\nu'}\ddot{\vec u}_{\nu',\vec 0}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
+\end{equation*}
+
+
+Buscaremos soluciones de la forma:
+
+\begin{equation*}
+u_ {\nu,\vec l}=\vec A_\nu e^{i\left(\vec q\cdot\vec R_{\vec l}-\omega t\right)}
+\end{equation*}
+
+donde $\vec A_\nu$ es el /vector de polarización/ que determina la amplitud y dirección de vibración de los átomos de tipo $\nu$ . Es importante apreciar que se necesitan tantas amplitudes de vibración como átomos tenga la base porque estos no ocupan posiciones equivalentes y describen vibraciones distintas. Se deben cumplir así $N_\nu=2$ ecuaciones vectoriales del tipo
+
+\begin{equation}\boxed{
+-m_{\nu^{\prime}}\omega^2\vec A_{\nu'}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu'}\right)}
+\label{eq1}
+\end{equation}
+
+Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $2N_\nu\times 2N_\nu$ ($2\cdot2\times2\cdot2$) de los coeficientes $A_{\nu,i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $2N_\nu=4$ soluciones que describen las $4$ ramas de la relación de dispersión, es decir, las $4$ frecuencias características de los $4$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el doble del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
+
+
+Fijemonos en el átomo de Boro de la celdilla $\vec 0$. Este átomo tiene 3 primeros vecinos situados en las celdillas $(0, 0), (-1,0), (1,1)$, cuyas posiciones són
+#+begin_src python :session :results output :exports both
+print([norm(R_nu(2,0,0)-R_nu(1,0,0)),norm(R_nu(2,-1,0)-R_nu(1,0,0)),norm(R_nu(2,0,1)-R_nu(1,0,0))])
+#+end_src
+
+#+RESULTS:
+
+y se encuentran a distancia src_python[:session]{norm(RN(-1,0)-RB(0,0))} {{{results(=0.5773502691896257=)}}}$ del átomo de boro de lba celdilla $\vec 0$.
+
+Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos hasta los cuartos vecinos, mejor genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+** Matriz dinámica                                                 :noexport:
+   
+
+Las frecuencias $\omega$ de los fonones en función del vector de ondas $\vec q$ son soluciones de la ecuación secular:
+
+\begin{equation}
+\det\left|\frac{1}{\sqrt{M_sM_t}}C^{\alpha\beta}_{st}\left(\vec q\right)-\omega^2\left(\vec q\right)\right| 
+\end{equation}
+
+donde $M_s$ y $M_t$ denotan las masas atómicas de los átoos $s$ y $t$ y la matriz dinámica esta definida cómo:
+
+\begin{equation}
+C^{\alpha\beta}_{st}\left(\vec q\right)=\frac{\partial^2E}{\partial u^{*\alpha}_s\left(\vec q\right)\partial u^{\beta}_{t}\left(\vec q\right)}
+\end{equation}
+
+donde $u^{*\alpha}_{s} representa el desplazamiento del átomo $s$ en la dirección $\alpha$ y la segunda derivada de la energía corresponde al cambio de la fuerza que actua en el átomo $t$ en la dirección $\beta$ respecto al desplazamiento del átomo $s$ en la dirección $\alpha$
