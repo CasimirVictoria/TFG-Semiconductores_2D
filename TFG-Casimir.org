@@ -1,4 +1,4 @@
-#+TITLE: Astrofisica. Tarea a entregar del Tema 6
+#+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
 #+LaTeX_HEADER:\usepackage[a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
