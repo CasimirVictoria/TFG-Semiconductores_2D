@@ -244,7 +244,7 @@ donde $\vec A_\nu$ es el /vector de polarización/ que determina la amplitud y d
 Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $2N_\nu\times 2N_\nu$ ($2\cdot2\times2\cdot2$) de los coeficientes $A_{\nu,i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $2N_\nu=4$ soluciones que describen las $4$ ramas de la relación de dispersión, es decir, las $4$ frecuencias características de los $4$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el doble del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
 
 
-Fijemonos en el átomo de Boro de la celdilla $\vec 0$. Este átomo tiene 3 primeros vecinos situados en las celdillas $(0, 0), (-1,0), (1,1)$, cuyas posiciones són
+Fijemonos en el átomo de Boro de la celdilla $\vec 0$. Este átomo tiene 3 primeros vecinos situados en las celdillas $(0, 0), (-1,0), (0,1)$, cuyas posiciones són
 
 #+begin_src python :session :results output :exports both
 print([R_nu(2,0,0),R_nu(2,-1,0),R_nu(2,0,1)])
