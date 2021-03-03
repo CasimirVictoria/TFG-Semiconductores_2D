@@ -254,8 +254,10 @@ Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos has
 
 #+begin_src python :session :results latex :exports both
   def propiedades_atomos(l1, l2):
-     return [(k, m, i, j, R_nu(m,i,j), R_nu(m,i,j)-R_nu(k,0,0),norm(R_nu(m,i,j)-R_nu(k,0,0)))
-	     for k in [1,2] for m in [1,2] for i in range(-l1,l1+1) for j in range(-l2,l2+1)]
+     return [(k, m, i, j, R_nu(m,i,j),
+	    (R_nu(m,i,j)-R_nu(k,0,0))/norm(R_nu(m,i,j)-R_nu(k,0,0)),
+	    norm(R_nu(m,i,j)-R_nu(k,0,0)))
+	    for k in [1,2] for m in [1,2] for i in range(-l1,l1+1) for j in range(-l2,l2+1)]
 
   columnas = [r"$\nu$",r"$\nu\prime$",r"$l_1$", r"$l_2$", r"$\vec R_{\nu,\vec l}$",
 	      r"$\hat R_{\nu\prime,\nu,\vec l}$",'Distancia' ]
@@ -305,13 +307,12 @@ Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos has
      2 &            1 &      2 &      1 &     [1.5, 1.4433756729740643] &       [1.0, 1.1547005383792515] &     1.5275 \\
      2 &            1 &      0 &     -2 &    [1.0, -1.1547005383792515] &      [0.5, -1.4433756729740643] &     1.5275 \\
      1 &            2 &      0 &      2 &      [-0.5, 2.02072594216369] &       [-0.5, 1.443375672974064] &     1.5275 \\
-     1 &            2 &     -2 &     -1 &   [-1.0, -0.5773502691896257] &     [-1.0, -1.1547005383792515] &     1.5275 \\
+     1 &            2 &     -2 &     -1 &   [-1.0, -0.5773502691896257] &     [-1.0, -1.1547005383792515] &     1.5275 \\vsimira
      2 &            1 &     -1 &     -2 &    [0.0, -1.1547005383792515] &     [-0.5, -1.4433756729740643] &     1.5275 \\
      2 &            1 &      2 &      0 &     [2.0, 0.5773502691896257] &      [1.5, 0.28867513459481287] &     1.5275 \\
      2 &            1 &     -1 &      0 &    [-1.0, 0.5773502691896257] &     [-1.5, 0.28867513459481287] &     1.5275 \\
      1 &            2 &     -2 &      0 &   [-1.5, 0.28867513459481287] &    [-1.5, -0.28867513459481287] &     1.5275 \\
      1 &            2 &      1 &      0 &    [1.5, 0.28867513459481287] &     [1.5, -0.28867513459481287] &     1.5275 \\
-     2 &            2 &      1 &      2 &       [0.5, 2.02072594216369] &        [0.0, 1.732050807568877] &     1.7321 \\
 \bottomrule
 \end{tabular}
 #+end_export
