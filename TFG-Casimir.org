@@ -88,6 +88,7 @@ Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los
 #+RESULTS:
 : 2.0943951023931957
 
+
 Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
 
 Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
@@ -249,6 +250,7 @@ del átomo de boro de la celdilla $\vec 0$.
 
 Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos hasta los cuartos vecinos, mejor genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$.
 
+\newpage
 
 #+begin_src python :session :results latex :exports both
     def propiedades_atomos(l1, l2):
