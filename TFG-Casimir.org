@@ -1,5 +1,5 @@
 #+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
-#+LaTeX_HEADER:\usepackage[a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm]{geometry}
+#+LaTeX_HEADER:\usepackage[a4paper,left=1cm,right=1cm,top=1cm,bottom=1.5cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
 #+LaTeX_HEADER:\usepackage{amsmath}
@@ -20,36 +20,40 @@ de los experimentos de dispersión de luz.
 La redacción del TFG todavía se encuentra en una versión muy preliminar, de echo es más un bloc de notas que lo que espero que sea el TFG final.
 \normalcolor
 
-\newpage
+
 
 * Bibliografía y apuntes de repaso                      :noexport:
 ** Bibliografia basica
   - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]]
+    - 
   - [[file:Bibliografia/Phonons_ Theory and Experiments I_ Lattice Dynamics and Models of Interatomic Forces.pdf][Phonons Theory]]
 ** Repaso de Estado Sólido 
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_PortadaxTema_01.pdf][Tema 1 de Estado Sólido]]
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
 
 
+* Pruebas varias (para probar el funcionamiento de org-mode, ...) :noexport:
+
+** Probando que funciona bien Wolfram Language 
+#+begin_src mathematica :results latex :export both
+FourierTransform[Cos[x],x,w] // TeXForm
+#+end_src
+
+#+RESULTS:
+#+begin_export latex
+\sqrt{\frac{\pi }{2}} \delta (w-1)+\sqrt{\frac{\pi }{2}} \delta (w+1)
+#+end_export
+  
    
 * TODO Introduccion
 Las vibraciones reticulares están regidas por las fuerzas que experimentan los átomos cuando se desplazan de su posición de equilibrio. La primera hipótesis es que cada átomo tiene una posicion de equilibrio en el cristal, y consideraremos que estos átomos vibran con una amplitud pequeña alrededor de su posición de equilibrio, de manera que el sólido se encuentra en estados que corresponden a lo que macroscópicamente se conoce como /la region de comportamiento elástico lineal/, donde se verifica la ley de Hooke.
 
 Podremos por tanto aproximar la energia potencial de interaccion por el termino armónico de su desarrolo en serie de potencias del desplazamiento, y la fuerza resultante es por tanto una funcion aproximadamente lineal del desplazamiento
 
+\newpage
+
 * TODO Desarrollo del trabajo
-
-** Pruebas varias :noexport:
-
-*** Probando que funciona bien Wolfram Language 
-#+begin_src mathematica :results none :export none
-FourierTransform[Cos[x]^2,x,w] // TeXForm
-#+end_src
-
-#+RESULTS:
-: \frac{1}{2} \sqrt{\frac{\pi }{2}} \delta (w-2)+\sqrt{\frac{\pi }{2}} \delta (w)+\frac{1}{2} \sqrt{\frac{\pi }{2}} \delta (w+2)
    
-
 ** TODO Formular la matriz dinámica para el BN  monolayer
   En el caso del BN monolayer estamos tratando con un cristal bidimensional del base diatómica, cuya celda unidad viene dada por:
 
@@ -58,10 +62,10 @@ FourierTransform[Cos[x]^2,x,w] // TeXForm
 \end{equation}
 
 
-
 #+begin_src python :session :results output :exports both
   import numpy as np
-  from  numpy  import array, sqrt, sort
+  from  numpy  import array, sqrt, sort, vdot, pi, arccos
+  from numpy.linalg import norm
   import pandas as pd
   import matplotlib
   from matplotlib import pyplot as plt
@@ -73,20 +77,8 @@ FourierTransform[Cos[x]^2,x,w] // TeXForm
 
 #+RESULTS:
 
+Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo de src_python[:session]{'{:.2f}'.format(arccos(vdot(a1,a2)/(norm(a1)*norm(a2))))} {{{results(=2.09=)}}}  $= 2\pi/3$ rad.
 
-
-Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo de $2\pi/3$ rad.
-
-#+begin_src python :session :results output :exports both
-  from numpy import vdot
-  from numpy import pi
-  from numpy import arccos
-  from numpy.linalg import norm
-  print(arccos(vdot(a1,a2)/(norm(a1)*norm(a2))))
-#+end_src
-
-#+RESULTS:
-: 2.0943951023931957
 
 
 Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
@@ -112,8 +104,6 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 #+end_src
 
 
-
-
 #+ATTR_ORG: :width 480
 [[file:Graficas/Reddenudos.jpg]]
 
@@ -132,20 +122,8 @@ Los átomos estan situados en:
 #+begin_src python :session :results none :exports both
   R_B=1/3*a1+2/3*a2
   R_N=2/3*a1+1/3*a2
-
-  ## La gráficas las he echo usando sagemath, las volvere a hacer con matplotlib, o plotly o otra cosa si eso
-  #  Celda=plot(arrow((0,0),(a1/a),color="red")+
-  #	arrow((0,0),(a2/a),color="red")+
-  #	line([(a1/a),(a1/a+a2/a)],linestyle="--",color="red")+
-  #	line([(a2/a),(a2/a+a1/a)],linestyle="--",color="red")+
-  #	point(R_B/a, size=140,color="green")+
-  #	point(R_N/a, size=130,color="red"))
-  #  Celda.save("Celda.png")
 #+end_src
 
-#+RESULTS:
-
-#+ATTR_ORG: :width 280
 
 
 *** Cristales bidimensionales con base diatómica
@@ -153,7 +131,7 @@ Los átomos estan situados en:
 Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
 
 Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
-Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos diferente, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$. Notemos que aunque los átomos fuesen idénticos, tenemos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes.
+Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos diferente, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$. Notemos que aunque los átomos fuesen idénticos tenemos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes.
 Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$ así como los desplazamientos atómicos $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',\nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
 
 #+begin_src python :session :results output :exports both
@@ -200,7 +178,7 @@ Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1
 La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ se puede expresar de manera aproximada como:
 
 \begin{equation*}
-F_{\nu',\vec 0,\nu,\vec l}=\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
+F_{\nu',\vec 0,\nu,\vec l}=\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
 \end{equation*}
 
 donde $\hat R_{\nu',\nu,\vec l}$ es el vector unitario en la dirección $\vec R_{\nu',\nu,\vec l}$
@@ -208,117 +186,161 @@ donde $\hat R_{\nu',\nu,\vec l}$ es el vector unitario en la dirección $\vec R_
 La ecuación de movimiento del átomo $\nu',\vec 0$ es por lo tanto:
 
 \begin{equation*}
-m_{\nu'}\ddot{\vec u}_{\nu',\vec 0}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
+m_{\nu'}\ddot{\vec u}_{\nu',\vec 0}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
 \end{equation*}
 
 
 Buscaremos soluciones de la forma:
 
 \begin{equation*}
-u_ {\nu,\vec l}=\vec A_\nu e^{i\left(\vec q\cdot\vec R_{\vec l}-\omega t\right)}
+\vec u_ {\nu,\vec l}=\vec A_\nu e^{i\left(\vec q\cdot\vec R_{\vec l}-\omega t\right)}
 \end{equation*}
 
-donde $\vec A_\nu$ es el /vector de polarización/ que determina la amplitud y dirección de vibración de los átomos de tipo $\nu$ . Es importante apreciar que se necesitan tantas amplitudes de vibración como átomos tenga la base porque estos no ocupan posiciones equivalentes y describen vibraciones distintas. Se deben cumplir así $N_\nu=2$ ecuaciones vectoriales del tipo
+donde $\vec A_\nu$ es el /vector de polarización/ que determina la amplitud y dirección de vibración de los átomos de tipo $\nu$ . Notemos que aunque el cristal sea bi-dimensional, los átomos de este pueden vibrar en las 3 direcciones espaciales.
+
+Es importante apreciar que se necesitan tantas amplitudes de vibración como átomos tenga la base porque estos no ocupan posiciones equivalentes y describen vibraciones distintas. Se deben cumplir así $N_\nu=2$ ecuaciones vectoriales del tipo
 
 \begin{equation}\boxed{
--m_{\nu^{\prime}}\omega^2\vec A_{\nu'}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\times\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu'}\right)}
+-m_{\nu^{\prime}}\omega^2\vec A_{\nu'}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu'}\right)}
 \label{eq1}
 \end{equation}
 
-Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $2N_\nu\times 2N_\nu$ ($2\cdot2\times2\cdot2$) de los coeficientes $A_{\nu,i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $2N_\nu=4$ soluciones que describen las $4$ ramas de la relación de dispersión, es decir, las $4$ frecuencias características de los $4$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el doble del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
+Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $3N_\nu\otimes 3N_\nu$ ($3\cdot2\otimes 3\cdot2$) de los coeficientes $A_{\nu',i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $3 N_\nu=6$ soluciones que describen las $6$ ramas de la relación de dispersión, es decir, las $6$ frecuencias características de los $6$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el triple del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
 
+Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal. Como los átomo pueden moverse en la tres dimensiones debemos añadir una tercera componente a la matriz $\hat R_{\nu\prime\nu\vec l}\otimes\hat R_{\nu\prime\nu\vec l}$, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, simplemente añadimos un la unidad a la diagonal de la mariz, siendo nulos los otros elementos añadidos.
 
-Fijemonos en el átomo de Boro de la celdilla $\vec 0$. Este átomo tiene 3 primeros vecinos situados en las celdillas $(0, 0), (-1,0), (0,1)$, cuyas posiciones són
-
-#+begin_src python :session :results output :exports both
-print([R_nu(2,0,0),R_nu(2,-1,0),R_nu(2,0,1)])
-#+end_src
-
-#+RESULTS:
-: [array([0.5       , 0.28867513]), array([-0.5       ,  0.28867513]), array([0.        , 1.15470054])]
-
-y se encuentran a ua distancia
-
-#+begin_src python :session :results output :exports both
-print([norm(R_nu(2,0,0)-R_nu(1,0,0)),norm(R_nu(2,-1,0)-R_nu(1,0,0)),norm(R_nu(2,0,1)-R_nu(1,0,0))])
-#+end_src
-
-#+RESULTS:
-: [0.5773502691896257, 0.5773502691896257, 0.5773502691896257]
-
-del átomo de boro de la celdilla $\vec 0$.
-
-Puesto que vamos a considerar no sólo estos primeros vecinos, sino al menos hasta los cuartos vecinos, mejor genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$.
 
 \newpage
+Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos (usando para ello un DataFrame de Pandas, que facilita mucho la manipulación de los datos)
+
 
 #+begin_src python :session :results latex :exports both
-  def propiedades_atomos(l1, l2):
-     return [(k, m, i, j, R_nu(m,i,j),
-	    (R_nu(m,i,j)-R_nu(k,0,0))/norm(R_nu(m,i,j)-R_nu(k,0,0)),
-	    norm(R_nu(m,i,j)-R_nu(k,0,0)))
-	    for k in [1,2] for m in [1,2] for i in range(-l1,l1+1) for j in range(-l2,l2+1)]
+    def propiedades_atomos(l1, l2):
+       return [(k, m, i, j, R_nu(m,i,j),
+	(R_nu(m,i,j)-R_nu(k,0,0))/norm(R_nu(m,i,j)-R_nu(k,0,0)), norm(R_nu(m,i,j)-R_nu(k,0,0)))
+	for k in [1,2] for m in [1,2] for i in range(-l1,l1+1) for j in range(-l2,l2+1)]
 
-  columnas = [r"$\nu$",r"$\nu\prime$",r"$l_1$", r"$l_2$", r"$\vec R_{\nu,\vec l}$",
-	      r"$\hat R_{\nu\prime,\nu,\vec l}$",'Distancia' ]
+    columnas = [r"$\nu$",r"$\nu\prime$",r"$l_1$", r"$l_2$", r"$\vec R_{\nu,\vec l}$",
+		r"$\hat R_{\nu\prime,\nu,\vec l}$",'Distancia' ]
 
-  def Atomos(l1, l2):
-     return pd.DataFrame(propiedades_atomos(l1, l2),columns=columnas)
+    def Atomos(l1, l2):
+       return pd.DataFrame(propiedades_atomos(l1, l2),columns=columnas).sort_values(
+	['Distancia',r"$\nu\prime$"], ascending=[True, True])
 
-  Atomos(2,2).sort_values(by=['Distancia']).head(38).to_latex(
-      escape=False,float_format="{:0.4f}".format,index=False)
+    Atomos(2,2).head(38).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
 #+end_src
 
 #+RESULTS:
 #+begin_export latex
 \begin{tabular}{rrrrllr}
 \toprule
- $\nu$ &  $\nu\prime$ &  $l_1$ &  $l_2$ &         $\vec R_{\nu,\vec l}$ & $\hat R_{\nu\prime,\nu,\vec l}$ &  Distancia \\
+ $\nu$ &  $\nu\prime$ &  $l_1$ &  $l_2$ &         $\vec R_{\nu,\vec l}$ &             $\hat R_{\nu\prime,\nu,\vec l}$ &  Distancia \\
 \midrule
-     2 &            2 &      0 &      0 &    [0.5, 0.28867513459481287] &                      [0.0, 0.0] &     0.0000 \\
-     1 &            1 &      0 &      0 &     [0.0, 0.5773502691896257] &                      [0.0, 0.0] &     0.0000 \\
-     1 &            2 &     -1 &      0 &   [-0.5, 0.28867513459481287] &    [-0.5, -0.28867513459481287] &     0.5774 \\
-     2 &            1 &      1 &      0 &     [1.0, 0.5773502691896257] &      [0.5, 0.28867513459481287] &     0.5774 \\
-     1 &            2 &      0 &      0 &    [0.5, 0.28867513459481287] &     [0.5, -0.28867513459481287] &     0.5774 \\
-     1 &            2 &      0 &      1 &     [0.0, 1.1547005383792515] &       [0.0, 0.5773502691896257] &     0.5774 \\
-     2 &            1 &      0 &     -1 &   [0.5, -0.28867513459481287] &      [0.0, -0.5773502691896257] &     0.5774 \\
-     2 &            1 &      0 &      0 &     [0.0, 0.5773502691896257] &     [-0.5, 0.28867513459481287] &     0.5774 \\
-     1 &            1 &     -1 &     -1 &  [-0.5, -0.28867513459481287] &     [-0.5, -0.8660254037844386] &     1.0000 \\
-     2 &            2 &      0 &     -1 &    [1.0, -0.5773502691896257] &      [0.5, -0.8660254037844386] &     1.0000 \\
-     1 &            1 &      0 &     -1 &   [0.5, -0.28867513459481287] &      [0.5, -0.8660254037844386] &     1.0000 \\
-     2 &            2 &      1 &      1 &     [1.0, 1.1547005383792515] &       [0.5, 0.8660254037844386] &     1.0000 \\
-     1 &            1 &      0 &      1 &    [-0.5, 1.4433756729740643] &      [-0.5, 0.8660254037844386] &     1.0000 \\
-     2 &            2 &      0 &      1 &     [0.0, 1.1547005383792515] &      [-0.5, 0.8660254037844386] &     1.0000 \\
-     1 &            1 &      1 &      1 &     [0.5, 1.4433756729740643] &       [0.5, 0.8660254037844386] &     1.0000 \\
-     2 &            2 &     -1 &     -1 &    [0.0, -0.5773502691896257] &     [-0.5, -0.8660254037844386] &     1.0000 \\
-     1 &            1 &     -1 &      0 &    [-1.0, 0.5773502691896257] &                     [-1.0, 0.0] &     1.0000 \\
-     2 &            2 &      1 &      0 &    [1.5, 0.28867513459481287] &                      [1.0, 0.0] &     1.0000 \\
-     2 &            2 &     -1 &      0 &   [-0.5, 0.28867513459481287] &                     [-1.0, 0.0] &     1.0000 \\
-     1 &            1 &      1 &      0 &     [1.0, 0.5773502691896257] &                      [1.0, 0.0] &     1.0000 \\
-     2 &            1 &     -1 &     -1 &  [-0.5, -0.28867513459481287] &     [-1.0, -0.5773502691896257] &     1.1547 \\
-     1 &            2 &     -1 &      1 &    [-1.0, 1.1547005383792515] &      [-1.0, 0.5773502691896257] &     1.1547 \\
-     1 &            2 &      1 &      1 &     [1.0, 1.1547005383792515] &       [1.0, 0.5773502691896257] &     1.1547 \\
-     2 &            1 &      1 &      1 &     [0.5, 1.4433756729740643] &       [0.0, 1.1547005383792515] &     1.1547 \\
-     1 &            2 &     -1 &     -1 &    [0.0, -0.5773502691896257] &      [0.0, -1.1547005383792515] &     1.1547 \\
-     2 &            1 &      1 &     -1 &   [1.5, -0.28867513459481287] &      [1.0, -0.5773502691896257] &     1.1547 \\
-     1 &            2 &      1 &      2 &       [0.5, 2.02072594216369] &        [0.5, 1.443375672974064] &     1.5275 \\
-     2 &            1 &      0 &      1 &    [-0.5, 1.4433756729740643] &      [-1.0, 1.1547005383792515] &     1.5275 \\
-     1 &            2 &      0 &     -1 &    [1.0, -0.5773502691896257] &      [1.0, -1.1547005383792515] &     1.5275 \\
-     2 &            1 &      2 &      1 &     [1.5, 1.4433756729740643] &       [1.0, 1.1547005383792515] &     1.5275 \\
-     2 &            1 &      0 &     -2 &    [1.0, -1.1547005383792515] &      [0.5, -1.4433756729740643] &     1.5275 \\
-     1 &            2 &      0 &      2 &      [-0.5, 2.02072594216369] &       [-0.5, 1.443375672974064] &     1.5275 \\
-     1 &            2 &     -2 &     -1 &   [-1.0, -0.5773502691896257] &     [-1.0, -1.1547005383792515] &     1.5275 \\vsimira
-     2 &            1 &     -1 &     -2 &    [0.0, -1.1547005383792515] &     [-0.5, -1.4433756729740643] &     1.5275 \\
-     2 &            1 &      2 &      0 &     [2.0, 0.5773502691896257] &      [1.5, 0.28867513459481287] &     1.5275 \\
-     2 &            1 &     -1 &      0 &    [-1.0, 0.5773502691896257] &     [-1.5, 0.28867513459481287] &     1.5275 \\
-     1 &            2 &     -2 &      0 &   [-1.5, 0.28867513459481287] &    [-1.5, -0.28867513459481287] &     1.5275 \\
-     1 &            2 &      1 &      0 &    [1.5, 0.28867513459481287] &     [1.5, -0.28867513459481287] &     1.5275 \\
+     1 &            1 &      0 &      0 &     [0.0, 0.5773502691896257] &                                  [nan, nan] &     0.0000 \\
+     2 &            2 &      0 &      0 &    [0.5, 0.28867513459481287] &                                  [nan, nan] &     0.0000 \\
+     2 &            1 &      0 &     -1 &   [0.5, -0.28867513459481287] &                                 [0.0, -1.0] &     0.5774 \\
+     2 &            1 &      0 &      0 &     [0.0, 0.5773502691896257] &                  [-0.8660254037844387, 0.5] &     0.5774 \\
+     2 &            1 &      1 &      0 &     [1.0, 0.5773502691896257] &                   [0.8660254037844387, 0.5] &     0.5774 \\
+     1 &            2 &     -1 &      0 &   [-0.5, 0.28867513459481287] &                 [-0.8660254037844387, -0.5] &     0.5774 \\
+     1 &            2 &      0 &      0 &    [0.5, 0.28867513459481287] &                  [0.8660254037844387, -0.5] &     0.5774 \\
+     1 &            2 &      0 &      1 &     [0.0, 1.1547005383792515] &                                  [0.0, 1.0] &     0.5774 \\
+     1 &            1 &     -1 &     -1 &  [-0.5, -0.28867513459481287] &  [-0.5000000000000001, -0.8660254037844387] &     1.0000 \\
+     1 &            1 &      0 &     -1 &   [0.5, -0.28867513459481287] &   [0.5000000000000001, -0.8660254037844387] &     1.0000 \\
+     1 &            1 &      0 &      1 &    [-0.5, 1.4433756729740643] &   [-0.5000000000000001, 0.8660254037844387] &     1.0000 \\
+     1 &            1 &      1 &      1 &     [0.5, 1.4433756729740643] &    [0.5000000000000001, 0.8660254037844387] &     1.0000 \\
+     2 &            2 &     -1 &     -1 &    [0.0, -0.5773502691896257] &  [-0.5000000000000001, -0.8660254037844387] &     1.0000 \\
+     2 &            2 &      0 &     -1 &    [1.0, -0.5773502691896257] &   [0.5000000000000001, -0.8660254037844387] &     1.0000 \\
+     2 &            2 &      0 &      1 &     [0.0, 1.1547005383792515] &   [-0.5000000000000001, 0.8660254037844387] &     1.0000 \\
+     2 &            2 &      1 &      1 &     [1.0, 1.1547005383792515] &    [0.5000000000000001, 0.8660254037844387] &     1.0000 \\
+     1 &            1 &     -1 &      0 &    [-1.0, 0.5773502691896257] &                                 [-1.0, 0.0] &     1.0000 \\
+     1 &            1 &      1 &      0 &     [1.0, 0.5773502691896257] &                                  [1.0, 0.0] &     1.0000 \\
+     2 &            2 &     -1 &      0 &   [-0.5, 0.28867513459481287] &                                 [-1.0, 0.0] &     1.0000 \\
+     2 &            2 &      1 &      0 &    [1.5, 0.28867513459481287] &                                  [1.0, 0.0] &     1.0000 \\
+     2 &            1 &     -1 &     -1 &  [-0.5, -0.28867513459481287] &                 [-0.8660254037844387, -0.5] &     1.1547 \\
+     2 &            1 &      1 &     -1 &   [1.5, -0.28867513459481287] &                  [0.8660254037844387, -0.5] &     1.1547 \\
+     2 &            1 &      1 &      1 &     [0.5, 1.4433756729740643] &                                  [0.0, 1.0] &     1.1547 \\
+     1 &            2 &     -1 &     -1 &    [0.0, -0.5773502691896257] &                                 [0.0, -1.0] &     1.1547 \\
+     1 &            2 &     -1 &      1 &    [-1.0, 1.1547005383792515] &                  [-0.8660254037844387, 0.5] &     1.1547 \\
+     1 &            2 &      1 &      1 &     [1.0, 1.1547005383792515] &                   [0.8660254037844387, 0.5] &     1.1547 \\
+     2 &            1 &     -1 &     -2 &    [0.0, -1.1547005383792515] &   [-0.3273268353539886, -0.944911182523068] &     1.5275 \\
+     2 &            1 &      0 &     -2 &    [1.0, -1.1547005383792515] &    [0.3273268353539886, -0.944911182523068] &     1.5275 \\
+     2 &            1 &      0 &      1 &    [-0.5, 1.4433756729740643] &   [-0.6546536707079772, 0.7559289460184545] &     1.5275 \\
+     2 &            1 &      2 &      1 &     [1.5, 1.4433756729740643] &    [0.6546536707079772, 0.7559289460184545] &     1.5275 \\
+     1 &            2 &     -2 &     -1 &   [-1.0, -0.5773502691896257] &  [-0.6546536707079772, -0.7559289460184545] &     1.5275 \\
+     1 &            2 &      0 &     -1 &    [1.0, -0.5773502691896257] &   [0.6546536707079772, -0.7559289460184545] &     1.5275 \\
+     1 &            2 &      0 &      2 &      [-0.5, 2.02072594216369] &   [-0.3273268353539886, 0.9449111825230679] &     1.5275 \\
+     1 &            2 &      1 &      2 &       [0.5, 2.02072594216369] &    [0.3273268353539886, 0.9449111825230679] &     1.5275 \\
+     2 &            1 &     -1 &      0 &    [-1.0, 0.5773502691896257] &   [-0.9819805060619656, 0.1889822365046136] &     1.5275 \\
+     2 &            1 &      2 &      0 &     [2.0, 0.5773502691896257] &    [0.9819805060619656, 0.1889822365046136] &     1.5275 \\
+     1 &            2 &     -2 &      0 &   [-1.5, 0.28867513459481287] &  [-0.9819805060619656, -0.1889822365046136] &     1.5275 \\
+     1 &            2 &      1 &      0 &    [1.5, 0.28867513459481287] &   [0.9819805060619656, -0.1889822365046136] &     1.5275 \\
 \bottomrule
 \end{tabular}
 #+end_export
 
 
 
+\newpage
+
+Fijemonos, por ahora, sólo en los primeros vecinos del átomo de Boro $\nu\prime=1$ 
+
+#+begin_src python :session :results latex :exports none
+    Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & (Atomos(1,1)['Distancia']>0)&
+		( Atomos(1,1)[r"$\nu\prime$"]==1)].to_latex(escape=False,index=False)
+#+end_src
+
+#+RESULTS:
+#+begin_export latex
+\begin{tabular}{rrrrllr}
+\toprule
+ $\nu$ &  $\nu\prime$ &  $l_1$ &  $l_2$ &        $\vec R_{\nu,\vec l}$ & $\hat R_{\nu\prime,\nu,\vec l}$ &  Distancia \\
+\midrule
+     2 &            1 &      0 &     -1 &  [0.5, -0.28867513459481287] &                     [0.0, -1.0] &    0.57735 \\
+     2 &            1 &      0 &      0 &    [0.0, 0.5773502691896257] &      [-0.8660254037844387, 0.5] &    0.57735 \\
+     2 &            1 &      1 &      0 &    [1.0, 0.5773502691896257] &       [0.8660254037844387, 0.5] &    0.57735 \\
+\bottomrule
+\end{tabular}
+#+end_export
+
+
+Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos 3 $p.v$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
+
+
+\begin{equation}
+\begin{aligned}
+-m_1\omega^2
+\begin{pmatrix}
+{A_1}_x\\
+{A_1}_y}\\
+{A_1}_z}
+\end{pmatrix}& =\alpha_{1,2,(0,0)}\left(\hat R_{1,2,(0,0)}\otimes\hat R_{1,2,(0,0)}\right)\cdot
+\left(\begin{pmatrix}
+{A_2}_x\\
+{A_2}_y\\
+{A_2}_z
+\end{pmatrix}-\begin{pmatrix}
+{A_1}_x}\\
+{A_1}_y}\\
+{A_1}_z}\end{pmatrix}\right)+\\
+ &+\alpha_{1,2(1,0)}\left(\hat R_{1,2,(1,0)}\otimes\hat R_{1,2,(1,0)}\right)\cdot
+\left(\begin{pmatrix}
+{A_2}_x\\
+{A_2}_y\\
+{A_2}_z}
+\end{pmatrix}\cdot e^{i (q_x R_{(1,0)}_x+q_y R_{(1,0)}_y)}-\begin{pmatrix}
+A_{1_x}\\
+A_{1_y}\\
+A_{1_z}\end{pmatrix}\right)\right)\\
+ &+\alpha_{1,2(0,-1)}\left(\hat R_{1,2,(0,-1)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
+\left(\begin{pmatrix}
+A_{2_x}\\
+A_{2_y}\\
+A_{2_z}
+\end{pmatrix}\cdot e^{i (q_x R_{(1,0)}_x+q_y R_{(1,0)}_y)}-\begin{pmatrix}
+A_{1_x}\\
+A_{1_y}\\
+A_{1_z}\end{pmatrix}\right)
+\end{aligned}
 
 
 
