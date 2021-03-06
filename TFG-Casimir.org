@@ -313,7 +313,7 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 #+end_export
 
 
-- Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos 3 $p.v$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
+- Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos $3$ $p.v$, $3$ átomos de $N$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
 
 
 \begin{equation}
@@ -333,19 +333,51 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 \left(\begin{pmatrix}
 {A_2}_x\\
 {A_2}_y\\
-\end{pmatrix}\cdot e^{i q_x a_1}-\begin{pmatrix}
+\end{pmatrix}\cdot e^{i \vec q\cdot \vec a_1}-\begin{pmatrix}
 A_{1_x}\\
 A_{1_y}\end{pmatrix}\right)\right)\\
  &+\alpha_{1,2(0,-1)}\left(\hat R_{1,2,(0,-1)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
 \left(\begin{pmatrix}
 A_{2_x}\\
 A_{2_y}
-\end{pmatrix}\cdot e^{i (-q_ya_2 )}-\begin{pmatrix}
+\end{pmatrix}\cdot e^{-i \vec q\cdot \vec a_2 }-\begin{pmatrix}
 A_{1_x}\\
 A_{1_y}\end{pmatrix}\right)
 \end{aligned}
 
-- Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$
+- Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$ tenemos $3$ átomos de $B$ como primeros vecinos
+
+\begin{equation}
+\begin{aligned}
+-m_2\omega^2
+\begin{pmatrix}
+{A_2}_x\\
+{A_2}_y}
+\end{pmatrix}& =\alpha_{2,1,(0,0)}\left(\hat R_{2,1,(0,0)}\otimes\hat R_{2,1,(0,0)}\right)\cdot
+\left(\begin{pmatrix}
+{A_1}_x\\
+{A_1}_y
+\end{pmatrix}-\begin{pmatrix}
+{A_2}_x}\\
+{A_2}_y}\end{pmatrix}\right)+\\
+ &+\alpha_{2,1,(-1,0)}\left(\hat R_{2,1,(-1,0)}\otimes\hat R_{2,1,(-1,0)}\right)\cdot
+\left(\begin{pmatrix}
+{A_1}_x\\
+{A_1}_y\\
+\end{pmatrix}\cdot e^{-i \vec q\cdot \vec a_1}-\begin{pmatrix}
+A_{1_x}\\
+A_{1_y}\end{pmatrix}\right)\right)\\
+ &+\alpha_{2,1,(0,1)}\left(\hat R_{2,1,(-1,0)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
+\left(\begin{pmatrix}
+A_{1_x}\\
+A_{1_y}
+\end{pmatrix}\cdot e^{i \vec q\cdot \vec a_2}-\begin{pmatrix}
+A_{2_x}\\
+A_{2_y}\end{pmatrix}\right)
+\end{aligned}
+
+
+
 
 
 Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
