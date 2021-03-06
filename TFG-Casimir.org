@@ -22,7 +22,7 @@ La redacción del TFG todavía se encuentra en una versión muy preliminar, de e
 
 
 
-* Bibliografía y apuntes de repaso                      :noexport:
+* Bibliografía y apuntes de repaso                    
 ** Bibliografia basica
   - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]] 
   - [[file:Bibliografia/Phonons_ Theory and Experiments I_ Lattice Dynamics and Models of Interatomic Forces.pdf][Phonons Theory]]
@@ -348,7 +348,8 @@ A_{1_y}\end{pmatrix}\right)
 - Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$
 
 
-Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal:
+Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
+
 - Para $\nu\prime=1$
 
 - Para $\nu\prime=2$
