@@ -31,7 +31,7 @@ La redacción del TFG todavía se encuentra en una versión muy preliminar, de e
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
 
 
-* Pruebas varias (para probar el funcionamiento de org-mode, ...) 
+* Pruebas varias (para probar org-mode, el uso de diversos lenguajes, etc.) 
 
 ** Probando que funciona bien Wolfram Language 
 #+begin_src mathematica :results latex :export both
@@ -290,7 +290,7 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 
 \newpage
 
-Fijemonos, por ahora, sólo en los primeros vecinos:
+** Fijemonos, por ahora, sólo en los primeros vecinos:
 
 #+begin_src python :session :results latex :exports none
     Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & (Atomos(1,1)['Distancia']>0)].to_latex(escape=False,index=False)
@@ -345,7 +345,7 @@ A_{1_x}\\
 A_{1_y}\end{pmatrix}\right)
 \end{aligned}
 
-- Igualmente, para $\nu\prime-2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$
+- Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$
 
 
 Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal:
