@@ -344,6 +344,7 @@ A_{2_y}
 A_{1_x}\\
 A_{1_y}\end{pmatrix}\right)
 \end{aligned}
+\end{equation}
 
 - Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$ tenemos $3$ átomos de $B$ como primeros vecinos
 
@@ -367,7 +368,7 @@ A_{1_y}\end{pmatrix}\right)
 \end{pmatrix}\cdot e^{-i \vec q\cdot \vec a_1}-\begin{pmatrix}
 A_{1_x}\\
 A_{1_y}\end{pmatrix}\right)\right)\\
- &+\alpha_{2,1,(0,1)}\left(\hat R_{2,1,(-1,0)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
+ &+\alpha_{2,1,(0,1)}\left(\hat R_{2,1,(0,1)}\otimes\hat R_{2,1,(0,1)}\right)\cdot
 \left(\begin{pmatrix}
 A_{1_x}\\
 A_{1_y}
@@ -375,12 +376,16 @@ A_{1_y}
 A_{2_x}\\
 A_{2_y}\end{pmatrix}\right)
 \end{aligned}
-
+\end{equation}
 
 
 
 
 Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
+
+\begin{equation}
+-m_\nu\omega^2 A_\nu=\alpha\sum_{\nu\prime,\vec l}\left(A_{\nu\prime}e^{i\vec q\cdot \vec R_{\vec l}}-A_{\nu}\right)
+\end{equation}
 
 - Para $\nu\prime=1$
 
