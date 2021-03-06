@@ -24,15 +24,14 @@ La redacción del TFG todavía se encuentra en una versión muy preliminar, de e
 
 * Bibliografía y apuntes de repaso                      :noexport:
 ** Bibliografia basica
-  - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]]
-    - 
+  - [[file:Bibliografia/wirtz2004.pdf][wirtz2004]] 
   - [[file:Bibliografia/Phonons_ Theory and Experiments I_ Lattice Dynamics and Models of Interatomic Forces.pdf][Phonons Theory]]
 ** Repaso de Estado Sólido 
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_PortadaxTema_01.pdf][Tema 1 de Estado Sólido]]
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
 
 
-* Pruebas varias (para probar el funcionamiento de org-mode, ...) :noexport:
+* Pruebas varias (para probar el funcionamiento de org-mode, ...) 
 
 ** Probando que funciona bien Wolfram Language 
 #+begin_src mathematica :results latex :export both
@@ -87,26 +86,28 @@ Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 
 Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,
 
+#+LATEX:\begin{minipage}{0.6\textwidth}   
 #+begin_src python :session :results none :exports both
-    def nudo(l1,l2):
-     return l1*a1+l2*a2 
+  def nudo(l1,l2):
+   return l1*a1+l2*a2 
 
-    reddenudos=array([nudo(l1,l2) for l1 in range(-3, 4) for l2 in range(-3,4)])
+  reddenudos=array([nudo(l1,l2) for l1 in range(-3, 4)
+    for l2 in range(-3,4)])
 
-    x = reddenudos[:,0]
-    y = reddenudos[:,1]
-    plt.plot(x,y,"o")
-    ax = plt.axes()
-    ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(1,0)[0],nudo(1,0)[1])
-    ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(0,1)[0],nudo(0,1)[1])
-    plt.savefig("Graficas/Reddenudos.jpg")
-    plt.close()
+  x = reddenudos[:,0]
+  y = reddenudos[:,1]
+  plt.plot(x,y,"o")
+  ax = plt.axes()
+  ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(1,0)[0],nudo(1,0)[1])
+  ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(0,1)[0],nudo(0,1)[1])
+  plt.savefig("Graficas/Reddenudos.jpg")
+  plt.close()
 #+end_src
 
-
+#+LATEX:\end{minipage}\begin{minipage}{0.4\textwidth}
 #+ATTR_ORG: :width 480
 [[file:Graficas/Reddenudos.jpg]]
-
+#+LATEX:\end{minipage}
 
 Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio  en la celda unidad **nota: proporcionadas como datos**
 
@@ -134,7 +135,8 @@ Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos diferente, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$. Notemos que aunque los átomos fuesen idénticos tenemos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes.
 Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$ así como los desplazamientos atómicos $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',\nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
 
-#+begin_src python :session :results output :exports both
+#+LATEX:\begin{minipage}{0.55\textwidth}   
+#+begin_src python :session :results none :exports both
   #Posiciones de equilibrio de los átomos
 
   def R_nu(nu,l1,l2):
@@ -145,12 +147,15 @@ Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l
       return l1*a1+l2*a2+R_N
 
     else:
-      print("Error, nu solo puede ser 1 (Boro) o 2 (Nitrogeno)")
+      print("Error, nu solo puede ser 1 (Boro) 
+      o 2 (Nitrogeno)")
 
 
-  AtomosB=array([R_nu(1,l1,l2) for l1 in range(-4, 5) for l2 in range(-4,5)])
+  AtomosB=array([R_nu(1,l1,l2) for l1 in range(-4, 5)
+		 for l2 in range(-4,5)])
 
-  AtomosN=array([R_nu(2,l1,l2) for l1 in range(-4, 5) for l2 in range(-4,5)])
+  AtomosN=array([R_nu(2,l1,l2) for l1 in range(-4, 5)
+		 for l2 in range(-4,5)])
 
   xB = AtomosB[:,0]
   yB = AtomosB[:,1]
@@ -166,11 +171,12 @@ Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l
 
 #+RESULTS:
 
+#+LATEX:\end{minipage}\begin{minipage}{0.4\textwidth}   
 #+ATTR_ORG: :width 480
 [[file:Graficas/Reddeatomos.jpg]]
+#+LATEX:\end{minipage}
 
-
-
+\vspace{0.5cm}
 Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1,2$) es el número de celdillas en la dirección $\hat a_i$. El cristal tiene tiene $N=N_1N_2$ celdillas unidad primitivas y $2N$ átomos.
 
 *La idea básica es que si la base tiene $N_\nu$ átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los $N_{\nu}$ átomos de la base de la celdilla $\vec 0$*, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de $B$ y la otra para el de $N$.
@@ -207,7 +213,9 @@ Es importante apreciar que se necesitan tantas amplitudes de vibración como át
 
 Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $3N_\nu\otimes 3N_\nu$ ($3\cdot2\otimes 3\cdot2$) de los coeficientes $A_{\nu',i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $3 N_\nu=6$ soluciones que describen las $6$ ramas de la relación de dispersión, es decir, las $6$ frecuencias características de los $6$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el triple del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
 
-Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal. Como los átomo pueden moverse en la tres dimensiones debemos añadir una tercera componente a la matriz $\hat R_{\nu\prime\nu\vec l}\otimes\hat R_{\nu\prime\nu\vec l}$, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, simplemente añadimos un la unidad a la diagonal de la mariz, siendo nulos los otros elementos añadidos.
+Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal (puesto que estamos considerando $\hat R_{\nu',\nu,\vec l}$ como vectores de 2 dimensiones . Como los átomos pueden moverse en la tres dimensiones debemos añadir una tercera componente a la matriz $\hat R_{\nu\prime\nu\vec l}\otimes\hat R_{\nu\prime\nu\vec l}$, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, simplemente añadimos la unidad a la diagonal de la matriz, siendo nulos los otros elementos añadidos.
+
+También podemos tratar por separado las vibraciones en el plano por un lado y las perpendiculares al plano, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
 
 
 \newpage
@@ -282,11 +290,10 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 
 \newpage
 
-Fijemonos, por ahora, sólo en los primeros vecinos del átomo de Boro $\nu\prime=1$ 
+Fijemonos, por ahora, sólo en los primeros vecinos:
 
 #+begin_src python :session :results latex :exports none
-    Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & (Atomos(1,1)['Distancia']>0)&
-		( Atomos(1,1)[r"$\nu\prime$"]==1)].to_latex(escape=False,index=False)
+    Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & (Atomos(1,1)['Distancia']>0)].to_latex(escape=False,index=False)
 #+end_src
 
 #+RESULTS:
@@ -298,12 +305,15 @@ Fijemonos, por ahora, sólo en los primeros vecinos del átomo de Boro $\nu\prim
      2 &            1 &      0 &     -1 &  [0.5, -0.28867513459481287] &                     [0.0, -1.0] &    0.57735 \\
      2 &            1 &      0 &      0 &    [0.0, 0.5773502691896257] &      [-0.8660254037844387, 0.5] &    0.57735 \\
      2 &            1 &      1 &      0 &    [1.0, 0.5773502691896257] &       [0.8660254037844387, 0.5] &    0.57735 \\
+     1 &            2 &     -1 &      0 &  [-0.5, 0.28867513459481287] &     [-0.8660254037844387, -0.5] &    0.57735 \\
+     1 &            2 &      0 &      0 &   [0.5, 0.28867513459481287] &      [0.8660254037844387, -0.5] &    0.57735 \\
+     1 &            2 &      0 &      1 &    [0.0, 1.1547005383792515] &                      [0.0, 1.0] &    0.57735 \\
 \bottomrule
 \end{tabular}
 #+end_export
 
 
-Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos 3 $p.v$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
+- Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos 3 $p.v$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
 
 
 \begin{equation}
@@ -311,41 +321,38 @@ Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec
 -m_1\omega^2
 \begin{pmatrix}
 {A_1}_x\\
-{A_1}_y}\\
-{A_1}_z}
+{A_1}_y}
 \end{pmatrix}& =\alpha_{1,2,(0,0)}\left(\hat R_{1,2,(0,0)}\otimes\hat R_{1,2,(0,0)}\right)\cdot
 \left(\begin{pmatrix}
 {A_2}_x\\
-{A_2}_y\\
-{A_2}_z
+{A_2}_y
 \end{pmatrix}-\begin{pmatrix}
 {A_1}_x}\\
-{A_1}_y}\\
-{A_1}_z}\end{pmatrix}\right)+\\
+{A_1}_y}\end{pmatrix}\right)+\\
  &+\alpha_{1,2(1,0)}\left(\hat R_{1,2,(1,0)}\otimes\hat R_{1,2,(1,0)}\right)\cdot
 \left(\begin{pmatrix}
 {A_2}_x\\
 {A_2}_y\\
-{A_2}_z}
-\end{pmatrix}\cdot e^{i (q_x R_{(1,0)}_x+q_y R_{(1,0)}_y)}-\begin{pmatrix}
+\end{pmatrix}\cdot e^{i q_x a_1}-\begin{pmatrix}
 A_{1_x}\\
-A_{1_y}\\
-A_{1_z}\end{pmatrix}\right)\right)\\
+A_{1_y}\end{pmatrix}\right)\right)\\
  &+\alpha_{1,2(0,-1)}\left(\hat R_{1,2,(0,-1)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
 \left(\begin{pmatrix}
 A_{2_x}\\
-A_{2_y}\\
-A_{2_z}
-\end{pmatrix}\cdot e^{i (q_x R_{(1,0)}_x+q_y R_{(1,0)}_y)}-\begin{pmatrix}
+A_{2_y}
+\end{pmatrix}\cdot e^{i (-q_ya_2 )}-\begin{pmatrix}
 A_{1_x}\\
-A_{1_y}\\
-A_{1_z}\end{pmatrix}\right)
+A_{1_y}\end{pmatrix}\right)
 \end{aligned}
 
+- Igualmente, para $\nu\prime-2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$
 
 
+Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal:
+- Para $\nu\prime=1$
 
-
+- Para $\nu\prime=2$
+    
 ** Matriz dinámica                                                 :noexport:
    
 
