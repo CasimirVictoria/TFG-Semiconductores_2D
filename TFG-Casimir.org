@@ -406,14 +406,18 @@ Paso a usar sympy en vez de numpy (si eso ya cambiare la parte anterior a este a
 
 
 
-#+begin_src python :session :results none :exports both
- print_latex(BlockMatrix([[M1], [M2]]).expand()) #.rewrite(cos).trigsimp()
+#+begin_src python :session output none :exports both
+  M=M1.row_insert(2,M2)
+  print(M) #.rewrite(cos).trigsimp()
 #+end_src
 
-\begin{equation}
-\left[\begin{matrix}\left[\begin{matrix}- 1.5 A1x + 0.75 A2x + 0.75 A2x e^{- i a q_{x}} - 0.25 \sqrt{3} A2y + 0.25 \sqrt{3} A2y e^{- i a q_{x}}\\- 1.5 A1y - 0.25 \sqrt{3} A2x + 0.25 \sqrt{3} A2x e^{- i a q_{x}} + 0.25 A2y + 0.25 A2y e^{- i a q_{x}} + 1.0 A2y e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\end{matrix}\right]\\\left[\begin{matrix}- 1.5 A1x + 0.75 A2x e^{i a q_{x}} + 0.75 A2x\\- 1.5 A1y + 0.25 \sqrt{3} A2x e^{i a q_{x}} - 0.25 \sqrt{3} A2x + 1.0 A2y e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + 0.5 A2y\end{matrix}\right]\end{matrix}\right]
-\end{equation}
+#+RESULTS:
 
+\begin{scriptsize}
+\begin{equation}
+\left[\begin{matrix}- 1.5 A1x + 0.75 A2x + 0.75 A2x e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A1y + A2y\right) + 0.25 \sqrt{3} \left(- A1y + A2y e^{- i a q_{x}}\right)\\- 1.5 A1y + 1.0 A2y e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 A2y + 0.25 A2y e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A1x + A2x\right) + 0.25 \sqrt{3} \left(- A1x + A2x e^{- i a q_{x}}\right)\\- 1.5 A1x + 0.75 A2x e^{i a q_{x}} + 0.75 A2x\\- 1.5 A1y + 0.5 A2y + 1.0 A2y e^{- i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} - 0.25 \sqrt{3} \left(- A1x + A2x\right) + 0.25 \sqrt{3} \left(- A1x + A2x e^{i a q_{x}}\right)\end{matrix}\right]
+\end{latex}
+\end{scriptsize}
 \newpage
 
 Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
@@ -431,6 +435,7 @@ Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano 
 
 - Para $\nu\prime=2$
 
+  
 
 *** Con numpy :noexport:   
 #+begin_src python :session :results latex :exports none
