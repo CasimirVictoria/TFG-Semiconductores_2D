@@ -467,6 +467,16 @@ A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba p
 \vec A=\left[\begin{matrix}A1x\\A1y\\A1z\\A2x\\A2y\\A2z\end{matrix}\right]
 \end{equation}
 
+
+- Pasamos ya a calcular la matriz dinámica considerndo sólo los primeros vecinos ...
+#+begin_src python :session :results output :exports both
+  print(Mprova2[2].coeff(A2z))
+#+end_src
+  
+#+RESULTS:
+: exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) + 1 + exp(-I*a*q_x)
+
+
   
 
 *** Con numpy :noexport:   
