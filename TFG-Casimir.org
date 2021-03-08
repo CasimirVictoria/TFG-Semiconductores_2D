@@ -81,27 +81,27 @@ Podremos por tanto aproximar la energia potencial de interaccion por el termino 
 Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo src_python[:session]{'{:.2f}'.format(arccos(vdot(a1,a2)))} {{{results(=2.09=)}}}   $= 2\pi/3$ rad.
 
 
-
 Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
 
 Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 
 Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,
 
+\vspace{0.5cm}
 #+LATEX:\begin{minipage}{0.6\textwidth}   
 #+begin_src python :session :results none :exports both
-  def nudo(l1,l2):
+  def R_l(l1,l2):
    return l1*a1+l2*a2 
 
-  reddenudos=array([nudo(l1,l2) for l1 in range(-3, 4)
+  reddenudos=array([R_l(l1,l2) for l1 in range(-3, 4)
     for l2 in range(-3,4)])
 
   x = reddenudos[:,0]
   y = reddenudos[:,1]
   plt.plot(x,y,"o")
   ax = plt.axes()
-  ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(1,0)[0],nudo(1,0)[1])
-  ax.arrow(nudo(0,0)[0],nudo(0,0)[1],nudo(0,1)[0],nudo(0,1)[1])
+  ax.arrow(R_l(0,0)[0],R_l(0,0)[1],R_l(1,0)[0],R_l(1,0)[1])
+  ax.arrow(R_l(0,0)[0],R_l(0,0)[1],R_l(0,1)[0],R_l(0,1)[1])
   plt.savefig("Graficas/Reddenudos.jpg")
   plt.close()
 #+end_src
@@ -110,6 +110,8 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 #+ATTR_ORG: :width 480
 [[file:Graficas/Reddenudos.jpg]]
 #+LATEX:\end{minipage}
+
+\newpage
 
 Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio  en la celda unidad **nota: proporcionadas como datos**
 
@@ -122,7 +124,7 @@ Los átomos estan situados en:
 \end{aligned}
 \end{equation}
 
-#+begin_src python :session :results none :exports both
+#+begin_src python :session :results none :exports none
   R_B=1/3*a1+2/3*a2
   R_N=2/3*a1+1/3*a2
 #+end_src
@@ -131,17 +133,17 @@ Los átomos estan situados en:
 
 *** Cristales bidimensionales con base diatómica
 
-Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
 
-Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
-Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos diferente, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$. Notemos que aunque los átomos fuesen idénticos tenemos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes.
-Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$ así como los desplazamientos atómicos $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',\nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
+Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$ (notemos que aunque los átomos fuesen idénticos deberíamos especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes).
+
+
+Las posiciones de equilibrio de los átomos: $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$  así como los desplazamientos atómicos: $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',\nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
 
 #+LATEX:\begin{minipage}{0.55\textwidth}   
 #+begin_src python :session :results none :exports both
   #Posiciones de equilibrio de los átomos
 
-  def R_nu(nu,l1,l2):
+  def R_nu_l(nu,l1,l2):
     if nu == 1:
       return l1*a1+l2*a2+R_B
 
@@ -149,13 +151,12 @@ Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l
       return l1*a1+l2*a2+R_N
 
     else:
-      print("Error, nu solo puede ser 1 o 2 "
-)
+      print("Error, nu solo puede ser 1 o 2 ")
 
-  AtomosB=array([R_nu(1,l1,l2) for l1 in range(-4, 5)
+  AtomosB=array([R_nu_l(1,l1,l2) for l1 in range(-4, 5)
 		 for l2 in range(-4,5)])
 
-  AtomosN=array([R_nu(2,l1,l2) for l1 in range(-4, 5)
+  AtomosN=array([R_nu_l(2,l1,l2) for l1 in range(-4, 5)
 		 for l2 in range(-4,5)])
 
   xB = AtomosB[:,0]
@@ -179,6 +180,8 @@ Las posiciones de equilibrio de los átomos $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l
 
 \vspace{0.5cm}
 Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1,2$) es el número de celdillas en la dirección $\hat a_i$. El cristal tiene tiene $N=N_1N_2$ celdillas unidad primitivas y $2N$ átomos.
+
+\newpage
 
 *La idea básica es que si la base tiene $N_\nu$ átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los $N_{\nu}$ átomos de la base de la celdilla $\vec 0$*, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de $B$ y la otra para el de $N$.
 
@@ -216,11 +219,12 @@ Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir 
 
 Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal (puesto que estamos considerando $\hat R_{\nu',\nu,\vec l}$ como vectores de 2 dimensiones . Como los átomos pueden moverse en la tres dimensiones debemos añadir una tercera componente a la matriz $\hat R_{\nu\prime\nu\vec l}\otimes\hat R_{\nu\prime\nu\vec l}$, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, simplemente añadimos la unidad a la diagonal de la matriz, siendo nulos los otros elementos añadidos.
 
-También podemos tratar por separado las vibraciones en el plano por un lado y las perpendiculares al plano, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
+Así que tratamos por un lado las vibraciones en el plano por y por otro las perpendiculares al plano del cristal, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
 
 
-Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos (usando para ello un DataFrame de Pandas, que facilita mucho la manipulación de los datos)
+Debemos determinar cuales son las posiciones de equilibrio de los átomos más cercanos a los átomos de la celda $\vec 0$: para ello genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos (usando para ello un DataFrame de pandas, que facilita mucho la manipulación de los datos)
 
+\newpage
 
 #+begin_src python :session :results latex :exports both
   def propiedades_atomos(l1, l2):
@@ -295,49 +299,58 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 
 *** Fijemonos, por ahora, sólo en los primeros vecinos:
 
+\color{blue}
 
-**** Con sympy
+Paso a usar sympy en vez de numpy (si eso ya cambiare la parte anterior a este apartado más adelante, las modificaciones son mínimas) para intentar determinar la matrix dinámica (y resolver la ecuación secular) simbólicamente
+\normalcolor
+
 #+begin_src python :session :results latex :exports both
-  import pandas as pd
-  from sympy import *
-  a=Symbol('a', real=True, positive=True)
-  q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
-  q=Matrix([q_x,q_y])
-  a_1=Matrix([a,0]); a_2=Matrix([-a/2,sqrt(3)*a/2])
-  R_B=1/3*a_1+2/3*a_2; R_N=2/3*a_1+1/3*a_2
+   from sympy import *
+   a=Symbol('a', real=True, positive=True)
+   q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
+   q=Matrix([q_x,q_y])
+   a_1=Matrix([a,0]); a_2=Matrix([-a/2,sqrt(3)*a/2])
+   R_B=1/3*a_1+2/3*a_2; R_N=2/3*a_1+1/3*a_2
 
-  def R(l_1,l_2):
-    return l_1*a_1+l_2*a_2
+   def R_l(l_1,l_2):
+     return l_1*a_1+l_2*a_2
 
-  def R_nu(nu,l_1,l_2):
-    if nu == 1:
-      return l_1*a_1+l_2*a_2+R_B
+   def R_nu_l(nu,l_1,l_2):
+     if nu == 1:
+       return l_1*a_1+l_2*a_2+R_B
 
-    elif nu == 2:
-      return l_1*a_1+l_2*a_2+R_N
+     elif nu == 2:
+       return l_1*a_1+l_2*a_2+R_N
 
-    else:
-      print("Error, nu solo puede ser 1 o 2 ")
+     else:
+       print("Error, nu solo puede ser 1 o 2 ")
 
-  def R_hat(nuprima,nu,l_1,l_2):
-    return (R_nu(nu,l_1,l_2)-R_nu(nuprima,0,0))/(R_nu(nu,l_1,l_2)-R_nu(nuprima,0,0)).norm()
+   def R_hat(nuprima,nu,l_1,l_2):
+     return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))/(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()
 
-  def propiedades_atomos(l_1, l_2):
-    return [(k, m, i, j, R_hat(k,m,i,j), (R_nu(m,i,j)-R_nu(k,0,0)).norm())
-       for k in [1,2] for m in [1,2] for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
+   def propiedades_atomos(l_1, l_2):
+     return [(k, m, i, j, R_hat(k,m,i,j), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm())
+	for k in [1,2] for m in [1,2] for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
 
-  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",r"$\hat R_{\nu\prime,\nu,\vec l}$"
-	      ,'Distancia']
+   columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",r"$\hat R_{\nu\prime,\nu,\vec l}$"
+	       ,'Distancia']
 
-  def Atomos(l_1, l_2):
-    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(
-      ['Distancia',r"$\nu\prime$"], ascending=[True, True])
+   def Atomos(l_1, l_2):
+     return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(
+       ['Distancia',r"$\nu\prime$"], ascending=[True, True])
 
-  PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']/a<0.9) &
-			    (Atomos(1,1)['Distancia']/a>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
+   PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']/a<0.9) &
+			     (Atomos(1,1)['Distancia']/a>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
 
-  PrimerosVecinosBoro.to_latex(escape=False,index=False)
+   PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']/a<0.9) &
+			     (Atomos(1,1)['Distancia']/a>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
+
 #+end_src   
+
+\newpage
+#+begin_src python :session :results latex :exports both
+  PrimerosVecinosBoro.to_latex(escape=False,index=False)
+#+end_src
 
 #+RESULTS:
 #+begin_export latex
@@ -352,6 +365,7 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 \end{tabular}
 #+end_export
 
+
 #+begin_src python :session :results none :exports both
   alpha=Symbol('alpha')
   A1x, A1y, A2x, A2y = symbols("A1x, A1y, A2x, A2y")
@@ -365,9 +379,6 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 
 
 #+begin_src python :session :results latex :exports both
-  PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']/a<0.9) &
-			    (Atomos(1,1)['Distancia']/a>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
-
   PrimerosVecinosNitrogeno.to_latex(escape=False,index=False)
 #+end_src
 
@@ -403,6 +414,7 @@ Genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,
 \left[\begin{matrix}\left[\begin{matrix}- 1.5 A1x + 0.75 A2x + 0.75 A2x e^{- i a q_{x}} - 0.25 \sqrt{3} A2y + 0.25 \sqrt{3} A2y e^{- i a q_{x}}\\- 1.5 A1y - 0.25 \sqrt{3} A2x + 0.25 \sqrt{3} A2x e^{- i a q_{x}} + 0.25 A2y + 0.25 A2y e^{- i a q_{x}} + 1.0 A2y e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\end{matrix}\right]\\\left[\begin{matrix}- 1.5 A1x + 0.75 A2x e^{i a q_{x}} + 0.75 A2x\\- 1.5 A1y + 0.25 \sqrt{3} A2x e^{i a q_{x}} - 0.25 \sqrt{3} A2x + 1.0 A2y e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + 0.5 A2y\end{matrix}\right]\end{matrix}\right]
 \end{equation}
 
+\newpage
 
 Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
 
