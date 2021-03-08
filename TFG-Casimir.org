@@ -347,6 +347,10 @@ Paso a usar sympy en vez de numpy (si eso ya cambiare la parte anterior a este a
 
 #+end_src   
 
+#+RESULTS:
+#+begin_export latex
+#+end_export
+
 \newpage
 #+begin_src python :session :results latex :exports both
   PrimerosVecinosBoro.to_latex(escape=False,index=False)
@@ -368,7 +372,7 @@ Paso a usar sympy en vez de numpy (si eso ya cambiare la parte anterior a este a
 
 #+begin_src python :session :results none :exports both
   alpha=Symbol('alpha')
-  A1x, A1y, A2x, A2y = symbols("A1x, A1y, A2x, A2y")
+  A1x, A1y, A1z, A2x, A2y, A2z = symbols("A1x, A1y, A1z, A2x, A2y, A2z")
   M1=(R_hat(1,2,-1,0)*R_hat(1,2,-1,0).T*Matrix([A2x*exp(-I*q.dot(a_1))-A1x,
       A2y*exp(-I*q.dot(a_1))-A1y])+
       (R_hat(1,2,0,0)*R_hat(1,2,0,0).T*Matrix([A2x-A1x, A2y-A1y]))+
@@ -426,13 +430,42 @@ Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano 
 \end{equation}
 
 - Para $\nu\prime=1$
+#+begin_src python :session :results none :exports both
+  M_1_z=Matrix([A2z*exp(-I*q.dot(a_1))-A1z+ A2z-A1z+A2z*exp(I*q.dot(a_2))-A1z])
+#+end_src
 
   
-\begin{equation}
--m_{1}\omega^2{A_1}_{z}={\alpha_z}_{p.v}
-\end{equation}
 
 - Para $\nu\prime=2$
+#+begin_src python :session :results none :exports both
+  M_2_z=Matrix([A1z-A2z+ A1z*exp(I*q.dot(a_1))-A2z+A1z*exp(-I*q.dot(a_2))-A2z])
+#+end_src
+
+#+begin_src python :session :results none :exports both
+  Mprova1=M.row_insert(2,M_1_z)
+  Mprova2=Mprova1.row_insert(5,M_1_z)
+  print_latex(Mprova2.expand()) #.rewrite(cos).trigsimp()
+#+end_src
+
+
+
+
+\begin{equation}
+\left[\begin{matrix}- 1.5 A1x + 0.75 A2x + 0.75 A2x e^{- i a q_{x}} - 0.25 \sqrt{3} A2y + 0.25 \sqrt{3} A2y e^{- i a q_{x}}\\- 1.5 A1y - 0.25 \sqrt{3} A2x + 0.25 \sqrt{3} A2x e^{- i a q_{x}} + 0.25 A2y + 0.25 A2y e^{- i a q_{x}} + 1.0 A2y e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\- 3 A1z + A2z + A2z e^{- i a q_{x}} + A2z e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\- 1.5 A1x + 0.75 A2x e^{i a q_{x}} + 0.75 A2x\\- 1.5 A1y + 0.25 \sqrt{3} A2x e^{i a q_{x}} - 0.25 \sqrt{3} A2x + 1.0 A2y e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + 0.5 A2y\\- 3 A1z + A2z + A2z e^{- i a q_{x}} + A2z e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\end{matrix}\right]
+\end{equation}
+
+
+
+A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba por $m_1$ y  3 de abajo por $m_2$) y constante de fuerza $\alpha$ esta vector (es el resultado de multiplicar la denominada matriz dinámica por el vector polarzación $\vec A$, de 6 componentes
+
+#+begin_src python :session :results none :exports both
+  A=Matrix([A1x,A1y,A1z,A2x,A2y,A2z]); B=Matrix([1/A1x,1/A1y,1/A1z,1/A2x,1/A2y,1/A2z])
+  print_latex(B)
+#+end_src
+
+\begin{equation}
+\vec A=\left[\begin{matrix}A1x\\A1y\\A1z\\A2x\\A2y\\A2z\end{matrix}\right]
+\end{equation}
 
   
 
