@@ -469,12 +469,15 @@ A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba p
 
 
 - Pasamos ya a calcular la matriz dinámica considerndo sólo los primeros vecinos ...
-#+begin_src python :session :results output :exports both
-  print(Mprova2[2].coeff(A2z))
+#+begin_src python :session :results none :exports both
+  print_latex(Matrix([Mprova2[i].coeff(j) for i in range(0,6) for j
+   in [A1x, A1y, A1z, A2x, A2y, A2z]]).reshape(6,6))
 #+end_src
   
-#+RESULTS:
-: exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) + 1 + exp(-I*a*q_x)
+\begin{equation}
+\left[\begin{matrix}-1.5 & 0 & 0 & 0.75 + 0.75 e^{- i a q_{x}} & 0 & 0\\0 & -1.5 & 0 & 0 & 1.0 e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 + 0.25 e^{- i a q_{x}} & 0\\0 & 0 & -3 & 0 & 0 & e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\\-1.5 & 0 & 0 & 0.75 e^{i a q_{x}} + 0.75 & 0 & 0\\0 & -1.5 & 0 & 0 & 0.5 + 1.0 e^{- i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\0 & 0 & -3 & 0 & 0 & e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\end{matrix}\right]
+\end{equation}
+
 
 
   
