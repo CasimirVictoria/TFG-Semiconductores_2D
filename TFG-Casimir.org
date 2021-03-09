@@ -454,9 +454,9 @@ Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano 
 \left[\begin{matrix}- 1.5 A1x + 0.75 A2x + 0.75 A2x e^{- i a q_{x}} - 0.25 \sqrt{3} A2y + 0.25 \sqrt{3} A2y e^{- i a q_{x}}\\- 1.5 A1y - 0.25 \sqrt{3} A2x + 0.25 \sqrt{3} A2x e^{- i a q_{x}} + 0.25 A2y + 0.25 A2y e^{- i a q_{x}} + 1.0 A2y e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\- 3 A1z + A2z + A2z e^{- i a q_{x}} + A2z e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\- 1.5 A1x + 0.75 A2x e^{i a q_{x}} + 0.75 A2x\\- 1.5 A1y + 0.25 \sqrt{3} A2x e^{i a q_{x}} - 0.25 \sqrt{3} A2x + 1.0 A2y e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + 0.5 A2y\\- 3 A1z + A2z + A2z e^{- i a q_{x}} + A2z e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\end{matrix}\right]
 \end{equation}
 
-
-
-A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba por $m_1$ y  3 de abajo por $m_2$) y constante de fuerza $\alpha$ esta vector (es el resultado de multiplicar la denominada matriz dinámica por el vector polarzación $\vec A$, de 6 componentes
+\color{red}
+Falta multiplicar por la constante de fuerza $\alpha$, así como introducir las masas de los átomos (restanto en la diagonal).
+\normalcolor
 
 #+begin_src python :session :results none :exports both
   A=Matrix([A1x,A1y,A1z,A2x,A2y,A2z])
