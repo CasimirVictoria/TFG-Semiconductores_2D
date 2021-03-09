@@ -459,8 +459,8 @@ Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano 
 A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba por $m_1$ y  3 de abajo por $m_2$) y constante de fuerza $\alpha$ esta vector (es el resultado de multiplicar la denominada matriz dinámica por el vector polarzación $\vec A$, de 6 componentes
 
 #+begin_src python :session :results none :exports both
-  A=Matrix([A1x,A1y,A1z,A2x,A2y,A2z]); B=Matrix([1/A1x,1/A1y,1/A1z,1/A2x,1/A2y,1/A2z])
-  print_latex(B)
+  A=Matrix([A1x,A1y,A1z,A2x,A2y,A2z])
+  print_latex(A)
 #+end_src
 
 \begin{equation}
@@ -470,7 +470,7 @@ A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba p
 
 - Pasamos ya a calcular la matriz dinámica considerndo sólo los primeros vecinos ...
 #+begin_src python :session :results none :exports both
-  print_latex(Matrix([Mprova2[i].coeff(j) for i in range(0,6) for j
+  print_latex(Matrix([Mprova2[i].coeff(j).expand().rewrite(cos).trigsimp() for i in range(0,6) for j
    in [A1x, A1y, A1z, A2x, A2y, A2z]]).reshape(6,6))
 #+end_src
   
@@ -478,9 +478,9 @@ A falta de multiplicar cada fila por la correspondiente $m_{\nu}$ (3 de arriba p
 \left[\begin{matrix}-1.5 & 0 & 0 & 0.75 + 0.75 e^{- i a q_{x}} & 0 & 0\\0 & -1.5 & 0 & 0 & 1.0 e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 + 0.25 e^{- i a q_{x}} & 0\\0 & 0 & -3 & 0 & 0 & e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\\-1.5 & 0 & 0 & 0.75 e^{i a q_{x}} + 0.75 & 0 & 0\\0 & -1.5 & 0 & 0 & 0.5 + 1.0 e^{- i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\0 & 0 & -3 & 0 & 0 & e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\end{matrix}\right]
 \end{equation}
 
-
-
-  
+\color{red}
+Una vez calculada bién la matriz dinámica para los primeros vecinos (aún no lo está), la idea es programarla directamente mediante un script, no sólo para los primeros vecinos, sino hasa los cuartos vecinos (en vez de mirar yo la distancia, el programa creará una nueva matriz cuando cambie el valor de la distancia ...)
+\normalcolor
 
 *** Con numpy :noexport:   
 #+begin_src python :session :results latex :exports none
