@@ -1,5 +1,5 @@
 #+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
-#+LaTeX_HEADER:\usepackage[12pt,paperwidth=22cm,paperheight=30cm,left=0.1cm,right=0.1cm,top=0.1cm, bottom=0.1cm]{geometry}
+#+LaTeX_HEADER:\usepackage[paperwidth=27cm,paperheight=28cm,left=0.4cm,right=0.4cm,top=0.4cm, bottom=0.4cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
 #+LaTeX_HEADER:\usepackage{amsmath}
@@ -221,7 +221,7 @@ Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir 
 Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal (puesto que estamos considerando $\hat R_{\nu',\nu,\vec l}$ como vectores de 2 dimensiones . Como los átomos pueden moverse en la tres dimensiones debemos añadir una ecuación de movimiento (escalar en este caso) para cada uno de los dos átomos de la base, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, estas dos ecuaciones son de la forma:
 
 \begin{equation}
--m_{\nu\prime}\omega^2A_{\nu\prime}=\sum_{\nu,\vec l}\alpha_{\nu\prime,\nu,\vec l}\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu\prime}\right)}
+-m_{\nu\prime}\omega^2A_{\nu\prime}=\sum_{\nu,\vec l}\alpha_{\nu\prime,\nu,\vec l}\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu\prime}\right)
 \end{equation}
 
 Así que tratamos por un lado las vibraciones en el plano por un lado y por otro las perpendiculares al plano del cristal, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
@@ -316,6 +316,10 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
   R_B=1/3*a_1+2/3*a_2; R_N=2/3*a_1+1/3*a_2
 
   alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
+  alpha_2=Symbol('alpha_2') #constante de fuerza entre 1eros vecinos
+  alpha_3=Symbol('alpha_3') #constante de fuerza entre 1eros vecinos
+  alpha_4=Symbol('alpha_4') #constante de fuerza entre 1eros vecinos
+
   m_1, m_2, omega=symbols("m_1, m_2, omega") #masa de los átomos de Boro y N.
   A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
   A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
@@ -405,9 +409,9 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 #+end_export
 
 #+begin_src python :session :results none :exports both
-	M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-	    3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
-		5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
+  M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+      3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
+	  5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
 #+end_src
 
 #+RESULTS:
@@ -417,9 +421,9 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 \end{equation}
 
 #+begin_src python :session :results none :exports both
-  Mat_Din_primeros_vecinos=(alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
-       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
+    Mat_Din_primeros_vecinos=alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
+      in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-diag(
+	  m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
 #+end_src
 
 \newpage
@@ -435,6 +439,30 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 \end{scriptsize}
 \end{minipage}
 \end{sideways}
+
+
+#+begin_src python :session :results none :exports both
+  M2=SegundosVecinosBoro['Ecuación'].sum().row_insert(2,SegundosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+      3,SegundosVecinosNitrogeno['Ecuación'].sum()).row_insert(5,SegundosVecinosNitrogeno['Ecuación perp.'].sum())
+  Mat_Din_segundos_vecinos=(alpha_2*Matrix([M2[i].coeff(j) for i in range(0,6) for j
+    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
+       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
+  M3=TercerosVecinosBoro['Ecuación'].sum().row_insert(2,TercerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+      3,TercerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
+	  5,TercerosVecinosNitrogeno['Ecuación perp.'].sum())
+  Mat_Din_terceros_vecinos=(alpha_3*Matrix([M3[i].coeff(j) for i in range(0,6) for j
+    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
+       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
+  M4=CuartosVecinosBoro['Ecuación'].sum().row_insert(2,CuartosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+      3,CuartosVecinosNitrogeno['Ecuación'].sum()).row_insert(
+	  5,CuartosVecinosNitrogeno['Ecuación perp.'].sum())
+  Mat_Din_cuartos_vecinos=(alpha_4*Matrix([M4[i].coeff(j) for i in range(0,6) for j
+    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
+       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
+  Mat_Dinamica= Mat_Din_primeros_vecinos+Mat_Din_segundos_vecinos +Mat_Din_terceros_vecinos+Mat_Din_cuartos_vecinos
+#+end_src
+
+Es mucho más facil visualizar cada elemento de la matriz dinámica que visualizarla toda. (se puede exportar el latex a html y visualizarla con un navegador si eso)  
 
 
 
