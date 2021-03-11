@@ -224,7 +224,7 @@ Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos 
 -m_{\nu\prime}\omega^2A_{\nu\prime}=\sum_{\nu,\vec l}\alpha_{\nu\prime,\nu,\vec l}\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu\prime}\right)}
 \end{equation}
 
-Así que tratamos por un lado las vibraciones en el plano por y por otro las perpendiculares al plano del cristal, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
+Así que tratamos por un lado las vibraciones en el plano por un lado y por otro las perpendiculares al plano del cristal, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
 
 
 Debemos determinar cuales son las posiciones de equilibrio de los átomos más cercanos a los átomos de la celda $\vec 0$: para ello genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a cada los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos (usando para ello un DataFrame de pandas, que facilita mucho la manipulación de los datos)
@@ -316,7 +316,7 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
   R_B=1/3*a_1+2/3*a_2; R_N=2/3*a_1+1/3*a_2
 
   alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
-  m_1, m_2=symbols("m_1, m_2") #masa de los átomos de Boro y N.
+  m_1, m_2, omega=symbols("m_1, m_2, omega") #masa de los átomos de Boro y N.
   A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
   A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
 
@@ -328,7 +328,18 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 	return Matrix([A_2_x,A_2_y])
 
       else:
+	 print("Error, nu sólo puede se 1 o 2")
+
+  def A_perp_plano(nu):
+    if nu == 1:
+	return A_1_z
+
+    elif nu == 2:
+	return A_2_z
+
+    else:
 	print("Error, nu sólo puede se 1 o 2")
+
 
   def R_l(l_1,l_2):
     return l_1*a_1+l_2*a_2
@@ -352,10 +363,11 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 
   def propiedades_atomos(l_1, l_2):
     return [(k, m, i, j, R_hat(k,m,i,j)*R_hat(k,m,i,j).T*
-	(A_plano(m)*exp(I*q.dot(R_l(i,j)))-A_plano(k)), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a)
-       for k in [1,2] for m in [1,2] for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
+	   (A_plano(m)*exp(I*q.dot(R_l(i,j)))-A_plano(k)), Matrix([A_perp_plano(m)*exp(I*q.dot(R_l(i,j)))
+	    -A_perp_plano(k)]), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a) for k in [1,2] for m in [1,2]
+	     for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
 
-  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",'Ecuación','Distancia']
+  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",'Ecuación','Ecuación perp.','Distancia']
 
   def Atomos(l_1, l_2):
     return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(
@@ -393,65 +405,24 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 #+end_export
 
 #+begin_src python :session :results none :exports both
-  M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosNitrogeno['Ecuación'].sum())
-  print_latex(M) #.rewrite(cos).trigsimp()
+	M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+	    3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
+		5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
 #+end_src
 
 #+RESULTS:
 
-Por otra parte, tenemos que considerar las vibraciones perpendiculares al plano del cristal, notemos que en este caso tenemos que resolver dos ecuaciones escalares del tipo:
-
 \begin{equation}
--m_\nu\omega^2 A_\nu=\alpha\sum_{\nu\prime,\vec l}\left(A_{\nu\prime}e^{i\vec q\cdot \vec R_{\vec l}}-A_{\nu}\right)
+\left[\begin{matrix}- 1.5 A_{1 x} + 0.75 A_{2 x} + 0.75 A_{2 x} e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A_{1 y} + A_{2 y}\right) + 0.25 \sqrt{3} \left(- A_{1 y} + A_{2 y} e^{- i a q_{x}}\right)\\- 1.5 A_{1 y} + 1.0 A_{2 y} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 A_{2 y} + 0.25 A_{2 y} e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A_{1 x} + A_{2 x}\right) + 0.25 \sqrt{3} \left(- A_{1 x} + A_{2 x} e^{- i a q_{x}}\right)\\- 3 A_{1 z} + A_{2 z} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + A_{2 z} + A_{2 z} e^{- i a q_{x}}\\0.75 A_{1 x} e^{i a q_{x}} + 0.75 A_{1 x} - 1.5 A_{2 x} - 0.25 \sqrt{3} \left(A_{1 y} - A_{2 y}\right) + 0.25 \sqrt{3} \left(A_{1 y} e^{i a q_{x}} - A_{2 y}\right)\\1.0 A_{1 y} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 A_{1 y} e^{i a q_{x}} + 0.25 A_{1 y} - 1.5 A_{2 y} - 0.25 \sqrt{3} \left(A_{1 x} - A_{2 x}\right) + 0.25 \sqrt{3} \left(A_{1 x} e^{i a q_{x}} - A_{2 x}\right)\\A_{1 z} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + A_{1 z} e^{i a q_{x}} + A_{1 z} - 3 A_{2 z}\end{matrix}\right]
 \end{equation}
 
-- Para $\nu\prime=1$
 #+begin_src python :session :results none :exports both
-  M_1_z=Matrix([A_2_z*exp(-I*q.dot(a_1))-A_1_z+ A_2_z-A_1_z+A_2_z*exp(I*q.dot(a_2))-A_1_z])
-#+end_src
-
-  
-
-- Para $\nu\prime=2$
-#+begin_src python :session :results none :exports both
-  M_2_z=Matrix([A_1_z-A_2_z+ A_1_z*exp(I*q.dot(a_1))-A_2_z+A_1_z*exp(-I*q.dot(a_2))-A_2_z])
-#+end_src
-
-#+begin_src python :session :results none :exports both
-  Mprova1=M.row_insert(2,M_1_z)
-  Mprova2=Mprova1.row_insert(5,M_1_z)
-#+end_src
-
-
-
-
-
-\begin{equation}
-\left[\begin{matrix}- 1.5 A_{1 x} + 0.75 A_{2 x} + 0.75 A_{2 x} e^{- i a q_{x}} - 0.25 \sqrt{3} A_{2 y} + 0.25 \sqrt{3} A_{2 y} e^{- i a q_{x}}\\- 1.5 A_{1 y} - 0.25 \sqrt{3} A_{2 x} + 0.25 \sqrt{3} A_{2 x} e^{- i a q_{x}} + 0.25 A_{2 y} + 0.25 A_{2 y} e^{- i a q_{x}} + 1.0 A_{2 y} e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\- 3 A_{1 z} + A_{2 z} + A_{2 z} e^{- i a q_{x}} + A_{2 z} e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\\0.75 A_{1 x} e^{i a q_{x}} + 0.75 A_{1 x} + 0.25 \sqrt{3} A_{1 y} e^{i a q_{x}} - 0.25 \sqrt{3} A_{1 y} - 1.5 A_{2 x}\\0.25 \sqrt{3} A_{1 x} e^{i a q_{x}} - 0.25 \sqrt{3} A_{1 x} + 1.0 A_{1 y} e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + 0.25 A_{1 y} e^{i a q_{x}} + 0.25 A_{1 y} - 1.5 A_{2 y}\\- 3 A_{1 z} + A_{2 z} + A_{2 z} e^{- i a q_{x}} + A_{2 z} e^{- \frac{i a q_{x}}{2}} e^{\frac{\sqrt{3} i a q_{y}}{2}}\end{matrix}\right]
-\end{equation}
-
-
-
-
-- Pasamos ya a calcular la matriz dinámica considerando sólo los primeros vecinos ...
-
-Podemos reescribir la \ref{eq1} de la forma:
-
-\begin{equation}
-0=[m_{\nu}\omega^{2}\delta_{ij} -T_{ij}]A_j
-\label{eq2}
-\end{equation}
-
-
-#+begin_src python :session :results none :exports both
-  m_1,m_2,omega= symbols('m_1, m_2, omega')
-  Mat_Din_primeros_vecinos=(alpha_1*Matrix([Mprova2[i].coeff(j) for i in range(0,6) for j
+  Mat_Din_primeros_vecinos=(alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
     in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
        diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
 #+end_src
 
 \newpage
-
 
 \begin{sideways}
 \begin{minipage}{\textheight}
@@ -459,12 +430,11 @@ Podemos reescribir la \ref{eq1} de la forma:
 \begin{equation}
 \setlength{\arraycolsep}{1pt}
 \renewcommand{\arraystretch}{0.8}
-\left[\begin{matrix}- 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(0.75 + 0.75 e^{- i a q_{x}}\right) & 0 & 0\\0 & - 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(1.0 e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 + 0.25 e^{- i a q_{x}}\right) & 0\\0 & 0 & - 3 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)\\\alpha_{1} \left(0.75 e^{i a q_{x}} + 0.75\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0 & 0\\0 & \alpha_{1} \left(1.0 e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 e^{i a q_{x}} + 0.25\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0\\0 & 0 & - 3 \alpha_{1} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right) - m_{2} \omega^{2}\end{matrix}\right]
+\left[\begin{matrix}- 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(0.75 + 0.75 e^{- i a q_{x}}\right) & 0 & 0\\0 & - 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(1.0 e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 + 0.25 e^{- i a q_{x}}\right) & 0\\0 & 0 & - 3 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)\\\alpha_{1} \left(0.75 e^{i a q_{x}} + 0.75\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0 & 0\\0 & \alpha_{1} \left(1.0 e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 e^{i a q_{x}} + 0.25\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0\\0 & 0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right) & 0 & 0 & - 3 \alpha_{1} - m_{2} \omega^{2}\end{matrix}\right]
 \end{equation}
 \end{scriptsize}
 \end{minipage}
 \end{sideways}
-
 
 
 
