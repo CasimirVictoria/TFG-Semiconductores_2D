@@ -382,7 +382,46 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 
   PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
 			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
+#+end_src   
 
+#+RESULTS:
+#+begin_export latex
+#+end_export
+
+#+begin_src python :session :results none :exports both
+  M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+      3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
+	  5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
+#+end_src
+
+#+RESULTS:
+
+#+begin_src python :session :results none :exports both
+  Mat_Din_primeros_vecinos=alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
+    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)#-diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
+#+end_src
+
+Tenemos por lo tanto que el miembro de la derecha de la ecuación \ref{eq1} es la matriz
+\begin{scriptsize}
+
+\begin{equation}
+\left[\begin{matrix}- \frac{3 \alpha_{1}}{2} & 0 & 0 & \alpha_{1} \left(\frac{3}{4} + \frac{3 e^{- i a q_{x}}}{4}\right) & 0 & 0\\0 & - \frac{3 \alpha_{1}}{2} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{1}{4} + \frac{e^{- i a q_{x}}}{4}\right) & 0\\0 & 0 & - 3 \alpha_{1} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)\\\alpha_{1} \left(\frac{3 e^{i a q_{x}}}{4} + \frac{3}{4}\right) & 0 & 0 & - \frac{3 \alpha_{1}}{2} & 0 & 0\\0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{e^{i a q_{x}}}{4} + \frac{1}{4}\right) & 0 & 0 & - \frac{3 \alpha_{1}}{2} & 0\\0 & 0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right) & 0 & 0 & - 3 \alpha_{1}\end{matrix}\right]
+\end{equation}
+
+
+\end{scriptsize}
+
+multiplicada por $\vec A=\left({A_1}_x,{A_1}_y,{A_1}_z,{A_2}_x,{A_2}_y,{A_2}_z\right)$.
+
+Y el miembro de la izquierda es, evidentemente,
+
+\begin{equation}
+\omega^{2}\left(-m_{1}
+\end{equation}
+
+
+\newpage
+#+begin_src python :session :results none :exports both
   SegundosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']>0.9) &
 			    (Atomos(1,1)['Distancia']<1.1) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
 
@@ -401,47 +440,6 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
   CuartosVecinosNitrogeno= Atomos(2,2)[(Atomos(2,2)['Distancia']> 1.5) &
 			    (Atomos(2,2)['Distancia']<1.7) & (Atomos(2,2)[r"$\nu\prime$"]==2)]
 
-
-#+end_src   
-
-#+RESULTS:
-#+begin_export latex
-#+end_export
-
-#+begin_src python :session :results none :exports both
-  M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-      3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
-	  5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
-#+end_src
-
-#+RESULTS:
-
-\begin{equation}
-\left[\begin{matrix}- 1.5 A_{1 x} + 0.75 A_{2 x} + 0.75 A_{2 x} e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A_{1 y} + A_{2 y}\right) + 0.25 \sqrt{3} \left(- A_{1 y} + A_{2 y} e^{- i a q_{x}}\right)\\- 1.5 A_{1 y} + 1.0 A_{2 y} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 A_{2 y} + 0.25 A_{2 y} e^{- i a q_{x}} - 0.25 \sqrt{3} \left(- A_{1 x} + A_{2 x}\right) + 0.25 \sqrt{3} \left(- A_{1 x} + A_{2 x} e^{- i a q_{x}}\right)\\- 3 A_{1 z} + A_{2 z} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + A_{2 z} + A_{2 z} e^{- i a q_{x}}\\0.75 A_{1 x} e^{i a q_{x}} + 0.75 A_{1 x} - 1.5 A_{2 x} - 0.25 \sqrt{3} \left(A_{1 y} - A_{2 y}\right) + 0.25 \sqrt{3} \left(A_{1 y} e^{i a q_{x}} - A_{2 y}\right)\\1.0 A_{1 y} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 A_{1 y} e^{i a q_{x}} + 0.25 A_{1 y} - 1.5 A_{2 y} - 0.25 \sqrt{3} \left(A_{1 x} - A_{2 x}\right) + 0.25 \sqrt{3} \left(A_{1 x} e^{i a q_{x}} - A_{2 x}\right)\\A_{1 z} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + A_{1 z} e^{i a q_{x}} + A_{1 z} - 3 A_{2 z}\end{matrix}\right]
-\end{equation}
-
-#+begin_src python :session :results none :exports both
-    Mat_Din_primeros_vecinos=alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
-      in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-diag(
-	  m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
-#+end_src
-
-\newpage
-
-\begin{sideways}
-\begin{minipage}{\textheight}
-\begin{scriptsize}
-\begin{equation}
-\setlength{\arraycolsep}{1pt}
-\renewcommand{\arraystretch}{0.8}
-\left[\begin{matrix}- 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(0.75 + 0.75 e^{- i a q_{x}}\right) & 0 & 0\\0 & - 1.5 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(1.0 e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 + 0.25 e^{- i a q_{x}}\right) & 0\\0 & 0 & - 3 \alpha_{1} - m_{1} \omega^{2} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)\\\alpha_{1} \left(0.75 e^{i a q_{x}} + 0.75\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0 & 0\\0 & \alpha_{1} \left(1.0 e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + 0.25 e^{i a q_{x}} + 0.25\right) & 0 & 0 & - 1.5 \alpha_{1} - m_{2} \omega^{2} & 0\\0 & 0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right) & 0 & 0 & - 3 \alpha_{1} - m_{2} \omega^{2}\end{matrix}\right]
-\end{equation}
-\end{scriptsize}
-\end{minipage}
-\end{sideways}
-
-
-#+begin_src python :session :results none :exports both
   M2=SegundosVecinosBoro['Ecuación'].sum().row_insert(2,SegundosVecinosBoro['Ecuación perp.'].sum()).row_insert(
       3,SegundosVecinosNitrogeno['Ecuación'].sum()).row_insert(5,SegundosVecinosNitrogeno['Ecuación perp.'].sum())
   Mat_Din_segundos_vecinos=(alpha_2*Matrix([M2[i].coeff(j) for i in range(0,6) for j
