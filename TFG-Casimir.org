@@ -1,5 +1,5 @@
 #+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
-#+LaTeX_HEADER:\usepackage[paperwidth=27cm,paperheight=28cm,left=0.4cm,right=0.4cm,top=0.4cm, bottom=0.4cm]{geometry}
+#+LaTeX_HEADER:\usepackage[paperwidth=21.0cm,paperheight=29.7cm,left=0.4cm,right=0.4cm,top=0.4cm, bottom=0.4cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
 #+LaTeX_HEADER:\usepackage{amsmath}
@@ -231,89 +231,13 @@ Debemos determinar cuales son las posiciones de equilibrio de los átomos más c
 
 
 #+begin_src python :session :results latex :exports both
-  def R_hat(nuprima,nu,l_1,l_2):
-    if norm(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))>0:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))/norm(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
-    else:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
-
-  def propiedades_atomos(l_1, l_2):
-    return [(k, m, i, j, R_hat(k,m,i,j), norm(R_nu_l(m,i,j)-R_nu_l(k,0,0)))
-       for k in [1,2] for m in [1,2] for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
-
-  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",r"$\hat R_{\nu\prime,\nu,\vec l}$"
-	      ,'Distancia']
-  def Atomos(l1, l2):
-     return pd.DataFrame(propiedades_atomos(l1, l2),columns=columnas).sort_values(
-	['Distancia',r"$\nu\prime$"], ascending=[True, True])
-
-  Atomos(2,2).head(38).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
-#+end_src
-
-#+RESULTS:
-#+begin_export latex
-\begin{tabular}{rrrrlr}
-\toprule
- $\nu\prime$ &  $\nu &  $l_1$ &  $l_2$ &             $\hat R_{\nu\prime,\nu,\vec l}$ &  Distancia \\
-\midrule
-           1 &     1 &      0 &      0 &                                  [0.0, 0.0] &     0.0000 \\
-           2 &     2 &      0 &      0 &                                  [0.0, 0.0] &     0.0000 \\
-           1 &     2 &     -1 &      0 &                 [-0.8660254037844387, -0.5] &     0.5774 \\
-           1 &     2 &      0 &      0 &                  [0.8660254037844387, -0.5] &     0.5774 \\
-           1 &     2 &      0 &      1 &                                  [0.0, 1.0] &     0.5774 \\
-           2 &     1 &      0 &     -1 &                                 [0.0, -1.0] &     0.5774 \\
-           2 &     1 &      0 &      0 &                  [-0.8660254037844387, 0.5] &     0.5774 \\
-           2 &     1 &      1 &      0 &                   [0.8660254037844387, 0.5] &     0.5774 \\
-           1 &     1 &     -1 &     -1 &  [-0.5000000000000001, -0.8660254037844387] &     1.0000 \\
-           1 &     1 &      0 &     -1 &   [0.5000000000000001, -0.8660254037844387] &     1.0000 \\
-           1 &     1 &      0 &      1 &   [-0.5000000000000001, 0.8660254037844387] &     1.0000 \\
-           1 &     1 &      1 &      1 &    [0.5000000000000001, 0.8660254037844387] &     1.0000 \\
-           2 &     2 &     -1 &     -1 &  [-0.5000000000000001, -0.8660254037844387] &     1.0000 \\
-           2 &     2 &      0 &     -1 &   [0.5000000000000001, -0.8660254037844387] &     1.0000 \\
-           2 &     2 &      0 &      1 &   [-0.5000000000000001, 0.8660254037844387] &     1.0000 \\
-           2 &     2 &      1 &      1 &    [0.5000000000000001, 0.8660254037844387] &     1.0000 \\
-           1 &     1 &     -1 &      0 &                                 [-1.0, 0.0] &     1.0000 \\
-           1 &     1 &      1 &      0 &                                  [1.0, 0.0] &     1.0000 \\
-           2 &     2 &     -1 &      0 &                                 [-1.0, 0.0] &     1.0000 \\
-           2 &     2 &      1 &      0 &                                  [1.0, 0.0] &     1.0000 \\
-           1 &     2 &     -1 &     -1 &                                 [0.0, -1.0] &     1.1547 \\
-           1 &     2 &     -1 &      1 &                  [-0.8660254037844387, 0.5] &     1.1547 \\
-           1 &     2 &      1 &      1 &                   [0.8660254037844387, 0.5] &     1.1547 \\
-           2 &     1 &     -1 &     -1 &                 [-0.8660254037844387, -0.5] &     1.1547 \\
-           2 &     1 &      1 &     -1 &                  [0.8660254037844387, -0.5] &     1.1547 \\
-           2 &     1 &      1 &      1 &                                  [0.0, 1.0] &     1.1547 \\
-           1 &     2 &     -2 &     -1 &  [-0.6546536707079772, -0.7559289460184545] &     1.5275 \\
-           1 &     2 &      0 &     -1 &   [0.6546536707079772, -0.7559289460184545] &     1.5275 \\
-           1 &     2 &      0 &      2 &   [-0.3273268353539886, 0.9449111825230679] &     1.5275 \\
-           1 &     2 &      1 &      2 &    [0.3273268353539886, 0.9449111825230679] &     1.5275 \\
-           2 &     1 &     -1 &     -2 &   [-0.3273268353539886, -0.944911182523068] &     1.5275 \\
-           2 &     1 &      0 &     -2 &    [0.3273268353539886, -0.944911182523068] &     1.5275 \\
-           2 &     1 &      0 &      1 &   [-0.6546536707079772, 0.7559289460184545] &     1.5275 \\
-           2 &     1 &      2 &      1 &    [0.6546536707079772, 0.7559289460184545] &     1.5275 \\
-           1 &     2 &     -2 &      0 &  [-0.9819805060619656, -0.1889822365046136] &     1.5275 \\
-           1 &     2 &      1 &      0 &   [0.9819805060619656, -0.1889822365046136] &     1.5275 \\
-           2 &     1 &     -1 &      0 &   [-0.9819805060619656, 0.1889822365046136] &     1.5275 \\
-           2 &     1 &      2 &      0 &    [0.9819805060619656, 0.1889822365046136] &     1.5275 \\
-\bottomrule
-\end{tabular}
-#+end_export
-
-\newpage
-
-*** Fijemonos, por ahora, sólo en los primeros vecinos:
-
-\color{blue}
-Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica simbólicamente
-\normalcolor
-
-#+begin_src python :session :results latex :exports both
   from sympy import *
   import pandas as pd
   a=Symbol('a', real=True, positive=True)
   q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
   q=Matrix([q_x,q_y])
-  a_1=Matrix([a,0]); a_2=Matrix([-a/2,sqrt(3)*a/2])
-  R_B=1/3*a_1+2/3*a_2; R_N=2/3*a_1+1/3*a_2
+  a_1=Matrix([a,0]); a_2=Rational(1,2)*Matrix([-a,sqrt(3)*a])
+  R_B=Rational(1,3)*a_1+Rational(2,3)*a_2; R_N=Rational(2,3)*a_1+Rational(1,3)*a_2
 
   alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
   alpha_2=Symbol('alpha_2') #constante de fuerza entre 1eros vecinos
@@ -324,14 +248,35 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
   A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
   A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
 
+  def masa(nu):
+    if nu == 1:
+	return m_1
+
+    elif nu == 2:
+	return m_2
+
+    else:
+	 print("Error, nu sólo puede se 1 o 2")
+
+  def A_perp_plano(nu):
+    if nu == 1:
+	return A_1_z
+
+    elif nu == 2:
+	return A_2_z
+
+    else:
+	print("Error, nu sólo puede se 1 o 2")
+
+
   def A_plano(nu):
-      if nu == 1:
+    if nu == 1:
 	return Matrix([A_1_x,A_1_y])
 
-      elif nu == 2:
+    elif nu == 2:
 	return Matrix([A_2_x,A_2_y])
 
-      else:
+    else:
 	 print("Error, nu sólo puede se 1 o 2")
 
   def A_perp_plano(nu):
@@ -366,7 +311,162 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
       return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
 
   def propiedades_atomos(l_1, l_2):
-    return [(k, m, i, j, R_hat(k,m,i,j)*R_hat(k,m,i,j).T*
+      return [(k, m, i, j, R_hat(k,m,i,j), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a) for k in [1,2] for m in [1,2]  for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
+
+  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",r"$\hat R$",'Distancia']
+
+  def Atomos(l_1, l_2):
+    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(['Distancia',r"$\nu\prime$"], ascending=[True, True])
+
+  PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
+			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
+
+  PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
+			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
+  Atomos(2,2).head(38).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
+#+end_src   
+
+#+RESULTS:
+#+begin_export latex
+\begin{tabular}{rrrrll}
+\toprule
+ $\nu\prime$ &  $\nu &  $l_1$ &  $l_2$ &                       $\hat R$ &    Distancia \\
+\midrule
+           1 &     1 &      0 &      0 &                         [0, 0] &            0 \\
+           2 &     2 &      0 &      0 &                         [0, 0] &            0 \\
+           1 &     2 &     -1 &      0 &             [-sqrt(3)/2, -1/2] &    sqrt(3)/3 \\
+           1 &     2 &      0 &      0 &              [sqrt(3)/2, -1/2] &    sqrt(3)/3 \\
+           1 &     2 &      0 &      1 &                         [0, 1] &    sqrt(3)/3 \\
+           2 &     1 &      0 &     -1 &                        [0, -1] &    sqrt(3)/3 \\
+           2 &     1 &      0 &      0 &              [-sqrt(3)/2, 1/2] &    sqrt(3)/3 \\
+           2 &     1 &      1 &      0 &               [sqrt(3)/2, 1/2] &    sqrt(3)/3 \\
+           1 &     1 &     -1 &     -1 &             [-1/2, -sqrt(3)/2] &            1 \\
+           1 &     1 &     -1 &      0 &                        [-1, 0] &            1 \\
+           1 &     1 &      0 &     -1 &              [1/2, -sqrt(3)/2] &            1 \\
+           1 &     1 &      0 &      1 &              [-1/2, sqrt(3)/2] &            1 \\
+           1 &     1 &      1 &      0 &                         [1, 0] &            1 \\
+           1 &     1 &      1 &      1 &               [1/2, sqrt(3)/2] &            1 \\
+           2 &     2 &     -1 &     -1 &             [-1/2, -sqrt(3)/2] &            1 \\
+           2 &     2 &     -1 &      0 &                        [-1, 0] &            1 \\
+           2 &     2 &      0 &     -1 &              [1/2, -sqrt(3)/2] &            1 \\
+           2 &     2 &      0 &      1 &              [-1/2, sqrt(3)/2] &            1 \\
+           2 &     2 &      1 &      0 &                         [1, 0] &            1 \\
+           2 &     2 &      1 &      1 &               [1/2, sqrt(3)/2] &            1 \\
+           1 &     2 &     -1 &     -1 &                        [0, -1] &  2*sqrt(3)/3 \\
+           1 &     2 &     -1 &      1 &              [-sqrt(3)/2, 1/2] &  2*sqrt(3)/3 \\
+           1 &     2 &      1 &      1 &               [sqrt(3)/2, 1/2] &  2*sqrt(3)/3 \\
+           2 &     1 &     -1 &     -1 &             [-sqrt(3)/2, -1/2] &  2*sqrt(3)/3 \\
+           2 &     1 &      1 &     -1 &              [sqrt(3)/2, -1/2] &  2*sqrt(3)/3 \\
+           2 &     1 &      1 &      1 &                         [0, 1] &  2*sqrt(3)/3 \\
+           1 &     2 &     -2 &     -1 &    [-sqrt(21)/7, -2*sqrt(7)/7] &   sqrt(21)/3 \\
+           1 &     2 &     -2 &      0 &  [-3*sqrt(21)/14, -sqrt(7)/14] &   sqrt(21)/3 \\
+           1 &     2 &      0 &     -1 &     [sqrt(21)/7, -2*sqrt(7)/7] &   sqrt(21)/3 \\
+           1 &     2 &      0 &      2 &   [-sqrt(21)/14, 5*sqrt(7)/14] &   sqrt(21)/3 \\
+           1 &     2 &      1 &      0 &   [3*sqrt(21)/14, -sqrt(7)/14] &   sqrt(21)/3 \\
+           1 &     2 &      1 &      2 &    [sqrt(21)/14, 5*sqrt(7)/14] &   sqrt(21)/3 \\
+           2 &     1 &     -1 &     -2 &  [-sqrt(21)/14, -5*sqrt(7)/14] &   sqrt(21)/3 \\
+           2 &     1 &     -1 &      0 &   [-3*sqrt(21)/14, sqrt(7)/14] &   sqrt(21)/3 \\
+           2 &     1 &      0 &     -2 &   [sqrt(21)/14, -5*sqrt(7)/14] &   sqrt(21)/3 \\
+           2 &     1 &      0 &      1 &     [-sqrt(21)/7, 2*sqrt(7)/7] &   sqrt(21)/3 \\
+           2 &     1 &      2 &      0 &    [3*sqrt(21)/14, sqrt(7)/14] &   sqrt(21)/3 \\
+           2 &     1 &      2 &      1 &      [sqrt(21)/7, 2*sqrt(7)/7] &   sqrt(21)/3 \\
+\bottomrule
+\end{tabular}
+#+end_export
+
+
+
+
+\newpage
+
+*** Fijemonos, por ahora, sólo en los primeros vecinos:
+
+\color{blue}
+Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica simbólicamente
+\normalcolor
+
+#+begin_src python :session :results latex :exports both
+  from sympy import *
+  import pandas as pd
+  a=Symbol('a', real=True, positive=True)
+  q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
+  q=Matrix([q_x,q_y])
+  a_1=Matrix([a,0]); a_2=Rational(1,2)*Matrix([-a,sqrt(3)*a])
+  R_B=Rational(1,3)*a_1+Rational(2,3)*a_2; R_N=Rational(2,3)*a_1+Rational(1,3)*a_2
+
+  alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
+  alpha_2=Symbol('alpha_2') #constante de fuerza entre 1eros vecinos
+  alpha_3=Symbol('alpha_3') #constante de fuerza entre 1eros vecinos
+  alpha_4=Symbol('alpha_4') #constante de fuerza entre 1eros vecinos
+
+  m_1, m_2, omega=symbols("m_1, m_2, omega") #masa de los átomos de Boro y N.
+  A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
+  A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
+
+  def masa(nu):
+    if nu == 1:
+	return m_1
+
+    elif nu == 2:
+	return m_2
+
+    else:
+	 print("Error, nu sólo puede se 1 o 2")
+
+  def A_perp_plano(nu):
+    if nu == 1:
+	return A_1_z
+
+    elif nu == 2:
+	return A_2_z
+
+    else:
+	print("Error, nu sólo puede se 1 o 2")
+
+
+  def A_plano(nu):
+    if nu == 1:
+	return Matrix([A_1_x,A_1_y])
+
+    elif nu == 2:
+	return Matrix([A_2_x,A_2_y])
+
+    else:
+	 print("Error, nu sólo puede se 1 o 2")
+
+  def A_perp_plano(nu):
+    if nu == 1:
+	return A_1_z
+
+    elif nu == 2:
+	return A_2_z
+
+    else:
+	print("Error, nu sólo puede se 1 o 2")
+
+
+  def R_l(l_1,l_2):
+    return l_1*a_1+l_2*a_2
+
+  def R_nu_l(nu,l_1,l_2):
+    if nu == 1:
+      return l_1*a_1+l_2*a_2+R_B
+
+    elif nu == 2:
+      return l_1*a_1+l_2*a_2+R_N
+
+    else:
+      print("Error, nu solo puede ser 1 o 2 ")
+
+  def R_hat(nuprima,nu,l_1,l_2):
+    if (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()>0:
+      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))/(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()
+
+    else:
+      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
+
+  def propiedades_atomos(l_1, l_2):
+      return [(k, m, i, j, R_hat(k,m,i,j)*R_hat(k,m,i,j).T*
 	   (A_plano(m)*exp(I*q.dot(R_l(i,j)))-A_plano(k)), Matrix([A_perp_plano(m)*exp(I*q.dot(R_l(i,j)))
 	    -A_perp_plano(k)]), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a) for k in [1,2] for m in [1,2]
 	     for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
@@ -374,22 +474,35 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
   columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",'Ecuación','Ecuación perp.','Distancia']
 
   def Atomos(l_1, l_2):
-    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(
-      ['Distancia',r"$\nu\prime$"], ascending=[True, True])
+    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(['Distancia',r"$\nu\prime$"], ascending=[True, True])
 
   PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
 			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
 
   PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
 			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
+
+  PrimerosVecinosBoro.to_latex(escape=False,float_format="{:0.4f}".format,index=False)
 #+end_src   
+
+
+
 
 #+RESULTS:
 #+begin_export latex
+\begin{tabular}{rrrrlll}
+\toprule
+ $\nu\prime$ &  $\nu &  $l_1$ &  $l_2$ &                                           Ecuación &                                     Ecuación perp. &  Distancia \\
+\midrule
+           1 &     2 &     -1 &      0 &  [-3*A_1_x/4 + 3*A_2_x*exp(-I*a*q_x)/4 + sqrt(3... &                     [-A_1_z + A_2_z*exp(-I*a*q_x)] &  sqrt(3)/3 \\
+           1 &     2 &      0 &      0 &  [-3*A_1_x/4 + 3*A_2_x/4 - sqrt(3)*(-A_1_y + A_... &                                   [-A_1_z + A_2_z] &  sqrt(3)/3 \\
+           1 &     2 &      0 &      1 &  [0, -A_1_y + A_2_y*exp(I*(-a*q_x/2 + sqrt(3)*a... &  [-A_1_z + A_2_z*exp(I*(-a*q_x/2 + sqrt(3)*a*q_... &  sqrt(3)/3 \\
+\bottomrule
+\end{tabular}
 #+end_export
 
 #+begin_src python :session :results none :exports both
-  M=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
+  M1=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
       3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
 	  5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
 #+end_src
@@ -397,8 +510,8 @@ Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica s
 #+RESULTS:
 
 #+begin_src python :session :results none :exports both
-  Mat_Din_primeros_vecinos=alpha_1*Matrix([M[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)#-diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
+  Mat_Din_primeros_vecinos=alpha_1*Matrix([M1[i].coeff(j) for i in range(0,6) for j  in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]
+			     ).reshape(6,6)#-diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
 #+end_src
 
 Tenemos por lo tanto que el miembro de la derecha de la ecuación \ref{eq1} es la matriz
@@ -455,8 +568,9 @@ Y el miembro de la izquierda es, evidentemente,
       3,CuartosVecinosNitrogeno['Ecuación'].sum()).row_insert(
 	  5,CuartosVecinosNitrogeno['Ecuación perp.'].sum())
   Mat_Din_cuartos_vecinos=(alpha_4*Matrix([M4[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
-       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
+    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)
+  #.reshape(6,6)-
+       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))                       
   Mat_Dinamica= Mat_Din_primeros_vecinos+Mat_Din_segundos_vecinos +Mat_Din_terceros_vecinos+Mat_Din_cuartos_vecinos
 #+end_src
 
