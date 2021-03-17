@@ -1,10 +1,12 @@
 #+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
-#+LaTeX_HEADER:\usepackage[paperwidth=21.0cm,paperheight=29.7cm,left=0.4cm,right=0.4cm,top=0.4cm, bottom=0.4cm]{geometry}
+#+LaTeX_HEADER:\usepackage[a4paper,left=1.5cm,right=1.5cm,top=1.5cm, bottom=2cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
 #+LaTeX_HEADER:\usepackage{amsmath}
+#+LaTeX_HEADER:\usepackage{adjustbox}
+#+LaTeX_HEADER:\usepackage{tabularx}
 #+LaTeX_HEADER:\usepackage{booktabs} %Publication quality tables in LaTeX.
-
+#+LaTeX_HEADER:\usepackage{pdflscape}
 
 \begin{abstract}
 Los materiales bidimensionales (2D) como el grafeno son de gran interés tanto por sus
@@ -12,15 +14,16 @@ propiedades físicas exclusivas como por sus aplicaciones potenciales. El estudi
 
 
 Este Trabajo de Fin de Grado consiste en la computación de los modos vibracionales de
-materiales semiconductores 2D y su correlación con los observables relevantes para la interpretación
-de los experimentos de dispersión de luz.
+materiales semiconductores 2D y su correlación con los observables relevantes para la interpretación de los experimentos de dispersión de luz.
 
 \end{abstract}
 
 \color{blue}
-La redacción del TFG todavía se encuentra en una versión muy preliminar, de echo es más un bloc de notas que lo que espero que sea el TFG final.
-\normalcolor
+La redacción del TFG todavía se encuentra en una versión muy preliminar, de hecho es más un bloc de notas que lo que espero que sea el TFG final.
 
+Para escribir este trabajo estoy usando *org-mode*: un modo de edición del editor /Emacs/, que, entre otras muchas cosas, permite escribir en un mismo fichero tanto el /texto/ cómo el /codigo/ (en muchos lenguajes, no solo python, y permite también mezclar distintos lenguajes), pudiendo insertar si así se desea la salida de los programas en el mismo documento, y exportat el resultado final a varios formatos (en particular $\LaTeX$)
+
+\normalcolor
 \newpage
 
 * Bibliografía y apuntes de repaso                    :noexport:
@@ -32,21 +35,6 @@ La redacción del TFG todavía se encuentra en una versión muy preliminar, de e
   - [[file:~/Documents/Fisica/Biblioteca/Estat_Solid/Apunts/FES0910_Tema02.pdf][Tema2. Vibraciones atómicas en cristales]]
 
 
-* Pruebas varias (para probar org-mode, el uso de diversos lenguajes, etc.)  :noexport:
-
-** Probando que funciona bien Wolfram Language 
-
-#+begin_src mathematica :results latex :export both
-FourierTransform[Cos[x],x,w] // TeXForm
-#+end_src
-
-#+RESULTS:
-#+begin_export latex
-\sqrt{\frac{\pi }{2}} \delta (w-1)+\sqrt{\frac{\pi }{2}} \delta (w+1)
-#+end_export
-
-  
-
 
 * TODO Introduccion
 Las vibraciones reticulares están regidas por las fuerzas que experimentan los átomos cuando se desplazan de su posición de equilibrio. La primera hipótesis es que cada átomo tiene una posicion de equilibrio en el cristal, y consideraremos que estos átomos vibran con una amplitud pequeña alrededor de su posición de equilibrio, de manera que el sólido se encuentra en estados que corresponden a lo que macroscópicamente se conoce como /la región de comportamiento elástico lineal/, donde se verifica la ley de Hooke.
@@ -54,10 +42,36 @@ Las vibraciones reticulares están regidas por las fuerzas que experimentan los 
 Podremos por tanto aproximar la energía potencial de interacción por el termino armónico de su desarrolo en serie de potencias del desplazamiento, y la fuerza resultante es por tanto una función aproximadamente lineal del desplazamiento
 
 
-* TODO Desarrollo del trabajo
-   
-** TODO Formular la matriz dinámica para el BN  monolayer
-  En el caso del BN monolayer estamos tratando con un cristal bidimensional del base diatómica, cuya celda unidad viene dada por:
+
+** TODO Matriz dinámica 
+   La matriz dinámica es una cantidad central en la dinámica reticular: las frecuencias de los fonones (vibraciones reticulares cuantificadas) se calculan a partir de los valores propios de la matriz dinámica:
+
+\begin{equation}
+\sum_{\alpha\prime}D_{\alpha\alpha\prime}\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)
+\end{equation}   
+
+Por lo tanto, las frecuencias $\omega$ como función de vector de ondas $\vec q$ del fonón son solución de la ecuación secular:
+
+\begin{equation}
+\det\left|\frac{1}{\sqrt{M_\alpha M_{\alpha\prime}}}D^{ij}_{\alpha\alpha\prime}\left(\vec q\right)-\omega^2\left(\vec q\right)\right| 
+\end{equation}
+
+donde $M_{\alpha}$ es la masa del átomo $\alpha$ y la matriz dinámica viene definida por:
+
+\begin{equation}
+D_{\alpha,\alpha\prime}^{i,j}=\frac{\partial^2 E}{\partial u_{\alpha}^{*i}(\vec q)\partial u_{\alpha\prime}^{j}(\vec q)}
+\label{eq:Matriz_Dinámica}
+\end{equation}
+
+donde $u_{\alpha}^{i}$ representa el desplazamiento del átomo $\alpha$ en la dirección $i$.
+
+La segunda derivada de la energía de la ecuación \ref{eq:Matriz_Dinámica} corresponde al cambio en la fuerza que actua sobre el átomo $\alpha\prime$ en la dirección $j$ cuando se desplaza el átomo $\alpha$ en la dirección $i$
+
+\begin{equation}
+D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*i}_{i}}F^{j}_t(\vec q)
+\end{equation}
+
+   Puesto que el cálculo de los modos de vibración por primeros principios empieza por establecer la geometria del cristal en equilibrio, vamos a comprobar que con los datos proporcionados que el BN monolayer se trata  de un cristal bidimensional de base diatómica, cuya celda unidad viene dada por (datos proporcionados):
 
 \begin{equation}
 \vec a_1=a(1,0);\qquad\vec a_2=a\left(-\frac{1}{2},\frac{\sqrt{3}}{2}\right)
@@ -73,16 +87,16 @@ Podremos por tanto aproximar la energía potencial de interacción por el termin
   from matplotlib import pyplot as plt
 
   a=1 
-  a1=np.array([a,0])
-  a2=np.array([-a/2,sqrt(3)*a/2])
+  a_1=np.array([a,0])
+  a_2=np.array([-a/2,sqrt(3)*a/2])
 #+end_src
 
 #+RESULTS:
 
-Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo src_python[:session]{'{:.2f}'.format(arccos(vdot(a1,a2)))} {{{results(=2.09=)}}}    $= 2\pi/3$ rad.
+Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo src_python[:session]{'{:.2f}'.format(arccos(vdot(a_1,a_2)))} {{{results(=2.09=)}}}    $= 2\pi/3$ rad.
 
 
-Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$.
+Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$, notemos que aunque es habitual representar la celdilla con un indice entero $n$ es más sencillo y facilita los cálculos (así como determinar a que celdilla no referimos) el uso de un índice vectorial.
 
 Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 
@@ -91,11 +105,11 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 \vspace{0.5cm}
 #+LATEX:\begin{minipage}{0.6\textwidth}   
 #+begin_src python :session :results none :exports both
-  def R_l(l1,l2):
-   return l1*a1+l2*a2 
+  def R_l(l_1,l_2):
+   return l_1*a_1+l_2*a_2 
 
-  reddenudos=array([R_l(l1,l2) for l1 in range(-3, 4)
-    for l2 in range(-3,4)])
+  reddenudos=array([R_l(l_1,l_2) for l_1 in range(-3, 4)
+    for l_2 in range(-3,4)])
 
   x = reddenudos[:,0]
   y = reddenudos[:,1]
@@ -112,8 +126,7 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 [[file:Graficas/Reddenudos.jpg]]
 #+LATEX:\end{minipage}
 
-\newpage
-
+\vspace{0.7cm}
 Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio  en la celda unidad **nota: proporcionadas como datos**
 
 Los átomos estan situados en:
@@ -126,39 +139,36 @@ Los átomos estan situados en:
 \end{equation}
 
 #+begin_src python :session :results none :exports none
-  R_B=1/3*a1+2/3*a2
-  R_N=2/3*a1+1/3*a2
+  R_B=1/3*a_1+2/3*a_2
+  R_N=2/3*a_1+1/3*a_2
 #+end_src
 
+Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\alpha^0$ , con $\alpha=1,2$, puesto que la base tiene 2 átomos, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$ (notemos que aunque los átomos fuesen idénticos tendriamos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes).
 
 
-*** Cristales bidimensionales con base diatómica
+Las posiciones de equilibrio de los átomos: $\vec R_{\alpha,\vec l}=\vec{R}_{\vec{l}} + \vec R_\alpha^0$  así como los desplazamientos atómicos: $\vec u_{\alpha,\vec l}$ quedarán por tanto identificados por medio de dos índices.
 
-
-Las posiciones de equilibrio de los átomos de la base respecto de su nudo son $\vec{R}_\nu^0$ , con $\nu=1,2$, puesto que la base tiene 2 átomos, el $1$ hará referencia a los átomos de $B$ y $2$ a los de átomos de $N$ (notemos que aunque los átomos fuesen idénticos deberíamos especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes).
-
-
-Las posiciones de equilibrio de los átomos: $\vec R_{\nu,\vec l}=\vec{R}_{\vec{l}} + \vec R_\nu^0$  así como los desplazamientos atómicos: $\vec u_{\nu,\vec l}$ quedarán por tanto identificados por medio de dos índices. La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ tiene aproximádamente la dirección determinada por las posiciones de equilibrio de estos átomos. Esta dirección es la del vector $\vec R_{\nu',\nu,\vec l}=\vec{R}_{\vec l} +\vec R_{\nu',\nu}^0$ donde $\vec R_{\nu',\nu}^0\equiv\vec R_\nu^0-\vec R_{\nu'}^0$.
+Pasamor ahora a representar la red de átomos:
 
 #+LATEX:\begin{minipage}{0.55\textwidth}   
 #+begin_src python :session :results none :exports both
   #Posiciones de equilibrio de los átomos
 
-  def R_nu_l(nu,l1,l2):
-    if nu == 1:
-      return l1*a1+l2*a2+R_B
+  def R_alpha_l(alpha,l_1,l_2):
+    if alpha == 1:
+      return l_1*a_1+l_2*a_2+R_B
 
-    elif nu == 2:
-      return l1*a1+l2*a2+R_N
+    elif alpha == 2:
+      return l_1*a_1+l_2*a_2+R_N
 
     else:
-      print("Error, nu solo puede ser 1 o 2 ")
+      print("Error, alpha solo puede ser 1 o 2 ")
 
-  AtomosB=array([R_nu_l(1,l1,l2) for l1 in range(-4, 5)
-		 for l2 in range(-4,5)])
+  AtomosB=array([R_alpha_l(1,l_1,l_2) for l_1 in range(-4, 5)
+		 for l_2 in range(-4,5)])
 
-  AtomosN=array([R_nu_l(2,l1,l2) for l1 in range(-4, 5)
-		 for l2 in range(-4,5)])
+  AtomosN=array([R_alpha_l(2,l_1,l_2) for l_1 in range(-4, 5)
+		 for l_2 in range(-4,5)])
 
   xB = AtomosB[:,0]
   yB = AtomosB[:,1]
@@ -180,514 +190,237 @@ Las posiciones de equilibrio de los átomos: $\vec R_{\nu,\vec l}=\vec{R}_{\vec{
 #+LATEX:\end{minipage}
 
 \vspace{0.5cm}
-Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1,2$) es el número de celdillas en la dirección $\hat a_i$. El cristal tiene tiene $N=N_1N_2$ celdillas unidad primitivas y $2N$ átomos.
+Las dimensiones del cristal son $L_1=N_1 a_1$ y $L_2=N_2 a_2$, donde $N_i$ ($i=1,2$) es el número de celdillas en la dirección $\vec a_i$. El cristal tiene tiene $N=N_1N_2$ celdillas unidad primitivas y $2N$ átomos.
+
+
+*La idea básica es que si la base tiene $r$ átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los $r$ átomos de la base de la celdilla $\vec 0$*, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de $B$ y la otra para el de $N$.
+
+\color{red} Falta reescribir completamente y ampliar mucho la introducción teórica
+
+
+Pasamos a comprobar que a partir de las ecuaciones de movimiento, y buscando soluciones de la forma:
+
+\begin{equation*}
+\vec u_ {\alpha,\vec l}=\vec A_\alpha e^{i\left(\vec q\cdot\vec R_{\vec l}-\omega t\right)}
+\end{equation*}
+
+donde $\vec A_\alpha$ es el /vector de polarización/, que determina la amplitud y dirección de vibración de los átomos de tipo $\alpha$ podemos plantear el problema como la determinación de los valores propios de la matriz dinámica.
+
+
+Notemos que aunque el cristal sea bi-dimensional, los átomos de este pueden vibrar en las 3 direcciones espaciales.
+
+
+Esta ecuación tiene $3 N_\nu=6$ soluciones que describen las $6$ ramas de la relación de dispersión, es decir, las $6$ frecuencias características de los $6$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el triple del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
+
+
+Explicar que podemos tratar por un lado las vibraciones en el plano del cristal y por otro las vibraciones perpendiculares a este, ya que se trata de vibraciones completamente desacopladas.
+
+
+
+\normalcolor
+
 
 \newpage
 
-*La idea básica es que si la base tiene $N_\nu$ átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los $N_{\nu}$ átomos de la base de la celdilla $\vec 0$*, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de $B$ y la otra para el de $N$.
 
-La fuerza que ejerce el átomo $\nu,\vec l$ sobre el átomo $\nu',\vec 0$ se puede expresar de manera aproximada como:
+* TODO Desarrollo del trabajo
 
-\begin{equation*}
-F_{\nu',\vec 0,\nu,\vec l}=\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
-\end{equation*}
-
-donde $\hat R_{\nu',\nu,\vec l}$ es el vector unitario en la dirección $\vec R_{\nu',\nu,\vec l}$
-
-La ecuación de movimiento del átomo $\nu',\vec 0$ es por lo tanto:
-
-\begin{equation*}
-m_{\nu'}\ddot{\vec u}_{\nu',\vec 0}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec u_{\nu,\vec l}-\vec u_{\nu',\vec 0}\right)
-\end{equation*}
-
-
-Buscaremos soluciones de la forma:
-
-\begin{equation*}
-\vec u_ {\nu,\vec l}=\vec A_\nu e^{i\left(\vec q\cdot\vec R_{\vec l}-\omega t\right)}
-\end{equation*}
-
-donde $\vec A_\nu$ es el /vector de polarización/ que determina la amplitud y dirección de vibración de los átomos de tipo $\nu$ . Notemos que aunque el cristal sea bi-dimensional, los átomos de este pueden vibrar en las 3 direcciones espaciales.
-
-Es importante apreciar que se necesitan tantas amplitudes de vibración como átomos tenga la base porque estos no ocupan posiciones equivalentes y describen vibraciones distintas. Se deben cumplir así $N_\nu=2$ ecuaciones vectoriales del tipo
-
-\begin{equation}\boxed{
--m_{\nu^{\prime}}\omega^2\vec A_{\nu'}=\sum_{\nu,\vec l}\alpha_{\nu',\nu,\vec l}\left(\hat R_{\nu',\nu,\vec l}\otimes\hat R_{\nu',\nu,\vec l}\right)\cdot\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu\prime}\right)}
-\label{eq1}
-\end{equation}
-
-Como se trata de un sistema de ecuaciones lineales homogéneas, se debe cumplir la correspondiente ecuación secular, es decir, que el determinante de la matriz de dimensión $3N_\nu\otimes 3N_\nu$ ($3\cdot2\otimes 3\cdot2$) de los coeficientes $A_{\nu',i}$ en la ecuación \ref{eq1} sea nula. Esta ecuación tiene $3 N_\nu=6$ soluciones que describen las $6$ ramas de la relación de dispersión, es decir, las $6$ frecuencias características de los $6$ modos normales de vibración de vector de onda $\vec q$. Se cumple que el número total de modos normales de vibración coincide con el triple del número total de átomos, es decir, \textit{el número total de modos normales de vibración coincide con el de grados de libertad de movimiento de los átomos}
-
-Debemos notar que tal y como esta escrita la ecuación \ref{eq1}, sólo estamos considerando vibraciones dentro del plano del cristal (puesto que estamos considerando $\hat R_{\nu',\nu,\vec l}$ como vectores de 2 dimensiones . Como los átomos pueden moverse en la tres dimensiones debemos añadir una ecuación de movimiento (escalar en este caso) para cada uno de los dos átomos de la base, y dado que podemos considerar que las vibraciones perpendiculares al plano están completamente desacopladas de las interplanares, estas dos ecuaciones son de la forma:
-
-\begin{equation}
--m_{\nu\prime}\omega^2A_{\nu\prime}=\sum_{\nu,\vec l}\alpha_{\nu\prime,\nu,\vec l}\left(\vec A_{\nu}e^{i\vec q\cdot\vec R_{\vec l}}-\vec A_{\nu\prime}\right)
-\end{equation}
-
-Así que tratamos por un lado las vibraciones en el plano por un lado y por otro las perpendiculares al plano del cristal, ya que como hemos comentado se trata de vibraciones completamente desacopladas.
-
-
-Debemos determinar cuales son las posiciones de equilibrio de los átomos más cercanos a los átomos de la celda $\vec 0$: para ello genero un array con los datos que voy a necesitar ($\nu, \nu',\hat R_{\nu\prime,nu,\vec l}$, ... ordenandolos según su distancia a cada los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos (usando para ello un DataFrame de pandas, que facilita mucho la manipulación de los datos)
+Puesto que debemos determinar cuales son las posiciones de equilibrio de los átomos más cercanos a los átomos de la celda $\vec 0$ antes que nada genero un array con los datos que voy a necesitar, ordenando las filas de manera creciente a la distancia a cada uno de los 2 átomos de la celda  $l=\vec 0$ hasta los cuartos vecinos, y guardando el array con la información como un DataFrame de pandas, que facilita mucho la manipulación de los datos.
 
 
 #+begin_src python :session :results latex :exports both
   from sympy import *
   import pandas as pd
+
+  ## Parametros de la red, de la celdilla y del cristal
   a=Symbol('a', real=True, positive=True)
   q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
   q=Matrix([q_x,q_y])
   a_1=Matrix([a,0]); a_2=Rational(1,2)*Matrix([-a,sqrt(3)*a])
   R_B=Rational(1,3)*a_1+Rational(2,3)*a_2; R_N=Rational(2,3)*a_1+Rational(1,3)*a_2
 
-  alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
-  alpha_2=Symbol('alpha_2') #constante de fuerza entre 1eros vecinos
-  alpha_3=Symbol('alpha_3') #constante de fuerza entre 1eros vecinos
-  alpha_4=Symbol('alpha_4') #constante de fuerza entre 1eros vecinos
+  ## Masas de los átomos, frecuencia, ...
+  M_B, M_N, omega=symbols("M_B, M_N, omega") #masa de los átomos de Boro y N.
+  def masa(alpha):
+    if alpha == 1:
+      return M_B
 
-  m_1, m_2, omega=symbols("m_1, m_2, omega") #masa de los átomos de Boro y N.
-  A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
-  A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
-
-  def masa(nu):
-    if nu == 1:
-	return m_1
-
-    elif nu == 2:
-	return m_2
+    elif alpha == 2:
+      return M_N
 
     else:
-	 print("Error, nu sólo puede se 1 o 2")
-
-  def A_perp_plano(nu):
-    if nu == 1:
-	return A_1_z
-
-    elif nu == 2:
-	return A_2_z
-
-    else:
-	print("Error, nu sólo puede se 1 o 2")
+      print("Error, alpha sólo puede se 1 o 2")
 
 
-  def A_plano(nu):
-    if nu == 1:
-	return Matrix([A_1_x,A_1_y])
-
-    elif nu == 2:
-	return Matrix([A_2_x,A_2_y])
-
-    else:
-	 print("Error, nu sólo puede se 1 o 2")
-
-  def A_perp_plano(nu):
-    if nu == 1:
-	return A_1_z
-
-    elif nu == 2:
-	return A_2_z
-
-    else:
-	print("Error, nu sólo puede se 1 o 2")
-
-
+  ## Vector R_n (vector de traslación primitivo)
   def R_l(l_1,l_2):
     return l_1*a_1+l_2*a_2
 
-  def R_nu_l(nu,l_1,l_2):
-    if nu == 1:
+  ## Vector de posición de los átomos del cristal (en equilibrio)
+  def R_alpha_l(alpha,l_1,l_2):
+    if alpha == 1:
       return l_1*a_1+l_2*a_2+R_B
 
-    elif nu == 2:
+    elif alpha == 2:
       return l_1*a_1+l_2*a_2+R_N
 
     else:
-      print("Error, nu solo puede ser 1 o 2 ")
+      print("Error, alpha solo puede ser 1 o 2 ")
 
-  def R_hat(nuprima,nu,l_1,l_2):
-    if (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()>0:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))/(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()
+  ## Vector unitario que une uno de los átomos en la celdilla 0 con el átomo considerado
+  def R_hat(alphaprima,alpha,l_1,l_2):
+    if (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()>0:
+      return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))/(R_alpha_l(alpha,l_1,l_2)
+						       -R_alpha_l(alphaprima,0,0)).norm()
 
     else:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
+      return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))
 
+  ## Finalmente construyo un DataFrame de pandas con la información necesaria para
+  ## identificar a los primeros, segundos, ... vecinos, según su distancia a cada uno
+  ## de los átomos de la celdilla unidad
   def propiedades_atomos(l_1, l_2):
-      return [(k, m, i, j, R_hat(k,m,i,j), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a) for k in [1,2] for m in [1,2]  for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
+    return [(k, m, i, j, exp(I*q.dot(R_l(i,j))), (R_alpha_l(m,i,j)-R_alpha_l(k,0,0)).norm()/a)
+	for k in [1,2] for m in [1,2]  for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
 
-  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",r"$\hat R$",'Distancia']
+  columnas = [r"$\alpha\prime$",r"$\alpha",r"$l_1$", r"$l_2$",'Exponencial','Distancia']
 
   def Atomos(l_1, l_2):
-    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(['Distancia',r"$\nu\prime$"], ascending=[True, True])
-
-  PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
-			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
-
-  PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
-			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
+    return pd.DataFrame(propiedades_atomos(l_1,l_2),columns=columnas).sort_values(
+	 ['Distancia',r"$\alpha\prime$"], ascending=[True, True])
+  ## Mostramos el dataframe como una tabla en formato \LaTeX.
   Atomos(2,2).head(38).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
-#+end_src   
+#+end_src      
 
 #+RESULTS:
 #+begin_export latex
 \begin{tabular}{rrrrll}
 \toprule
- $\nu\prime$ &  $\nu &  $l_1$ &  $l_2$ &                       $\hat R$ &    Distancia \\
+ $\alpha\prime$ &  $\alpha &  $l_1$ &  $l_2$ &                            Exponencial &    Distancia \\
 \midrule
-           1 &     1 &      0 &      0 &                         [0, 0] &            0 \\
-           2 &     2 &      0 &      0 &                         [0, 0] &            0 \\
-           1 &     2 &     -1 &      0 &             [-sqrt(3)/2, -1/2] &    sqrt(3)/3 \\
-           1 &     2 &      0 &      0 &              [sqrt(3)/2, -1/2] &    sqrt(3)/3 \\
-           1 &     2 &      0 &      1 &                         [0, 1] &    sqrt(3)/3 \\
-           2 &     1 &      0 &     -1 &                        [0, -1] &    sqrt(3)/3 \\
-           2 &     1 &      0 &      0 &              [-sqrt(3)/2, 1/2] &    sqrt(3)/3 \\
-           2 &     1 &      1 &      0 &               [sqrt(3)/2, 1/2] &    sqrt(3)/3 \\
-           1 &     1 &     -1 &     -1 &             [-1/2, -sqrt(3)/2] &            1 \\
-           1 &     1 &     -1 &      0 &                        [-1, 0] &            1 \\
-           1 &     1 &      0 &     -1 &              [1/2, -sqrt(3)/2] &            1 \\
-           1 &     1 &      0 &      1 &              [-1/2, sqrt(3)/2] &            1 \\
-           1 &     1 &      1 &      0 &                         [1, 0] &            1 \\
-           1 &     1 &      1 &      1 &               [1/2, sqrt(3)/2] &            1 \\
-           2 &     2 &     -1 &     -1 &             [-1/2, -sqrt(3)/2] &            1 \\
-           2 &     2 &     -1 &      0 &                        [-1, 0] &            1 \\
-           2 &     2 &      0 &     -1 &              [1/2, -sqrt(3)/2] &            1 \\
-           2 &     2 &      0 &      1 &              [-1/2, sqrt(3)/2] &            1 \\
-           2 &     2 &      1 &      0 &                         [1, 0] &            1 \\
-           2 &     2 &      1 &      1 &               [1/2, sqrt(3)/2] &            1 \\
-           1 &     2 &     -1 &     -1 &                        [0, -1] &  2*sqrt(3)/3 \\
-           1 &     2 &     -1 &      1 &              [-sqrt(3)/2, 1/2] &  2*sqrt(3)/3 \\
-           1 &     2 &      1 &      1 &               [sqrt(3)/2, 1/2] &  2*sqrt(3)/3 \\
-           2 &     1 &     -1 &     -1 &             [-sqrt(3)/2, -1/2] &  2*sqrt(3)/3 \\
-           2 &     1 &      1 &     -1 &              [sqrt(3)/2, -1/2] &  2*sqrt(3)/3 \\
-           2 &     1 &      1 &      1 &                         [0, 1] &  2*sqrt(3)/3 \\
-           1 &     2 &     -2 &     -1 &    [-sqrt(21)/7, -2*sqrt(7)/7] &   sqrt(21)/3 \\
-           1 &     2 &     -2 &      0 &  [-3*sqrt(21)/14, -sqrt(7)/14] &   sqrt(21)/3 \\
-           1 &     2 &      0 &     -1 &     [sqrt(21)/7, -2*sqrt(7)/7] &   sqrt(21)/3 \\
-           1 &     2 &      0 &      2 &   [-sqrt(21)/14, 5*sqrt(7)/14] &   sqrt(21)/3 \\
-           1 &     2 &      1 &      0 &   [3*sqrt(21)/14, -sqrt(7)/14] &   sqrt(21)/3 \\
-           1 &     2 &      1 &      2 &    [sqrt(21)/14, 5*sqrt(7)/14] &   sqrt(21)/3 \\
-           2 &     1 &     -1 &     -2 &  [-sqrt(21)/14, -5*sqrt(7)/14] &   sqrt(21)/3 \\
-           2 &     1 &     -1 &      0 &   [-3*sqrt(21)/14, sqrt(7)/14] &   sqrt(21)/3 \\
-           2 &     1 &      0 &     -2 &   [sqrt(21)/14, -5*sqrt(7)/14] &   sqrt(21)/3 \\
-           2 &     1 &      0 &      1 &     [-sqrt(21)/7, 2*sqrt(7)/7] &   sqrt(21)/3 \\
-           2 &     1 &      2 &      0 &    [3*sqrt(21)/14, sqrt(7)/14] &   sqrt(21)/3 \\
-           2 &     1 &      2 &      1 &      [sqrt(21)/7, 2*sqrt(7)/7] &   sqrt(21)/3 \\
+              1 &        1 &      0 &      0 &                                      1 &            0 \\
+              2 &        2 &      0 &      0 &                                      1 &            0 \\
+              1 &        2 &     -1 &      0 &                          exp(-I*a*q_x) &    sqrt(3)/3 \\
+              1 &        2 &      0 &      0 &                                      1 &    sqrt(3)/3 \\
+              1 &        2 &      0 &      1 &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &    sqrt(3)/3 \\
+              2 &        1 &      0 &     -1 &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &    sqrt(3)/3 \\
+              2 &        1 &      0 &      0 &                                      1 &    sqrt(3)/3 \\
+              2 &        1 &      1 &      0 &                           exp(I*a*q_x) &    sqrt(3)/3 \\
+              1 &        1 &     -1 &     -1 &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
+              1 &        1 &     -1 &      0 &                          exp(-I*a*q_x) &            1 \\
+              1 &        1 &      0 &     -1 &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
+              1 &        1 &      0 &      1 &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
+              1 &        1 &      1 &      0 &                           exp(I*a*q_x) &            1 \\
+              1 &        1 &      1 &      1 &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
+              2 &        2 &     -1 &     -1 &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
+              2 &        2 &     -1 &      0 &                          exp(-I*a*q_x) &            1 \\
+              2 &        2 &      0 &     -1 &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
+              2 &        2 &      0 &      1 &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
+              2 &        2 &      1 &      0 &                           exp(I*a*q_x) &            1 \\
+              2 &        2 &      1 &      1 &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
+              1 &        2 &     -1 &     -1 &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              1 &        2 &     -1 &      1 &  exp(I*(-3*a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              1 &        2 &      1 &      1 &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              2 &        1 &     -1 &     -1 &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              2 &        1 &      1 &     -1 &   exp(I*(3*a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              2 &        1 &      1 &      1 &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
+              1 &        2 &     -2 &     -1 &  exp(I*(-3*a*q_x/2 - sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
+              1 &        2 &     -2 &      0 &                        exp(-2*I*a*q_x) &   sqrt(21)/3 \\
+              1 &        2 &      0 &     -1 &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
+              1 &        2 &      0 &      2 &        exp(I*(-a*q_x + sqrt(3)*a*q_y)) &   sqrt(21)/3 \\
+              1 &        2 &      1 &      0 &                           exp(I*a*q_x) &   sqrt(21)/3 \\
+              1 &        2 &      1 &      2 &                   exp(sqrt(3)*I*a*q_y) &   sqrt(21)/3 \\
+              2 &        1 &     -1 &     -2 &                  exp(-sqrt(3)*I*a*q_y) &   sqrt(21)/3 \\
+              2 &        1 &     -1 &      0 &                          exp(-I*a*q_x) &   sqrt(21)/3 \\
+              2 &        1 &      0 &     -2 &         exp(I*(a*q_x - sqrt(3)*a*q_y)) &   sqrt(21)/3 \\
+              2 &        1 &      0 &      1 &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
+              2 &        1 &      2 &      0 &                         exp(2*I*a*q_x) &   sqrt(21)/3 \\
+              2 &        1 &      2 &      1 &   exp(I*(3*a*q_x/2 + sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
 \bottomrule
 \end{tabular}
 #+end_export
 
+\vspace{0.5cm}
 
+A parte de identificar los primeros, segundos, ... vecinos, necesitamos conocer la correspondiente matriz de constantes de fuerza que corresponde a la interacción de cada átomo de la celdilla unidad con su n-esimo vecino.
 
+Vamos a realizar la simplificación que un desplazamiento longitudinal, transversal o perpendicular solo genera una fuerza longitudidal, transversal o perpendicular, de manera que la matriz de constantes de fuerza tiene 12 parámetros no nulos (y que deberemos determinar). 
 
-\newpage
-
-*** Fijemonos, por ahora, sólo en los primeros vecinos:
-
-\color{blue}
-Paso a usar sympy en vez de numpy para intentar determinar la matrix dinámica simbólicamente
-\normalcolor
 
 #+begin_src python :session :results latex :exports both
-  from sympy import *
-  import pandas as pd
-  a=Symbol('a', real=True, positive=True)
-  q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
-  q=Matrix([q_x,q_y])
-  a_1=Matrix([a,0]); a_2=Rational(1,2)*Matrix([-a,sqrt(3)*a])
-  R_B=Rational(1,3)*a_1+Rational(2,3)*a_2; R_N=Rational(2,3)*a_1+Rational(1,3)*a_2
 
-  alpha_1=Symbol('alpha_1') #constante de fuerza entre 1eros vecinos
-  alpha_2=Symbol('alpha_2') #constante de fuerza entre 1eros vecinos
-  alpha_3=Symbol('alpha_3') #constante de fuerza entre 1eros vecinos
-  alpha_4=Symbol('alpha_4') #constante de fuerza entre 1eros vecinos
-
-  m_1, m_2, omega=symbols("m_1, m_2, omega") #masa de los átomos de Boro y N.
-  A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z = symbols("A_1_x, A_1_y, A_1_z, A_2_x, A_2_y, A_2_z")
-  A=Matrix([A_1_x,A_1_y,A_1_z,A_2_x,A_2_y,A_2_z])
-
-  def masa(nu):
-    if nu == 1:
-	return m_1
-
-    elif nu == 2:
-	return m_2
-
-    else:
-	 print("Error, nu sólo puede se 1 o 2")
-
-  def A_perp_plano(nu):
-    if nu == 1:
-	return A_1_z
-
-    elif nu == 2:
-	return A_2_z
-
-    else:
-	print("Error, nu sólo puede se 1 o 2")
+  PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &\
+  (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
+  PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & \
+  (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
 
 
-  def A_plano(nu):
-    if nu == 1:
-	return Matrix([A_1_x,A_1_y])
+  ## Constantes de fuerza
+  phi_BB__xx,phi_BB__yy,phi_BB__zz,phi_NN__xx,phi_NN__yy,phi_NN__zz, \
+  phi_BN__xx,phi_BN__yy,phi_BN__zz,phi_NB__xx,phi_NB__yy,phi_NB__zz = symbols(\
+  'phi_BB__xx,phi_BB__yy, phi_BB__zz,phi_NN__xx,phi_NN__yy,phi_NN__zz, \
+  phi_BN__xx,phi_BN__yy,phi_BN__zz, phi_NB__xx,phi_NB__yy,phi_NB__zz') \
 
-    elif nu == 2:
-	return Matrix([A_2_x,A_2_y])
+  phi=zeros(6)
 
-    else:
-	 print("Error, nu sólo puede se 1 o 2")
+  phi[0,0]=phi_BB__xx
+  phi[1,1]=phi_BB__yy
+  phi[2,2]=phi_BB__zz
+  phi[3,3]=phi_NN__xx
+  phi[4,4]=phi_NN__yy
+  phi[5,5]=phi_NN__zz
 
-  def A_perp_plano(nu):
-    if nu == 1:
-	return A_1_z
+  phi[3,0]=phi_NB__xx
+  phi[4,1]=phi_NB__yy
+  phi[5,2]=phi_NB__zz
 
-    elif nu == 2:
-	return A_2_z
-
-    else:
-	print("Error, nu sólo puede se 1 o 2")
-
-
-  def R_l(l_1,l_2):
-    return l_1*a_1+l_2*a_2
-
-  def R_nu_l(nu,l_1,l_2):
-    if nu == 1:
-      return l_1*a_1+l_2*a_2+R_B
-
-    elif nu == 2:
-      return l_1*a_1+l_2*a_2+R_N
-
-    else:
-      print("Error, nu solo puede ser 1 o 2 ")
-
-  def R_hat(nuprima,nu,l_1,l_2):
-    if (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()>0:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))/(R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0)).norm()
-
-    else:
-      return (R_nu_l(nu,l_1,l_2)-R_nu_l(nuprima,0,0))
-
-  def propiedades_atomos(l_1, l_2):
-      return [(k, m, i, j, R_hat(k,m,i,j)*R_hat(k,m,i,j).T*
-	   (A_plano(m)*exp(I*q.dot(R_l(i,j)))-A_plano(k)), Matrix([A_perp_plano(m)*exp(I*q.dot(R_l(i,j)))
-	    -A_perp_plano(k)]), (R_nu_l(m,i,j)-R_nu_l(k,0,0)).norm()/a) for k in [1,2] for m in [1,2]
-	     for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
-
-  columnas = [r"$\nu\prime$",r"$\nu",r"$l_1$", r"$l_2$",'Ecuación','Ecuación perp.','Distancia']
-
-  def Atomos(l_1, l_2):
-    return pd.DataFrame(propiedades_atomos(l_1, l_2),columns=columnas).sort_values(['Distancia',r"$\nu\prime$"], ascending=[True, True])
-
-  PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
-			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
-
-  PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
-			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
-
-  PrimerosVecinosBoro.to_latex(escape=False,float_format="{:0.4f}".format,index=False)
-#+end_src   
-
-
-
+  phi[0,3]=phi_BN__xx
+  phi[1,4]=phi_BN__yy
+  phi[2,5]=phi_BN__zz
+#+end_src
 
 #+RESULTS:
 #+begin_export latex
-\begin{tabular}{rrrrlll}
-\toprule
- $\nu\prime$ &  $\nu &  $l_1$ &  $l_2$ &                                           Ecuación &                                     Ecuación perp. &  Distancia \\
-\midrule
-           1 &     2 &     -1 &      0 &  [-3*A_1_x/4 + 3*A_2_x*exp(-I*a*q_x)/4 + sqrt(3... &                     [-A_1_z + A_2_z*exp(-I*a*q_x)] &  sqrt(3)/3 \\
-           1 &     2 &      0 &      0 &  [-3*A_1_x/4 + 3*A_2_x/4 - sqrt(3)*(-A_1_y + A_... &                                   [-A_1_z + A_2_z] &  sqrt(3)/3 \\
-           1 &     2 &      0 &      1 &  [0, -A_1_y + A_2_y*exp(I*(-a*q_x/2 + sqrt(3)*a... &  [-A_1_z + A_2_z*exp(I*(-a*q_x/2 + sqrt(3)*a*q_... &  sqrt(3)/3 \\
-\bottomrule
-\end{tabular}
 #+end_export
 
-#+begin_src python :session :results none :exports both
-  M1=PrimerosVecinosBoro['Ecuación'].sum().row_insert(2,PrimerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-      3,PrimerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
-	  5,PrimerosVecinosNitrogeno['Ecuación perp.'].sum())
+
+y la matriz de constantes de fuerza tiene la expresión:
+
+\begin{equation}
+\phi_1=\left[\begin{matrix}\phi^{xx}_{BB} & 0 & 0 & \phi^{xx}_{BN} & 0 & 0\\0 & \phi^{yy}_{BB} & 0 & 0 & \phi^{yy}_{BN} & 0\\0 & 0 & \phi^{zz}_{BB} & 0 & 0 & \phi^{zz}_{BN}\\\phi^{xx}_{NB} & 0 & 0 & \phi^{xx}_{NN} & 0 & 0\\0 & \phi^{yy}_{NB} & 0 & 0 & \phi^{yy}_{NN} & 0\\0 & 0 & \phi^{zz}_{NB} & 0 & 0 & \phi^{zz}_{NN}\end{matrix}\right]
+\end{equation}
+
+Por lo tanto, la matriz dinámica que tenemos es:
+
+#+begin_src python :session :results latex :exports both
+
+
+  D1=zeros(6)
+
+  D1[0,0]=1/M_B*phi[0,0]
+  D1[1,1]=1/M_B*phi[1,1]
+  D1[2,2]=1/M_B*phi[2,2]
+  D1[3,3]=1/M_N*phi[3,3]
+  D1[4,4]=1/M_N*phi[4,4]
+  D1[5,5]=1/M_B*phi[5,5]
+
+  D1[3,0]=(1/sqrt(M_N*M_B))*phi[3,0]*sum(PrimerosVecinosBoro['Exponencial'])
+  D1[4,1]=(1/sqrt(M_N*M_B))*phi[4,1]*sum(PrimerosVecinosBoro['Exponencial'])
+  D1[5,2]=(1/sqrt(M_N*M_B))*phi[5,2]*sum(PrimerosVecinosBoro['Exponencial'])
+
+  D1[0,3]=(1/sqrt(M_B*M_N))*phi[0,3]*sum(PrimerosVecinosNitrogeno['Exponencial'])
+  D1[1,4]=(1/sqrt(M_B*M_N))*phi[1,4]*sum(PrimerosVecinosNitrogeno['Exponencial'])
+  D1[2,5]=(1/sqrt(M_B*M_N))*phi[2,5]*sum(PrimerosVecinosNitrogeno['Exponencial'])
 #+end_src
 
 #+RESULTS:
-
-#+begin_src python :session :results none :exports both
-  Mat_Din_primeros_vecinos=alpha_1*Matrix([M1[i].coeff(j) for i in range(0,6) for j  in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]
-			     ).reshape(6,6)#-diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2)
-#+end_src
-
-Tenemos por lo tanto que el miembro de la derecha de la ecuación \ref{eq1} es la matriz
-\begin{scriptsize}
-
-\begin{equation}
-\left[\begin{matrix}- \frac{3 \alpha_{1}}{2} & 0 & 0 & \alpha_{1} \left(\frac{3}{4} + \frac{3 e^{- i a q_{x}}}{4}\right) & 0 & 0\\0 & - \frac{3 \alpha_{1}}{2} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{1}{4} + \frac{e^{- i a q_{x}}}{4}\right) & 0\\0 & 0 & - 3 \alpha_{1} & 0 & 0 & \alpha_{1} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)\\\alpha_{1} \left(\frac{3 e^{i a q_{x}}}{4} + \frac{3}{4}\right) & 0 & 0 & - \frac{3 \alpha_{1}}{2} & 0 & 0\\0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{e^{i a q_{x}}}{4} + \frac{1}{4}\right) & 0 & 0 & - \frac{3 \alpha_{1}}{2} & 0\\0 & 0 & \alpha_{1} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right) & 0 & 0 & - 3 \alpha_{1}\end{matrix}\right]
-\end{equation}
-
-
-\end{scriptsize}
-
-multiplicada por $\vec A=\left({A_1}_x,{A_1}_y,{A_1}_z,{A_2}_x,{A_2}_y,{A_2}_z\right)$.
-
-Y el miembro de la izquierda es, evidentemente,
-
-\begin{equation}
-\omega^{2}\left(-m_{1}
-\end{equation}
-
+#+begin_export latex
+#+end_export
 
 \newpage
-#+begin_src python :session :results none :exports both
-  SegundosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']>0.9) &
-			    (Atomos(1,1)['Distancia']<1.1) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
-
-  SegundosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']>0.9) &
-			    (Atomos(1,1)['Distancia']<1.1) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
-
-  TercerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']>1.1) &
-			    (Atomos(1,1)['Distancia']<1.5) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
-
-  TercerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']> 1.1) &
-			    (Atomos(1,1)['Distancia']<1.5) & (Atomos(1,1)[r"$\nu\prime$"]==2)]
-
-  CuartosVecinosBoro= Atomos(2,2)[(Atomos(2,2)['Distancia']>1.5) &
-			    (Atomos(2,2)['Distancia']<1.7) & (Atomos(2,2)[r"$\nu\prime$"]==1)]
-
-  CuartosVecinosNitrogeno= Atomos(2,2)[(Atomos(2,2)['Distancia']> 1.5) &
-			    (Atomos(2,2)['Distancia']<1.7) & (Atomos(2,2)[r"$\nu\prime$"]==2)]
-
-  M2=SegundosVecinosBoro['Ecuación'].sum().row_insert(2,SegundosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-      3,SegundosVecinosNitrogeno['Ecuación'].sum()).row_insert(5,SegundosVecinosNitrogeno['Ecuación perp.'].sum())
-  Mat_Din_segundos_vecinos=(alpha_2*Matrix([M2[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
-       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
-  M3=TercerosVecinosBoro['Ecuación'].sum().row_insert(2,TercerosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-      3,TercerosVecinosNitrogeno['Ecuación'].sum()).row_insert(
-	  5,TercerosVecinosNitrogeno['Ecuación perp.'].sum())
-  Mat_Din_terceros_vecinos=(alpha_3*Matrix([M3[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)-
-       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))
-  M4=CuartosVecinosBoro['Ecuación'].sum().row_insert(2,CuartosVecinosBoro['Ecuación perp.'].sum()).row_insert(
-      3,CuartosVecinosNitrogeno['Ecuación'].sum()).row_insert(
-	  5,CuartosVecinosNitrogeno['Ecuación perp.'].sum())
-  Mat_Din_cuartos_vecinos=(alpha_4*Matrix([M4[i].coeff(j) for i in range(0,6) for j
-    in [A_1_x, A_1_y, A_1_z, A_2_x, A_2_y,A_2_z]]).reshape(6,6)
-  #.reshape(6,6)-
-       diag(m_1*omega**2,m_1*omega**2,m_1*omega**2,m_2*omega**2,m_2*omega**2, m_2*omega**2))                       
-  Mat_Dinamica= Mat_Din_primeros_vecinos+Mat_Din_segundos_vecinos +Mat_Din_terceros_vecinos+Mat_Din_cuartos_vecinos
-#+end_src
-
-Es mucho más facil visualizar cada elemento de la matriz dinámica que visualizarla toda. (se puede exportar el latex a html y visualizarla con un navegador si eso)  
-
-
-
-
-
-*** Con numpy :noexport:   
-#+begin_src python :session :results latex :exports none
-  PrimerosVecinosBoro=  Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &
-			    (Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\nu\prime$"]==1)]
-
-  PrimerosVecinosBoro.to_latex(escape=False,index=False)
-#+end_src
-
-#+RESULTS:
-#+begin_export latex
-#+end_export
-
-
-- Podemos observar que para $\nu\prime=1$, el átomo de Boro, de la celdilla $\vec l=\vec 0$, tenemos $3$ $p.v$, $3$ átomos de $N$, uno que pertenece a la misma celda $\vec l=\vec 0$ y otros dos de celdillas contiguas. \color{red}Considerando que $\alpha_{1,2,(1,0)}=\alpha_{1,2,(0,-1)}$ por simetria, ya que se estamos hablando de la interacción entre dos átomos de $B$ y $N$ de celdas contiguas, y diferente a $\alpha_{1,2,(0,0)}$, pues en este caso los aomos $B$ y $N$ pertenecen a la misma base (mirar enlaces de BN, hibridaciones, etc.) \normalcolor
-
-
+\eject \pdfpagewidth=35cm \pdfpageheight=15cm
 \begin{equation}
-\begin{aligned}
--m_1\omega^2
-\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y
-\end{pmatrix}& =\alpha_{1,2,(0,0)}\left(\hat R_{1,2,(0,0)}\otimes\hat R_{1,2,(0,0)}\right)\cdot
-\left(\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y
-\end{pmatrix}-\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y\end{pmatrix}\right)+\\
- &+\alpha_{1,2(1,0)}\left(\hat R_{1,2,(1,0)}\otimes\hat R_{1,2,(1,0)}\right)\cdot
-\left(\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y\\
-\end{pmatrix}\cdot e^{i \vec q\cdot \vec a_1}-\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y\end{pmatrix}\right)\right)\\
- &+\alpha_{1,2(0,-1)}\left(\hat R_{1,2,(0,-1)}\otimes\hat R_{1,2,(0,-1)}\right)\cdot
-\left(\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y
-\end{pmatrix}\cdot e^{-i \vec q\cdot \vec a_2 }-\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y\end{pmatrix}\right)
-\end{aligned}
+\left[\begin{matrix}\frac{\phi^{xx}_{BB}}{M_{B}} & 0 & 0 & \frac{\phi^{xx}_{BN} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0\\0 & \frac{\phi^{yy}_{BB}}{M_{B}} & 0 & 0 & \frac{\phi^{yy}_{BN} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right)}{\sqrt{M_{B} M_{N}}} & 0\\0 & 0 & \frac{\phi^{zz}_{BB}}{M_{B}} & 0 & 0 & \frac{\phi^{zz}_{BN} \left(e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + e^{i a q_{x}} + 1\right)}{\sqrt{M_{B} M_{N}}}\\\frac{\phi^{xx}_{NB} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{\phi^{xx}_{NN}}{M_{N}} & 0 & 0\\0 & \frac{\phi^{yy}_{NB} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{\phi^{yy}_{NN}}{M_{N}} & 0\\0 & 0 & \frac{\phi^{zz}_{NB} \left(e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + 1 + e^{- i a q_{x}}\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{\phi^{zz}_{NN}}{M_{B}}\end{matrix}\right]
 \end{equation}
-
-- Igualmente, para $\nu\prime=2$, el átomo de $N$ de la celdilla $\vec l=\vec 0$ tenemos $3$ átomos de $B$ como primeros vecinos
-
-\begin{equation}
-\begin{aligned}
--m_2\omega^2
-\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y
-\end{pmatrix}& =\alpha_{2,1,(0,0)}\left(\hat R_{2,1,(0,0)}\otimes\hat R_{2,1,(0,0)}\right)\cdot
-\left(\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y
-\end{pmatrix}-\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y\end{pmatrix}\right)+\\
- &+\alpha_{2,1,(-1,0)}\left(\hat R_{2,1,(-1,0)}\otimes\hat R_{2,1,(-1,0)}\right)\cdot
-\left(\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y\\
-\end{pmatrix}\cdot e^{-i \vec q\cdot \vec a_1}-\begin{pmatrix}
-{A_1}_x\\
-{A_1}_y\end{pmatrix}\right)\right)\\
- &+\alpha_{2,1,(0,1)}\left(\hat R_{2,1,(0,1)}\otimes\hat R_{2,1,(0,1)}\right)\cdot
-\left(\begin{pmatrix}
-{A_1}_x\\
-{A_1_y
-\end{pmatrix}\cdot e^{i \vec q\cdot \vec a_2}-\begin{pmatrix}
-{A_2}_x\\
-{A_2}_y\end{pmatrix}\right)
-\end{aligned}
-\end{equation}
-
-
-
-
-
-** Matriz dinámica                                                 :noexport:
-
-   donde el miembro de la derecha es el producto de la conocida como matriz dinámica del cristal por la amplitud de las vibraciones. La matriz dinámica suele escribirse como la suma de contribuciones de primersos vecinos, segundos vecinoss, etc., de los átomos $\nu,\vec 0$.
-
-Puesto que representa un sistema de 6, en nuestro caso, ecuaciones lineales homogeneas (en las icongnitas que son las componenetes del vector $\vec A$ su solución no trivial exige que el determinante de los coeficientes sea nulo, es decir que se cumpla la ecuación secular:
-
-\begin{equation}
-m\omega^2 .....
-\end{equation}
-
-Dado que la matriz dinámica es de dimensión $6x6$, la ecuación secular tiene 6 soluciones que describen las 6 ramas de la relación de dispersión, es decir. las 6 frecuencias características de los 6 modos norales de vibración del vecor de ondas $\vec q$.
-
-
-Por lo general, la orientación relativa entre el vector de ondas $\vec q$ y el vector de polarización $\vec A(\vec q, p)$, donde p=1,..6 es un índice que identifica la rama, es arbritaria. Aquellos modos en los que $\vec q$ y $\vec A(\vec q, p)$ sean paralelos se denominan /modos longitudinales/; y aquellos en los que sean perpendiculares se denominan /modos transversales/.
-
-
-Las frecuencias $\omega$ de los fonones en función del vector de ondas $\vec q$ son soluciones de la ecuación secular:
-
-\begin{equation}
-\det\left|\frac{1}{\sqrt{M_sM_t}}C^{\alpha\beta}_{st}\left(\vec q\right)-\omega^2\left(\vec q\right)\right| 
-\end{equation}
-
-donde $M_s$ y $M_t$ denotan las masas atómicas de los átoos $s$ y $t$ y la matriz dinámica esta definida cómo:
-
-\begin{equation}
-C^{\alpha\beta}_{st}\left(\vec q\right)=\frac{\partial^2E}{\partial u^{*\alpha}_s\left(\vec q\right)\partial u^{\beta}_{t}\left(\vec q\right)}
-\end{equation}
-
-donde $u^{*\alpha}_{s} representa el desplazamiento del átomo $s$ en la dirección $\alpha$ y la segunda derivada de la energía corresponde al cambio de la fuerza que actua en el átomo $t$ en la dirección $\beta$ respecto al desplazamiento del átomo $s$ en la dirección $\alpha$
+\restoregeometry
+\newpage
