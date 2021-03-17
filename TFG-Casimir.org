@@ -1,5 +1,7 @@
 #+TITLE: Fonones y espectroscopía Raman en semiconductores bidimensionales.
-#+LaTeX_HEADER:\usepackage[a4paper,left=1.5cm,right=1.5cm,top=1.5cm, bottom=2cm]{geometry}
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt,a4paper]
+#+LaTeX_HEADER:\usepackage[left=1.5cm,right=1.5cm,top=1.5cm, bottom=2cm]{geometry}
 #+LaTeX_HEADER:\usepackage[utf8]{inputenc}
 #+LaTeX_HEADER:\usepackage{siunitx}
 #+LaTeX_HEADER:\usepackage{amsmath}
@@ -68,7 +70,7 @@ donde $u_{\alpha}^{i}$ representa el desplazamiento del átomo $\alpha$ en la di
 La segunda derivada de la energía de la ecuación \ref{eq:Matriz_Dinámica} corresponde al cambio en la fuerza que actua sobre el átomo $\alpha\prime$ en la dirección $j$ cuando se desplaza el átomo $\alpha$ en la dirección $i$
 
 \begin{equation}
-D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*i}_{i}}F^{j}_t(\vec q)
+D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha\prime}(\vec q)
 \end{equation}
 
    Puesto que el cálculo de los modos de vibración por primeros principios empieza por establecer la geometria del cristal en equilibrio, vamos a comprobar que con los datos proporcionados que el BN monolayer se trata  de un cristal bidimensional de base diatómica, cuya celda unidad viene dada por (datos proporcionados):
@@ -93,12 +95,10 @@ D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*i}_{i}}F^{j}_t(
 
 #+RESULTS:
 
-Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo src_python[:session]{'{:.2f}'.format(arccos(vdot(a_1,a_2)))} {{{results(=2.09=)}}}    $= 2\pi/3$ rad.
+Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo de $\SI{2\pi/3}{\radian}$
 
 
-Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$, notemos que aunque es habitual representar la celdilla con un indice entero $n$ es más sencillo y facilita los cálculos (así como determinar a que celdilla no referimos) el uso de un índice vectorial.
-
-Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
+Numeraremos las celdillas unidad con un índice vectorial $\vec l=\left( l_1, l_2\right)$, notemos que aunque es habitual representar la celdilla con un indice entero $n$ es más sencillo y facilita los cálculos (así como determinar a que celdilla no referimos) el uso de un índice vectorial. Las posiciones de los nudos son $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 
 Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,
 
@@ -218,9 +218,6 @@ Explicar que podemos tratar por un lado las vibraciones en el plano del cristal 
 
 
 \normalcolor
-
-
-\newpage
 
 
 * TODO Desarrollo del trabajo
@@ -424,3 +421,20 @@ Por lo tanto, la matriz dinámica que tenemos es:
 \end{equation}
 \restoregeometry
 \newpage
+
+
+Como he comenttado, tenemos 12 parámetros (los elementos del tensor constantes de fuerza no nulos) a determinar. Simplifico aún más el problema y asumiento que:
+
+
+#+begin_src python :session :results latex :exports both
+  phi_BB, phi_NN, phi_BN = symbols('phi_BB, phi_NN, phi_BN')
+  phi_BB__xx, phi_BB__yy, phi_BB__zz=(phi_BB for i in range(3))
+  phi_NN__xx, phi_NN__yy, phi_NN__zz=(phi_NN for i in range(3))
+  phi_NB__xx, phi_NB__yy, phi_NB__zz, phi_BN__xx, phi_BN__yy, phi_BN__zz= \
+  (phi_BN for i in range(6))
+
+#+end_src
+
+#+RESULTS:
+#+begin_export latex
+#+end_export
