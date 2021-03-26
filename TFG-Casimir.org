@@ -633,15 +633,50 @@ Mientras que la interacción entre el átomo de nitrogeno de la celdilla $\vec l
 \left[\begin{matrix}3 \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2ti} \cos{\left(a q_{x} \right)} & \sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\\sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2r} \cos{\left(a q_{x} \right)} + 3 \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\0 & 0 & 2 \phi^{NN}_{2to} \left(2 \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \cos{\left(a q_{x} \right)}\right)\end{matrix}\right]
 \end{equation}
 
-\eject \pdfpagewidth=210mm \pdfpageheight=297mm
+\eject \pdfpagewidth=450mm \pdfpageheight=297mm
 \newpage
-
-En este punto debemmos tener presente que las constantes de fuerza 
-
-
 *** Terceros vecinos
-Veamos ahora la contibución a la matriz dinámica de los terceros vecinos:
+Veamos ahora la contribución a la matriz dinámica de los terceros vecinos:
+#+begin_src python :session :results output :exports both
+  TercerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<sqrt(21)/3) &\
+  (Atomos(1,1)['Distancia']>1) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
+  
+  TercerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<sqrt(21)/3) &\
+  (Atomos(1,1)['Distancia']>1) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
+  
+  phi_3r__BN,phi_3ti__BN,phi_3to__BN=symbols('phi_3r__BN,phi_3ti__BN,phi_3to__BN')
+  
+  phi_3r__NB,phi_3ti__NB,phi_3to__NB=symbols('phi_3r__BN,phi_3ti__BN,phi_3to__BN')
+  
+  # Para el átomo de N de la celdilla l=-1,-1  
+  Phi_30__BN=Matrix([[phi_3ti__BN,0,0],[0,phi_3r__BN,0],[0,0,phi_3to__BN]])
+  # Para el átomo de B de la celdilla l=1,1
+  Phi_30__NB=Matrix([[phi_3ti__NB,0,0],[0,phi_3r__NB,0],[0,0,phi_3to__NB]])
 
+  def Phi_3l__BN(theta):
+    return U(-theta)*Phi_30__BN*U(theta)
+ 
+  def Phi_3l__NB(theta):
+    return U(-theta)*Phi_30__NB*U(theta)
+ 
+  Phi_3__BN=Phi_30__BN*fase(-1,-1)+Phi_3l__BN(2*pi/3)*fase(1,1)+Phi_3l__BN(-2*pi/3)*fase(-1,1)
+  Phi_3__NB=Phi_30__NB*fase(1,1)+Phi_3l__NB(2*pi/3)*fase(-1,-1)+Phi_3l__NB(-2*pi/3)*fase(1,-1)
+  #print_latex(Phi_3__NB)
+#+end_src
+
+#+RESULTS:
+
+En este caso la matriz dinámica de los terceros vecinos del átomo de boro es:
+\begin{equation}
+\left[\begin{matrix}\phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} & \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & \phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} & 0\\0 & 0 & \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{- i a q_{x}}\end{matrix}\right]
+\end{equation}
+
+Mientras que la de los terceros vecinos del átomo de nitrogeno:
+\begin{equation}
+\left[\begin{matrix}\phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & \phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\0 & 0 & \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}\end{matrix}\right]
+\end{equation}
+
+*** Ajuste a los datos experimentales
 Podemos evaluar la matriz dinámica en el punto $\Gamma$ ($q_x=0,q_y=0$).
 
 #+begin_src python :session :results output :exports both
@@ -650,6 +685,8 @@ Podemos evaluar la matriz dinámica en el punto $\Gamma$ ($q_x=0,q_y=0$).
   #D1_Gamma=D1.subs([(q_x,0),(q_y,0),(M_B,B.mass*u),(M_N,N.mass*u)])
   #print(D1_Gamma)
 #+end_src
+
+#+RESULTS:
 
 
 
