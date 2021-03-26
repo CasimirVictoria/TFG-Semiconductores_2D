@@ -375,12 +375,20 @@ Puesto que debemos determinar cuales son las posiciones de equilibrio de los át
 \end{tabular}
 #+end_export
 
+\newpage
+
 ** Matriz de constantes de fuerza y matriz dinámica
 
 A parte de identificar los primeros, segundos, ... vecinos, necesitamos conocer la matriz de constantes de fuerza que corresponde a la interacción de cada átomo de la celdilla unidad con su n-esimo vecino.
 
 Vamos a suponer (por simplificar) que un desplazamiento longitudinal (radial, que estará contenido en el plano del cristal) o transversal (tangencial, sea en el plano o perpendicular al plano) solo genera una fuerza radial o transversal.
 
+\color{red}
+Dibujar un esquema tipo
+#+ATTR_ORG: :width 480
+#+ATTR_LATEX: :width 6 cm 
+[[file:Graficas/Esquema_Matriz_Constantes_de_fuerza.png]]
+\normalcolor
 *** Primeros vecinos
 Fijemonos en los primeros vecinos del átomo de boro. 
 \color{red} Dibujar el boro, y sus vecinos \normalcolor
@@ -459,7 +467,7 @@ Mientras que para el átomo situado en $\vec l= (0,0)$ la matriz de constantes d
 \end{equation}
 
 \newpage
-\eject \pdfpagewidth=297mm \pdfpageheight=210mm
+\eject \pdfpagewidth=297mm \pdfpageheight=300mm
 
 Por lo tanto, la contribución a matriz dinámica que tenemos por parte de la interacción de estos primeros vecinos es:
 
@@ -512,7 +520,7 @@ Y por lo tanto, la contribución a matriz dinámica que tenemos por parte de la 
 \left[\begin{matrix}\phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{3 \phi^{1}_{r}}{4} + \frac{\phi^{1}_{ti}}{4} + \left(\frac{3 \phi^{1}_{r}}{4} + \frac{\phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & - \frac{\sqrt{3} \phi^{1}_{r}}{4} + \frac{\sqrt{3} \phi^{1}_{ti}}{4} + \left(\frac{\sqrt{3} \phi^{1}_{r}}{4} - \frac{\sqrt{3} \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & 0\\- \frac{\sqrt{3} \phi^{1}_{r}}{4} + \frac{\sqrt{3} \phi^{1}_{ti}}{4} + \left(\frac{\sqrt{3} \phi^{1}_{r}}{4} - \frac{\sqrt{3} \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & \phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{1}_{r}}{4} + \frac{3 \phi^{1}_{ti}}{4} + \left(\frac{\phi^{1}_{r}}{4} + \frac{3 \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & 0\\0 & 0 & \phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{1}_{to} e^{i a q_{x}} + \phi^{1}_{to}\end{matrix}\right]
 \end{equation}
 
-Podemos observar que las vibraciones fuera de plano, en la dirección $z$ no estan acopladas a las interplanares, así como que $D^{NB}_{(1)}={D^{BN}_{(1)}}^*$
+Debemos hacer notar que /como la energía potencial es una función cuadrática de los desplazamientos atómicos $u^B_i(\vec R_{\vec l})$ $u^N_i(\vec R_{\vec l})$ la matriz de constantes de fuerza tiene la forma $\phi_{ij}^{BN}(\vec R_{\vec l})=\phi_{ji}^{NB}(-\vec R_{\vec l})$, y su transformada de Fourier, es decir, la matriz dinámica, es una matriz Hermítica/ (cite:falkovsky08_symmet_const_phonon_disper_graph), y también que las vibraciones fuera de plano, en la dirección $z$ no estan acopladas a las interplanares.
 
 *** Segundos vecinos
 
@@ -571,7 +579,7 @@ y por tanto, la contribución a la matriz dinámica debida a estas interacciones
 #+end_src
 
 \newpage
-\eject \pdfpagewidth=400mm \pdfpageheight=210mm
+\eject \pdfpagewidth=400mm \pdfpageheight=310mm
 
 
 
@@ -620,7 +628,6 @@ Mientras que la interacción entre el átomo de nitrogeno de la celdilla $\vec l
   print_latex(Matrix([Phi_2__NN[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3))
 #+end_src
 
-\newpage
 \begin{equation}
 \label{eq:4}
 \left[\begin{matrix}3 \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2ti} \cos{\left(a q_{x} \right)} & \sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\\sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2r} \cos{\left(a q_{x} \right)} + 3 \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\0 & 0 & 2 \phi^{NN}_{2to} \left(2 \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \cos{\left(a q_{x} \right)}\right)\end{matrix}\right]
@@ -628,6 +635,8 @@ Mientras que la interacción entre el átomo de nitrogeno de la celdilla $\vec l
 
 \eject \pdfpagewidth=210mm \pdfpageheight=297mm
 \newpage
+
+En este punto debemmos tener presente que las constantes de fuerza 
 
 
 *** Terceros vecinos
