@@ -9,8 +9,8 @@
 #+LaTeX_HEADER:\usepackage{tabularx}
 #+LaTeX_HEADER:\usepackage{booktabs} %Publication quality tables in LaTeX.
 #+LaTeX_HEADER:\usepackage{pdflscape}
-#+latex_header: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}
-#+latex_header: \addbibresource{TFG-Casimir.bib}
+#+latex_header:\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}
+#+latex_header:\addbibresource{TFG-Casimir.bib}
 
 
 
@@ -250,7 +250,7 @@ Puesto que la energia potencial es una funcion cuadratica cite:falkovsky08_symme
 
 \normalcolor
 
-
+\newpage
 * TODO Desarrollo del trabajo
 
 ** Clasificación de los vecinos 
@@ -259,7 +259,7 @@ Puesto que debemos determinar cuales son las posiciones de equilibrio de los át
 
 
 
-#+begin_src python :session :results latex :exports both
+#+begin_src python :session :results latex :exports results
   from sympy import *
   import pandas as pd
 
@@ -324,7 +324,7 @@ Puesto que debemos determinar cuales son las posiciones de equilibrio de los át
     return pd.DataFrame(propiedades_atomos(l_1,l_2),columns=columnas).sort_values(
 	 ['Distancia',r"$\alpha\prime$"], ascending=[True, True])
   ## Mostramos el dataframe como una tabla en formato \LaTeX.
-  Atomos(2,2).head(38).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
+  Atomos(2,2).head(26).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
 #+end_src      
 
 #+RESULTS:
@@ -359,21 +359,14 @@ Puesto que debemos determinar cuales son las posiciones de equilibrio de los át
               2 &         1 &     -1 &     -1 &              [-sqrt(3)/2, -1/2] &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
               2 &         1 &      1 &     -1 &               [sqrt(3)/2, -1/2] &   exp(I*(3*a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
               2 &         1 &      1 &      1 &                          [0, 1] &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              1 &         2 &     -2 &     -1 &     [-sqrt(21)/7, -2*sqrt(7)/7] &  exp(I*(-3*a*q_x/2 - sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
-              1 &         2 &     -2 &      0 &   [-3*sqrt(21)/14, -sqrt(7)/14] &                        exp(-2*I*a*q_x) &   sqrt(21)/3 \\
-              1 &         2 &      0 &     -1 &      [sqrt(21)/7, -2*sqrt(7)/7] &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
-              1 &         2 &      0 &      2 &    [-sqrt(21)/14, 5*sqrt(7)/14] &        exp(I*(-a*q_x + sqrt(3)*a*q_y)) &   sqrt(21)/3 \\
-              1 &         2 &      1 &      0 &    [3*sqrt(21)/14, -sqrt(7)/14] &                           exp(I*a*q_x) &   sqrt(21)/3 \\
-              1 &         2 &      1 &      2 &     [sqrt(21)/14, 5*sqrt(7)/14] &                   exp(sqrt(3)*I*a*q_y) &   sqrt(21)/3 \\
-              2 &         1 &     -1 &     -2 &   [-sqrt(21)/14, -5*sqrt(7)/14] &                  exp(-sqrt(3)*I*a*q_y) &   sqrt(21)/3 \\
-              2 &         1 &     -1 &      0 &    [-3*sqrt(21)/14, sqrt(7)/14] &                          exp(-I*a*q_x) &   sqrt(21)/3 \\
-              2 &         1 &      0 &     -2 &    [sqrt(21)/14, -5*sqrt(7)/14] &         exp(I*(a*q_x - sqrt(3)*a*q_y)) &   sqrt(21)/3 \\
-              2 &         1 &      0 &      1 &      [-sqrt(21)/7, 2*sqrt(7)/7] &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
-              2 &         1 &      2 &      0 &     [3*sqrt(21)/14, sqrt(7)/14] &                         exp(2*I*a*q_x) &   sqrt(21)/3 \\
-              2 &         1 &      2 &      1 &       [sqrt(21)/7, 2*sqrt(7)/7] &   exp(I*(3*a*q_x/2 + sqrt(3)*a*q_y/2)) &   sqrt(21)/3 \\
 \bottomrule
 \end{tabular}
 #+end_export
+
+
+
+
+
 
 \newpage
 
@@ -390,8 +383,11 @@ Dibujar un esquema tipo
 [[file:Graficas/Esquema_Matriz_Constantes_de_fuerza.png]]
 \normalcolor
 *** Primeros vecinos
-Fijemonos en los primeros vecinos del átomo de boro. 
-\color{red} Dibujar el boro, y sus vecinos \normalcolor
+Para hacer más explicito el método que he seguido se muestra las matriz de constantes de fuerza para los primeros vecinos del boro 
+
+\color{red} 
+Dibujar el boro, y sus vecinos 
+\normalcolor
 
 #+begin_src python :session :results latex :exports both
   PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &\
@@ -412,18 +408,23 @@ Fijemonos en los primeros vecinos del átomo de boro.
 \end{tabular}
 #+end_export
 
+Podemos observar que para el átomo de nitrogeno de la celdilla $\vec l = (0,1)$ la correspondiente matriz de constantes de fuerza puede escribirse (en coordenadas cartesianas) como:
 
+#+begin_src python :session :results none :exports both
+  phi_1r__BN,phi_1ti__BN,phi_1to__BN=symbols('phi_1r__BN,phi_1ti__BN,phi_1to__BN')
+  
+  Phi_10__BN=Matrix([[phi_1ti__BN,0,0],[0,phi_1r__BN,0],[0,0,phi_1to__BN]])
+  print(r"\begin{equation}D_{1,(0,1)}^{BN}=", latex(Phi_10__BN),r"\end{equation}")
+#+end_src
 
-Podemos observar que para el  átomo de nitrogeno de la celdilla $\vec l = (0,1)$ la correspondiente matriz de constantes de fuerza puede escribirse (en coordenadas cartesianas) como:
-
+#+RESULTS:
 \begin{equation}
-\label{eq:1}
-\Phi^{(BN)}_{1,0}=\begin{pmatrix}
-\phi_{1ti}^{(BN))} & 0 & 0 \\
-0 & \phi_{1r}^{(BN)} & 0 \\
- 0 & 0  & \phi_{1to}^{(BN)}
-\end{pmatrix}
-\end{equation} 
+D_{1,(0,1)}^{BN}= \left[\begin{matrix}\phi^{BN}_{1ti} & 0 & 0\\0 & \phi^{BN}_{1r} & 0\\0 & 0 & \phi^{BN}_{1to}\end{matrix}\right]
+\end{equation}
+
+\vspace{0.7cm}
+
+
 
 donde $\phi_r$ hace referencia a la constante de fuerza en la dirección radial (/bond stretching/) y $\phi_{ti}$ y $\phi_{to}$ a las constantes de fuerza en dirección tangencial (/bond bending/) dentro y fuera de plano, respectivamente.
 
@@ -448,8 +449,13 @@ Por lo tanto tenemos que para el átomo situado en $\vec l=(-1,0)$
   def Phi_1l__BN(theta):
     return U(-theta)*Phi_10__BN*U(theta)
  
-  print_latex(Phi_1l__BN(2*pi/3))
+  print_latex(Matrix([Phi_1l__BN(2*pi/3)[i,j].factor() for j in range(3) for i in range(3)]).reshape(3,3))
 #+end_src
+
+\begin{equation}
+\label{eq:3}
+\left[\begin{matrix}\frac{3 \phi^{BN}_{1r} + \phi^{BN}_{1ti}}{4} & \frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & 0\\\frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & \frac{\phi^{BN}_{1r} + 3 \phi^{BN}_{1ti}}{4} & 0\\0 & 0 & \phi^{BN}_{1to}\end{matrix}\right]
+\end{equation}
 
 \begin{equation}
 \label{eq:11}
@@ -473,11 +479,11 @@ Por lo tanto, la contribución a matriz dinámica que tenemos por parte de la in
 
 #+begin_src python :session :results none :exports both
   Phi_1__BN=Phi_10__BN*fase(0,1)+Phi_1l__BN(2*pi/3)*fase(-1,0)+Phi_1l__BN(-2*pi/3)*fase(0,0)
-  print_latex(Phi_1__BN)
+  #Phi_1__BN=Matrix([Phi_1__BN[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3)
 #+end_src
 
 \begin{equation}
-\left[\begin{matrix}\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} & - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} & 0\\- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} & \phi^{BN}_{1r} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} & 0\\0 & 0 & \phi^{BN}_{1to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} + \phi^{BN}_{1to} e^{- i a q_{x}}\end{matrix}\right]
+\left[\begin{matrix}\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4} + \phi^{BN}_{1ti} e^{- \frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + \frac{\left(3 \phi^{BN}_{1r} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4} & \frac{\sqrt{3} \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti} - \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}\right)}{4} & 0\\\frac{\sqrt{3} \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti} - \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}\right)}{4} & \frac{\phi^{BN}_{1r}}{4} + \phi^{BN}_{1r} e^{- \frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + \frac{3 \phi^{BN}_{1ti}}{4} + \frac{\left(\phi^{BN}_{1r} + 3 \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4} & 0\\0 & 0 & \phi^{BN}_{1to} \left(1 + e^{- \frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + e^{- i a q_{x}}\right)\end{matrix}\right]
 \end{equation}
 
 De manera análoga, para los primeros vecinos del átomo de nitrogeno
@@ -510,53 +516,50 @@ Y por lo tanto, la contribución a matriz dinámica que tenemos por parte de la 
 #+begin_src python :session :results none :exports both
   Phi_10__NB=Phi_10__BN
   def Phi_1l__NB(theta):
-    return U(-theta)*Phi_1__NB*U(theta)
+    return U(-theta)*Phi_10__NB*U(theta)
  
-  #print_latex(Phi_1__NB*fase(0,-1)+Phi_1l__NB(2*pi/3)*fase(1,0)+Phi_1l__NB(-2*pi/3)*fase(0,0))
-  print_latex(Matrix([Phi_1__NB[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3))
+  Phi_1__NB=Phi_10__NB*fase(0,-1)+Phi_1l__NB(2*pi/3)*fase(1,0)+Phi_1l__NB(-2*pi/3)*fase(0,0)
+  #Phi_1__NB=(Matrix([Phi_1__NB[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3))
 #+end_src
 
 \begin{equation}
-\left[\begin{matrix}\phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{3 \phi^{1}_{r}}{4} + \frac{\phi^{1}_{ti}}{4} + \left(\frac{3 \phi^{1}_{r}}{4} + \frac{\phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & - \frac{\sqrt{3} \phi^{1}_{r}}{4} + \frac{\sqrt{3} \phi^{1}_{ti}}{4} + \left(\frac{\sqrt{3} \phi^{1}_{r}}{4} - \frac{\sqrt{3} \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & 0\\- \frac{\sqrt{3} \phi^{1}_{r}}{4} + \frac{\sqrt{3} \phi^{1}_{ti}}{4} + \left(\frac{\sqrt{3} \phi^{1}_{r}}{4} - \frac{\sqrt{3} \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & \phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{1}_{r}}{4} + \frac{3 \phi^{1}_{ti}}{4} + \left(\frac{\phi^{1}_{r}}{4} + \frac{3 \phi^{1}_{ti}}{4}\right) e^{i a q_{x}} & 0\\0 & 0 & \phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{1}_{to} e^{i a q_{x}} + \phi^{1}_{to}\end{matrix}\right]
+\left[\begin{matrix}\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{\frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + \frac{\phi^{BN}_{1ti}}{4} + \frac{\left(3 \phi^{BN}_{1r} + \phi^{BN}_{1ti}\right) e^{i a q_{x}}}{4} & \frac{\sqrt{3} \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti} + \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{i a q_{x}}\right)}{4} & 0\\\frac{\sqrt{3} \left(- \phi^{BN}_{1r} + \phi^{BN}_{1ti} + \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{i a q_{x}}\right)}{4} & \phi^{BN}_{1r} e^{\frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \frac{\left(\phi^{BN}_{1r} + 3 \phi^{BN}_{1ti}\right) e^{i a q_{x}}}{4} & 0\\0 & 0 & \phi^{BN}_{1to} \left(e^{i a q_{x}} + e^{\frac{i a \left(q_{x} - \sqrt{3} q_{y}\right)}{2}} + 1\right)\end{matrix}\right]
 \end{equation}
 
 Debemos hacer notar que /como la energía potencial es una función cuadrática de los desplazamientos atómicos $u^B_i(\vec R_{\vec l})$ $u^N_i(\vec R_{\vec l})$ la matriz de constantes de fuerza tiene la forma $\phi_{ij}^{BN}(\vec R_{\vec l})=\phi_{ji}^{NB}(-\vec R_{\vec l})$, y su transformada de Fourier, es decir, la matriz dinámica, es una matriz Hermítica/ (cite:falkovsky08_symmet_const_phonon_disper_graph), y también que las vibraciones fuera de plano, en la dirección $z$ no estan acopladas a las interplanares.
 
-*** Segundos vecinos
+\newpage
+\eject \pdfpagewidth=210mm \pdfpageheight=297mm
 
-Vamos ahora a considerar los segundos vecinos:
+*** Segundos vecinos y terceros vecinos
 
-#+begin_src python :session :results latex :exports both
+Calculamos ahora las contribuciones a la matriz dinámica de los segundos y terceros vecinos.
+
+#+begin_src python :session :results none :exports none
   SegundosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
   (Atomos(1,1)['Distancia']>0.9) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
-  SegundosVecinosBoro.to_latex(escape=False)
+  ##SegundosVecinosBoro.to_latex(escape=False)
 #+end_src
 
 #+RESULTS:
-#+begin_export latex
-\begin{tabular}{lrrrrlll}
-\toprule
-{} &  $\alpha\prime$ &  $\alpha$ &  $l_1$ &  $l_2$ & $\hat R_{\nu\prime,\nu,\vec l}$ &                                 Fase & Distancia \\
-\midrule
-0 &               1 &         1 &     -1 &     -1 &              [-1/2, -sqrt(3)/2] &  exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &         1 \\
-1 &               1 &         1 &     -1 &      0 &                         [-1, 0] &                        exp(-I*a*q_x) &         1 \\
-3 &               1 &         1 &      0 &     -1 &               [1/2, -sqrt(3)/2] &   exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &         1 \\
-5 &               1 &         1 &      0 &      1 &               [-1/2, sqrt(3)/2] &  exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &         1 \\
-7 &               1 &         1 &      1 &      0 &                          [1, 0] &                         exp(I*a*q_x) &         1 \\
-8 &               1 &         1 &      1 &      1 &                [1/2, sqrt(3)/2] &   exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &         1 \\
-\bottomrule
-\end{tabular}
-#+end_export
 
-
-
-Tenemos $6$ segundos vecinos, que en este caso corresponden a átomos de boro. Fijandonos en el átomo de boro situado en la celdilla $\vec l=(1,0)$ podemos escribir la matriz de constantes de fuerza como:
+Tenemos $6$ segundos vecinos para cada uno de los dos átomos de la celdilla unidad y en este caso las interacciones son entre el mismo tipo de átomo. Fijandonos en el átomo de boro situado en la celdilla $\vec l=(1,0)$ podemos escribir la matriz de constantes de fuerza como:
 
 \begin{equation}
-\Phi_2^{BB}=\begin{pmatrix}
+\Phi_{2,(1,0)}^{BB}=\begin{pmatrix}
 \phi_{2r}^{(BB)} & 0 & 0 \\
 0 & \phi_{2ti}^{(BB)} & 0 \\
  0 & 0  & \phi_{2to}^{(BB)}
+\end{pmatrix}
+\end{equation} 
+ 
+mientras que para el atómo de nitrogeno la matriz de constantes de fuerza para el átomo situado en la celdilla $\vec l =(1,0)$ es:
+
+\begin{equation}
+\Phi_{2,(1,0)}^{NN}=\begin{pmatrix}
+\phi_{2r}^{(NN)} & 0 & 0 \\
+0 & \phi_{2ti}^{(NN)} & 0 \\
+ 0 & 0  & \phi_{2to}^{(NN)}
 \end{pmatrix}
 \end{equation} 
 
@@ -572,71 +575,48 @@ y por tanto, la contribución a la matriz dinámica debida a estas interacciones
     return U(-theta)*Phi_20__BB*U(theta)
 
   Phi_2__BB=Phi_20__BB*fase(1,0)+Phi_2l__BB(pi/3)*fase(1,1)+Phi_2l__BB(-pi/3)*fase(0,-1) \
-	+Phi_2l__BB(pi)*fase(-1,0)+Phi_2l__BB(2*pi/3)*fase(0,1)+ Phi_2l__BB(-2*pi/3)*fase(-1,-1)
+  +Phi_2l__BB(pi)*fase(-1,0)+Phi_2l__BB(2*pi/3)*fase(0,1)+ Phi_2l__BB(-2*pi/3)*fase(-1,-1)
   
-  print_latex(Matrix([Phi_2__BB[i,j].rewrite(cos).simplify() for i in range(3) \
-   for j in range(3)]).reshape(3,3))
-#+end_src
+  #Phi_2_BB=Matrix([Phi_2__BB[i,j].rewrite(cos).simplify() for i in range(3) \
+  # for j in range(3)]).reshape(3,3)
 
-\newpage
-\eject \pdfpagewidth=400mm \pdfpageheight=310mm
-
-
-
-\begin{equation}
-\left[\begin{matrix}3 \phi^{BB}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \phi^{BB}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{BB}_{2ti} \cos{\left(a q_{x} \right)} & \sqrt{3} \left(\phi^{BB}_{2r} - \phi^{BB}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\\sqrt{3} \left(\phi^{BB}_{2r} - \phi^{BB}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & \phi^{BB}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{BB}_{2r} \cos{\left(a q_{x} \right)} + 3 \phi^{BB}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\0 & 0 & 2 \phi^{BB}_{2to} \left(2 \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \cos{\left(a q_{x} \right)}\right)\end{matrix}\right]
-\end{equation}
-
-Mientras que la interacción entre el átomo de nitrogeno de la celdilla $\vec l = \vec 0$ con sus segundos vecinos viene descrita por la matriz dinámica:
-#+begin_src python :session :results latex :exports both
   SegundosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
   (Atomos(1,1)['Distancia']>0.9) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
-  SegundosVecinosNitrogeno.to_latex(escape=False)
-#+end_src
+  #SegundosVecinosNitrogeno.to_latex(escape=False)
 
-
-
-#+RESULTS:
-#+begin_export latex
-\begin{tabular}{lrrrrlll}
-\toprule
-{} &  $\alpha\prime$ &  $\alpha$ &  $l_1$ &  $l_2$ & $\hat R_{\nu\prime,\nu,\vec l}$ &                                 Fase & Distancia \\
-\midrule
-27 &               2 &         2 &     -1 &     -1 &              [-1/2, -sqrt(3)/2] &  exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &         1 \\
-28 &               2 &         2 &     -1 &      0 &                         [-1, 0] &                        exp(-I*a*q_x) &         1 \\
-30 &               2 &         2 &      0 &     -1 &               [1/2, -sqrt(3)/2] &   exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &         1 \\
-32 &               2 &         2 &      0 &      1 &               [-1/2, sqrt(3)/2] &  exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &         1 \\
-34 &               2 &         2 &      1 &      0 &                          [1, 0] &                         exp(I*a*q_x) &         1 \\
-35 &               2 &         2 &      1 &      1 &                [1/2, sqrt(3)/2] &   exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &         1 \\
-\bottomrule
-\end{tabular}
-#+end_export
-
-
-#+begin_src python :session :results none :exports both
   phi_2r__NN,phi_2ti__NN,phi_2to__NN=symbols('phi_2r__NN,phi_2ti__NN,phi_2to__NN')
   
   Phi_20__NN=Matrix([[phi_2ti__NN,0,0],[0,phi_2r__NN,0],[0,0,phi_2to__NN]])
   
-  # Para el átomo que ocupa la posición l_1=-1,0
+  # Para el átomo que ocupa la posición l=1,0
   def Phi_2l__NN(theta):
     return U(-theta)*Phi_20__NN*U(theta)
  
   Phi_2__NN=Phi_20__NN*fase(1,0)+Phi_2l__NN(pi/3)*fase(1,1)+Phi_2l__NN(-pi/3)*fase(0,-1) \
         +Phi_2l__NN(pi)*fase(-1,0)+Phi_2l__NN(2*pi/3)*fase(0,1)+Phi_2l__NN(-2*pi/3)*fase(-1,-1)
-  
-  print_latex(Matrix([Phi_2__NN[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3))
+  #Phi_2__NN=Matrix([Phi_2__NN[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3)
+
 #+end_src
+
+\newpage
+\eject \pdfpagewidth=360mm \pdfpageheight=210mm
+
+\begin{equation}
+\left[\begin{matrix}3 \phi^{BB}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \phi^{BB}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{BB}_{2ti} \cos{\left(a q_{x} \right)} & \sqrt{3} \left(\phi^{BB}_{2r} - \phi^{BB}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\\sqrt{3} \left(\phi^{BB}_{2r} - \phi^{BB}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & \phi^{BB}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{BB}_{2r} \cos{\left(a q_{x} \right)} + 3 \phi^{BB}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\0 & 0 & 2 \phi^{BB}_{2to} \left(2 \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \cos{\left(a q_{x} \right)}\right)\end{matrix}\right]
+\end{equation}
+
+\vspace{1cm}
+
 
 \begin{equation}
 \label{eq:4}
 \left[\begin{matrix}3 \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2ti} \cos{\left(a q_{x} \right)} & \sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\\sqrt{3} \left(\phi^{NN}_{2r} - \phi^{NN}_{2ti}\right) \sin{\left(\frac{a q_{x}}{2} \right)} \sin{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & \phi^{NN}_{2r} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + 2 \phi^{NN}_{2r} \cos{\left(a q_{x} \right)} + 3 \phi^{NN}_{2ti} \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} & 0\\0 & 0 & 2 \phi^{NN}_{2to} \left(2 \cos{\left(\frac{a q_{x}}{2} \right)} \cos{\left(\frac{\sqrt{3} a q_{y}}{2} \right)} + \cos{\left(a q_{x} \right)}\right)\end{matrix}\right]
 \end{equation}
 
-\eject \pdfpagewidth=450mm \pdfpageheight=297mm
+\eject \pdfpagewidth=210mm \pdfpageheight=297mm
 \newpage
-*** Terceros vecinos
-Veamos ahora la contribución a la matriz dinámica de los terceros vecinos:
+
+Pasamos  ahora a calcular la contribución a la matriz dinámica de los terceros vecinos:
 #+begin_src python :session :results output :exports both
   TercerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<sqrt(21)/3) &\
   (Atomos(1,1)['Distancia']>1) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
@@ -660,22 +640,56 @@ Veamos ahora la contribución a la matriz dinámica de los terceros vecinos:
     return U(-theta)*Phi_30__NB*U(theta)
  
   Phi_3__BN=Phi_30__BN*fase(-1,-1)+Phi_3l__BN(2*pi/3)*fase(1,1)+Phi_3l__BN(-2*pi/3)*fase(-1,1)
+  #Phi_3__BN=Matrix([Phi_3__BN[i,j].rewrite(cos).simplify() for i in range(3) \
+  #for j in range(3)]).reshape(3,3)
   Phi_3__NB=Phi_30__NB*fase(1,1)+Phi_3l__NB(2*pi/3)*fase(-1,-1)+Phi_3l__NB(-2*pi/3)*fase(1,-1)
   #print_latex(Phi_3__NB)
+  #Phi_3__NB=Matrix([Phi_3__NB[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3)
 #+end_src
 
 #+RESULTS:
 
-En este caso la matriz dinámica de los terceros vecinos del átomo de boro es:
-\begin{equation}
-\left[\begin{matrix}\phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} & \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} & \phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{- i a q_{x}} & 0\\0 & 0 & \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{- i a q_{x}}\end{matrix}\right]
-\end{equation}
+Debemos tener en cuenta en este punto que las  constantes de fuerza de fuerza asociadas a la interaccion de un átomo \color{red}??consigo mismo o con la totalidad del cristal?? \normalcolor las excluimos con la ayuda de las condiciones impuestas por la invarianza respecto a la traslacion del cistal en su totalidad en las direcciones $x/z$ (cite:falkovsky08_symmet_const_phonon_disper_graph).
 
-Mientras que la de los terceros vecinos del átomo de nitrogeno:
-\begin{equation}
-\left[\begin{matrix}\phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & \phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} & 0\\0 & 0 & \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}\end{matrix}\right]
-\end{equation}
 
+\eject \pdfpagewidth=410mm \pdfpageheight=310mm
+*** Matriz dinámica del cristal de BN
+
+Tenemos por lo tanto que la matriz dinámica que obtenemos considerando hasta los terceros vecinos és
+#+begin_src python :session :results latex :exports both
+  Dsup=Phi_2__BB.col_insert(3,Phi_1__BN+Phi_3__BN)
+  Dinf=(Phi_1__NB+Phi_3__NB).col_insert(3,Phi_2__NN)
+  D=Dsup.row_insert(3,Dinf)
+  #print_latex(D)
+  #[D[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]
+  #constuimos una tabla con m filas a partir de una matriz :
+  def element_de_matriu(Matriu,m,n):
+    return latex(Matriu[m,n])
+
+  def Matriu_com_a_Taula(Matriu,m,n):
+    s = r"\begin{tabular}{|c|c|c|}\hline"
+    s += r"$i$ & $j$ & $D_{i,j}$ \\ \hline"
+    for i in range(m):
+      for j in range(n):
+	s += " $ %d $ & $ %d $ & $ %s $" %(i+1, j+1, element_de_matriu(D,i,j))
+	s += r"\\ \hline"
+
+    s += r"\end{tabular}"
+
+    return s
+
+  Matriu_com_a_Taula(D,6,6)
+#+end_src
+
+#+RESULTS:
+#+begin_export latex
+\begin{tabular}{|c|c|c|}\hline$i$ & $j$ & $D_{i,j}$ \\ \hline $ 1 $ & $ 1 $ & $ \phi^{BB}_{2ti} e^{i a q_{x}} + \phi^{BB}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 2 $ & $ \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 3 $ & $ 0 $\\ \hline $ 1 $ & $ 4 $ & $ \frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 5 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 6 $ & $ 0 $\\ \hline $ 2 $ & $ 1 $ & $ \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 2 $ & $ \phi^{BB}_{2r} e^{i a q_{x}} + \phi^{BB}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 3 $ & $ 0 $\\ \hline $ 2 $ & $ 4 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 5 $ & $ \phi^{BN}_{1r} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 6 $ & $ 0 $\\ \hline $ 3 $ & $ 1 $ & $ 0 $\\ \hline $ 3 $ & $ 2 $ & $ 0 $\\ \hline $ 3 $ & $ 3 $ & $ \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i a q_{x}} + \phi^{BB}_{2to} e^{- i a q_{x}} $\\ \hline $ 3 $ & $ 4 $ & $ 0 $\\ \hline $ 3 $ & $ 5 $ & $ 0 $\\ \hline $ 3 $ & $ 6 $ & $ \phi^{BN}_{1to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} + \phi^{BN}_{1to} e^{- i a q_{x}} + \phi^{BN}_{3to} e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 1 $ & $ \frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 2 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 3 $ & $ 0 $\\ \hline $ 4 $ & $ 4 $ & $ \phi^{NN}_{2ti} e^{i a q_{x}} + \phi^{NN}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 5 $ & $ \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 6 $ & $ 0 $\\ \hline $ 5 $ & $ 1 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 2 $ & $ \phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 3 $ & $ 0 $\\ \hline $ 5 $ & $ 4 $ & $ \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 5 $ & $ \phi^{NN}_{2r} e^{i a q_{x}} + \phi^{NN}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 6 $ & $ 0 $\\ \hline $ 6 $ & $ 1 $ & $ 0 $\\ \hline $ 6 $ & $ 2 $ & $ 0 $\\ \hline $ 6 $ & $ 3 $ & $ \phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} e^{i a q_{x}} + \phi^{BN}_{1to} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 6 $ & $ 4 $ & $ 0 $\\ \hline $ 6 $ & $ 5 $ & $ 0 $\\ \hline $ 6 $ & $ 6 $ & $ \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i a q_{x}} + \phi^{NN}_{2to} e^{- i a q_{x}} $\\ \hline\end{tabular}
+#+end_export
+
+La matriz es un churro, pero podemos ver que las vibraciones perpendiculares al plano del cristal se encuentran desacopladas de las interplanares,
+
+
+\newpage
 *** Ajuste a los datos experimentales
 Podemos evaluar la matriz dinámica en el punto $\Gamma$ ($q_x=0,q_y=0$).
 
