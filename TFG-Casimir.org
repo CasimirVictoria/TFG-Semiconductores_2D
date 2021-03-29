@@ -10,6 +10,7 @@
 #+LaTeX_HEADER:\usepackage{mathtools}
 #+LaTeX_HEADER:\usepackage{booktabs} %Publication quality tables in LaTeX.
 #+LaTeX_HEADER:\usepackage{pdflscape}
+#+AUTHOR: Casimiro Victoria Castillo
 #+latex_header:\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}
 #+latex_header:\addbibresource{TFG-Casimir.bib}
 
@@ -365,10 +366,6 @@ Puesto que debemos determinar cuales son las posiciones de equilibrio de los át
 #+end_export
 
 
-
-
-
-
 \newpage
 
 ** Matriz de constantes de fuerza y matriz dinámica
@@ -470,25 +467,25 @@ Por lo tanto, la contribución a matriz dinámica que tenemos por parte de la in
 
 
 #+begin_src python :session :results none :exports both
-  Phi_1__BN=Phi_10__BN*fase(0,1)+Phi_1l__BN(2*pi/3)*fase(-1,0)+Phi_1l__BN(-2*pi/3)*fase(0,0)
-  Phi_1__BN_xy=Matrix([Phi_1__BN[i,j].factor().simplify() for i in range(2) \
+  D_1__BN=1/sqrt(M_B*M_N)*(Phi_10__BN*fase(0,1)+Phi_1l__BN(2*pi/3)*fase(-1,0) \
+  +Phi_1l__BN(-2*pi/3)*fase(0,0))
+  D_1__BN_xy=Matrix([D_1__BN[i,j].factor().simplify() for i in range(2) \
   for j in range(2)]).reshape(2,2)
-  Phi_1__BN_zz=Phi_1__BN[2,2].factor().simplify()
+  D_1__BN_zz=D_1__BN[2,2].factor().simplify()
 #+end_src
 
 \begin{equation}
-\label{eq:8}
-\left[\begin{matrix}\frac{\left(3 \phi^{BN}_{1r} e^{i a q_{x}} + 3 \phi^{BN}_{1r} + \phi^{BN}_{1ti} e^{i a q_{x}} + 4 \phi^{BN}_{1ti} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4} & \frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4}\\\frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4} & \frac{\left(\phi^{BN}_{1r} e^{i a q_{x}} + 4 \phi^{BN}_{1r} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1r} + 3 \phi^{BN}_{1ti} e^{i a q_{x}} + 3 \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4}\end{matrix}\right]
+\left[\begin{smallmatrix}\frac{\left(3 \phi^{BN}_{1r} e^{i a q_{x}} + 3 \phi^{BN}_{1r} + \phi^{BN}_{1ti} e^{i a q_{x}} + 4 \phi^{BN}_{1ti} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}} & \frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}}\\\frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}} & \frac{\left(\phi^{BN}_{1r} e^{i a q_{x}} + 4 \phi^{BN}_{1r} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1r} + 3 \phi^{BN}_{1ti} e^{i a q_{x}} + 3 \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}}\end{smallmatrix}\right]
+\label{eq:1}
+
 \end{equation}
+
 
 Mientras que la única componente no nula de la fila y columna 3 de esta matriz dinámica (la componente $zz$) es:
 \begin{equation}
 \label{eq:9}
-\phi^{BN}_{1to} \left(e^{i a q_{x}} + e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + 1\right) e^{- i a q_{x}}
+\frac{\phi^{BN}_{1to} \left(e^{i a q_{x}} + e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + 1\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}}
 \end{equation}
-
-\newpage
-# \eject \pdfpagewidth=297mm \pdfpageheight=300mm
 
 De manera análoga, para los primeros vecinos del átomo de nitrogeno
 
@@ -522,10 +519,11 @@ Y por lo tanto, la contribución a matriz dinámica que tenemos por parte de la 
   def Phi_1l__NB(theta):
     return U(-theta)*Phi_10__NB*U(theta)
  
-  Phi_1__NB=Phi_10__NB*fase(0,-1)+Phi_1l__NB(2*pi/3)*fase(1,0)+Phi_1l__NB(-2*pi/3)*fase(0,0)
-  Phi_1__NB_xy=(Matrix([Phi_1__NB[i,j].factor() for i in range(2) \
+  D_1__NB=1/sqrt(M_N*M_B)*(Phi_10__NB*fase(0,-1)+Phi_1l__NB(2*pi/3)*fase(1,0) \
+  +Phi_1l__NB(-2*pi/3)*fase(0,0))
+  D_1__NB_xy=(Matrix([D_1__NB[i,j].factor() for i in range(2) \
   for j in range(2)]).reshape(2,2))
-  Phi_1_NB_zz=Phi_1__NB[2,2].factor()
+  D_1__NB_zz=D_1__NB[2,2].factor()
 #+end_src
 
 La parte que da la interacción dentro del plano:
@@ -549,7 +547,7 @@ Debemos hacer notar que /como la energía potencial es una función cuadrática 
 
 *** Segundos vecinos y terceros vecinos
 
-Pro ahora las contribuciones a la matriz dinámica de los segundos y terceros vecinos.
+Pasamos a calcular las contribuciones a la matriz dinámica de los segundos y terceros vecinos.
 
 #+begin_src python :session :results none :exports none
   SegundosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
@@ -569,7 +567,7 @@ Tenemos $6$ segundos vecinos para cada uno de los dos átomos de la celdilla uni
 \end{pmatrix}
 \end{equation} 
  
-mientras que para el atómo de nitrogeno la matriz de constantes de fuerza para el átomo situado en la celdilla $\vec l =(1,0)$ es:
+mientras que para el atómo de nitrógeno la matriz de constantes de fuerza para el átomo situado en la celdilla $\vec l =(1,0)$ es:
 
 \begin{equation}
 \Phi_{2}^{NN}(1,0)=\begin{pmatrix}
@@ -588,8 +586,10 @@ y por tanto, la contribución a la matriz dinámica debida a estas interacciones
   def Phi_2l__BB(theta):
     return U(-theta)*Phi_20__BB*U(theta)
 
-  Phi_2__BB=Phi_20__BB*fase(1,0)+Phi_2l__BB(pi/3)*fase(1,1)+Phi_2l__BB(-pi/3)*fase(0,-1) \
-  +Phi_2l__BB(pi)*fase(-1,0)+Phi_2l__BB(2*pi/3)*fase(0,1)+ Phi_2l__BB(-2*pi/3)*fase(-1,-1)
+  D_2__BB=1/M_B*(Phi_20__BB*fase(1,0)+Phi_2l__BB(pi/3)*fase(1,1)+ \
+  Phi_2l__BB(-pi/3)*fase(0,-1)+ Phi_2l__BB(pi)*fase(-1,0)+ \
+  Phi_2l__BB(2*pi/3)*fase(0,1)+Phi_2l__BB(-2*pi/3)*fase(-1,-1))
+
   #Phi_2_BB=Matrix([Phi_2__BB[i,j].rewrite(cos).simplify() for i in range(3) \
   # for j in range(3)]).reshape(3,3)
   SegundosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
@@ -601,8 +601,9 @@ y por tanto, la contribución a la matriz dinámica debida a estas interacciones
   def Phi_2l__NN(theta):
     return U(-theta)*Phi_20__NN*U(theta)
  
-  Phi_2__NN=Phi_20__NN*fase(1,0)+Phi_2l__NN(pi/3)*fase(1,1)+Phi_2l__NN(-pi/3)*fase(0,-1) \
-  +Phi_2l__NN(pi)*fase(-1,0)+Phi_2l__NN(2*pi/3)*fase(0,1)+Phi_2l__NN(-2*pi/3)*fase(-1,-1)
+  D_2__NN=1/M_N*(Phi_20__NN*fase(1,0)+Phi_2l__NN(pi/3)*fase(1,1)+ \
+  Phi_2l__NN(-pi/3)*fase(0,-1) +Phi_2l__NN(pi)*fase(-1,0)+Phi_2l__NN(2*pi/3)*fase(0,1) \
+  +Phi_2l__NN(-2*pi/3)*fase(-1,-1))
   #Phi_2__NN=Matrix([Phi_2__NN[i,j].rewrite(cos).simplify() for i in range(3)\
   # for j in range(3)]).reshape(3,3)
 
@@ -631,10 +632,12 @@ Mientras que para los terceros vecinos:
   def Phi_3l__NB(theta):
     return U(-theta)*Phi_30__NB*U(theta)
  
-  Phi_3__BN=Phi_30__BN*fase(-1,-1)+Phi_3l__BN(2*pi/3)*fase(1,1)+Phi_3l__BN(-2*pi/3)*fase(-1,1)
+  D_3__BN=1/sqrt(M_B*M_N)*(Phi_30__BN*fase(-1,-1)+Phi_3l__BN(2*pi/3)*fase(1,1) \
+  +Phi_3l__BN(-2*pi/3)*fase(-1,1))
   #Phi_3__BN=Matrix([Phi_3__BN[i,j].rewrite(cos).simplify() for i in range(3) \
   #for j in range(3)]).reshape(3,3)
-  Phi_3__NB=Phi_30__NB*fase(1,1)+Phi_3l__NB(2*pi/3)*fase(-1,-1)+Phi_3l__NB(-2*pi/3)*fase(1,-1)
+  D_3__NB=1/sqrt(M_N*M_B)*(Phi_30__NB*fase(1,1)+Phi_3l__NB(2*pi/3)*fase(-1,-1) \
+  +Phi_3l__NB(-2*pi/3)*fase(1,-1))
   #print_latex(Phi_3__NB)
   #Phi_3__NB=Matrix([Phi_3__NB[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3)
 #+end_src
@@ -644,12 +647,11 @@ Mientras que para los terceros vecinos:
 Debemos tener en cuenta en este punto que las  constantes de fuerza de fuerza asociadas a la interaccion de un átomo \color{red}??consigo mismo o con la totalidad del cristal?? \normalcolor las excluimos con la ayuda de las condiciones impuestas por la invarianza respecto a la traslacion del cistal en su totalidad en las direcciones $x/z$ (cite:falkovsky08_symmet_const_phonon_disper_graph).
 
 
-*** Matriz dinámica del cristal de BN
+*** Matriz dinámica del cristal de BN (hasta terceros vecinos)
 
-Tenemos por lo tanto que la matriz dinámica que obtenemos considerando hasta los terceros vecinos és
 #+begin_src python :session :results latex :exports both
-  Dsup=Phi_2__BB.col_insert(3,Phi_1__BN+Phi_3__BN);
-  Dinf=(Phi_1__NB+Phi_3__NB).col_insert(3,Phi_2__NN)
+  Dsup=D_2__BB.col_insert(3,D_1__BN+D_3__BN);
+  Dinf=(D_1__NB+D_3__NB).col_insert(3,D_2__NN)
   D=Dsup.row_insert(3,Dinf)
   def Matriu_com_a_Taula(Matriu,m,n):
     s = r"\begin{tabular}{|c|c|c|}\hline"
@@ -666,13 +668,12 @@ Tenemos por lo tanto que la matriz dinámica que obtenemos considerando hasta lo
   Matriu_com_a_Taula(D,6,6)
 #+end_src
 
-
 \newpage
+\eject \pdfpagewidth=260mm \pdfpageheight=390mm
 
-\eject \pdfpagewidth=320mm \pdfpageheight=340mm
-
+#+RESULTS:
 #+begin_export latex
-\begin{tabular}{|c|c|c|}\hline$i$ & $j$ & $D_{i,j}$ \\ \hline $ 1 $ & $ 1 $ & $ \phi^{BB}_{2ti} e^{i a q_{x}} + \phi^{BB}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 2 $ & $ \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 3 $ & $ 0 $\\ \hline $ 1 $ & $ 4 $ & $ \frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 5 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 1 $ & $ 6 $ & $ 0 $\\ \hline $ 2 $ & $ 1 $ & $ \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 2 $ & $ \phi^{BB}_{2r} e^{i a q_{x}} + \phi^{BB}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 3 $ & $ 0 $\\ \hline $ 2 $ & $ 4 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 5 $ & $ \phi^{BN}_{1r} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 2 $ & $ 6 $ & $ 0 $\\ \hline $ 3 $ & $ 1 $ & $ 0 $\\ \hline $ 3 $ & $ 2 $ & $ 0 $\\ \hline $ 3 $ & $ 3 $ & $ \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i a q_{x}} + \phi^{BB}_{2to} e^{- i a q_{x}} $\\ \hline $ 3 $ & $ 4 $ & $ 0 $\\ \hline $ 3 $ & $ 5 $ & $ 0 $\\ \hline $ 3 $ & $ 6 $ & $ \phi^{BN}_{1to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} + \phi^{BN}_{1to} e^{- i a q_{x}} + \phi^{BN}_{3to} e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 1 $ & $ \frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 2 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 3 $ & $ 0 $\\ \hline $ 4 $ & $ 4 $ & $ \phi^{NN}_{2ti} e^{i a q_{x}} + \phi^{NN}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 5 $ & $ \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 4 $ & $ 6 $ & $ 0 $\\ \hline $ 5 $ & $ 1 $ & $ - \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 2 $ & $ \phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 3 $ & $ 0 $\\ \hline $ 5 $ & $ 4 $ & $ \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 5 $ & $ \phi^{NN}_{2r} e^{i a q_{x}} + \phi^{NN}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 5 $ & $ 6 $ & $ 0 $\\ \hline $ 6 $ & $ 1 $ & $ 0 $\\ \hline $ 6 $ & $ 2 $ & $ 0 $\\ \hline $ 6 $ & $ 3 $ & $ \phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} e^{i a q_{x}} + \phi^{BN}_{1to} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} $\\ \hline $ 6 $ & $ 4 $ & $ 0 $\\ \hline $ 6 $ & $ 5 $ & $ 0 $\\ \hline $ 6 $ & $ 6 $ & $ \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i a q_{x}} + \phi^{NN}_{2to} e^{- i a q_{x}} $\\ \hline\end{tabular}
+\begin{tabular}{|c|c|c|}\hline$i$ & $j$ & $D_{i,j}$ \\ \hline $ 1 $ & $ 1 $ & $ \frac{\phi^{BB}_{2ti} e^{i a q_{x}} + \phi^{BB}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 1 $ & $ 2 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 1 $ & $ 3 $ & $ 0 $\\ \hline $ 1 $ & $ 4 $ & $ \frac{\phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 1 $ & $ 5 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 1 $ & $ 6 $ & $ 0 $\\ \hline $ 2 $ & $ 1 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 2 $ & $ 2 $ & $ \frac{\phi^{BB}_{2r} e^{i a q_{x}} + \phi^{BB}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 2 $ & $ 3 $ & $ 0 $\\ \hline $ 2 $ & $ 4 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 2 $ & $ 5 $ & $ \frac{\phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{1r} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 2 $ & $ 6 $ & $ 0 $\\ \hline $ 3 $ & $ 1 $ & $ 0 $\\ \hline $ 3 $ & $ 2 $ & $ 0 $\\ \hline $ 3 $ & $ 3 $ & $ \frac{\phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i a q_{x}} + \phi^{BB}_{2to} e^{- i a q_{x}}}{M_{B}} $\\ \hline $ 3 $ & $ 4 $ & $ 0 $\\ \hline $ 3 $ & $ 5 $ & $ 0 $\\ \hline $ 3 $ & $ 6 $ & $ \frac{\phi^{BN}_{1to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} + \phi^{BN}_{1to} e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{3to} e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 1 $ & $ \frac{\phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 2 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 3 $ & $ 0 $\\ \hline $ 4 $ & $ 4 $ & $ \frac{\phi^{NN}_{2ti} e^{i a q_{x}} + \phi^{NN}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 4 $ & $ 5 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 4 $ & $ 6 $ & $ 0 $\\ \hline $ 5 $ & $ 1 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 5 $ & $ 2 $ & $ \frac{\phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 5 $ & $ 3 $ & $ 0 $\\ \hline $ 5 $ & $ 4 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 5 $ & $ 5 $ & $ \frac{\phi^{NN}_{2r} e^{i a q_{x}} + \phi^{NN}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 5 $ & $ 6 $ & $ 0 $\\ \hline $ 6 $ & $ 1 $ & $ 0 $\\ \hline $ 6 $ & $ 2 $ & $ 0 $\\ \hline $ 6 $ & $ 3 $ & $ \frac{\phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} e^{i a q_{x}} + \phi^{BN}_{1to}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 6 $ & $ 4 $ & $ 0 $\\ \hline $ 6 $ & $ 5 $ & $ 0 $\\ \hline $ 6 $ & $ 6 $ & $ \frac{\phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i a q_{x}} + \phi^{NN}_{2to} e^{- i a q_{x}}}{M_{N}} $\\ \hline\end{tabular}
 #+end_export
 
 
@@ -684,16 +685,13 @@ Podemos evaluar la matriz dinámica en el punto $\Gamma$ ($q_x=0,q_y=0$).
 #+begin_src python :session :results latex :exports both
   from periodictable import B, N, constants
   u=constants.atomic_mass_constant
-  D_Gamma=D.subs([(q_x,0),(q_y,0),(M_B,B.mass*u),(M_N,N.mass*u)])
+  D_Gamma=D.subs([(q_x,0),(q_y,0)]) #,(M_B,B.mass*u),(M_N,N.mass*u)])
   latex(Matrix([D_Gamma[i,j].factor() for i in range(6) for j in range(6)]).reshape(6,6))
 #+end_src
 
 #+RESULTS:
 #+begin_export latex
-\begin{equation}
-\left[\begin{smallmatrix}3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right) & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2} & 0 & 0\\0 & 3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right) & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2} & 0\\0 & 0 & 6 \phi^{BB}_{2to} & 0 & 0 & 3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right)\\\frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2} & 0 & 0 & 3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right) & 0 & 0\\0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2} & 0 & 0 & 3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right) & 0\\0 & 0 & 3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right) & 0 & 0 & 6 \phi^{NN}_{2to}\end{smallmatrix}\right]
-\end{equation}
-
+\left[\begin{smallmatrix}\frac{3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right)}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0\\0 & \frac{3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right)}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0\\0 & 0 & \frac{6 \phi^{BB}_{2to}}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right)}{\sqrt{M_{B} M_{N}}}\\\frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right)}{M_{N}} & 0 & 0\\0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right)}{M_{N}} & 0\\0 & 0 & \frac{3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{6 \phi^{NN}_{2to}}{M_{N}}\end{smallmatrix}\right]
 #+end_export
 
 
