@@ -1,6 +1,6 @@
-* Fonones y espectroscopía Raman en semiconductores bidimensionales
+# Fonones y espectroscopía Raman en semiconductores bidimensionales
 
-* Objectivos del trabajo propuesto
+## Objectivos del trabajo propuesto
 
 Los materiales bidimensionales (2D) como el grafeno son de gran interés tanto por sus propiedades físicas exclusivas como por sus aplicaciones potenciales. El estudio de la dinámica de la red cristalina (fonones) de estos materiales es un requisito previo para entender su estabilidad estructural y propiedades térmicas, así como sus propiedades de transporte y ópticas.
 
