@@ -1,718 +1,775 @@
-% Created 2021-03-29 Mon 06:46
-% Intended LaTeX compiler: pdflatex
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[12pt,twoside,a4paper]{article}%,a4paper
+
+% Establim el format de la pàgina:
+\usepackage{fancyhdr}
+%\usepackage[a4paper]{geometry}
+\usepackage[left=2cm,right=2cm,top=1.5cm, bottom=2cm]{geometry}
+\setlength{\parskip}{0.2cm}
 \usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{grffile}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{textcomp}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{hyperref}
-\usepackage{minted}
-\usepackage{listings}
-\usepackage[left=1cm,right=1cm,top=1.5cm, bottom=2cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage{newunicodechar}
+\newunicodechar{Ŀ}{\L.}
+\newunicodechar{ŀ}{\l.}
 \usepackage{siunitx}
 \usepackage{amsmath}
-\usepackage{adjustbox}
-\usepackage{tabularx}
+%\usepackage{adjustbox}
+%\usepackage{tabularx}
 \usepackage{mathtools}
-\usepackage{booktabs} %Publication quality tables in LaTeX.
-\usepackage{pdflscape}
-\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}
-\addbibresource{TFG-Casimir.bib}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+%\usepackage{booktabs} %Publication quality tables in LaTeX.
+%\usepackage{pdflscape}
+\usepackage{attachfile}
+\usepackage{todonotes}
+
+\usepackage{sagetex}
 \author{Casimiro Victoria Castillo}
-\date{\today}
-\title{Fonones y espectroscopía Raman en semiconductores bidimensionales.}
-\hypersetup{
- pdfauthor={Casimiro Victoria Castillo},
- pdftitle={Fonones y espectroscopía Raman en semiconductores bidimensionales.},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 27.1 (Org mode 9.4)}, 
- pdflang={English}}
+
+
 \begin{document}
 
+\title{Fonons y espectroscòpia Raman en semiconductors bidimensionals}
+\author{Casimiro Victoria Castillo}
+\date{11 de Abril de 2021}
+%\date{}
 \maketitle
-\tableofcontents
+
+
 
 \begin{abstract}
-Los materiales bidimensionales (2D) como el grafeno son de gran interés tanto por sus
-propiedades físicas exclusivas como por sus aplicaciones potenciales. El estudio de la dinámica de la red cristalina (fonones) de estos materiales es un requisito previo para entender su estabilidad estructural y propiedades térmicas, así como sus propiedades de transporte y ópticas.
+  Els materials bidimensionals ($2D$) com el grafé són de gran interés tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristallina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
 
 
-Este Trabajo de Fin de Grado consiste en la computación de los modos vibracionales de
-materiales semiconductores 2D y su correlación con los observables relevantes para la interpretación de los experimentos de dispersión de luz.
-
+  Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
 \end{abstract}
 
-\color{blue}
-La redacción del TFG todavía se encuentra en una versión muy preliminar, de hecho es más un bloc de notas que lo que espero que sea el TFG final.
-
-Para redactar este trabajo estoy usando \textbf{org-mode} (junto con org-babel, org-ref, \ldots{}): un modo de edición del editor \emph{Emacs}, que, entre otras muchas cosas, permite usar de manera nativa \LaTeX y escribir un mismo fichero tanto el \emph{texto} cómo el \emph{codigo} (en muchos lenguajes, permitiendo también metaprogramación \ldots{}), pudiendo insertar si así se desea la salida de los programas en el mismo documento, y exportat el resultado final a varios formatos (en particular \LaTeX) mostrando u ocultando los bloques con el código en el pdf final.
-
-
-\normalcolor
-\newpage
-
-\section{Lecturas y apuntes de repaso}
-\label{sec:org49948e8}
-
-Links a los documentos, no es la bibliografía.
-
-La bibliografía va en el fichero TFG-Casimir.bib y la gestiono (así como las referencias) con el paquete org-ref: entre otras cosas añade la referencia en formato bibtex automáticamente al fichero .bib y copia el pdf a mi biblioteca (renombrando el fichero) simplemente arrastrando el pdf al buffer de emacs donde tenemos abierto este fichero. Podemos también insertar manualmente ('M-x crossref-lookup') el título del artículo, lo busca en internet, lo baja si es posible (se pueden añadir fuentes no oficiales), y nos genera la entrada bibtex.
-
-\subsection{Bibliografia basica}
-\label{sec:org4d675d7}
-\begin{itemize}
-\item \href{Bibliografia/Phonons\_Theory\_and\_Experiments\_I.pdf}{Phonons Theory and Experiments}
-\item \href{Bibliografia/wirtz2004.pdf}{wirtz2004}
-\item \href{Bibliografia/0802.0912.pdf}{Symmetry constraints on phono dispersion in graphene}
-\item \href{Bibliografia/PhysRevB.42.11469.pdf}{Bond softening in monolayer graphite formed on transition-metal carbide surfaces}
-\item \href{Bibliografia/kumar2013.pdf}{Phonon dispersions in graphene sheet and single-walled carbon nanotubes}
-\item \href{Bibliografia/PFC\_Carlos\_Ventura\_Piazza.pdf}{Matriz de fuerzas, interpretacion, simetrias \ldots{} (pag 29)}
-\end{itemize}
-
-\subsection{Repaso de Estado Sólido}
-\label{sec:org3999a55}
-\begin{itemize}
-\item \href{file:///home/casimir/Documents/Fisica/Biblioteca/Estat\_Solid/Apunts/FES0910\_PortadaxTema\_01.pdf}{Tema 1 de Estado Sólido}
-\item \href{file:///home/casimir/Documents/Fisica/Biblioteca/Estat\_Solid/Apunts/FES0910\_Tema02.pdf}{Tema2. Vibraciones atómicas en cristales}
-\end{itemize}
-
+\textit{Nota: s'ajunta el codi font del document: \attachfile[author=Casimir]{TFG-Casimir.tex}}
 
 \newpage
 
-\section{{\bfseries\sffamily TODO} Introduccion}
-\label{sec:org5f6e9a4}
-\color{red}
-Por ahora solo algunas ideas que hay que desarrollar.
+\section{Introducció}
 
-La idea que tengo es explicar el modelo de  Born y  Von karman (1921), tal y como viene explicado en \cite{brueesch82_phonon}, pagina 4.
+\todo[inline]{Per ara sols són algunes idees a desenvolupar}
 
-Luego explicar que haciendo uso de la aproximación adiabática, \cite{brueesch82_phonon} página 6, podemos, siempre que sea válida tal aproximación -explicar cuando lo es y cuando deja de serlo-, considerar los nucleos ionicos y los elecrones de valencia como constituyentes independientes del sólido, de manera que podemos escribir la energía potencial (o el Hamiltoniano) como una suma de las distintas contribuciones, y que para 
-
-Pasar a describir la aproximación armónica: escribir el potencial, las ecuaciones de movimiento de Lagrange, y pasar de estas ecuaciones de movimiento en el espacio de posiciones al problema de valores propios de la matriz dinámica en el espació de vectores de onda.
-
-Una vez concluida la introducción teórica general, valida para cualquier cristal, escribir el potencial separando el "stretching" y "bendig¨ y escribir la matriz dinámica, teniendo en cuenta que debido a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), debe cumplir ciertas relaciones (forma de la matriz, elementos nulos, relación entre elementos, \ldots{}), \cite{aizawa90_bond_soften_monol_graph_formed} (en el apendice). Hay que hacer notar que para expresar la matriz de constantes de fuerza en coordenadas cartesianas hay que hacer el correspondiente cambio de coordenadas desde las radiales-transversales.
+\subsection{Model de BORN i VON KARMAN}
+- Explicar el \textbf{model de  Born y  Von Karman (1921}), tal y com ve en \cite{Balkanski_2000} \cite{brueesch82_phonon} (pàgina 4).
 
 
-\normalcolor
+\subsection{Aproximació adiabàtica}
+Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
+  
+\subsection{Aproximació armònica}
+Passar a descriure l'\textbf{aproximació amònica}: escriure el potencial, les equacions de moviment de Lagrange, y passar d'estes equacions de moviment en l'espai de posiciones al problema de valors propis de la matriu dinàmica en l'espai de vectores de onda (o moments).
 
-Las vibraciones reticulares están regidas por las fuerzas que experimentan los átomos cuando se desplazan de su posición de equilibrio. La primera hipótesis es que cada átomo tiene una posicion de equilibrio en el cristal, y consideraremos que estos átomos vibran con una amplitud pequeña (en comparación con la distancia interatómica) alrededor de su posición de equilibrio, de manera que el sólido se encuentra en estados que corresponden a lo que macroscópicamente se conoce como \emph{la región de comportamiento elástico lineal}, donde se verifica la ley de Hooke.
+Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d'equilibri. La primera hipòtesi és que cada àtom té una posició d'equilibri en el cristall, y considerarem que estos àtoms vibren amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d'aquesta, de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament e\l.làstic lineal}, on es verifica la llei de Hooke.
 
-Podremos por tanto aproximar la energía potencial de interacción por el termino armónico de su desarrolo en serie de potencias del desplazamiento \color{red} desarollar como a partir de la energia potencial del cristal \(\mathcal{U}\), usando una aproximacion armonica, obtenemos la ecuacion secular para los fonones.\normalcolor.
-
-Un fonón es un modo de vibración cuantizado que tiene lugar en una red cristalina. El estudio de los fonones juega un papel muy importante en la física del estado sólido porque los fonones tienen una gran importancia en muchas propiedades físicas de los sólidos. Los fonones son una versión mecano-cuantica de los modos normales de vibración de la mecánica clasica, donde cada parte de la red oscila con la misma frecuencia. Estos modos normales son importantes porque cualquier movimiento vibracional de la red puede describirse como una superposición de modos normales de distinta frecuencia, en este sentido son la base de las vibraciones de la red.
+Podem per tant aproximar l'energia potencial de interacció pel terme armònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament ....
 
 
+- Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aqests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
 
-\subsection{{\bfseries\sffamily TODO} Matriz dinámica}
-\label{sec:org5b75941}
-La matriz dinámica es una cantidad central en la dinámica reticular: las frecuencias de los fonones (vibraciones reticulares cuantificadas) se calculan a partir de los valores propios de la matriz dinámica:
+- Explicar també que una vegada descrit el cristall en l'espai de posicions tenim que descriure la xarxa cristalina en l'espai de moments ...
+
+- Una vegada concluida la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristalina, base, xarxa en l'esspai $2\pi\text{-recíproc}$.
+
+- Pasar a contruir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, ...), cite aizawa90 bond soften monol graph formed (en el apèndix). 
+
+
+\subsection{Xarxa recíproca. Primera zona de Brillouin.}
+Donada una terna de vectors base primitius, $p_i$, de la xarxa cristalina en l'espai de posicion, la condició:
+
+\begin{equation}
+\label{eq:rec1}
+\vec p_i\cdot\vec p_j^{*}=\delta_{ij}
+\end{equation}
+on $\delta_{ij}$ és la delta de Kronecker, pot considerar-se un sistema d'equacions que defieix una altra terna de vectors $p_j^*$. La solució de l'equació (\ref{eq:rec1}) és
+
+\begin{equation}
+\label{eq:rec2}
+\vec p_1^*=\frac{\vec p_2\times\vec p_3}{\vec p_1\cdot(\vec p_2\times\vec p_3)},\quad \vec p_2^*=\frac{\vec p_3\times\vec p_1}{\vec p_1\cdot(\vec p_2\times\vec p_3)}, \quad \vec p_3^*=\frac{\vec p_1\times\vec p_2}{\vec p_1\cdot(\vec p_2\times\vec p_3)}
+\end{equation} 
+
+Els \textit{vectors recíprocs} $\vec p_j^{*}$ són els vectors d'una altra xarxa cristallina coneguda com \textit{xarxa recíproca}. Els  vectors recíprocs, i els vectors de translació cristallina recíprocs, tenen dimendions de inversa de longitut i es representen en l'\textit{espaci recíproc} o de números d'ona. \textbf{Les xarxes cristallines real y recíproca són dues descripcions equivalents del matexi sistema físic: el sòlido cristallí} que s'està estudiant.
+
+
+Tenim que tindre present que l'espai $2\pi-$ recíproc és el fonamental en l'estudi de la Física de l'Estado Sòlid ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona.
+
+Podem interpretar que 
+
+\begin{equation}
+\label{eq:rec3}
+\vec K_{h_1h_2h_3}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}+h_3\vec a_3^{*}\right)
+\end{equation}
+
+són els vectors de traslació cristallina que defineixen una xarxa cristallina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproco és l'/espai de vectors d'ona/ $\vec k$, i a falta d'un factors d'escala $\hbar$, coincide amb l'espai de moments  $\vec p=\hbar\vec k$. 
+
+\subsubsection{Ce\l.les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
+Para descrire la xarxa 2$\pi$-recíproca, emprarem el criteri de \textit{Wigner-Seitz}. Las \textit{ce\l.les de Wigner-Seitz} estan centradas en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la ce\l.la) que a quasevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construim els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bissecten cadascun d'estos segments: la ce\l.la de WS és la ce\l.la de menor volumn al voltant de l'origen que està delimitadda per estos plans (rectes en el caso d'una xarxa bidimensional).
+
+Notem que en l'espai de $\vec k$ emprarem ce\l.les unitat de WS mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
+La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zona de Brillouin} (ZB)
+
+\newpage
+\subsection{Matriu dinàmica}
+
+La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica:
 
 \begin{equation}
 \sum_{\alpha\prime}D_{\alpha\alpha\prime}\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)
 \end{equation}   
 
-Por lo tanto, las frecuencias \(\omega\) como función de vector de ondas \(\vec q\) del fonón son solución de la ecuación secular:
+Per tant, les freqüències $\omega$ com funció del vector d'ones $\vec q$ del fonó són solució de l'equació secular:
 
 \begin{equation}
-\det\left|\frac{1}{\sqrt{M_\alpha M_{\alpha\prime}}}D^{ij}_{\alpha\alpha\prime}\left(\vec q\right)-\omega^2\left(\vec q\right)\right| 
+\det\left|\frac{1}{\sqrt{M_\alpha M_{\alpha\prime}}}D^{ij}_{\alpha\alpha\prime}\left(\vec q\right)-\omega^2\left(\vec q\right)\right|=0 
 \end{equation}
 
-donde \(M_{\alpha}\) es la masa del átomo \(\alpha\) y la matriz dinámica viene definida por:
+on $M_{\alpha}$ es la massa de l'àtom $\alpha$ y la matriu dinàmica ve definida por:
 
 \begin{equation}
 D_{\alpha,\alpha\prime}^{i,j}=\frac{\partial^2 E}{\partial u_{\alpha}^{*i}(\vec q)\partial u_{\alpha\prime}^{j}(\vec q)}
 \label{eq:Matriz_Dinámica}
 \end{equation}
 
-donde \(u_{\alpha}^{i}\) representa el desplazamiento del átomo \(\alpha\) en la dirección \(i\).
+on $u_{\alpha}^{i}$ representa el despla\c{c}ament de l'àtom $\alpha$ en la direcció $i$.
 
-La segunda derivada de la energía de la ecuación \ref{eq:Matriz_Dinámica} corresponde al cambio en la fuerza que actua sobre el átomo \(\alpha\prime\) en la dirección \(j\) cuando se desplaza el átomo \(\alpha\) en la dirección \(i\)
+La segona derivada de l'energia de l'equació \ref{eq:Matriz_Dinámica} correspon al canvi en la for\c{c}a que actua sobre l'àtom $\alpha\prime$ en la direcció $j$ quan es despla\c{c}a l'àtom $\alpha$ en la direcció $i$
 
 \begin{equation}
 D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha\prime}(\vec q)
 \end{equation}
 
-Puesto que el cálculo de los modos de vibración por primeros principios empieza por establecer la geometria del cristal en equilibrio, vamos a comprobar que con los datos proporcionados que el BN monolayer se trata  de un cristal bidimensional de base diatómica, cuya celda unidad viene dada por (datos proporcionados):
 
-\begin{equation}
-\vec a_1=a(1,0);\qquad\vec a_2=a\left(-\frac{1}{2},\frac{\sqrt{3}}{2}\right)
-\end{equation}
-
-
-\begin{minted}[]{python}
-import numpy as np
-from  numpy  import array, sqrt, sort, vdot, pi, arccos
-from numpy.linalg import norm
-import pandas as pd
-import matplotlib
-from matplotlib import pyplot as plt
-
-a=1 
-a_1=np.array([a,0])
-a_2=np.array([-a/2,sqrt(3)*a/2])
-\end{minted}
-
-Podemos comprobar que efectivamente se trata de una celdilla hexagonal, pues los dos vectores base forman un angulo de \(\SI{2\pi/3}{\radian}\)
-
-
-Numeraremos las celdillas unidad con un índice vectorial \(\vec l=\left( l_1, l_2\right)\), notemos que aunque es habitual representar la celdilla con un indice entero \(n\) es más sencillo y facilita los cálculos (así como determinar a que celdilla no referimos) el uso de un índice vectorial. Las posiciones de los nudos son \(\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2\).
-
-Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,
-
-\vspace{0.5cm}
-\begin{minipage}{0.55\textwidth}
-\begin{minted}[]{python}
-def R_l(l_1,l_2):
- return l_1*a_1+l_2*a_2 
-
-reddenudos=array([R_l(l_1,l_2) for l_1 in range(-3, 4)
-  for l_2 in range(-3,4)])
-
-x = reddenudos[:,0]
-y = reddenudos[:,1]
-plt.plot(x,y,"o")
-ax = plt.axes()
-ax.arrow(R_l(0,0)[0],R_l(0,0)[1],
-	 R_l(1,0)[0],R_l(1,0)[1])
-ax.arrow(R_l(0,0)[0],R_l(0,0)[1],
-	 R_l(0,1)[0],R_l(0,1)[1])
-plt.savefig("Graficas/Reddenudos.jpg")
-plt.close()
-\end{minted}
-
-\end{minipage}\begin{minipage}{0.55\textwidth}
-\begin{center}
-\includegraphics[width=8cm]{Graficas/Reddenudos.jpg}
-\end{center}
-\end{minipage}
-
-\vspace{0.5cm}
-\color{red}
-Hacer figuras de la red reciproca, primera zona de Brillouin (y puntos especiales, Gamma, K, K', M).
-\normalcolor
-
-\vspace{0.7cm}
-Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio  en la celda unidad \textbf{\textbf{nota: proporcionadas como datos}}
-
-Los átomos estan situados en:
-
-\begin{equation}
-\begin{aligned}
-\vec R_B&=\frac{1}{3}\vec{a_1}+2\vec{a_2}\\
-\vec R_N&=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2}
-\end{aligned}
-\end{equation}
-
-\begin{minted}[]{python}
-R_B=1/3*a_1+2/3*a_2
-R_N=2/3*a_1+1/3*a_2
-\end{minted}
-
-Las posiciones de equilibrio de los átomos de la base respecto de su nudo son \(\vec{R}_\alpha^0\) , con \(\alpha=1,2\), puesto que la base tiene 2 átomos, el \(1\) hará referencia a los átomos de \(B\) y \(2\) a los de átomos de \(N\) (notemos que aunque los átomos fuesen idénticos tendriamos que especificar a que átomo de la base nos referimos, puesto que no ocupan posiciones equivalentes).
-
-
-Las posiciones de equilibrio de los átomos: \(\vec R_{\alpha,\vec l}=\vec{R}_{\vec{l}} + \vec R_\alpha^0\)  así como los desplazamientos atómicos: \(\vec u_{\alpha,\vec l}\) quedarán por tanto identificados por medio de dos índices.
-
-Pasamor ahora a representar la red de átomos:
-
-\begin{minipage}{0.55\textwidth}
-\begin{minted}[]{python}
-#Posiciones de equilibrio de los átomos
-
-def R_alpha_l(alpha,l_1,l_2):
-  if alpha == 1:
-    return l_1*a_1+l_2*a_2+R_B
-
-  elif alpha == 2:
-    return l_1*a_1+l_2*a_2+R_N
-
-  else:
-    print("Error, alpha solo puede ser 1 o 2 ")
-
-AtomosB=array([R_alpha_l(1,l_1,l_2) for l_1 in range(-4, 5)
-	       for l_2 in range(-4,5)])
-
-AtomosN=array([R_alpha_l(2,l_1,l_2) for l_1 in range(-4, 5)
-	       for l_2 in range(-4,5)])
-
-xB = AtomosB[:,0]
-yB = AtomosB[:,1]
-plt.plot(xB,yB,"o",color="red")
-
-xN = AtomosN[:,0]
-yN = AtomosN[:,1]
-plt.plot(xN,yN,"o",color="blue")
-
-plt.savefig("Graficas/Reddeatomos.jpg")
-plt.close()
-\end{minted}
-
-\end{minipage}\begin{minipage}{0.6\textwidth}
-\begin{center}
-\includegraphics[width=6 cm]{Graficas/Reddeatomos.jpg}
-\end{center}
-\end{minipage}
-
-\vspace{0.5cm}
-Las dimensiones del cristal son \(L_1=N_1 a_1\) y \(L_2=N_2 a_2\), donde \(N_i\) (\(i=1,2\)) es el número de celdillas en la dirección \(\vec a_i\). El cristal tiene tiene \(N=N_1N_2\) celdillas unidad primitivas y \(2N\) átomos.
-
-
-\textbf{La idea básica es que si la base tiene \(r\) átomos entonces debemos plantear y resolver las ecuaciones de movimiento de los \(r\) átomos de la base de la celdilla \(\vec 0\)}, por lo tanto en el caso que estamos estudiando debemos resolver 2 ecuaciones vectoriales de movimiento: una para el átomo de \(B\) y la otra para el de \(N\).
-
-\color{red} Falta reescribir completamente y ampliar mucho la introducción teórica
-
-
-Notar que aunque el cristal sea bi-dimensional, los átomos de este pueden vibrar en las 3 direcciones espaciales.
-
-Explicar que podemos tratar por un lado las vibraciones en el plano del cristal y por otro las vibraciones perpendiculares a este, ya que se trata de vibraciones completamente desacopladas.
-
-Que la  ecuación secular tiene \(3 N_\nu=6\) soluciones que describen las \(6\) ramas de la relación de dispersión, es decir, las \(6\) frecuencias características de los \(6\) modos normales de vibración de vector de onda \(\vec q\). Se cumple que el número total de modos normales de vibración coincide con el triple del número total de átomos, es decir, \textit{con el de grados de libertad de movimiento de los átomos}
-
-Puesto que la energia potencial es una funcion cuadratica \cite{falkovsky08_symmet_const_phonon_disper_graph}
-
-\normalcolor
 
 \newpage
-\section{{\bfseries\sffamily TODO} Desarrollo del trabajo}
-\label{sec:org8469435}
 
-\subsection{Clasificación de los vecinos}
-\label{sec:orgd199633}
+\section{Descripció del cristall de BN}
 
-Puesto que debemos determinar cuales son las posiciones de equilibrio de los átomos más cercanos a los átomos de la celda \(\vec 0\) antes que nada genero un array con los datos que voy a necesitar, ordenando las filas de manera creciente a la distancia a cada uno de los 2 átomos de la celda  \(l=\vec 0\) hasta los cuartos vecinos, y guardando el array con la información como un DataFrame de pandas, que facilita mucho la manipulación de los datos.
+Donat que el càlcul dels modes de vibració per primers principis comen\c{c}a per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatómica, la ce\l.la unitat del qual ve donada per (dades proporcionades):
+
+\begin{sagesilent}
+var('a', domain='positive')
+a_1=a*vector([1,0])
+a_2=a*vector([-1/2,sqrt(3)/2])
+\end{sagesilent}
+
+\begin{equation}
+\vec a_1=\sage{a_1}\qquad\vec a_2=\sage{a_2} 
+\end{equation}
+
+I les posiciones atòmiques d'equilibri en la ce\l.la unitat són:
+
+\begin{sagesilent}
+r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
+cela=arrow((0,0),(a_1/a),color="blue")+\
+      arrow((0,0),(a_2/a),color="red")+\
+      line([(a_1/a),(a_1/a+a_2/a)],linestyle="--",color="red")+\
+      line([(a_2/a),(a_2/a+a_1/a)],linestyle="--",color="red")+\
+      point(r_B/a, size=120,color="blue")+\
+      point(r_N/a, size=100,color="red")
+\end{sagesilent}
+
+\begin{equation}
+\vec R_B=\frac{1}{3}\vec{a_1}+2\vec{a_2}\qquad
+\vec R_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2} 
+\end{equation} 
 
 
 
-\begin{minted}[]{python}
-from sympy import *
-import pandas as pd
+Podem comprobar que efectivament es tracta de una ce\l.la hexagonal, ja que els seus vectors primitius formen un angle de $\sage{arccos(a_1*a_2/(norm(a_1)*norm(a_2)).simplify())}$ \SI{}{\radian}
+
+Numerarem les ce\l.les amb un índex vectorial $\vec l=\left(l_1, l_2\right)$, on $l_1$ i $l_2$ són dos nombres enters, encara que en la literatura les trobem habitualment numerades amb un índex enter,$n$, ja que així resulta més sencill identificar les ce\l.les.
+
+Les posicions del nucs de la xarxa són $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
+
+
+\begin{sagesilent}
+nucs=points([l_1*a_1/a+l_2*a_2/a for l_1 in range(-3, 4) for l_2 in range(-3,4)], size=40, color="blue", frame=False)
+
+xarxa=nucs+\
+line([(0,0),(a_1/a)],color="red")+\
+line([(0,0),(a_2/a)],color="red")+\
+line([(a_1/a),(a_1/a+a_2/a)],color="red")+\
+line([(a_2/a),(a_2/a+a_1/a)],color="red")+\
+line([(a_2/a),(a_1/a+2*a_2/a)],linestyle="--")+\
+line([(a_1/a+2*a_2/a),(2*a_1/a+2*a_2/a)],linestyle="--")+\
+line([(2*a_1/a+2*a_2/a),(2*a_1/a+a_2/a)],linestyle="--")+\
+line([(2*a_1/a+a_2/a),(a_1/a)],linestyle="--")
+
+#Posicions d'equilibri dels àtomos
+def RB(l_1,l_2):
+    return (l_1*a_1+l_2*a_2+r_B)
+
+def RN(l_1,l_2):
+    return (l_1*a_1+l_2*a_2+r_N)
+
+AtomsB=points([RB(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='blue')
+
+AtomsN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='red')
+
+\end{sagesilent}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\sageplot[width=\textwidth]{xarxa, figsize=3}
+\caption{Xarxa de nucs}
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\sageplot[width=\textwidth]{cela, figsize=3}
+\caption{Ce\l.la unitat}
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\sageplot[width=\textwidth]{AtomsB+AtomsN, figsize=3}
+\caption{Cristall}
+\end{subfigure}
+\end{figure}
+
+Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la ce\l.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
+
+\begin{sagesilent}
+#import pandas as pd
+var('q_x, q_y'); assume(q_x, q_y, 'real'); q=vector([q_x,q_y])
+
 
 ## Parametros de la red, de la celdilla y del cristal
-a=Symbol('a', real=True, positive=True)
-q_x=Symbol('q_x', real=True);  q_y=Symbol('q_y', real=True)
-q=Matrix([q_x,q_y])
-a_1=Matrix([a,0]); a_2=Rational(1,2)*Matrix([-a,sqrt(3)*a])
-R_B=Rational(1,3)*a_1+Rational(2,3)*a_2; R_N=Rational(2,3)*a_1+Rational(1,3)*a_2
-
-## Masas de los átomos, frecuencia, ...
-M_B, M_N, omega=symbols("M_B, M_N, omega") #masa de los átomos de Boro y N.
-def masa(alpha):
-  if alpha == 1:
-    return M_B
-
-  elif alpha == 2:
-    return M_N
-
-  else:
-    print("Error, alpha sólo puede se 1 o 2")
-
-
 ## Vector R_l (vector de traslación primitivo)
 def R_l(l_1,l_2):
-  return l_1*a_1+l_2*a_2
+    return l_1*a_1+l_2*a_2
 
 ## Vector de posición de los átomos del cristal (en equilibrio)
 def R_alpha_l(alpha,l_1,l_2):
-  if alpha == 1:
-    return l_1*a_1+l_2*a_2+R_B
+    if alpha == 1:
+        return l_1*a_1+l_2*a_2+r_B
 
-  elif alpha == 2:
-    return l_1*a_1+l_2*a_2+R_N
+    elif alpha == 2:
+        return l_1*a_1+l_2*a_2+r_N
 
-  else:
-    print("Error, alpha solo puede ser 1 o 2 ")
+    else:
+        print("Error, alpha solo puede ser 1 o 2 ")
 
-## Vector unitario que une uno de los átomos en la celdilla 0 con el átomo considerado
+## Vector unitario que une uno de los átomo alphaprima con el átomo considerado alpha, l_1,l_2
 def R_hat(alphaprima,alpha,l_1,l_2):
-  if (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()>0:
-    return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))/(R_alpha_l(alpha,l_1,l_2)
-						     -R_alpha_l(alphaprima,0,0)).norm()
+    if (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()>0:
+        return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))/(R_alpha_l(alpha,l_1,l_2)\
+                                                                 -R_alpha_l(alphaprima,0,0)).norm()
+    else:
+        return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))
 
-  else:
-    return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))
+# Distancia entre el átomo alphaprime y su vecino alpha situado en la celdilla l_1,l_2
+def distancia(alphaprime,alpha,l_1,l_2):
+    return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprime,0,0)).norm()/a    
 
 def fase(l_1,l_2):
-  return exp(I*q.dot(R_l(l_1,l_2)))
+    return exp(I*q*R_l(l_1,l_2))
 
-## Finalmente construyo un DataFrame de pandas con la información necesaria para
-## identificar a los primeros, segundos, ... vecinos, según su distancia a cada uno
-## de los átomos de la celdilla unidad
-def propiedades_atomos(l_1, l_2):
-  return [(k, m, i, j,  R_hat(k,m,i,j),fase(i,j), (R_alpha_l(m,i,j)-R_alpha_l(k,0,0)).norm()/a)
-      for k in [1,2] for m in [1,2]  for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
+#Genero una lista con la distancia de cada átomo a los átomos de la celdilla unidad 
+#def valores_atomos(l_1, l_2):
+#    return [(k, m, i, j, R_hat(k, m, i, j), distancia(k,m,i,j)) for k in [1,2] for m in [1,2]  \
+#            for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
 
-columnas = [r"$\alpha\prime$",r"$\alpha$",r"$l_1$", r"$l_2$",r"$\hat R_{\nu\prime,\nu,\vec l}$",
- 'Fase','Distancia']
+## Construyo un DataFrame de pandas con la información necesaria para identificar a los primeros, segundos, ... vecinos, según su distancia a cada uno de los átomos de la celdilla unidad
+#columnas = [r"$\alpha\prime$",r"$\alpha$",r"$l_1$", r"$l_2$", r"$\hat R$",'Distancia']
 
-def Atomos(l_1, l_2):
-  return pd.DataFrame(propiedades_atomos(l_1,l_2),columns=columnas).sort_values(
-       ['Distancia',r"$\alpha\prime$"], ascending=[True, True])
-## Mostramos el dataframe como una tabla en formato \LaTeX.
-Atomos(2,2).head(26).to_latex(escape=False,float_format="{:0.4f}".format,index=False)
-\end{minted}
+#def lista_atomos(l_1, l_2):
+#    return pd.DataFrame(valores_atomos(l_1,l_2),columns=columnas).sort_values(['Distancia',r"$\alpha\prime$"], ascending=[True,True])
 
-\begin{tabular}{rrrrlll}
-\toprule
- $\alpha\prime$ &  $\alpha$ &  $l_1$ &  $l_2$ & $\hat R_{\nu\prime,\nu,\vec l}$ &                                   Fase &    Distancia \\
-\midrule
-              1 &         1 &      0 &      0 &                          [0, 0] &                                      1 &            0 \\
-              2 &         2 &      0 &      0 &                          [0, 0] &                                      1 &            0 \\
-              1 &         2 &     -1 &      0 &              [-sqrt(3)/2, -1/2] &                          exp(-I*a*q_x) &    sqrt(3)/3 \\
-              1 &         2 &      0 &      0 &               [sqrt(3)/2, -1/2] &                                      1 &    sqrt(3)/3 \\
-              1 &         2 &      0 &      1 &                          [0, 1] &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &    sqrt(3)/3 \\
-              2 &         1 &      0 &     -1 &                         [0, -1] &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &    sqrt(3)/3 \\
-              2 &         1 &      0 &      0 &               [-sqrt(3)/2, 1/2] &                                      1 &    sqrt(3)/3 \\
-              2 &         1 &      1 &      0 &                [sqrt(3)/2, 1/2] &                           exp(I*a*q_x) &    sqrt(3)/3 \\
-              1 &         1 &     -1 &     -1 &              [-1/2, -sqrt(3)/2] &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
-              1 &         1 &     -1 &      0 &                         [-1, 0] &                          exp(-I*a*q_x) &            1 \\
-              1 &         1 &      0 &     -1 &               [1/2, -sqrt(3)/2] &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
-              1 &         1 &      0 &      1 &               [-1/2, sqrt(3)/2] &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
-              1 &         1 &      1 &      0 &                          [1, 0] &                           exp(I*a*q_x) &            1 \\
-              1 &         1 &      1 &      1 &                [1/2, sqrt(3)/2] &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
-              2 &         2 &     -1 &     -1 &              [-1/2, -sqrt(3)/2] &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
-              2 &         2 &     -1 &      0 &                         [-1, 0] &                          exp(-I*a*q_x) &            1 \\
-              2 &         2 &      0 &     -1 &               [1/2, -sqrt(3)/2] &     exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &            1 \\
-              2 &         2 &      0 &      1 &               [-1/2, sqrt(3)/2] &    exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
-              2 &         2 &      1 &      0 &                          [1, 0] &                           exp(I*a*q_x) &            1 \\
-              2 &         2 &      1 &      1 &                [1/2, sqrt(3)/2] &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &            1 \\
-              1 &         2 &     -1 &     -1 &                         [0, -1] &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              1 &         2 &     -1 &      1 &               [-sqrt(3)/2, 1/2] &  exp(I*(-3*a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              1 &         2 &      1 &      1 &                [sqrt(3)/2, 1/2] &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              2 &         1 &     -1 &     -1 &              [-sqrt(3)/2, -1/2] &    exp(I*(-a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              2 &         1 &      1 &     -1 &               [sqrt(3)/2, -1/2] &   exp(I*(3*a*q_x/2 - sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-              2 &         1 &      1 &      1 &                          [0, 1] &     exp(I*(a*q_x/2 + sqrt(3)*a*q_y/2)) &  2*sqrt(3)/3 \\
-\bottomrule
-\end{tabular}
+## Mostramos el dataframe como una tabla
+#table(lista_atomos(2,2).to_html(index=False))
+\end{sagesilent}
 
 
-\newpage
+\subsubsection{Primera zona de Brillouin}
+Passe ara a mostrar la xarxa $2\pi$-recíproca associada a la xarxa de nucs del cristall de $BN$, la primera zona de Brillouin y calcular els punts de màxima simetria de la primera zona de Brillouin:
 
-\subsection{Matriz de constantes de fuerza y matriz dinámica}
-\label{sec:orgd418b27}
+Los vectores recíprocos son
 
-A parte de identificar los primeros, segundos, \ldots{} vecinos, necesitamos conocer la matriz de constantes de fuerza que corresponde a la interacción de cada átomo de la celdilla unidad con su n-esimo vecino.
+En nuestro caso los vectores primitivos de la red $2\pi\text{-recíproca}$ son:
 
-Vamos a suponer (por simplificar) que un desplazamiento longitudinal (radial, que estará contenido en el plano del cristal) o transversal (tangencial, sea en el plano o perpendicular al plano) solo genera una fuerza radial o transversal.
-
-\color{red}
-Dibujar un esquema tipo
-\begin{center}
-\includegraphics[width=6 cm]{Graficas/Esquema_Matriz_Constantes_de_fuerza.png}
-\end{center}
-\normalcolor
-\subsubsection{Primeros vecinos}
-\label{sec:org715612b}
-Para hacer más explicito el método que he seguido se muestran las matrices de constantes de fuerza para los primeros vecinos del boro (y que son átomos de nitrógeno).
-
-\color{red} 
-Dibujar el boro, y sus vecinos 
-\normalcolor
-
-\begin{minted}[]{python}
-PrimerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) &\
-(Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
-PrimerosVecinosBoro.to_latex(escape=False)
-\end{minted}
-
-\begin{tabular}{lrrrrlll}
-\toprule
-{} &  $\alpha\prime$ &  $\alpha$ &  $l_1$ &  $l_2$ & $\hat R_{\nu\prime,\nu,\vec l}$ &                                 Fase &  Distancia \\
-\midrule
-10 &               1 &         2 &     -1 &      0 &              [-sqrt(3)/2, -1/2] &                        exp(-I*a*q_x) &  sqrt(3)/3 \\
-13 &               1 &         2 &      0 &      0 &               [sqrt(3)/2, -1/2] &                                    1 &  sqrt(3)/3 \\
-14 &               1 &         2 &      0 &      1 &                          [0, 1] &  exp(I*(-a*q_x/2 + sqrt(3)*a*q_y/2)) &  sqrt(3)/3 \\
-\bottomrule
-\end{tabular}
-
-Podemos observar que para el átomo de nitrogeno de la celdilla \(\vec l = (0,1)\) la correspondiente matriz de constantes de fuerza puede escribirse (en coordenadas cartesianas) como:
-
-\begin{minted}[]{python}
-phi_1r__BN,phi_1ti__BN,phi_1to__BN=symbols('phi_1r__BN,phi_1ti__BN,phi_1to__BN')
-
-Phi_10__BN=Matrix([[phi_1ti__BN,0,0],[0,phi_1r__BN,0],[0,0,phi_1to__BN]])
-print(r"\begin{equation}\Phi_1^{BN}(0,1)=", latex(Phi_10__BN),r"\end{equation}")
-\end{minted}
-
-\begin{equation}\Phi_1^{BN}(0,1)= \left[\begin{matrix}\phi^{BN}_{1ti} & 0 & 0\\0 & \phi^{BN}_{1r} & 0\\0 & 0 & \phi^{BN}_{1to}\end{matrix}\right] \end{equation}
-\vspace{0.7cm}
-
-
-
-donde \(\phi_r\) hace referencia a la constante de fuerza en la dirección radial (\emph{bond stretching}) y \(\phi_{ti}\) y \(\phi_{to}\) a las constantes de fuerza en dirección tangencial (\emph{bond bending}) dentro y fuera de plano, respectivamente.
-
-Puesto que los otros dos primeros vecinos del boro son átomos exactamente iguales que este, y se encuentran a la misma distancia, podemos calcular sus respectivas matrices de fuerza simplemente rotando esta matriz:
 \begin{equation}
-\label{eq:2}
-\Phi(\vec R_{\vec l})=U(\vec R_{\vec l})^{-1}\Phi^{BN}_{1}(0,1)U(\vec R_{\vec l})
+\label{eq:11}
+\vec b_1=\frac{2\pi}{a}\left(\hat k_{x}+\frac{1}{\sqrt{3}}\hat k_{y}\right)\quad \vec b_2=\frac{2\pi}{a}\left(\frac{2}{\sqrt{3}}\hat k_y\right)
+\end{equation} 
+
+i la xarxa $2\pi$-recíproca és:
+
+\begin{sagesilent}
+import numpy as np
+import matplotlib.pyplot as plt
+import pybinding as pb
+
+a_1_rec=np.array([1,1/sqrt(3)])
+a_2_rec=np.array([0,2/sqrt(3)])
+  
+def R_l_rec(l_1,l_2):
+    return 2*np.pi*l_1*a_1_rec+2*np.pi*l_2*a_2_rec 
+
+reddenudos=np.array([R_l_rec(l_1,l_2) for l_1 in range(-5, 5) for l_2 in range(-3,4)])
+
+  
+x = reddenudos[:,0]
+y = reddenudos[:,1]
+plt.plot(x,y,"o")
+plt.axis('scaled')
+plt.savefig("Red2pireciproca.jpg")
+plt.close()
+
+#from math import sqrt, pi
+
+pb.pltutils.use_style()
+from pybinding.repository.graphene.constants import a_cc, t
+
+a = 56 / 55 * a_cc  # ratio of lattice constants is 56/55, in [nm] unit cell length
+#t in [eV] hopping energy
+
+vn = -1.4  # [eV] nitrogen onsite potential
+vb = 3.34  # [eV] boron onsite potential
+
+# create a simple 2D lattice with vectors a1 and a2
+lattice = pb.Lattice(a1=[a, 0], a2=[-a/2, np.sqrt(3)*a/2])
+lattice.add_sublattices(
+('B', [0, np.sqrt(3)*a/3], vb), # add an atom called 'A' at position [0, 0]
+('N', [a/2,np.sqrt(3)*a/6] ,vn )
+)
+
+lattice.add_hoppings(
+        ([ 0,  0], 'B', 'N', t),
+        ([ -1, 0], 'B', 'N', t),
+        ([0,  1], 'B', 'N', t)
+    )
+
+
+lattice.plot()
+lattice.plot_brillouin_zone()
+plt.savefig("1aBZ.jpg")
+plt.close()
+reset('a')
+var('a', domain='positive')
+\end{sagesilent}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{0.4\textwidth}
+\includegraphics[width=8cm]{../Graficas/Red2pireciproca.jpg}
+\subcaption{Xarxa en l'espai $2\pi$-recíproc}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+\includegraphics[width=6cm]{./1aBZ.jpg}
+\subcaption{Primera zona de Brillouin}
+\end{subfigure}
+\end{figure}
+
+
+
+
+
+\subsection{Tensor de constants de forca i matriu dinàmica}
+
+Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
+
+Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtomo amb el seu n-èssimo veí.
+
+La forma general del tensor de forces d'un $n$-èssim veí és de la forma (cite wirtz04 phonon disper graph revis): 
+
+
+\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^1&\xi_n &0\\
+-\xi_n & \phi_n^{ti} & 0 \\
+0 & 0 & \phi_n^{to}
+\end{pmatrix}
+\label{eq:tensordeforces}
 \end{equation}
 
-Donde \(U(\vec R_{\vec l})\) es la matriz de rotación para llevar el átomo de nitrogeno que esta en la celdilla \(\vec l=(0, 1)\) a la posición que ocupan cada uno de los otros primeros vecinos en sus respectivas celdillas.
+on el sistema de coordenadas se eligeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $y$ la coordenada transversal en el planol i $z$ la coordenada perperndicular al planol. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció $z$) estan completament desacoblades.
 
-Por lo tanto tenemos que para el átomo situado en \(\vec l=(-1,0)\)
-\begin{minted}[]{python}
+
+
+Anem a supossar (per simplificar) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una for\c{c}a radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com la aproximación \textit{4NNFC}, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
+
+\missingfigure{Ací va imatge mostrant el cristall i les forces}
+
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=40mm,height=40mm]{example-image-a}
+%\caption{Caption}
+%\end{figure}
+
+
+Una altra aproximació al problema trobada en la literatura sobre els fonons del grafé és la coneguda com el modelo \textit{VFF} (\textit{valence-force field}), la qual determina els paràmetros de la matriu en l'equació \ref{eq:tensordeforces} introduïnt \textit{constants de moll} que determinen el canvi en l'energia potencial segons diferents deformacions; una introducción a esta aproximació es troba en l'annexe de la referència (cite aizawa90 bond soften monol graph formed). Amb aquesta aproximació 
+es necesiten menys paràmetres (\textit{constantes de fuerza}) per  obtindre una qualitat similar a la parametrizació \textit{4NNFC} (cite wirtz04 phonon disper graph revis).
+
+Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d'un àtom classificat com $n$-èssim, situat en la direcció $\hat x$ respecte del átom de la ce\l.la $\vec 0$, té la forma diagonal:
+
+\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^r& 0 &0\\
+0 & \phi_n^{ti} & 0 \\
+0 & 0 & \phi_n^{to}
+\end{pmatrix}
+\end{equation}
+
+i per tant el tensor de constants de for\c{c}a de cadascun dels $n$-èssims veïns reals l'obtenim rotant esta matriu:
+\vspace{4cm}
+
+
+Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estamos considerant de la ce\.l.la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, \cite{falkovsky08_symmet_const_phonon_disper_graph}
+\cite{wirtz04_phonon_disper_graph_revis}
+Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que implica s'ha de complir:
+
+\vspace{4cm}
+
+Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
+
+\vspace{5cm}
+
+\begin{sagesilent}
+#Angulo que forma el átomo considerado respecto al eje x
+
+def angulo(alphaprima,alpha,l_1,l_2):
+    if R_hat(alphaprima,alpha,l_1,l_2)[1] <0:
+        return -acos(R_hat(alphaprima,alpha,l_1,l_2)*vector([1,0]))
+    
+    else:
+        return acos(R_hat(alphaprima,alpha,l_1,l_2)*vector([1,0]))
+
+#Matriz unitaria de rotación para cambio de ejes coordenados (entorno al eje z)
+
 def U(theta):
-  return Matrix([[cos(theta),sin(theta),0], [-sin(theta), cos(theta),0],[0,0,1]])
+    return matrix([[cos(theta),sin(theta),0], [-sin(theta), cos(theta),0],[0,0,1]])
 
-# Para el átomo que ocupa la posición l_1=-1,0
-def Phi_1l__BN(theta):
-  return U(-theta)*Phi_10__BN*U(theta)
+#Matriz de fuerza para los primeros vecinos
 
-print_latex(Matrix([Phi_1l__BN(2*pi/3)[i,j].factor() for j in range(3) \
-for i in range(3)]).reshape(3,3))
-\end{minted}
+var('M_B,M_N', domain='positive')
+var('omega')
 
-\begin{equation}
-\label{eq:3}
-\left[\begin{matrix}\frac{3 \phi^{BN}_{1r} + \phi^{BN}_{1ti}}{4} & \frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & 0\\\frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & \frac{\phi^{BN}_{1r} + 3 \phi^{BN}_{1ti}}{4} & 0\\0 & 0 & \phi^{BN}_{1to}\end{matrix}\right]
-\end{equation}
+phi1rBN=var('phi1rBN',latex_name='\\phi_{1,r}^{BN}')
+phi1tiBN=var('phi1tiBN',latex_name='\\phi_{1,ti}^{BN}')
+phi1toBN=var('phi1toBN',latex_name='\\phi_{1,to}^{BN}',domain='real')
 
-Y para el átomo situado en \(\vec l= (0,0)\) la matriz de constantes de fuerza es:
-
-\begin{minted}[]{python}
-print_latex(Matrix([Phi_1l__BN(-2*pi/3)[i,j].factor() for j in range(3) \
-for i in range(3)]).reshape(3,3))
-\end{minted}
-
-\begin{equation}
-\left[\begin{matrix}\frac{3 \phi^{BN}_{1r} + \phi^{BN}_{1ti}}{4} & - \frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & 0\\- \frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right)}{4} & \frac{\phi^{BN}_{1r} + 3 \phi^{BN}_{1ti}}{4} & 0\\0 & 0 & \phi^{BN}_{1to}\end{matrix}\right]
-\end{equation}
-
-Notemos que las vibraciones fuera de plano, en la dirección \(z\) no estan acopladas a las interplanares.
+phi1rNB=phi1rBN; phi1tiNB=phi1tiBN; phi1toNB=phi1toBN
 
 
-Por lo tanto, la contribución a matriz dinámica que tenemos por parte de la interacción de estos primeros vecinos es:
+Phi_10__BN=1/sqrt(M_B*M_N)*Matrix([[phi1rBN,0,0],[0,phi1tiBN,0],[0,0,phi1toBN]])
+Phi_10__NB=1/sqrt(M_N*M_B)*Matrix([[phi1rNB,0,0],[0,phi1tiNB,0],[0,0,phi1toNB]])
 
 
-\begin{minted}[]{python}
-D_1__BN=1/sqrt(M_B*M_N)*(Phi_10__BN*fase(0,1)+Phi_1l__BN(2*pi/3)*fase(-1,0) \
-+Phi_1l__BN(-2*pi/3)*fase(0,0))
-D_1__BN_xy=Matrix([D_1__BN[i,j].factor().simplify() for i in range(2) \
-for j in range(2)]).reshape(2,2)
-D_1__BN_zz=D_1__BN[2,2].factor().simplify()
-\end{minted}
+def Phi_1l__BN(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_10__BN*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-\begin{equation}
-\left[\begin{smallmatrix}\frac{\left(3 \phi^{BN}_{1r} e^{i a q_{x}} + 3 \phi^{BN}_{1r} + \phi^{BN}_{1ti} e^{i a q_{x}} + 4 \phi^{BN}_{1ti} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}} & \frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}}\\\frac{\sqrt{3} \left(1 - e^{i a q_{x}}\right) \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}} & \frac{\left(\phi^{BN}_{1r} e^{i a q_{x}} + 4 \phi^{BN}_{1r} e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + \phi^{BN}_{1r} + 3 \phi^{BN}_{1ti} e^{i a q_{x}} + 3 \phi^{BN}_{1ti}\right) e^{- i a q_{x}}}{4 \sqrt{M_{B} M_{N}}}\end{smallmatrix}\right]
-\label{eq:1}
+def Phi_1l__NB(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_10__NB*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-\end{equation}
+def D_1l_BN(alphaprima,alpha,l_1,l_2):
+    return Phi_1l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
+def D_1l_NB(alphaprima,alpha,l_1,l_2):
+    return Phi_1l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-Mientras que la única componente no nula de la fila y columna 3 de esta matriz dinámica (la componente \(zz\)) es:
-\begin{equation}
-\label{eq:9}
-\frac{\phi^{BN}_{1to} \left(e^{i a q_{x}} + e^{\frac{i a \left(q_{x} + \sqrt{3} q_{y}\right)}{2}} + 1\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}}
-\end{equation}
+# Matriz de fuerza para los segundos vecinos
 
-De manera análoga, para los primeros vecinos del átomo de nitrogeno
+phi2rBB=var('phi2rBB',latex_name='\\phi_{2,r}^{BB}')
+phi2tiBB=var('phi2tiBB',latex_name='\\phi_{2,ti}^{BB}')
+phi2toBB=var('phi2toBB',latex_name='\\phi_{2,to}^{BB}',domain='real')
 
-\begin{minted}[]{python}
-PrimerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<0.9) & \
-(Atomos(1,1)['Distancia']>0) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
-PrimerosVecinosNitrogeno.to_latex(escape=False)
-\end{minted}
+phi2rNN=var('phi2rNN',latex_name='\\phi_{2,r}^{NN}')
+phi2tiNN=var('phi2tiNN',latex_name='\\phi_{2,ti}^{NN}')
+phi2toNN=var('phi2toNN',latex_name='\\phi_{2,to}^{NN}',domain='real')
 
-\begin{tabular}{lrrrrlll}
-\toprule
-{} &  $\alpha\prime$ &  $\alpha$ &  $l_1$ &  $l_2$ & $\hat R_{\nu\prime,\nu,\vec l}$ &                                Fase &  Distancia \\
-\midrule
-21 &               2 &         1 &      0 &     -1 &                         [0, -1] &  exp(I*(a*q_x/2 - sqrt(3)*a*q_y/2)) &  sqrt(3)/3 \\
-22 &               2 &         1 &      0 &      0 &               [-sqrt(3)/2, 1/2] &                                   1 &  sqrt(3)/3 \\
-25 &               2 &         1 &      1 &      0 &                [sqrt(3)/2, 1/2] &                        exp(I*a*q_x) &  sqrt(3)/3 \\
-\bottomrule
-\end{tabular}
+Phi_20__BB=1/M_B*Matrix([[phi2rBB,0,0],[0,phi2tiBB,0],[0,0,phi2toBB]])
+Phi_20__NN=1/M_N*Matrix([[phi2rNN,0,0],[0,phi2tiNN,0],[0,0,phi2toNN]])
 
-\vspace{0.5cm}
+#A tener en cuenta: cuando consideramos el mismo tipo de átomos 
+# (de la misma subred, no porque sean el mismmo elemento)
 
-Por simetría, la matriz de constantes de fuerza para la interacción entre el átomo de nitrogeno y su primer vecino situado en \(\vec l= (0,-1)\) es igual a la que hemos visto antes para el átomo de boro en la celdilla \(\vec l= (0,0)\) y su primer vecino (un átomo de nitrogeno) en la celdilla \(\vec l= (0,1)\):
+def Phi_2l__BB(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_20__BB*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-Y por lo tanto, la contribución a matriz dinámica que tenemos por parte de la interacción de estos primeros vecinos es:
+def Phi_2l__NN(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_20__NN*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-\begin{minted}[]{python}
-Phi_10__NB=Phi_10__BN
-def Phi_1l__NB(theta):
-  return U(-theta)*Phi_10__NB*U(theta)
+def D_2l_BB(alphaprima,alpha,l_1,l_2):
+    return Phi_2l__BB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-D_1__NB=1/sqrt(M_N*M_B)*(Phi_10__NB*fase(0,-1)+Phi_1l__NB(2*pi/3)*fase(1,0) \
-+Phi_1l__NB(-2*pi/3)*fase(0,0))
-D_1__NB_xy=(Matrix([D_1__NB[i,j].factor() for i in range(2) \
-for j in range(2)]).reshape(2,2))
-D_1__NB_zz=D_1__NB[2,2].factor()
-\end{minted}
-
-La parte que da la interacción dentro del plano:
-
-\begin{equation}
-\label{eq:10}
-\left[\begin{matrix}\frac{3 \phi^{BN}_{1r} e^{i a q_{x}} + 3 \phi^{BN}_{1r} + 4 \phi^{BN}_{1ti} e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + \phi^{BN}_{1ti} e^{i a q_{x}} + \phi^{BN}_{1ti}}{4} & \frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) \left(e^{i a q_{x}} - 1\right)}{4}\\\frac{\sqrt{3} \left(\phi^{BN}_{1r} - \phi^{BN}_{1ti}\right) \left(e^{i a q_{x}} - 1\right)}{4} & \frac{4 \phi^{BN}_{1r} e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + \phi^{BN}_{1r} e^{i a q_{x}} + \phi^{BN}_{1r} + 3 \phi^{BN}_{1ti} e^{i a q_{x}} + 3 \phi^{BN}_{1ti}}{4}\end{matrix}\right]
-\end{equation}
-
-Mientras que la interacción fuera de plano viene dada por el elemento de matriz:
-\begin{equation}
-\label{eq:12}
-\phi^{BN}_{1to} \left(e^{\frac{i a q_{x}}{2}} e^{- \frac{\sqrt{3} i a q_{y}}{2}} + e^{i a q_{x}} + 1\right)
-\end{equation}
+def D_2l_NN(alphaprima,alpha,l_1,l_2):
+    return Phi_2l__NN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
 
-Debemos hacer notar que \emph{como la energía potencial es una función cuadrática de los desplazamientos atómicos \(u^B_i(\vec R_{\vec l})\) \(u^N_i(\vec R_{\vec l})\) la matriz de constantes de fuerza tiene la forma \(\phi_{ij}^{BN}(\vec R_{\vec l})=\phi_{ji}^{NB}(-\vec R_{\vec l})\), y su transformada de Fourier, es decir, la matriz dinámica, es una matriz Hermítica} (\cite{falkovsky08_symmet_const_phonon_disper_graph}), 
+#Matriz de fuerza para los terceros vecinos
 
-\newpage
-\eject \pdfpagewidth=210mm \pdfpageheight=297mm
+phi3rBN=var('phi3rBN',latex_name='\\phi_{3,r}^{BN}')
+phi3tiBN=var('phi3tiBN',latex_name='\\phi_{3,ti}^{BN}')
+phi3toBN=var('phi3toBN',latex_name='\\phi_{3,to}^{BN}',domain='real')
+phi3rNB,phi3tiNB,phi3toNB=phi3rBN,phi3tiBN,phi3toBN
+Phi_30__BN=1/sqrt(M_B*M_N)*Matrix([[phi3rBN,0,0],[0,phi3tiBN,0],[0,0,phi3toBN]])
+Phi_30__NB=1/sqrt(M_N*M_B)*Matrix([[phi3rNB,0,0],[0,phi3tiNB,0],[0,0,phi3toNB]])
+                   
+def Phi_3l__BN(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_30__BN*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-\subsubsection{Segundos vecinos y terceros vecinos}
-\label{sec:orga1f6342}
+def Phi_3l__NB(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_30__NB*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-Pasamos a calcular las contribuciones a la matriz dinámica de los segundos y terceros vecinos.
+def D_3l_BN(alphaprima,alpha,l_1,l_2):
+    return Phi_3l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-\begin{minted}[]{python}
-SegundosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
-(Atomos(1,1)['Distancia']>0.9) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
-##SegundosVecinosBoro.to_latex(escape=False)
-\end{minted}
+def D_3l_NB(alphaprima,alpha,l_1,l_2):
+    return Phi_3l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-Tenemos \(6\) segundos vecinos para cada uno de los dos átomos de la celdilla unidad y en este caso las interacciones son entre el mismo tipo de átomo. Fijandonos en el átomo de boro situado en la celdilla \(\vec l=(1,0)\) podemos escribir la matriz de constantes de fuerza como:
+#Matriz de fuerza para los cuartos vecinos
+phi4rBN=var('phi4rBN',latex_name='\\phi_{4,r}^{BN}')
+phi4tiBN=var('phi4tiBN',latex_name='\\phi_{4,ti}^{BN}')
+phi4toBN=var('phi4toBN',latex_name='\\phi_{4,to}^{BN}',domain='real')
+phi4rNB,phi4tiNB,phi4toNB=phi4rBN,phi4tiBN,phi4toBN
 
-\begin{equation}
-\Phi_{2}^{BB}(1,0)=\begin{pmatrix}
-\phi_{2r}^{(BB)} & 0 & 0 \\
-0 & \phi_{2ti}^{(BB)} & 0 \\
- 0 & 0  & \phi_{2to}^{(BB)}
-\end{pmatrix}
-\end{equation} 
+Phi_40__BN=1/sqrt(M_B*M_N)*Matrix([[phi4rBN,0,0],[0,phi4tiBN,0],[0,0,phi4toBN]])
+Phi_40__NB=1/sqrt(M_N*M_B)*Matrix([[phi4rNB,0,0],[0,phi4tiNB,0],[0,0,phi4toNB]])
 
-mientras que para el atómo de nitrógeno la matriz de constantes de fuerza para el átomo situado en la celdilla \(\vec l =(1,0)\) es:
+def Phi_4l__BN(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_40__BN*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-\begin{equation}
-\Phi_{2}^{NN}(1,0)=\begin{pmatrix}
-\phi_{2r}^{(NN)} & 0 & 0 \\
-0 & \phi_{2ti}^{(NN)} & 0 \\
- 0 & 0  & \phi_{2to}^{(NN)}
-\end{pmatrix}
-\end{equation} 
+def Phi_4l__NB(alphaprima,alpha,l_1,l_2):
+    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_40__NB*\
+           U(angulo(alphaprima,alpha,l_1,l_2))
 
-y por tanto, la contribución a la matriz dinámica debida a estas interacciones será:
+def D_4l_BN(alphaprima,alpha,l_1,l_2):
+    return Phi_4l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-\begin{minted}[]{python}
-phi_2r__BB,phi_2ti__BB,phi_2to__BB=symbols('phi_2r__BB,phi_2ti__BB,phi_2to__BB')
-# Para el átomo que ocupa la posición l=1,0
-Phi_20__BB=Matrix([[phi_2ti__BB,0,0],[0,phi_2r__BB,0],[0,0,phi_2to__BB]])
-def Phi_2l__BB(theta):
-  return U(-theta)*Phi_20__BB*U(theta)
+def D_4l_NB(alphaprima,alpha,l_1,l_2):
+    return Phi_4l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-D_2__BB=1/M_B*(Phi_20__BB*fase(1,0)+Phi_2l__BB(pi/3)*fase(1,1)+ \
-Phi_2l__BB(-pi/3)*fase(0,-1)+ Phi_2l__BB(pi)*fase(-1,0)+ \
-Phi_2l__BB(2*pi/3)*fase(0,1)+Phi_2l__BB(-2*pi/3)*fase(-1,-1))
+# Finalmente construimos la matriz dinámica "a capas"
+# Con la tabla de la celda de codigo anterior comprobamos que para considerar 
+# hasta los cuartos vecinos es suficiente con l_1,l_2=2
+                   
+D1BN, D1NB, D2BB, D2NN, D3BN, D3NB, D4BN, D4NB = (matrix(3) for i in range(8))
+D01BN, D01NB, D02BB, D02NN, D03BN, D03NB, D04BN, D04NB= (matrix(3) for i in range(8))
+for k in [1,2]:
+    for m in [1,2]:
+         for i in range(-2,3):
+            for j in range(-2,4):
+                if (k==1) & bool( distancia(k,m,i,j) == sqrt(3)/3 ):
+                    D1BN += D_1l_BN(k,m,i,j)
+                    D01BN += Phi_1l__BN(k,m,i,j)
 
-#Phi_2_BB=Matrix([Phi_2__BB[i,j].rewrite(cos).simplify() for i in range(3) \
-# for j in range(3)]).reshape(3,3)
-SegundosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<1.1) &\
-(Atomos(1,1)['Distancia']>0.9) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
-#SegundosVecinosNitrogeno.to_latex(escape=False)
-phi_2r__NN,phi_2ti__NN,phi_2to__NN=symbols('phi_2r__NN,phi_2ti__NN,phi_2to__NN')
-Phi_20__NN=Matrix([[phi_2ti__NN,0,0],[0,phi_2r__NN,0],[0,0,phi_2to__NN]])
-# Para el átomo que ocupa la posición l=1,0
-def Phi_2l__NN(theta):
-  return U(-theta)*Phi_20__NN*U(theta)
+                elif (k==2) & bool( distancia(k,m,i,j) == sqrt(3)/3 ):
+                    D1NB += D_1l_NB(k,m,i,j)
+                    D01NB += Phi_1l__NB(k,m,i,j)
+                 
+                elif (k==1) & bool( distancia(k,m,i,j) == 1):
+                    D2BB += D_2l_BB(k,m,i,j)
+                    D02BB += Phi_2l__BB(k,m,i,j)
 
-D_2__NN=1/M_N*(Phi_20__NN*fase(1,0)+Phi_2l__NN(pi/3)*fase(1,1)+ \
-Phi_2l__NN(-pi/3)*fase(0,-1) +Phi_2l__NN(pi)*fase(-1,0)+Phi_2l__NN(2*pi/3)*fase(0,1) \
-+Phi_2l__NN(-2*pi/3)*fase(-1,-1))
-#Phi_2__NN=Matrix([Phi_2__NN[i,j].rewrite(cos).simplify() for i in range(3)\
-# for j in range(3)]).reshape(3,3)
+                elif (k==2) & bool( distancia(k,m,i,j) == 1):
+                    D2NN += D_2l_NN(k,m,i,j)
+                    D02NN += Phi_2l__NN(k,m,i,j)
 
-\end{minted}
+                elif (k==1) & bool( distancia(k,m,i,j) == 2*sqrt(3)/3 ):
+                    D3BN += D_3l_BN(k,m,i,j)
+                    D03BN += Phi_3l__BN(k,m,i,j)
+
+                elif (k==2) & bool( distancia(k,m,i,j) == 2*sqrt(3)/3 ):
+                    D3NB += D_3l_NB(k,m,i,j)
+                    D03NB += Phi_3l__NB(k,m,i,j)
+                    
+                elif (k==1) & bool( distancia(k,m,i,j) == sqrt(7/3)):
+                    D4BN += D_4l_BN(k,m,i,j)
+                    D04BN += Phi_4l__NB(k,m,i,j)
+
+                elif (k==2) & bool( distancia(k,m,i,j) == sqrt(7/3)):
+                    D4NB += D_4l_NB(k,m,i,j)
+                    D04NB += Phi_4l__NB(k,m,i,j)
+
+# Tenemos en cuenta la contribución a la matriu dinámica de los átomos situados en 
+# la celdilla 0
+D2BB=D2BB-D01BN-D02BB-D03BN
+D2NN=D2NN-D01NB-D02NN-D03NB                    
+\end{sagesilent}
+
+Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però donat que les components en $z$ d'esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.
 
 \newpage
 
-Mientras que para los terceros vecinos:
-\begin{minted}[]{python}
-TercerosVecinosBoro= Atomos(1,1)[(Atomos(1,1)['Distancia']<sqrt(21)/3) &\
-(Atomos(1,1)['Distancia']>1) & (Atomos(1,1)[r"$\alpha\prime$"]==1)]
+\subsection{Vibracions transversales fora de pla}
+Donat que en el nostre model, per com hem construït la matriu dinàmica, les vibracions fora de pla són independents de les interplanars passem a estudiar-les.
 
-TercerosVecinosNitrogeno= Atomos(1,1)[(Atomos(1,1)['Distancia']<sqrt(21)/3) &\
-(Atomos(1,1)['Distancia']>1) & (Atomos(1,1)[r"$\alpha\prime$"]==2)]
+\begin{sagesilent}
+D1BN_zz=D1BN[2,2]
+D1NB_zz=D1NB[2,2]
 
-phi_3r__BN,phi_3ti__BN,phi_3to__BN=symbols('phi_3r__BN,phi_3ti__BN,phi_3to__BN')
-phi_3r__NB,phi_3ti__NB,phi_3to__NB=symbols('phi_3r__BN,phi_3ti__BN,phi_3to__BN')
+D2BB_zz=D2BB[2,2]
+D2NN_zz=D2NN[2,2]
 
-# Para el átomo de N de la celdilla l=-1,-1  
-Phi_30__BN=Matrix([[phi_3ti__BN,0,0],[0,phi_3r__BN,0],[0,0,phi_3to__BN]])
-# Para el átomo de B de la celdilla l=1,1
-Phi_30__NB=Matrix([[phi_3ti__NB,0,0],[0,phi_3r__NB,0],[0,0,phi_3to__NB]])
-def Phi_3l__BN(theta):
-  return U(-theta)*Phi_30__BN*U(theta)
+D3BN_zz=D3BN[2,2]
+D3NB_zz=D3NB[2,2]
+D4BN_zz=D4BN[2,2]
+D4NB_zz=D4NB[2,2]
 
-def Phi_3l__NB(theta):
-  return U(-theta)*Phi_30__NB*U(theta)
+D_zz=Matrix([[D2BB_zz,D1BN_zz+D3BN_zz], [D1NB_zz+D3NB_zz,D2NN_zz]])
+#valors_propis_D_zz=D_zz.eigenvalues()
+\end{sagesilent}
 
-D_3__BN=1/sqrt(M_B*M_N)*(Phi_30__BN*fase(-1,-1)+Phi_3l__BN(2*pi/3)*fase(1,1) \
-+Phi_3l__BN(-2*pi/3)*fase(-1,1))
-#Phi_3__BN=Matrix([Phi_3__BN[i,j].rewrite(cos).simplify() for i in range(3) \
-#for j in range(3)]).reshape(3,3)
-D_3__NB=1/sqrt(M_N*M_B)*(Phi_30__NB*fase(1,1)+Phi_3l__NB(2*pi/3)*fase(-1,-1) \
-+Phi_3l__NB(-2*pi/3)*fase(1,-1))
-#print_latex(Phi_3__NB)
-#Phi_3__NB=Matrix([Phi_3__NB[i,j].rewrite(cos).simplify() for i in range(3) for j in range(3)]).reshape(3,3)
-\end{minted}
+\subsubsection{En $\Gamma (k_x=0, k_y=0)$}
+Al punt $\Gamma$, ($q_x=0, q_y=0$), la matriu dinámica per a les vibracions fora de pla pren el valor:
 
-Debemos tener en cuenta en este punto que las  constantes de fuerza de fuerza asociadas a la interaccion de un átomo \color{red}??consigo mismo o con la totalidad del cristal?? \normalcolor las excluimos con la ayuda de las condiciones impuestas por la invarianza respecto a la traslacion del cistal en su totalidad en las direcciones \(x/z\) (\cite{falkovsky08_symmet_const_phonon_disper_graph}).
+\begin{sagesilent}
+from periodictable import C, B, N, constants
+u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
+
+omega_Gamma_ZO=830 #cm-1
+omega_Gamma_ZA=0
+
+D_Gamma_zz=D_zz.subs(q_x=0,q_y=0) #,(M_B,B.mass*u),(M_N,N.mass*u)])
+Eq1=(D_Gamma_zz.eigenvalues()[0]==omega**2).subs(omega=omega_Gamma_ZO)
+\end{sagesilent}
+
+\begin{equation}
+\sage{D_Gamma_zz}
+\end{equation}
+
+i es seus valors propis son:
+
+\begin{align*}
+\omega_{ZO}^2(\Gamma)&=\sage{D_Gamma_zz.eigenvalues()[0]}\\
+\omega_{ZA}^2(\Gamma)&=\sage{D_Gamma_zz.eigenvalues()[1]}
+\end{align*}
 
 
-\subsubsection{Matriz dinámica del cristal de BN (hasta terceros vecinos)}
-\label{sec:org2fc6d18}
+\subsubsection{En $K$ ($q_x=4\pi/(3 a)$, $q_y=0$)}
+Els valors propios de la matriu dinàmica en aques punt són:
+\begin{sagesilent}
+omega_K_ZO=605 #cm-1
+omega_K_ZA=322
+D_K_zz=D_zz.subs(q_x=4*pi/(3*a),q_y=0)
+Eq1=(D_Gamma_zz.eigenvalues()[0]==omega**2).subs(omega=omega_Gamma_ZO)
+solEq1=solve(Eq1, phi3toBN)
+\end{sagesilent}
 
-\begin{minted}[]{python}
-Dsup=D_2__BB.col_insert(3,D_1__BN+D_3__BN);
-Dinf=(D_1__NB+D_3__NB).col_insert(3,D_2__NN)
-D=Dsup.row_insert(3,Dinf)
-def Matriu_com_a_Taula(Matriu,m,n):
-  s = r"\begin{tabular}{|c|c|c|}\hline"
-  s += r"$i$ & $j$ & $D_{i,j}$ \\ \hline"
-  for i in range(m):
-    for j in range(n):
-      s += " $ %d $ & $ %d $ & $ %s $" %(i+1, j+1, latex(Matriu[i,j]))
-      s += r"\\ \hline"
+\begin{align*}
+\omega_{ZO}^2(K)&=\sage{D_K_zz.eigenvalues()[0]}\\
+\omega_{ZA}^2(K)&=\sage{D_K_zz.eigenvalues()[1]}
+\end{align*}
 
-  s += r"\end{tabular}"
 
-  return s
+Podem observar que en el cas del $BN$, a diferència del cas del grafé, obtenim 2 freqüències distintes al punt $K$ degut a que en la base tenim dos àtoms distints.
 
-Matriu_com_a_Taula(D,6,6)
-\end{minted}
+\begin{sagesilent}
+sol=[]
+Eq2=(D_K_zz.eigenvalues()[0]==omega**2).subs(omega=omega_K_ZO)
+Eq3=(D_K_zz.eigenvalues()[1]==omega**2).subs(omega=omega_K_ZA)
+sol.append(solve(Eq2.subs(solEq1),phi2toNN)[0])
+sol.append(solve(Eq3.subs(solEq1),phi2toBB)[0])
+\end{sagesilent}
+
+\subsubsection{En el punt $M(q_x=\pi/a,q_y=\pi/(\sqrt 3 a)$}
+
+\begin{sagesilent}
+omega_M_ZO=635 #cm-1
+omega_M_ZA=314
+
+D_M_zz=D_zz.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
+#D_M_zz.eigenvalues()
+#Podemos simplificar un poco la expresión obtenida para los valores propios en el punto  𝑀  (simplemente reescribiendo el argumento de la raiz cuadrada)
+
+omegaM1cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)-sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
+
+#if bool(D_M_zz.eigenvalues()[0]==omegaM1cuadrado):
+#    show(omegaM1cuadrado)
+
+omegaM2cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)+sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
+
+#if bool(D_M_zz.eigenvalues()[1]==omegaM2cuadrado):
+#    show(omegaM2cuadrado)
+\end{sagesilent}
+
+\begin{small}
+\begin{align*}
+\omega_{ZO}^2(M)&=\sage{omegaM1cuadrado}\\
+\omega_{ZA}^2(M)&=\sage{omegaM2cuadrado}
+\end{align*}
+\end{small}
+
+Comprobem que les expresions obtesses es redueixen a les que aparéixen en la ref: Falkowsky en el cas que es àtoms de la base foen iguals.
+
+\begin{sagesilent}
+Eq5=(omegaM1cuadrado==omega_M_ZO**2)
+Eq6=(omegaM2cuadrado==omega_M_ZA**2)
+
+sol1=(phi1toBN==n(solve(((Eq6-Eq5)**2).subs(solEq1), phi1toBN)[0].subs(sol[0], sol[1]).subs(M_B=B.mass, M_N=N.mass).rhs()))
+
+sol2=sol[0].subs(M_N=N.mass)
+
+sol3=sol[1].subs(M_B=B.mass)
+
+sol4=solEq1[0].subs(M_B=B.mass, M_N=N.mass).subs(sol1)
+
+\end{sagesilent}
+
+De manera que los valores que obtenemos para las cuatro constantes de fuerza consideradas son:
+
+\begin{align*}
+&\sage{sol1}\qquad& \sage{sol2}\\
+&\sage{sol3}\qquad& \sage{sol4}
+\end{align*}
+
+Y les relacions de dispersió per als modes $ZO$ i $ZA$ tenen la foma:
+\begin{sagesilent}
+from pylab import loadtxt
+dades=loadtxt("freq.dat.txt")
+
+ZAZO=\
+list_plot(
+    [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+        M_N=N.mass, a=1, q_x=n(x*pi), q_y=n(x*pi/sqrt(3))).simplify_full().eigenvalues()[1]))) \
+        for x in srange(0,1,0.1)] +\
+         [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+M_N=N.mass, a=1, q_x=n(pi*(1+x/3)), q_y=n(pi/sqrt(3)*(1-x))).simplify_full().eigenvalues()[1]))) \
+        for x in srange(0,1,0.1)]+\
+         [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+M_N=N.mass, a=1, q_x=n(4*pi/3*(1-x)), q_y=0).simplify_full().eigenvalues()[1]))) \
+        for x in srange(0,1,0.1)]) + \
+list_plot(
+    [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+        M_N=N.mass, a=1, q_x=n(x*pi), q_y=n(x*pi/sqrt(3))).simplify_full().eigenvalues()[0]))) \
+        for x in srange(0,1,0.1)]+
+          [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+M_N=N.mass, a=1,q_x=n(pi*(1+x/3)), q_y=n(pi/sqrt(3)*(1-x))).simplify_full().eigenvalues()[0]))) \
+        for x in srange(0,1,0.1)]+\
+         [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
+M_N=N.mass, a=1, q_x=n(4*pi/3*(1-x)), q_y=0).simplify_full().eigenvalues()[0]))) \
+        for x in srange(0,1,0.1)]) \
+     +line([(10,0),(10,1600)])+line([(20,0),(20,1600)])+line([(30,0),(30,1600)], ticks=[[0.05,10,20,30], None], \
+        tick_formatter = [[r'$\Gamma$', '$M$', '$K$', r'$\Gamma$'], None])
+
+relacio_dispersio_experimental=points(zip(dades[:,0]/523*30, dades[:,1]), color="black")
+ \end{sagesilent}
+
+
+\begin{figure}[h]
+\centering
+ \sageplot{ZAZO + relacio_dispersio_experimental,figsize=6}
+\end{figure}
+
+Podem
 
 \newpage
-\eject \pdfpagewidth=260mm \pdfpageheight=390mm
 
-\begin{tabular}{|c|c|c|}\hline$i$ & $j$ & $D_{i,j}$ \\ \hline $ 1 $ & $ 1 $ & $ \frac{\phi^{BB}_{2ti} e^{i a q_{x}} + \phi^{BB}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BB}_{2r}}{4} + \frac{\phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 1 $ & $ 2 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 1 $ & $ 3 $ & $ 0 $\\ \hline $ 1 $ & $ 4 $ & $ \frac{\phi^{BN}_{3ti} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 1 $ & $ 5 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 1 $ & $ 6 $ & $ 0 $\\ \hline $ 2 $ & $ 1 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{BB}_{2r}}{4} + \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BB}_{2r}}{4} - \frac{\sqrt{3} \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 2 $ & $ 2 $ & $ \frac{\phi^{BB}_{2r} e^{i a q_{x}} + \phi^{BB}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BB}_{2r}}{4} + \frac{3 \phi^{BB}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{B}} $\\ \hline $ 2 $ & $ 3 $ & $ 0 $\\ \hline $ 2 $ & $ 4 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 2 $ & $ 5 $ & $ \frac{\phi^{BN}_{3r} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{1r} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 2 $ & $ 6 $ & $ 0 $\\ \hline $ 3 $ & $ 1 $ & $ 0 $\\ \hline $ 3 $ & $ 2 $ & $ 0 $\\ \hline $ 3 $ & $ 3 $ & $ \frac{\phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BB}_{2to} e^{i a q_{x}} + \phi^{BB}_{2to} e^{- i a q_{x}}}{M_{B}} $\\ \hline $ 3 $ & $ 4 $ & $ 0 $\\ \hline $ 3 $ & $ 5 $ & $ 0 $\\ \hline $ 3 $ & $ 6 $ & $ \frac{\phi^{BN}_{1to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} + \phi^{BN}_{1to} e^{- i a q_{x}}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{3to} e^{i \left(- \frac{3 a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 1 $ & $ \frac{\phi^{BN}_{3ti} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{BN}_{3r}}{4} + \frac{\phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\frac{3 \phi^{BN}_{1r}}{4} + \phi^{BN}_{1ti} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1ti}}{4} + \left(\frac{3 \phi^{BN}_{1r}}{4} + \frac{\phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 2 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 4 $ & $ 3 $ & $ 0 $\\ \hline $ 4 $ & $ 4 $ & $ \frac{\phi^{NN}_{2ti} e^{i a q_{x}} + \phi^{NN}_{2ti} e^{- i a q_{x}} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{3 \phi^{NN}_{2r}}{4} + \frac{\phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 4 $ & $ 5 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 4 $ & $ 6 $ & $ 0 $\\ \hline $ 5 $ & $ 1 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{BN}_{3r}}{4} + \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{BN}_{3r}}{4} - \frac{\sqrt{3} \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{- \frac{\sqrt{3} \phi^{BN}_{1r}}{4} + \frac{\sqrt{3} \phi^{BN}_{1ti}}{4} + \left(\frac{\sqrt{3} \phi^{BN}_{1r}}{4} - \frac{\sqrt{3} \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 5 $ & $ 2 $ & $ \frac{\phi^{BN}_{3r} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{BN}_{3r}}{4} + \frac{3 \phi^{BN}_{3ti}}{4}\right) e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{1r} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4} + \left(\frac{\phi^{BN}_{1r}}{4} + \frac{3 \phi^{BN}_{1ti}}{4}\right) e^{i a q_{x}}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 5 $ & $ 3 $ & $ 0 $\\ \hline $ 5 $ & $ 4 $ & $ \frac{\left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(- \frac{\sqrt{3} \phi^{NN}_{2r}}{4} + \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\sqrt{3} \phi^{NN}_{2r}}{4} - \frac{\sqrt{3} \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 5 $ & $ 5 $ & $ \frac{\phi^{NN}_{2r} e^{i a q_{x}} + \phi^{NN}_{2r} e^{- i a q_{x}} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \left(\frac{\phi^{NN}_{2r}}{4} + \frac{3 \phi^{NN}_{2ti}}{4}\right) e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)}}{M_{N}} $\\ \hline $ 5 $ & $ 6 $ & $ 0 $\\ \hline $ 6 $ & $ 1 $ & $ 0 $\\ \hline $ 6 $ & $ 2 $ & $ 0 $\\ \hline $ 6 $ & $ 3 $ & $ \frac{\phi^{BN}_{1to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{1to} e^{i a q_{x}} + \phi^{BN}_{1to}}{\sqrt{M_{B} M_{N}}} + \frac{\phi^{BN}_{3to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{BN}_{3to} e^{i \left(\frac{3 a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)}}{\sqrt{M_{B} M_{N}}} $\\ \hline $ 6 $ & $ 4 $ & $ 0 $\\ \hline $ 6 $ & $ 5 $ & $ 0 $\\ \hline $ 6 $ & $ 6 $ & $ \frac{\phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(- \frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} - \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i \left(\frac{a q_{x}}{2} + \frac{\sqrt{3} a q_{y}}{2}\right)} + \phi^{NN}_{2to} e^{i a q_{x}} + \phi^{NN}_{2to} e^{- i a q_{x}}}{M_{N}} $\\ \hline\end{tabular}
+\bibliography{Referencies.bib}
+\bibliographystyle{plain}
 
-
-\newpage
-\eject \pdfpagewidth=210mm \pdfpageheight=297mm
-\subsubsection{Ajuste a los datos experimentales}
-\label{sec:orgd93a11b}
-Podemos evaluar la matriz dinámica en el punto \(\Gamma\) (\(q_x=0,q_y=0\)).
-
-\begin{minted}[]{python}
-from periodictable import B, N, constants
-u=constants.atomic_mass_constant
-D_Gamma=D.subs([(q_x,0),(q_y,0)]) #,(M_B,B.mass*u),(M_N,N.mass*u)])
-latex(Matrix([D_Gamma[i,j].factor() for i in range(6) for j in range(6)]).reshape(6,6))
-\end{minted}
-
-\left[\begin{smallmatrix}\frac{3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right)}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0\\0 & \frac{3 \left(\phi^{BB}_{2r} + \phi^{BB}_{2ti}\right)}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0\\0 & 0 & \frac{6 \phi^{BB}_{2to}}{M_{B}} & 0 & 0 & \frac{3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right)}{\sqrt{M_{B} M_{N}}}\\\frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right)}{M_{N}} & 0 & 0\\0 & \frac{3 \left(\phi^{BN}_{1r} + \phi^{BN}_{1ti} + \phi^{BN}_{3r} + \phi^{BN}_{3ti}\right)}{2 \sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{3 \left(\phi^{NN}_{2r} + \phi^{NN}_{2ti}\right)}{M_{N}} & 0\\0 & 0 & \frac{3 \left(\phi^{BN}_{1to} + \phi^{BN}_{3to}\right)}{\sqrt{M_{B} M_{N}}} & 0 & 0 & \frac{6 \phi^{NN}_{2to}}{M_{N}}\end{smallmatrix}\right]
-
-
-
-
-\printbibliography
 \end{document}
