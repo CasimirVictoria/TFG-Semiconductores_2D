@@ -27,6 +27,7 @@
 \usepackage{todonotes}
 
 \usepackage{sagetex}
+\usepackage{color}
 \author{Casimiro Victoria Castillo}
 
 
@@ -155,6 +156,7 @@ Donat que el càlcul dels modes de vibració per primers principis comen\c{c}a p
 var('a', domain='positive')
 a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
+print(a_2)
 \end{sagesilent}
 
 \begin{equation}
@@ -318,7 +320,7 @@ x = reddenudos[:,0]
 y = reddenudos[:,1]
 plt.plot(x,y,"o")
 plt.axis('scaled')
-plt.savefig("Red2pireciproca.jpg")
+plt.savefig("Grafiques/Xarxa2pireciproca.jpg")
 plt.close()
 
 #from math import sqrt, pi
@@ -348,7 +350,7 @@ lattice.add_hoppings(
 
 lattice.plot()
 lattice.plot_brillouin_zone()
-plt.savefig("1aBZ.jpg")
+plt.savefig("Grafiques/1aBZ.jpg")
 plt.close()
 reset('a')
 var('a', domain='positive')
@@ -357,11 +359,11 @@ var('a', domain='positive')
 \begin{figure}[h]
 \centering
 \begin{subfigure}[b]{0.4\textwidth}
-\includegraphics[width=8cm]{../Graficas/Red2pireciproca.jpg}
+\includegraphics[width=8cm]{./Grafiques/Xarxa2pireciproca.jpg}
 \subcaption{Xarxa en l'espai $2\pi$-recíproc}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
-\includegraphics[width=6cm]{./1aBZ.jpg}
+\includegraphics[width=6cm]{./Grafiques/1aBZ.jpg}
 \subcaption{Primera zona de Brillouin}
 \end{subfigure}
 \end{figure}
@@ -728,9 +730,10 @@ De manera que los valores que obtenemos para las cuatro constantes de fuerza con
 \end{align*}
 
 Y les relacions de dispersió per als modes $ZO$ i $ZA$ tenen la foma:
+%\sagetexpause
 \begin{sagesilent}
 from pylab import loadtxt
-dades=loadtxt("freq.dat.txt")
+dades=loadtxt("Dades/freq.dat")
 
 ZAZO=\
 list_plot(
@@ -757,16 +760,87 @@ M_N=N.mass, a=1, q_x=n(4*pi/3*(1-x)), q_y=0).simplify_full().eigenvalues()[0])))
         tick_formatter = [[r'$\Gamma$', '$M$', '$K$', r'$\Gamma$'], None])
 
 relacio_dispersio_experimental=points(zip(dades[:,0]/523*30, dades[:,1]), color="black")
- \end{sagesilent}
-
+\end{sagesilent}
 
 \begin{figure}[h]
 \centering
  \sageplot{ZAZO + relacio_dispersio_experimental,figsize=6}
 \end{figure}
 
-Podem
+%\sagetexunpause
 
+
+Passem ara a estudiar les vibracions dins del pla del cristall.
+
+\newpage
+\subsection{Vibracions dins del pla del cristall}
+En este cas tractem amn una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$)
+
+\begin{sagesilent}
+D1BN_xy=D1BN.matrix_from_rows_and_columns([0,1],[0,1])
+D1NB_xy=D1NB.matrix_from_rows_and_columns([0,1],[0,1])
+
+D2BB_xy=D2BB.matrix_from_rows_and_columns([0,1],[0,1])
+D2NN_xy=D2NN.matrix_from_rows_and_columns([0,1],[0,1])
+               
+D3BN_xy=D3BN.matrix_from_rows_and_columns([0,1],[0,1])
+D3NB_xy=D3NB.matrix_from_rows_and_columns([0,1],[0,1])
+#D4BN_xy=D4BN.matrix_from_rows_and_columns([0,1],[0,1])
+#D4NB_xy=D4NB.matrix_from_rows_and_columns([0,1],[0,1])
+
+D_xy=block_matrix([[D2BB_xy, D1BN_xy+D3BN_xy],[D1NB_xy+D3NB_xy, D2NN_xy]])
+\end{sagesilent}
+
+\subsubsection{Al punt $\Gamma$}
+
+Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
+\begin{sagesilent}
+D_Gamma_xy=D_xy.subs(q_x=0,q_y=0)
+\end{sagesilent}
+
+\begin{align*}
+\omega_{1,2}^2(\Gamma)&=\sage{D_Gamma_xy.eigenvalues()[0]}\\
+\omega_{3,4}^2(\Gamma)&=\sage{D_Gamma_xy.eigenvalues()[3]}
+\end{align*}
+
+El programa (escrit en python emprant \textcolor{blue}{sagemath}, que per a la diagonalització de matrius empra el programa \textcolor{red}{maxima}) no consigueix trobar un resultat analític \textit{sencill} per als valors propis de la matriu dinàmica als punts $M$ i $K$, de manera que anem a intentar obtindre algun resultat aproximat realitzant algunes simplificacions; en particular anem a considerar:
+
+\begin{itemize}
+
+\item Les masses dels àtoms són iguals $M_N=M_B$
+\item Les constants de for\c{c}a entre àtoms del mateix tipus són també iguals: $\phi_{2,r}^{NN}=\phi_{2,r}^{BB}$, $\phi_{2,ti}^{NN}=\phi_{2,ti}^{BB}$ 
+\end{itemize}
+
+Emprant aquestes aproximacions (més endavant veurem que no fa falta fer tantes simplificacions, podem no igualar alguna de les dues constants anteriors), obtenim
+
+\subsubsection{Al punt $M$}
+
+Obtinc 4 valors propis distints, cosa que sembla raonable observant la gràfica de les dades proporcionades.
+\begin{sagesilent}
+D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2rNN=phi2rBB,phi2tiNN=phi2tiBB, M_N=M_B)
+\end{sagesilent}
+
+\begin{align*}
+\omega_1^2(\Gamma)&=\sage{D_M_xy.eigenvalues()[0]}\\
+\omega_2^2(\Gamma)&=\sage{D_M_xy.eigenvalues()[1]}\\
+\omega_3^2(\Gamma)&=\sage{D_M_xy.eigenvalues()[2]}\\
+\omega_4^2(\Gamma)&=\sage{D_M_xy.eigenvalues()[3]}
+\end{align*}
+
+\subsubsection{Al punt $K$}
+
+En este punt el programa en dona 3 valors propis, un d'ells amb multiplicitat, i observant la gràfica de les dades proporcionades sembla també raonable que en primera aproximació un dels valors propis estiga degenerat (podem observar que tenim $2$ freqüències al punt $K$ molt pròxims entre ells)
+
+\begin{sagesilent}
+D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi2rNN=phi2rBB,phi2tiNN=phi2tiBB, M_N=M_B)\end{sagesilent}
+
+\begin{align*}
+\omega_1^2(\Gamma)&=\sage{D_K_xy.eigenvalues()[0]}\\
+\omega_2^2(\Gamma)&=\sage{D_K_xy.eigenvalues()[1]}\\
+\omega_{3,4}^2(\Gamma)&=\sage{D_K_xy.eigenvalues()[2]}
+\end{align*}
+
+Passem ara a intentar calcular els valors de les constants de for\c{c}a, emprant els valors de les freqüències dels modes de vibració en estes punts de la primera zona de Brillouin.
 \newpage
 
 \bibliography{Referencies.bib}
