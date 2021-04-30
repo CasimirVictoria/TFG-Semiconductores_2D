@@ -1,4 +1,4 @@
-\documentclass[12pt,twoside,a4paper]{article}%,a4paper
+\documentclass[12pt,twoside,a4paper, notitlepage]{article}%,a4paper
 
 % Establim el format de la pàgina:
 \usepackage{fancyhdr}
@@ -25,21 +25,37 @@
 %\usepackage{pdflscape}
 \usepackage{attachfile}
 \usepackage{todonotes}
+\usepackage{pdfpages}
 
 \usepackage{sagetex}
 \usepackage{color}
+\definecolor{gris}{RGB}{220,220,220}
+
 \author{Casimiro Victoria Castillo}
 
 
 \begin{document}
 
-\title{Fonons y espectroscòpia Raman en semiconductors bidimensionals}
-\author{Casimiro Victoria Castillo}
-\date{11 de Abril de 2021}
+%\title{}
+%\author{}
 %\date{}
-\maketitle
+%\date{}607123000
+%\maketitle 
+%\begin{titlepage}
+%  \vspace*{4cm}
+%  {\fontsize{28}{34}\selectfont\bfseries Fonons y espectroscòpia Raman en semiconductors bidimensionals}
+%  \hfill
+  % Logo
+  %\includegraphics[height=2cm]{example-image-a} \\
+  % Línea gris
+%  {%\color{gris}
+%  \hrule}
+  %\Large{\itshape Subtítulo}
+%  \vfill
+%  {\large Casimiro Victoria Castillo \hfill 11 de Abril de 2021}
+%\end{titlepage}
 
-
+\includepdf{./Altres/portada_tfg_casimir.pdf}
 
 \begin{abstract}
   Els materials bidimensionals ($2D$) com el grafé són de gran interés tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristallina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
@@ -61,7 +77,7 @@
 
 
 \subsection{Aproximació adiabàtica}
-Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
+Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considearar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
   
 \subsection{Aproximació armònica}
 Passar a descriure l'\textbf{aproximació amònica}: escriure el potencial, les equacions de moviment de Lagrange, y passar d'estes equacions de moviment en l'espai de posiciones al problema de valors propis de la matriu dinàmica en l'espai de vectores de onda (o moments).
@@ -730,11 +746,12 @@ De manera que los valores que obtenemos para las cuatro constantes de fuerza con
 \end{align*}
 
 Y les relacions de dispersió per als modes $ZO$ i $ZA$ tenen la foma:
+
 %\sagetexpause
 \begin{sagesilent}
 from pylab import loadtxt
-dades=loadtxt("Dades/freq.dat")
-
+#data = pd.read_csv('../Dades/freq.dat', header = None)
+dades=loadtxt("./Dades/freq.dat")
 ZAZO=\
 list_plot(
     [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
@@ -756,15 +773,21 @@ M_N=N.mass, a=1,q_x=n(pi*(1+x/3)), q_y=n(pi/sqrt(3)*(1-x))).simplify_full().eige
          [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
 M_N=N.mass, a=1, q_x=n(4*pi/3*(1-x)), q_y=0).simplify_full().eigenvalues()[0]))) \
         for x in srange(0,1,0.1)]) \
-     +line([(10,0),(10,1600)])+line([(20,0),(20,1600)])+line([(30,0),(30,1600)], ticks=[[0.05,10,20,30], None], \
-        tick_formatter = [[r'$\Gamma$', '$M$', '$K$', r'$\Gamma$'], None])
+     +line([(10,0),(10,1600)], color="black")+line([(20,0),(20,1600)], color="black")\
+     +line([(30,0),(30,1600)], color="black", ticks=[[0.05,10,20,30], None], \
+        tick_formatter = [[r'$\Gamma$', '$M$', '$K$', r'$\Gamma$'], None])+\
+points(zip(dades[:524,0]/524*30, dades[:524,1]), color="red") +\
+points(zip(dades[524:1048,0]/524*30, dades[524:1048,1]), color="brown") +\
+points(zip(dades[1048:1572,0]/524*30, dades[1048:1572,1]), color="black") +\
+points(zip(dades[1572:2096,0]/525*30, dades[1572:2096,1]), color="pink") +\
+points(zip(dades[2096:2620,0]/525*30, dades[2096:2620,1]), color="steelblue") +\
+points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="blue")
 
-relacio_dispersio_experimental=points(zip(dades[:,0]/523*30, dades[:,1]), color="black")
 \end{sagesilent}
 
 \begin{figure}[h]
 \centering
- \sageplot{ZAZO + relacio_dispersio_experimental,figsize=6}
+ \sageplot{ZAZO,figsize=6}
 \end{figure}
 
 %\sagetexunpause
@@ -827,9 +850,11 @@ D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2rNN=phi2rBB,phi2tiNN=phi2tiBB,
 \omega_4^2(\Gamma)&=\sage{D_M_xy.eigenvalues()[3]}
 \end{align*}
 
+\newpage
+
 \subsubsection{Al punt $K$}
 
-En este punt el programa en dona 3 valors propis, un d'ells amb multiplicitat, i observant la gràfica de les dades proporcionades sembla també raonable que en primera aproximació un dels valors propis estiga degenerat (podem observar que tenim $2$ freqüències al punt $K$ molt pròxims entre ells)
+En este punt el programa en dona 3 valors propis, un d'ells amb multiplicitat $2$, i observant la gràfica de les dades proporcionades sembla també raonable que en primera aproximació un dels valors propis estiga degenerat (podem observar que tenim $2$ freqüències al punt $K$ molt pròxims entre ells)
 
 \begin{sagesilent}
 D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi2rNN=phi2rBB,phi2tiNN=phi2tiBB, M_N=M_B)\end{sagesilent}
