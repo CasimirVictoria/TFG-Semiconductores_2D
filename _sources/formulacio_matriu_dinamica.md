@@ -53,7 +53,7 @@ a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
 ```
 
-Comprobem que efectivament els dos vectors base formen un angle de 
+Comprobem que efectivament els dos vectors base formen un angle de
 
 ```{code-cell} ipython3
 angle=arccos(a_1*a_2/(norm(a_1)*norm(a_2)))
@@ -565,7 +565,7 @@ solve(Eq_Gamma_5i6,phi3rBN)
 ```
 
 ```{note}
-Per als punts $K$ i $M$, sagemath (mitjançcant maxima) no obté una expressió analítica però el que fem és calcular els valors propis supossant que en compte de una base diatòmica amb 2 àtoms de diferents elements tenim una base amb els dos àtoms iguals (supossem que les dues masses son iguals i que les constants de forca entre átoms del mateix element (segons veïns) són iguals també. 
+Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourceforge.io/)) no obté una expressió analítica però el que fem és calcular els valors propis supossant que en compte de una base diatòmica amb 2 àtoms de diferents elements tenim una base amb els dos àtoms iguals (supossem que les dues masses son iguals i que les constants de forca entre átoms del mateix element (segons veïns) són iguals també. 
 
 Evidentment els resultats obtessos no són vàlids, però els emprarem com a punt de partida per poder trobar el valor de les constants de forca ajustant als valors proporcionats. De fet, obtenim una expressió analítica igualant sols una d'estes forces (les $r$ o $ti$)
 ```
@@ -573,7 +573,7 @@ Evidentment els resultats obtessos no són vàlids, però els emprarem com a pun
 +++
 
 ### Per al punt $K$ 
-En ($k_x=\frac{4\pi}{3a}, k_y=0$)
+En $\left(k_x=\frac{4\pi}{3a}, k_y=0\right)$
 
 ```{code-cell} ipython3
 D_K_xy=matriu_simplificada(D_xy.subs(q_x=4*pi/(3*a),q_y=0),4,4)
@@ -588,6 +588,13 @@ for i in range(0,4):
     show(D_K_xy_0.eigenvalues()[i])
 ```
 
+```{code-cell} ipython3
+D_K_xy_3=D_xy.subs(q_x=4*pi/(3*a),q_y=0, M_N=M_B)
+#for i in range(0,4):
+#    show(D_M_xy_3.eigenvalues()[i])
+bool(((D_K_xy_3.eigenvalues()[0]+D_K_xy_3.eigenvalues()[1]).expand())==(D_K_xy_3.eigenvalues()[2]+D_K_xy_3.eigenvalues()[3]).expand())
+```
+
 Podem observar que al punt $K$ obtenim 3 valors propis distints (un d'ells de multiplicitat 2, clar)
 
 ```{code-cell} ipython3
@@ -595,7 +602,7 @@ bool(D_K_xy_0.eigenvalues()[2]==D_K_xy_0.eigenvalues()[3])
 ```
 
 ```{code-cell} ipython3
-omega_Gamma_Ki6=1394
+omega_Gamma_5i6=1394
 Eq_Gamma_5i6=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5i6**2)
 #Eq_Gamma_5
 solve(Eq_Gamma_5i6,phi3rBN)
@@ -616,5 +623,48 @@ for i in range(0,4):
     show(D_M_xy_0.eigenvalues()[i])
 ```
 
+```{code-cell} ipython3
+(D_M_xy_0.eigenvalues()[0]+D_M_xy_0.eigenvalues()[1]).expand()
+```
+
+```{code-cell} ipython3
+D_M_xy_1=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2tiNN=phi2tiBB,M_N=M_B)
+#for i in range(0,4):
+#    show(D_M_xy_1.eigenvalues()[i])
+```
+
+```{code-cell} ipython3
+(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()
+```
+
+```{code-cell} ipython3
+(D_M_xy_1.eigenvalues()[0]+D_M_xy_1.eigenvalues()[1]).expand()
+```
+
+```{code-cell} ipython3
+(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()
+```
+
+```{code-cell} ipython3
+D_M_xy_2=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2rNN=phi2rBB,M_N=M_B)
+#for i in range(0,4):
+#    show(D_M_xy_2.eigenvalues()[i])
+```
+
+```{code-cell} ipython3
+(D_M_xy_2.eigenvalues()[0]+D_M_xy_2.eigenvalues()[1]).expand()
+```
+
+```{code-cell} ipython3
+(D_M_xy_2.eigenvalues()[2]+D_M_xy_2.eigenvalues()[3]).expand()
+```
+
+```{code-cell} ipython3
+D_M_xy_3=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), M_N=M_B)
+#for i in range(0,4):
+#    show(D_M_xy_3.eigenvalues()[i])
+show((D_M_xy_3.eigenvalues()[0]+D_M_xy_3.eigenvalues()[1]).expand())
+show((D_M_xy_3.eigenvalues()[2]+D_M_xy_3.eigenvalues()[3]).expand())
+```
 
 Al punt $M$ sí obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.

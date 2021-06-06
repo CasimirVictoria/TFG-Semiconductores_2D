@@ -17,25 +17,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from periodictable import C, B, N, constants
-u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
-
-omega_Gamma_ZO=830 #cm-1
-omega_Gamma_ZA=0
-alor
-D_Gamma_zz=D_zz.subs(q_x=0,q_y=0) #,(M_B,B.mass*u),(M_N,N.mass*u)])
-D_Gamma_zz
+(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
 [0;32m/usr/lib/python3/dist-packages/sage/all_cmdline.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0momega_Gamma_ZO[0m[0;34m=[0m[0mInteger[0m[0;34m([0m[0;36m830[0m[0;34m)[0m [0;31m#cm-1[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0momega_Gamma_ZA[0m[0;34m=[0m[0mInteger[0m[0;34m([0m[0;36m0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 6[0;31m [0malor[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      7[0m [0mD_Gamma_zz[0m[0;34m=[0m[0mD_zz[0m[0;34m.[0m[0msubs[0m[0;34m([0m[0mq_x[0m[0;34m=[0m[0mInteger[0m[0;34m([0m[0;36m0[0m[0;34m)[0m[0;34m,[0m[0mq_y[0m[0;34m=[0m[0mInteger[0m[0;34m([0m[0;36m0[0m[0;34m)[0m[0;34m)[0m [0;31m#,(M_B,B.mass*u),(M_N,N.mass*u)])[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      8[0m [0mD_Gamma_zz[0m[0;34m[0m[0;34m[0m[0m
-
-[0;31mNameError[0m: name 'alor' is not defined
-NameError: name 'alor' is not defined
+[0;32m----> 1[0;31m [0;34m([0m[0mD_M_xy_1[0m[0;34m.[0m[0meigenvalues[0m[0;34m([0m[0;34m)[0m[0;34m[[0m[0mInteger[0m[0;34m([0m[0;36m2[0m[0;34m)[0m[0;34m][0m[0;34m+[0m[0mD_M_xy_1[0m[0;34m.[0m[0meigenvalues[0m[0;34m([0m[0;34m)[0m[0;34m[[0m[0mInteger[0m[0;34m([0m[0;36m3[0m[0;34m)[0m[0;34m][0m[0;34m)[0m[0;34m.[0m[0mexpand[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mNameError[0m: name 'D_M_xy_1' is not defined
+NameError: name 'D_M_xy_1' is not defined
 
