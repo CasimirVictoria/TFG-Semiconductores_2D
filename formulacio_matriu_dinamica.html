@@ -320,7 +320,7 @@
 <span class="c1"># Importe les biblioteques i mètodes que empre al llarg del script</span>
 <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">loadtxt</span>
 
-<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="c1">#from myst_nb import glue</span>
 
 <span class="c1"># Algunes funcions emprades</span>
 <span class="k">def</span> <span class="nf">matriu_simplificada</span><span class="p">(</span><span class="n">matriu</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
@@ -344,17 +344,23 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">)</span>
 <span class="n">a_1</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">a_2</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
-
-<span class="n">angle</span><span class="o">=</span><span class="n">arccos</span><span class="p">(</span><span class="n">a_1</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a_1</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">a_2</span><span class="p">)))</span>
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;angle_cela&quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Comprobem que efectivament els dos vectors base formen un angle de</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span><span class="o">=</span><span class="n">arccos</span><span class="p">(</span><span class="n">a_1</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a_1</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">a_2</span><span class="p">)))</span>
+<span class="c1">#glue(&quot;angle_cela&quot;, angle, display=False)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="s2">&quot; radians&quot;</span><span class="p">)</span>
 <span class="c1">#In-line text; {glue:}`angle`</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{2}{3} \, \pi \phantom{\verb!x!}\verb|radians|</script></html></div></div>
 </div>
-</div>
-<p>Comprobem que efectivament els dos vectors base formen un angle de <span class="pasted-inline"><span class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{2}{3} \, \pi</script></html></span></span> radians</p>
 <p>Numerem les cel·les unitat amb un índex vectorial <span class="math notranslate nohighlight">\(\vec l=\left( l_1, l_2\right)\)</span>.</p>
 <p>Las posiciones de los nudos son <span class="math notranslate nohighlight">\(\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2\)</span>.
 Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,</p>
@@ -376,7 +382,7 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_6_0.png" src="_images/formulacio_matriu_dinamica_6_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_7_0.png" src="_images/formulacio_matriu_dinamica_7_0.png" />
 </div>
 </div>
 <p>Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio en la celda unidad <strong>nota: proporcionadas como datos</strong></p>
@@ -399,7 +405,7 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_8_0.png" src="_images/formulacio_matriu_dinamica_8_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_9_0.png" src="_images/formulacio_matriu_dinamica_9_0.png" />
 </div>
 </div>
 <div class="section" id="identificacio-dels-veins-segons-la-seua-distancia">
@@ -422,7 +428,7 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_10_0.png" src="_images/formulacio_matriu_dinamica_10_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_11_0.png" src="_images/formulacio_matriu_dinamica_11_0.png" />
 </div>
 </div>
 <div class="cell tag_output_scroll docutils container">
@@ -1513,7 +1519,6 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 
 <span class="n">omega_Gamma_ZO</span><span class="o">=</span><span class="mi">830</span> <span class="c1">#cm-1</span>
 <span class="n">omega_Gamma_ZA</span><span class="o">=</span><span class="mi">0</span>
-
 <span class="n">D_Gamma_zz</span><span class="o">=</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#,(M_B,B.mass*u),(M_N,N.mass*u)])</span>
 <span class="n">D_Gamma_zz</span>
 </pre></div>
@@ -1684,9 +1689,148 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_31_0.png" src="_images/formulacio_matriu_dinamica_31_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_32_0.png" src="_images/formulacio_matriu_dinamica_32_0.png" />
 </div>
 </div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Serie</p></th>
+<th class="head"><p>Color</p></th>
+<th class="head"><p>Punt</p></th>
+<th class="head"><p>omega (Taula)</p></th>
+<th class="head"><p>omega(propor.)</p></th>
+<th class="head"><p>Rama</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Roig</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>Negatiu</p></td>
+<td><p>0</p></td>
+<td><p>1 (ZA)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Roig</p></td>
+<td><p>M</p></td>
+<td><p>293</p></td>
+<td><p>314</p></td>
+<td><p>1 (ZA)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Roig</p></td>
+<td><p>K</p></td>
+<td><p>284</p></td>
+<td><p>322</p></td>
+<td><p>1 (ZA)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Marro</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>Negatiu</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Marro</p></td>
+<td><p>M</p></td>
+<td><p>544</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Marro</p></td>
+<td><p>K</p></td>
+<td><p>640</p></td>
+<td><p>605</p></td>
+<td><p>4 (ZO)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Negre</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Negre</p></td>
+<td><p>M</p></td>
+<td><p>654</p></td>
+<td><p>635</p></td>
+<td><p>4 (ZO)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Negre</p></td>
+<td><p>K</p></td>
+<td><p>771</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Rosa</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>832</p></td>
+<td><p>830</p></td>
+<td><p>4 (ZO)</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Rosa</p></td>
+<td><p>M</p></td>
+<td><p>1114</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Rosa</p></td>
+<td><p>K</p></td>
+<td><p>1111</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>B.clar</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>1394</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>B.clar</p></td>
+<td><p>M</p></td>
+<td><p>1296</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>B.clar</p></td>
+<td><p>K</p></td>
+<td><p>1299</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Blau</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td><p>1394</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Blau</p></td>
+<td><p>M</p></td>
+<td><p>1362</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Blau</p></td>
+<td><p>K</p></td>
+<td><p>1323</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="vibracions-dins-del-pla-del-cristall">
@@ -1732,14 +1876,15 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 <p>Obtenim 0 dues vegades, tal i com tenim en les dades propocionades. L’altre valor propi també correspon a dues rames, com en les dades. Així que podem escriure</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_Gamma_5</span><span class="o">=</span><span class="mi">1395</span>
-<span class="n">Eq_Gamma_5</span><span class="o">=</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega_Gamma_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Eq_Gamma_5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_Gamma_5i6</span><span class="o">=</span><span class="mi">1394</span>
+<span class="n">Eq_Gamma_5i6</span><span class="o">=</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega_Gamma_5i6</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#Eq_Gamma_5</span>
+<span class="n">solve</span><span class="p">(</span><span class="n">Eq_Gamma_5i6</span><span class="p">,</span><span class="n">phi3rBN</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} = 1946025</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{3,r}^{BN}} = -{\phi_{1,r}^{BN}} - {\phi_{1,ti}^{BN}} - {\phi_{3,ti}^{BN}} - \frac{1943236}{3} \, \sqrt{M_{B} M_{N}}\right]</script></html></div></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -1780,6 +1925,18 @@ Visualizamos una región de la red hexagonal, con los correspondientes nudos (qu
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\mathrm{True}</script></html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_Gamma_Ki6</span><span class="o">=</span><span class="mi">1394</span>
+<span class="n">Eq_Gamma_5i6</span><span class="o">=</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega_Gamma_5i6</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#Eq_Gamma_5</span>
+<span class="n">solve</span><span class="p">(</span><span class="n">Eq_Gamma_5i6</span><span class="p">,</span><span class="n">phi3rBN</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{3,r}^{BN}} = -{\phi_{1,r}^{BN}} - {\phi_{1,ti}^{BN}} - {\phi_{3,ti}^{BN}} - \frac{1943236}{3} \, \sqrt{M_{B} M_{N}}\right]</script></html></div></div>
 </div>
 </div>
 </div>

@@ -29,7 +29,7 @@ reset()
 # Importe les biblioteques i mètodes que empre al llarg del script
 from pylab import loadtxt
 
-from myst_nb import glue
+#from myst_nb import glue
 
 # Algunes funcions emprades
 def matriu_simplificada(matriu,m,n):
@@ -51,15 +51,16 @@ $$
 var('a', domain='positive')
 a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
-
-angle=arccos(a_1*a_2/(norm(a_1)*norm(a_2)))
-glue("angle_cela", angle, display=False)
-#In-line text; {glue:}`angle`
 ```
 
-Comprobem que efectivament els dos vectors base formen un angle de {glue:}`angle_cela` radians
+Comprobem que efectivament els dos vectors base formen un angle de 
 
-+++
+```{code-cell} ipython3
+angle=arccos(a_1*a_2/(norm(a_1)*norm(a_2)))
+#glue("angle_cela", angle, display=False)
+show(angle, " radians")
+#In-line text; {glue:}`angle`
+```
 
 Numerem les cel·les unitat amb un índex vectorial $\vec l=\left( l_1, l_2\right)$.
 
@@ -380,7 +381,6 @@ u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fu
 
 omega_Gamma_ZO=830 #cm-1
 omega_Gamma_ZA=0
-
 D_Gamma_zz=D_zz.subs(q_x=0,q_y=0) #,(M_B,B.mass*u),(M_N,N.mass*u)])
 D_Gamma_zz
 ```
@@ -502,6 +502,29 @@ points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="blue")
      ,figsize=9) 
 ```
 
+| Serie | Color  | Punt  | omega (Taula) | omega(propor.) |   Rama |
+|-------|--------|-------|---------------|----------------|--------|
+|     1 | Roig   | $\Gamma$ |       Negatiu |              0 | 1 (ZA) |
+|     1 | Roig   | M     |           293 |            314 | 1 (ZA) |
+|     1 | Roig   | K     |           284 |            322 | 1 (ZA) |
+|     2 | Marro  | $\Gamma$ |       Negatiu |                |      2 |
+|     2 | Marro  | M     |           544 |                |      2 |
+|     2 | Marro  | K     |           640 |            605 | 4 (ZO) |
+|     3 | Negre  | $\Gamma$ |             4 |                |      3 |
+|     3 | Negre  | M     |           654 |            635 | 4 (ZO) |
+|     3 | Negre  | K     |           771 |                |      2 |
+|     4 | Rosa   | $\Gamma$ |           832 |            830 | 4 (ZO) |
+|     4 | Rosa   | M     |          1114 |                |      3 |
+|     4 | Rosa   | K     |          1111 |                |      3 |
+|     5 | B.clar | $\Gamma$ |          1394 |                |      5 |
+|     5 | B.clar | M     |          1296 |                |      5 |
+|     5 | B.clar | K     |          1299 |                |      5 |
+|     6 | Blau   | $\Gamma$ |          1394 |                |      6 |
+|     6 | Blau   | M     |          1362 |                |      6 |
+|     6 | Blau   | K     |          1323 |                |      6 |
+
++++
+
 ## Vibracions dins del pla del cristall
 En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$)
 
@@ -535,9 +558,10 @@ D_Gamma_xy.eigenvalues()
 Obtenim 0 dues vegades, tal i com tenim en les dades propocionades. L'altre valor propi també correspon a dues rames, com en les dades. Així que podem escriure
 
 ```{code-cell} ipython3
-omega_Gamma_5=1395
-Eq_Gamma_5=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5**2)
-Eq_Gamma_5
+omega_Gamma_5i6=1394
+Eq_Gamma_5i6=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5i6**2)
+#Eq_Gamma_5
+solve(Eq_Gamma_5i6,phi3rBN)
 ```
 
 ```{note}
@@ -570,6 +594,13 @@ Podem observar que al punt $K$ obtenim 3 valors propis distints (un d'ells de mu
 bool(D_K_xy_0.eigenvalues()[2]==D_K_xy_0.eigenvalues()[3])
 ```
 
+```{code-cell} ipython3
+omega_Gamma_Ki6=1394
+Eq_Gamma_5i6=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5i6**2)
+#Eq_Gamma_5
+solve(Eq_Gamma_5i6,phi3rBN)
+```
+
 ### Per al punto $M$
 En ($q_x=\pi/a,q_y=\pi/(\sqrt{3} a$)
 
@@ -585,8 +616,5 @@ for i in range(0,4):
     show(D_M_xy_0.eigenvalues()[i])
 ```
 
+
 Al punt $M$ sí obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.
-
-```{code-cell} ipython3
-
-```
