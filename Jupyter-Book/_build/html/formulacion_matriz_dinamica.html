@@ -1,0 +1,1861 @@
+
+<!DOCTYPE html>
+
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descripció del cristall de BN &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Índex" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo_tfg.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Cerca en aquest llibre ..." aria-label="Cerca en aquest llibre ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Sobre este TFG
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduccio.html">
+   Introducció
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Commuta la navegació" aria-controls="site-navigation"
+            title="Commuta la navegació" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Descarregueu aquesta pàgina"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/formulacion_matriz_dinamica.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Descarregar fitxer de quadern" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/formulacion_matriz_dinamica.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Baixeu el fitxer font" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Imprimeix a PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Dipòsit de fonts"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fformulacion_matriz_dinamica.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Obriu un número"><i class="fas fa-lightbulb"></i>número obert</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/formulacion_matriz_dinamica.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Llançament Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identificacio-dels-veins-segons-la-seua-distancia">
+   Identificació dels veins segons la seua distància
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vibracions-fora-de-pla">
+   Vibracions fora de pla
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#punt-gamma">
+     Punt
+     <span class="math notranslate nohighlight">
+      \(\Gamma\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#punt-k">
+     Punt
+     <span class="math notranslate nohighlight">
+      \(K\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#punt-m">
+     Punt
+     <span class="math notranslate nohighlight">
+      \(M\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vibracions-dins-del-pla-del-cristall">
+   Vibracions dins del pla del cristall
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#al-punt-gamma">
+     Al punt
+     <span class="math notranslate nohighlight">
+      \(\Gamma\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#per-al-punt-k">
+     Per al punt
+     <span class="math notranslate nohighlight">
+      \(K\)
+     </span>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simplificant">
+       Simplificant
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#per-al-punto-m">
+     Per al punto
+     <span class="math notranslate nohighlight">
+      \(M\)
+     </span>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Simplificant
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="descripcio-del-cristall-de-bn">
+<h1>Descripció del cristall de BN<a class="headerlink" href="#descripcio-del-cristall-de-bn" title="Link permanent a aquest títol">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En este notebook va la major part del codi. De fet és on estan tots els càlculs.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Netejem totes les variables </span>
+<span class="n">reset</span><span class="p">()</span>
+
+<span class="c1"># Eixida per defecte en LaTeX</span>
+<span class="o">%</span><span class="k">display</span> latex
+
+<span class="c1"># Importe les biblioteques i mètodes que empre al llarg del script</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">loadtxt</span>
+
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+
+<span class="c1"># Algunes funcions emprades</span>
+<span class="k">def</span> <span class="nf">matriu_simplificada</span><span class="p">(</span><span class="n">matriu</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">matsimp</span><span class="o">=</span><span class="n">matriu</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+             <span class="n">matsimp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">matriu</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">full_simplify</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">matsimp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Donat que el càlcul dels modes de vibració per primers principis comença per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el <span class="math notranslate nohighlight">\(BN\)</span> monocapa es tracta d’un cristall bidimensional hexagonal de base diatómica, la cel·la unitat del qual ve donada per (dades proporcionades):</p>
+<div class="math notranslate nohighlight">
+\[
+\vec a_1=a(1,0);\qquad\vec a_2=a\left(-\frac{1}{2},\frac{\sqrt{3}}{2}\right);
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">)</span>
+<span class="n">a_1</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">a_2</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">angle</span><span class="o">=</span><span class="n">arccos</span><span class="p">(</span><span class="n">a_1</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a_1</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">a_2</span><span class="p">)))</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;angle_cela&quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#In-line text; {glue:}`angle`</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Comprobem que efectivament els dos vectors base formen un angle de <span class="pasted-inline"><span class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{2}{3} \, \pi</script></html></span></span> radians</p>
+<p>Numerem les cel·les unitat amb un índex vectorial <span class="math notranslate nohighlight">\(\vec l=\left( l_1, l_2\right)\)</span>.</p>
+<p>Las posiciones de los nudos son <span class="math notranslate nohighlight">\(\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2\)</span>.
+Visualizamos una región de la red hexagonal, con los correspondientes nudos (que no átomos), así como la correspondiente celda unidad,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nucs</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span> 
+             <span class="n">size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">nucs</span><span class="o">+</span>
+    <span class="n">line</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="mi">2</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="mi">2</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="mi">2</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">line</span><span class="p">([(</span><span class="mi">2</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/formulacion_matriz_dinamica_6_0.png" src="_images/formulacion_matriz_dinamica_6_0.png" />
+</div>
+</div>
+<p>Para calcular los modos de vibración por primeros principios debemos determinar primero las posiciones atómicas de equilibrio en la celda unidad <strong>nota: proporcionadas como datos</strong></p>
+<p>Los átomos estan situados en:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec R_B=\frac{1}{3}\vec{a_1}+2\vec{a_2}\qquad
+\vec R_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_B</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="n">a_2</span><span class="p">;</span> <span class="n">r_N</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="n">a_2</span>
+<span class="n">show</span><span class="p">(</span><span class="n">arrow</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">arrow</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">line</span><span class="p">([(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">line</span><span class="p">([(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">point</span><span class="p">(</span><span class="n">r_B</span><span class="o">/</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">point</span><span class="p">(</span><span class="n">r_N</span><span class="o">/</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">),</span> <span class="n">frame</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/formulacion_matriz_dinamica_8_0.png" src="_images/formulacion_matriz_dinamica_8_0.png" />
+</div>
+</div>
+<div class="section" id="identificacio-dels-veins-segons-la-seua-distancia">
+<h2>Identificació dels veins segons la seua distància<a class="headerlink" href="#identificacio-dels-veins-segons-la-seua-distancia" title="Link permanent a aquest títol">¶</a></h2>
+<p>Determinem els veins dels àtoms situats en la cel.la 0⃗, per poder classificar-los segons la seua distància a cadascun d’aquests àtoms.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Posicins d&#39;equilibri dels àtoms</span>
+<span class="k">def</span> <span class="nf">RB</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span><span class="o">+</span><span class="n">r_B</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">RN</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span><span class="o">+</span><span class="n">r_N</span><span class="p">)</span>
+
+<span class="n">AtomosB</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">RB</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">/</span><span class="n">a</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">AtomosN</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">RN</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">/</span><span class="n">a</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">AtomosB</span><span class="o">+</span><span class="n">AtomosN</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/formulacion_matriz_dinamica_10_0.png" src="_images/formulacion_matriz_dinamica_10_0.png" />
+</div>
+</div>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">var</span><span class="p">(</span><span class="s1">&#39;q_x, q_y&#39;</span><span class="p">);</span> <span class="n">assume</span><span class="p">(</span><span class="n">q_x</span><span class="p">,</span> <span class="n">q_y</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">);</span> <span class="n">q</span><span class="o">=</span><span class="n">vector</span><span class="p">([</span><span class="n">q_x</span><span class="p">,</span><span class="n">q_y</span><span class="p">])</span>
+
+
+<span class="c1">## Parametros de la red, de la celdilla y del cristal</span>
+<span class="c1">## Vector R_l (vector de traslación primitivo)</span>
+<span class="k">def</span> <span class="nf">R_l</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span>
+
+<span class="c1">## Vector de posición de los átomos del cristal (en equilibrio)</span>
+<span class="k">def</span> <span class="nf">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">alpha</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span><span class="o">+</span><span class="n">r_B</span>
+
+    <span class="k">elif</span> <span class="n">alpha</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l_1</span><span class="o">*</span><span class="n">a_1</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">a_2</span><span class="o">+</span><span class="n">r_N</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error, alpha solo puede ser 1 o 2 &quot;</span><span class="p">)</span>
+
+<span class="c1">## Vector unitario que une uno de los átomo alphaprima con el átomo considerado alpha, l_1,l_2</span>
+<span class="k">def</span> <span class="nf">R_hat</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">-</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">-</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>\
+                                                                 <span class="o">-</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">-</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Distancia entre el átomo alphaprime y su vecino alpha situado en la celdilla l_1,l_2</span>
+<span class="k">def</span> <span class="nf">distancia</span><span class="p">(</span><span class="n">alphaprime</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">-</span><span class="n">R_alpha_l</span><span class="p">(</span><span class="n">alphaprime</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">/</span><span class="n">a</span>    
+
+<span class="k">def</span> <span class="nf">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">R_l</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="c1">#Genero una lista con la distancia de cada átomo a los átomos de la celdilla unidad </span>
+<span class="k">def</span> <span class="nf">valores_atomos</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">R_hat</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  \
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">l_2</span><span class="p">,</span><span class="n">l_2</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1">## Construyo un DataFrame de pandas con la información necesaria para identificar a los primeros, segundos, ... vecinos, según su distancia a cada uno de los átomos de la celdilla unidad</span>
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\alpha\prime$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\alpha$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$l_1$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$l_2$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\hat R$&quot;</span><span class="p">,</span><span class="s1">&#39;Distancia&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">lista_atomos</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valores_atomos</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">),</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Distancia&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\alpha\prime$&quot;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">])</span>
+
+<span class="c1">## Mostramos el dataframe como una tabla</span>
+<span class="c1">#table(lista_atomos(2,2).to_html(index=False))</span>
+<span class="n">table</span><span class="p">(</span><span class="n">lista_atomos</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="notruncate">
+<table  class="table_form">
+<tbody>
+<tr class ="row-a">
+<td><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th><script type="math/tex">\alpha\prime</script></th>
+      <th><script type="math/tex">\alpha</script></th>
+      <th><script type="math/tex">l_1</script></th>
+      <th><script type="math/tex">l_2</script></th>
+      <th><script type="math/tex">\hat R</script></th>
+      <th>Distancia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[0, 0]</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[0, 0]</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>[-3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>[0, sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>[0, -sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[-3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>[3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>[-1/2, -1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>[-1, 0]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>[1/2, -1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>[-1/2, 1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>[1, 0]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[1/2, 1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>[-1/2, -1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>[-1, 0]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>[1/2, -1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>[-1/2, 1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>[1, 0]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[1/2, 1/2*sqrt(3)]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>[0, -sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>[-3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>[-3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>[3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[0, sqrt(3)*sqrt(1/3)]</td>
+      <td>2*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>-1</td>
+      <td>[-3/7*sqrt(7/3), -2/7*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>0</td>
+      <td>[-9/14*sqrt(7/3), -1/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>[3/7*sqrt(7/3), -2/7*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>[-3/14*sqrt(7/3), 5/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>[9/14*sqrt(7/3), -1/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>[3/14*sqrt(7/3), 5/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>-2</td>
+      <td>[-3/14*sqrt(7/3), -5/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>[-9/14*sqrt(7/3), 1/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-2</td>
+      <td>[3/14*sqrt(7/3), -5/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>[-3/7*sqrt(7/3), 2/7*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>[9/14*sqrt(7/3), 1/14*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>[3/7*sqrt(7/3), 2/7*sqrt(3)*sqrt(7/3)]</td>
+      <td>sqrt(7/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>-1</td>
+      <td>[-1/2*sqrt(3), -1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>-2</td>
+      <td>[0, -1]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>[-1/2*sqrt(3), 1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>[1/2*sqrt(3), -1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>[0, 1]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>[1/2*sqrt(3), 1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>-1</td>
+      <td>[-1/2*sqrt(3), -1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>-2</td>
+      <td>[0, -1]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>[-1/2*sqrt(3), 1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>[1/2*sqrt(3), -1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>[0, 1]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>[1/2*sqrt(3), 1/2]</td>
+      <td>sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>-2</td>
+      <td>[-1/2, -1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>0</td>
+      <td>[-1, 0]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-2</td>
+      <td>[1/2, -1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>[-1/2, 1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>[1, 0]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>[1/2, 1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>-2</td>
+      <td>[-1/2, -1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>0</td>
+      <td>[-1, 0]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-2</td>
+      <td>[1/2, -1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>[-1/2, 1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>[1, 0]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>[1/2, 1/2*sqrt(3)]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>-2</td>
+      <td>[-3/26*sqrt(13/3), -7/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>1</td>
+      <td>[-6/13*sqrt(13/3), 1/13*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>-2</td>
+      <td>[3/26*sqrt(13/3), -7/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>[-9/26*sqrt(13/3), 5/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>[6/13*sqrt(13/3), 1/13*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>[9/26*sqrt(13/3), 5/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>-2</td>
+      <td>[-9/26*sqrt(13/3), -5/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>-1</td>
+      <td>[-6/13*sqrt(13/3), -1/13*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>[9/26*sqrt(13/3), -5/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>[-3/26*sqrt(13/3), 7/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>[6/13*sqrt(13/3), -1/13*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>[3/26*sqrt(13/3), 7/26*sqrt(13/3)*sqrt(3)]</td>
+      <td>sqrt(13/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>[3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>4*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>[-3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>4*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-2</td>
+      <td>[9/38*sqrt(19/3), -7/38*sqrt(19/3)*sqrt(3)]</td>
+      <td>sqrt(19/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>[15/38*sqrt(19/3), -1/38*sqrt(19/3)*sqrt(3)]</td>
+      <td>sqrt(19/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>0</td>
+      <td>[-15/38*sqrt(19/3), 1/38*sqrt(19/3)*sqrt(3)]</td>
+      <td>sqrt(19/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>[-9/38*sqrt(19/3), 7/38*sqrt(19/3)*sqrt(3)]</td>
+      <td>sqrt(19/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>1</td>
+      <td>[-5/14*sqrt(7), 1/14*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>[-2/7*sqrt(7), 1/7*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>[2/7*sqrt(7), -1/7*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>[5/14*sqrt(7), -1/14*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>1</td>
+      <td>[-5/14*sqrt(7), 1/14*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>[-2/7*sqrt(7), 1/7*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>[2/7*sqrt(7), -1/7*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>[5/14*sqrt(7), -1/14*sqrt(7)*sqrt(3)]</td>
+      <td>sqrt(7)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>2</td>
+      <td>[-3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>5*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>[3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>5*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>[15/62*sqrt(31/3), -7/62*sqrt(31/3)*sqrt(3)]</td>
+      <td>sqrt(31/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>[9/31*sqrt(31/3), -2/31*sqrt(31/3)*sqrt(3)]</td>
+      <td>sqrt(31/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>1</td>
+      <td>[-9/31*sqrt(31/3), 2/31*sqrt(31/3)*sqrt(3)]</td>
+      <td>sqrt(31/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>[-15/62*sqrt(31/3), 7/62*sqrt(31/3)*sqrt(3)]</td>
+      <td>sqrt(31/3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>2</td>
+      <td>[-1/2*sqrt(3), 1/2]</td>
+      <td>2*sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>[1/2*sqrt(3), -1/2]</td>
+      <td>2*sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>2</td>
+      <td>[-1/2*sqrt(3), 1/2]</td>
+      <td>2*sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>[1/2*sqrt(3), -1/2]</td>
+      <td>2*sqrt(3)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>[3/2*sqrt(1/3), -1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>7*sqrt(1/3)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>2</td>
+      <td>[-3/2*sqrt(1/3), 1/2*sqrt(3)*sqrt(1/3)]</td>
+      <td>7*sqrt(1/3)</td>
+    </tr>
+  </tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<p>Passe ja a construir la matriu dinàmica</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Angulo que forma el átomo considerado respecto al eje x</span>
+
+<span class="k">def</span> <span class="nf">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">R_hat</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">acos</span><span class="p">(</span><span class="n">R_hat</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">acos</span><span class="p">(</span><span class="n">R_hat</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1">#Matriz unitaria de rotación para cambio de ejes coordenados (entorno al eje z)</span>
+
+<span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">([[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1">#Matriz de fuerza para los primeros vecinos</span>
+
+<span class="n">var</span><span class="p">(</span><span class="s1">&#39;M_B,M_N&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">)</span>
+<span class="n">var</span><span class="p">(</span><span class="s1">&#39;omega&#39;</span><span class="p">)</span>
+
+<span class="n">phi1rBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi1rBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{1,r}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi1tiBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi1tiBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{1,ti}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi1toBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi1toBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{1,to}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+
+<span class="n">phi1rNB</span><span class="o">=</span><span class="n">phi1rBN</span><span class="p">;</span> <span class="n">phi1tiNB</span><span class="o">=</span><span class="n">phi1tiBN</span><span class="p">;</span> <span class="n">phi1toNB</span><span class="o">=</span><span class="n">phi1toBN</span>
+
+
+<span class="n">Phi_10__BN</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi1rBN</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi1tiBN</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi1toBN</span><span class="p">]])</span>
+<span class="n">Phi_10__NB</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi1rNB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi1tiNB</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi1toNB</span><span class="p">]])</span>
+
+
+<span class="k">def</span> <span class="nf">Phi_1l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_10__BN</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">Phi_1l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_10__NB</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">D_1l_BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_1l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">D_1l_NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_1l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="c1"># Matriz de fuerza para los segundos vecinos</span>
+
+<span class="n">phi2rBB</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2rBB&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,r}^</span><span class="si">{BB}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi2tiBB</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2tiBB&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,ti}^</span><span class="si">{BB}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi2toBB</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2toBB&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,to}^</span><span class="si">{BB}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+
+<span class="n">phi2rNN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2rNN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,r}^</span><span class="si">{NN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi2tiNN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2tiNN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,ti}^</span><span class="si">{NN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi2toNN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi2toNN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{2,to}^</span><span class="si">{NN}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+
+<span class="n">Phi_20__BB</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">M_B</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi2rBB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi2tiBB</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi2toBB</span><span class="p">]])</span>
+<span class="n">Phi_20__NN</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">M_N</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi2rNN</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi2tiNN</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi2toNN</span><span class="p">]])</span>
+
+<span class="c1">#A tener en cuenta: cuando consideramos el mismo tipo de átomos </span>
+<span class="c1"># (de la misma subred, no porque sean el mismmo elemento)</span>
+
+<span class="k">def</span> <span class="nf">Phi_2l__BB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_20__BB</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">Phi_2l__NN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_20__NN</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">D_2l_BB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_2l__BB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">D_2l_NN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_2l__NN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+
+<span class="c1">#Matriz de fuerza para los terceros vecinos</span>
+
+<span class="n">phi3rBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi3rBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{3,r}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi3tiBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi3tiBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{3,ti}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi3toBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi3toBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{3,to}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="n">phi3rNB</span><span class="p">,</span><span class="n">phi3tiNB</span><span class="p">,</span><span class="n">phi3toNB</span><span class="o">=</span><span class="n">phi3rBN</span><span class="p">,</span><span class="n">phi3tiBN</span><span class="p">,</span><span class="n">phi3toBN</span>
+<span class="n">Phi_30__BN</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi3rBN</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi3tiBN</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi3toBN</span><span class="p">]])</span>
+<span class="n">Phi_30__NB</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi3rNB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi3tiNB</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi3toNB</span><span class="p">]])</span>
+                   
+<span class="k">def</span> <span class="nf">Phi_3l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_30__BN</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">Phi_3l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_30__NB</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">D_3l_BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_3l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">D_3l_NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_3l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="c1">#Matriz de fuerza para los cuartos vecinos</span>
+<span class="n">phi4rBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi4rBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{4,r}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi4tiBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi4tiBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{4,ti}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">phi4toBN</span><span class="o">=</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;phi4toBN&#39;</span><span class="p">,</span><span class="n">latex_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">phi_{4,to}^</span><span class="si">{BN}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="n">phi4rNB</span><span class="p">,</span><span class="n">phi4tiNB</span><span class="p">,</span><span class="n">phi4toNB</span><span class="o">=</span><span class="n">phi4rBN</span><span class="p">,</span><span class="n">phi4tiBN</span><span class="p">,</span><span class="n">phi4toBN</span>
+
+<span class="n">Phi_40__BN</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi4rBN</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4tiBN</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4toBN</span><span class="p">]])</span>
+<span class="n">Phi_40__NB</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">)</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">phi4rNB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4tiNB</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4toNB</span><span class="p">]])</span>
+
+<span class="k">def</span> <span class="nf">Phi_4l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_40__BN</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">Phi_4l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span><span class="o">*</span><span class="n">Phi_40__NB</span><span class="o">*</span>\
+           <span class="n">U</span><span class="p">(</span><span class="n">angulo</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">D_4l_BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_4l__BN</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">D_4l_NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Phi_4l__NB</span><span class="p">(</span><span class="n">alphaprima</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">*</span><span class="n">fase</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span>
+
+<span class="c1"># Finalmente construimos la matriz dinámica &quot;a capas&quot;</span>
+<span class="c1"># Con la tabla de la celda de codigo anterior comprobamos que para considerar </span>
+<span class="c1"># hasta los cuartos vecinos es suficiente con l_1,l_2=2</span>
+                   
+<span class="n">D1BN</span><span class="p">,</span> <span class="n">D1NB</span><span class="p">,</span> <span class="n">D2BB</span><span class="p">,</span> <span class="n">D2NN</span><span class="p">,</span> <span class="n">D3BN</span><span class="p">,</span> <span class="n">D3NB</span><span class="p">,</span> <span class="n">D4BN</span><span class="p">,</span> <span class="n">D4NB</span> <span class="o">=</span> <span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">D01BN</span><span class="p">,</span> <span class="n">D01NB</span><span class="p">,</span> <span class="n">D02BB</span><span class="p">,</span> <span class="n">D02NN</span><span class="p">,</span> <span class="n">D03BN</span><span class="p">,</span> <span class="n">D03NB</span><span class="p">,</span> <span class="n">D04BN</span><span class="p">,</span> <span class="n">D04NB</span><span class="o">=</span> <span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">):</span>
+                    <span class="n">D1BN</span> <span class="o">+=</span> <span class="n">D_1l_BN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D01BN</span> <span class="o">+=</span> <span class="n">Phi_1l__BN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">):</span>
+                    <span class="n">D1NB</span> <span class="o">+=</span> <span class="n">D_1l_NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D01NB</span> <span class="o">+=</span> <span class="n">Phi_1l__NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                 
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">D2BB</span> <span class="o">+=</span> <span class="n">D_2l_BB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D02BB</span> <span class="o">+=</span> <span class="n">Phi_2l__BB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">D2NN</span> <span class="o">+=</span> <span class="n">D_2l_NN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D02NN</span> <span class="o">+=</span> <span class="n">Phi_2l__NN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">):</span>
+                    <span class="n">D3BN</span> <span class="o">+=</span> <span class="n">D_3l_BN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D03BN</span> <span class="o">+=</span> <span class="n">Phi_3l__BN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">):</span>
+                    <span class="n">D3NB</span> <span class="o">+=</span> <span class="n">D_3l_NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D03NB</span> <span class="o">+=</span> <span class="n">Phi_3l__NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="o">/</span><span class="mi">3</span><span class="p">)):</span>
+                    <span class="n">D4BN</span> <span class="o">+=</span> <span class="n">D_4l_BN</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D04BN</span> <span class="o">+=</span> <span class="n">Phi_4l__NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">bool</span><span class="p">(</span> <span class="n">distancia</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="o">/</span><span class="mi">3</span><span class="p">)):</span>
+                    <span class="n">D4NB</span> <span class="o">+=</span> <span class="n">D_4l_NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">D04NB</span> <span class="o">+=</span> <span class="n">Phi_4l__NB</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+<span class="c1"># Tenemos en cuenta la contribución a la matriz dinámica de los átomos situados en </span>
+<span class="c1"># la celdilla 0</span>
+<span class="n">D2BB</span><span class="o">=</span><span class="n">D2BB</span><span class="o">-</span><span class="n">D01BN</span><span class="o">-</span><span class="n">D02BB</span><span class="o">-</span><span class="n">D03BN</span>
+<span class="n">D2NN</span><span class="o">=</span><span class="n">D2NN</span><span class="o">-</span><span class="n">D01NB</span><span class="o">-</span><span class="n">D02NN</span><span class="o">-</span><span class="n">D03NB</span>                    
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vibracions-fora-de-pla">
+<h2>Vibracions fora de pla<a class="headerlink" href="#vibracions-fora-de-pla" title="Link permanent a aquest títol">¶</a></h2>
+<p>Donat que les vibracions fora de plà són, per com hem construït la matriu dinàmica, independients de les interplanars, podem estudiar primer les vibracions fora de pla.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D1BN_zz</span><span class="o">=</span><span class="n">D1BN</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">D1NB_zz</span><span class="o">=</span><span class="n">D1NB</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">D2BB_zz</span><span class="o">=</span><span class="n">D2BB</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">D2NN_zz</span><span class="o">=</span><span class="n">D2NN</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">D3BN_zz</span><span class="o">=</span><span class="n">D3BN</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">D3NB_zz</span><span class="o">=</span><span class="n">D3NB</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">D4BN_zz</span><span class="o">=</span><span class="n">D4BN</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">D4NB_zz</span><span class="o">=</span><span class="n">D4NB</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1">#D_zz=Matrix([[D2BB_zz,D1BN_zz+D3BN_zz+D4BN_zz], [D1NB_zz+D3NB_zz+D4BN_zz,D2NN_zz]])</span>
+<span class="n">D_zz</span><span class="o">=</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">D2BB_zz</span><span class="p">,</span><span class="n">D1BN_zz</span><span class="o">+</span><span class="n">D3BN_zz</span><span class="p">],</span> <span class="p">[</span><span class="n">D1NB_zz</span><span class="o">+</span><span class="n">D3NB_zz</span><span class="p">,</span><span class="n">D2NN_zz</span><span class="p">]])</span>
+
+<span class="c1">#valors_propis_D_zz=D_zz.eigenvalues()</span>
+<span class="c1">#D_zz[0,0].simplify_full()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="punt-gamma">
+<h3>Punt <span class="math notranslate nohighlight">\(\Gamma\)</span><a class="headerlink" href="#punt-gamma" title="Link permanent a aquest títol">¶</a></h3>
+<p>Per al punt <span class="math notranslate nohighlight">\((k_x=0, k_y=0)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">periodictable</span> <span class="kn">import</span> <span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">constants</span>
+<span class="n">u</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">atomic_mass_constant</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="c1">#para que este en CGS (y las const. de fuerza en dyn)</span>
+
+<span class="n">omega_Gamma_ZO</span><span class="o">=</span><span class="mi">830</span> <span class="c1">#cm-1</span>
+<span class="n">omega_Gamma_ZA</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">D_Gamma_zz</span><span class="o">=</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#,(M_B,B.mass*u),(M_N,N.mass*u)])</span>
+<span class="n">D_Gamma_zz</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left(\begin{array}{rr}
+-\frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}} & \frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} + \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}} \\
+\frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} + \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}} & -\frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}}
+\end{array}\right)</script></html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[-\frac{6 \, {\left({\phi_{1,to}^{BN}} + {\phi_{3,to}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}}, 0\right]</script></html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Eq1</span><span class="o">=</span><span class="p">(</span><span class="n">D_Gamma_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="n">omega_Gamma_ZO</span><span class="p">)</span>
+<span class="c1">#timeit(&#39;Eq1=solve(det(D_Gamma_zz-omega**2)==0, omega)&#39;)#.subs(omega=omega_Gamma_ZO)</span>
+<span class="n">solEq1</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">Eq1</span><span class="p">,</span><span class="n">phi3toBN</span><span class="p">);</span><span class="n">solEq1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{3,to}^{BN}} = -{\phi_{1,to}^{BN}} - \frac{344450}{3} \, \sqrt{M_{B} M_{N}}\right]</script></html></div></div>
+</div>
+</div>
+<div class="section" id="punt-k">
+<h3>Punt <span class="math notranslate nohighlight">\(K\)</span><a class="headerlink" href="#punt-k" title="Link permanent a aquest títol">¶</a></h3>
+<p>Per al punt (<span class="math notranslate nohighlight">\(k_x=4\pi/(3 a)\)</span>, <span class="math notranslate nohighlight">\(k_y=0\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_K_ZO</span><span class="o">=</span><span class="mi">605</span> <span class="c1">#cm-1</span>
+<span class="n">omega_K_ZA</span><span class="o">=</span><span class="mi">322</span>
+<span class="n">D_K_zz</span><span class="o">=</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">D_K_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<span class="c1">#solve(det(D_K_zz-omega**2)==0, omega**2)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[-\frac{3 \, {\left(M_{N} {\phi_{1,to}^{BN}} + M_{N} {\phi_{3,to}^{BN}} + 3 \, \sqrt{M_{B} M_{N}} {\phi_{2,to}^{NN}}\right)}}{\sqrt{M_{B} M_{N}} M_{N}}, -\frac{3 \, {\left(M_{B} {\phi_{1,to}^{BN}} + M_{B} {\phi_{3,to}^{BN}} + 3 \, \sqrt{M_{B} M_{N}} {\phi_{2,to}^{BB}}\right)}}{\sqrt{M_{B} M_{N}} M_{B}}\right]</script></html></div></div>
+</div>
+<p>Podemos observar que en el baso del  𝐵𝑁 , a diferencia del caso del grafeno, obtenemos 2 frecuencias distintas en el punto  𝐾  debido a que en la base tenemos dos átomos distintos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">Eq2</span><span class="o">=</span><span class="p">(</span><span class="n">D_K_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="n">omega_K_ZO</span><span class="p">)</span>
+<span class="n">Eq3</span><span class="o">=</span><span class="p">(</span><span class="n">D_K_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="n">omega_K_ZA</span><span class="p">)</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">Eq2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">solEq1</span><span class="p">),</span><span class="n">phi2toNN</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">Eq3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">solEq1</span><span class="p">),</span><span class="n">phi2toBB</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{2,to}^{NN}} = -\frac{21575}{9} \, M_{N}, {\phi_{2,to}^{BB}} = \frac{240766}{9} \, M_{B}\right]</script></html></div></div>
+</div>
+</div>
+<div class="section" id="punt-m">
+<h3>Punt <span class="math notranslate nohighlight">\(M\)</span><a class="headerlink" href="#punt-m" title="Link permanent a aquest títol">¶</a></h3>
+<p>Al punt <span class="math notranslate nohighlight">\(\left(q_x=\pi/a,q_y=\pi/(\sqrt 3 a\right)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_M_ZO</span><span class="o">=</span><span class="mi">635</span> <span class="c1">#cm-1</span>
+<span class="n">omega_M_ZA</span><span class="o">=</span><span class="mi">314</span>
+
+<span class="n">D_M_zz</span><span class="o">=</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="n">a</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">))</span>
+<span class="c1">#D_M_zz.eigenvalues()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Podem simplificar un poc l&#39;expressió obtessa per als valores propios al punto $M$ (simplement reescribint l&#39;argumento de l&#39;arrel quadrada)</span>
+<span class="n">omegaM1cuadrado</span><span class="o">=-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">/</span><span class="n">M_B</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toNN</span><span class="o">/</span><span class="n">M_N</span><span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">+</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">-</span><span class="n">M_B</span><span class="o">*</span><span class="n">phi2toNN</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">D_M_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omegaM1cuadrado</span><span class="p">):</span>
+    <span class="n">Eq5</span><span class="o">=</span><span class="p">(</span><span class="n">omegaM1cuadrado</span><span class="o">==</span><span class="n">omega_M_ZO</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">omegaM2cuadrado</span><span class="o">=-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">/</span><span class="n">M_B</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toNN</span><span class="o">/</span><span class="n">M_N</span><span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">+</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">-</span><span class="n">M_B</span><span class="o">*</span><span class="n">phi2toNN</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">D_M_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">omegaM2cuadrado</span><span class="p">):</span>
+    <span class="n">Eq6</span><span class="o">=</span><span class="p">(</span><span class="n">omegaM2cuadrado</span><span class="o">==</span><span class="n">omega_M_ZA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+<span class="n">show</span><span class="p">(</span><span class="n">Eq5</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">Eq6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,to}^{BN}} + {\phi_{3,to}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} - \frac{4 \, {\phi_{2,to}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,to}^{NN}}}{M_{N}} - \frac{\sqrt{M_{B} M_{N} {\left({\phi_{1,to}^{BN}} - 3 \, {\phi_{3,to}^{BN}}\right)}^{2} + 16 \, {\left(M_{N} {\phi_{2,to}^{BB}} - M_{B} {\phi_{2,to}^{NN}}\right)}^{2}}}{M_{B} M_{N}} = 403225</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,to}^{BN}} + {\phi_{3,to}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} - \frac{4 \, {\phi_{2,to}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,to}^{NN}}}{M_{N}} + \frac{\sqrt{M_{B} M_{N} {\left({\phi_{1,to}^{BN}} - 3 \, {\phi_{3,to}^{BN}}\right)}^{2} + 16 \, {\left(M_{N} {\phi_{2,to}^{BB}} - M_{B} {\phi_{2,to}^{NN}}\right)}^{2}}}{M_{B} M_{N}} = 98596</script></html></div></div>
+</div>
+<p>Podemos comprobar que en el caso que fuesen los átomos identicos obtenemos las mismas expresiones que en Falkowsky</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_B</span><span class="o">=</span><span class="n">M_N</span><span class="p">,</span> <span class="n">phi2toBB</span><span class="o">=</span><span class="n">phi2toNN</span><span class="p">)</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[-\frac{2 \, {\left({\phi_{1,to}^{BN}} + 4 \, {\phi_{2,to}^{NN}} + 3 \, {\phi_{3,to}^{BN}}\right)}}{M_{N}}, -\frac{4 \, {\left({\phi_{1,to}^{BN}} + 2 \, {\phi_{2,to}^{NN}}\right)}}{M_{N}}\right]</script></html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sol.append(solve(((Eq5-Eq6)**2).subs(sol[0], sol[1], solEq1[0],M_N=N.mass, M_B=B.mass), phi1toBN)[1])</span>
+<span class="n">sol1</span><span class="o">=</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">==</span><span class="n">n</span><span class="p">(</span><span class="n">solve</span><span class="p">(((</span><span class="n">Eq6</span><span class="o">-</span><span class="n">Eq5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">solEq1</span><span class="p">),</span> <span class="n">phi1toBN</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sol</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+    <span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span><span class="o">.</span><span class="n">rhs</span><span class="p">()))</span>
+<span class="n">sol2</span><span class="o">=</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span>
+<span class="n">sol3</span><span class="o">=</span><span class="n">sol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span>
+<span class="n">sol4</span><span class="o">=</span><span class="n">solEq1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">sol1</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">sol2</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">sol3</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">sol4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}{\phi_{1,to}^{BN}} = \left(-1.36116402436406 \times 10^{6}\right)</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}{\phi_{2,to}^{NN}} = \left(-33577.1725\right)</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}{\phi_{2,to}^{BB}} = 289213.46955555555</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}{\phi_{3,to}^{BN}} = \left(-51717.6151722642\right)</script></html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dades</span><span class="o">=</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;../Dades/freq.dat&quot;</span><span class="p">)</span>
+<span class="c1">#data = pd.read_csv(&#39;../../Dades/freq.dat&#39;, header = None)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span>\
+<span class="n">list_plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+        <span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">q_y</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)]</span> <span class="o">+</span>\
+         <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+<span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)),</span> <span class="n">q_y</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)]</span><span class="o">+</span>\
+         <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+<span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)),</span> <span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)])</span> <span class="o">+</span> \
+<span class="n">list_plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+        <span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">q_y</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)]</span><span class="o">+</span>
+          <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+<span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)),</span> <span class="n">q_y</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)]</span><span class="o">+</span>\
+         <span class="p">[</span><span class="n">real_part</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_zz</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">sol4</span><span class="p">,</span> <span class="n">M_B</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> \
+<span class="n">M_N</span><span class="o">=</span><span class="n">N</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_x</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)),</span> <span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">simplify_full</span><span class="p">()</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">])))</span> \
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)])</span> \
+     <span class="o">+</span><span class="n">line</span><span class="p">([(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1600</span><span class="p">)],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span><span class="o">+</span><span class="n">line</span><span class="p">([(</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">20</span><span class="p">,</span><span class="mi">1600</span><span class="p">)],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>\
+     <span class="o">+</span><span class="n">line</span><span class="p">([(</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">30</span><span class="p">,</span><span class="mi">1600</span><span class="p">)],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.05</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span> \
+        <span class="n">tick_formatter</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">r</span><span class="s1">&#39;$\Gamma$&#39;</span><span class="p">,</span> <span class="s1">&#39;$M$&#39;</span><span class="p">,</span> <span class="s1">&#39;$K$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\Gamma$&#39;</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span><span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[:</span><span class="mi">524</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">524</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[:</span><span class="mi">524</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span> <span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[</span><span class="mi">524</span><span class="p">:</span><span class="mi">1048</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">524</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[</span><span class="mi">524</span><span class="p">:</span><span class="mi">1048</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;brown&quot;</span><span class="p">)</span> <span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[</span><span class="mi">1048</span><span class="p">:</span><span class="mi">1572</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">524</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[</span><span class="mi">1048</span><span class="p">:</span><span class="mi">1572</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[</span><span class="mi">1572</span><span class="p">:</span><span class="mi">2096</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">525</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[</span><span class="mi">1572</span><span class="p">:</span><span class="mi">2096</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;pink&quot;</span><span class="p">)</span> <span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[</span><span class="mi">2096</span><span class="p">:</span><span class="mi">2620</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">525</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[</span><span class="mi">2096</span><span class="p">:</span><span class="mi">2620</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span> <span class="o">+</span>\
+<span class="n">points</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dades</span><span class="p">[</span><span class="mi">2620</span><span class="p">:</span><span class="mi">3144</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">525</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">dades</span><span class="p">[</span><span class="mi">2620</span><span class="p">:</span><span class="mi">3144</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>     
+     <span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/formulacion_matriz_dinamica_31_0.png" src="_images/formulacion_matriz_dinamica_31_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vibracions-dins-del-pla-del-cristall">
+<h2>Vibracions dins del pla del cristall<a class="headerlink" href="#vibracions-dins-del-pla-del-cristall" title="Link permanent a aquest títol">¶</a></h2>
+<p>En este cas tractem amb una matriu <span class="math notranslate nohighlight">\(4\times 4\)</span>, i per tant tenim 4 valors propis (<span class="math notranslate nohighlight">\(\omega^2\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D1BN_xy</span><span class="o">=</span><span class="n">D1BN</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">D1NB_xy</span><span class="o">=</span><span class="n">D1NB</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">D2BB_xy</span><span class="o">=</span><span class="n">D2BB</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">D2NN_xy</span><span class="o">=</span><span class="n">D2NN</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+               
+<span class="n">D3BN_xy</span><span class="o">=</span><span class="n">D3BN</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">D3NB_xy</span><span class="o">=</span><span class="n">D3NB</span><span class="o">.</span><span class="n">matrix_from_rows_and_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1">#D4BN_xy=D4BN.matrix_from_rows_and_columns([0,1],[0,1])</span>
+<span class="c1">#D4NB_xy=D4NB.matrix_from_rows_and_columns([0,1],[0,1])</span>
+
+<span class="n">D_xy</span><span class="o">=</span><span class="n">block_matrix</span><span class="p">([[</span><span class="n">D2BB_xy</span><span class="p">,</span> <span class="n">D1BN_xy</span><span class="o">+</span><span class="n">D3BN_xy</span><span class="p">],[</span><span class="n">D1NB_xy</span><span class="o">+</span><span class="n">D3NB_xy</span><span class="p">,</span> <span class="n">D2NN_xy</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="al-punt-gamma">
+<h3>Al punt <span class="math notranslate nohighlight">\(\Gamma\)</span><a class="headerlink" href="#al-punt-gamma" title="Link permanent a aquest títol">¶</a></h3>
+<p>Al punt <span class="math notranslate nohighlight">\(\Gamma\)</span> obtinc 2 valors propis, de multiplicitat <span class="math notranslate nohighlight">\(2\)</span> cadascun:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[-\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}}, -\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}}, 0, 0\right]</script></html></div></div>
+</div>
+<p>Obtenim 0 dues vegades, tal i com tenim en les dades propocionades. L’altre valor propi també correspon a dues rames, com en les dades. Així que podem escriure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_Gamma_5</span><span class="o">=</span><span class="mi">1395</span>
+<span class="n">Eq_Gamma_5</span><span class="o">=</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omega_Gamma_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Eq_Gamma_5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} = 1946025</script></html></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Per als punts <span class="math notranslate nohighlight">\(K\)</span> i <span class="math notranslate nohighlight">\(M\)</span>, sagemath (mitjançcant maxima) no obté una expressió analítica però el que fem és calcular els valors propis supossant que en compte de una base diatòmica amb 2 àtoms de diferents elements tenim una base amb els dos àtoms iguals (supossem que les dues masses son iguals i que les constants de forca entre átoms del mateix element (segons veïns) són iguals també.</p>
+<p>Evidentment els resultats obtessos no són vàlids, però els emprarem com a punt de partida per poder trobar el valor de les constants de forca ajustant als valors proporcionats. De fet, obtenim una expressió analítica igualant sols una d’estes forces (les <span class="math notranslate nohighlight">\(r\)</span> o <span class="math notranslate nohighlight">\(ti\)</span>)</p>
+</div>
+</div>
+<div class="section" id="per-al-punt-k">
+<h3>Per al punt <span class="math notranslate nohighlight">\(K\)</span><a class="headerlink" href="#per-al-punt-k" title="Link permanent a aquest títol">¶</a></h3>
+<p>En (<span class="math notranslate nohighlight">\(k_x=\frac{4\pi}{3a}, k_y=0\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_K_xy</span><span class="o">=</span><span class="n">matriu_simplificada</span><span class="p">(</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="simplificant">
+<h4>Simplificant<a class="headerlink" href="#simplificant" title="Link permanent a aquest títol">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_K_xy_0</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">phi2rNN</span><span class="o">=</span><span class="n">phi2rBB</span><span class="p">,</span><span class="n">phi2tiNN</span><span class="o">=</span><span class="n">phi2tiBB</span><span class="p">,</span> <span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
+<span class="n">D_K_xy_0</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">D_K_xy_0</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left(2 \, {\phi_{1,ti}^{BN}} + 3 \, {\phi_{2,r}^{BB}} + 3 \, {\phi_{2,ti}^{BB}} + 2 \, {\phi_{3,ti}^{BN}}\right)}}{2 \, M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left(2 \, {\phi_{1,r}^{BN}} + 3 \, {\phi_{2,r}^{BB}} + 3 \, {\phi_{2,ti}^{BB}} + 2 \, {\phi_{3,r}^{BN}}\right)}}{2 \, M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + 3 \, {\phi_{2,r}^{BB}} + 3 \, {\phi_{2,ti}^{BB}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{2 \, M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + 3 \, {\phi_{2,r}^{BB}} + 3 \, {\phi_{2,ti}^{BB}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}}\right)}}{2 \, M_{B}}</script></html></div></div>
+</div>
+<p>Podem observar que al punt <span class="math notranslate nohighlight">\(K\)</span> obtenim 3 valors propis distints (un d’ells de multiplicitat 2, clar)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="n">D_K_xy_0</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">D_K_xy_0</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\mathrm{True}</script></html></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="per-al-punto-m">
+<h3>Per al punto <span class="math notranslate nohighlight">\(M\)</span><a class="headerlink" href="#per-al-punto-m" title="Link permanent a aquest títol">¶</a></h3>
+<p>En (<span class="math notranslate nohighlight">\(q_x=\pi/a,q_y=\pi/(\sqrt{3} a\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_xy</span><span class="o">=</span><span class="n">matriu_simplificada</span><span class="p">(</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="n">a</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">)),</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Simplificant<a class="headerlink" href="#id1" title="Link permanent a aquest títol">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_xy_0</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="n">a</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">),</span> <span class="n">phi2rNN</span><span class="o">=</span><span class="n">phi2rBB</span><span class="p">,</span><span class="n">phi2tiNN</span><span class="o">=</span><span class="n">phi2tiBB</span><span class="p">,</span><span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">D_M_xy_0</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + 2 \, {\phi_{2,r}^{BB}} + 6 \, {\phi_{2,ti}^{BB}}}{M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{{\phi_{1,r}^{BN}} + 3 \, {\phi_{1,ti}^{BN}} + 6 \, {\phi_{2,r}^{BB}} + 2 \, {\phi_{2,ti}^{BB}}}{M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{2 \, {\phi_{1,r}^{BN}} + 6 \, {\phi_{2,r}^{BB}} + 2 \, {\phi_{2,ti}^{BB}} + 3 \, {\phi_{3,r}^{BN}} + 3 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{2 \, {\phi_{1,ti}^{BN}} + 2 \, {\phi_{2,r}^{BB}} + 6 \, {\phi_{2,ti}^{BB}} + 3 \, {\phi_{3,r}^{BN}} + 3 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div></div>
+</div>
+<p>Al punt <span class="math notranslate nohighlight">\(M\)</span> sí obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "sagemath"
+        },
+        kernelOptions: {
+            kernelName: "sagemath",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'sagemath'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Casimiro Victoria Castillo<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

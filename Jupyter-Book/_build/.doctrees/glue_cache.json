@@ -1,0 +1,18 @@
+{
+  "formulacion_matriz_dinamica": {
+    "angle_cela": {
+      "data": {
+        "application/papermill.record/text/html": "<html><script type=\"math/tex; mode=display\">\\newcommand{\\Bold}[1]{\\mathbf{#1}}\\frac{2}{3} \\, \\pi</script></html>",
+        "application/papermill.record/text/latex": "\\begin{math}\n\\newcommand{\\Bold}[1]{\\mathbf{#1}}\\frac{2}{3} \\, \\pi\n\\end{math}",
+        "application/papermill.record/text/plain": "2/3*pi"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "angle_cela"
+        }
+      },
+      "output_type": "display_data"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+- file: index.md
+- file: introduccio.md
+##  sections:
+##    - file: markdown
+##    - file: notebooks
+- file: formulacio_matriu_dinamica.md
