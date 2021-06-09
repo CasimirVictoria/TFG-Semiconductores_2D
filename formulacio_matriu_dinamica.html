@@ -217,6 +217,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensor-de-constants-de-forca-i-matriu-dinamica">
+   Tensor de constants de forca i matriu dinàmica
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#vibracions-fora-de-pla">
    Vibracions fora de pla
   </a>
@@ -261,34 +266,20 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#per-al-punt-m">
-     Per al punt
+    <a class="reference internal nav-link" href="#al-punt-m">
+     Al punt
      <span class="math notranslate nohighlight">
       \(M\)
      </span>
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#simplificant">
-       Simplificant
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#per-al-punt-k">
-     Per al punt
+    <a class="reference internal nav-link" href="#al-punt-k">
+     Al punt
      <span class="math notranslate nohighlight">
       \(K\)
      </span>
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Simplificant
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -410,7 +401,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 </div>
 <div class="section" id="identificacio-dels-veins-segons-la-seua-distancia">
 <h2>Identificació dels veins segons la seua distància<a class="headerlink" href="#identificacio-dels-veins-segons-la-seua-distancia" title="Link permanent a aquest títol">¶</a></h2>
-<p>Determinem els veins dels àtoms situats en la cel.la 0⃗, per poder classificar-los segons la seua distància a cadascun d’aquests àtoms.</p>
+<p>Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la cel.la unitat, ja que els clasificarem com primers, segons, tercers … veïns segons aquesta distància i els asxignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Posicins d&#39;equilibri dels àtoms</span>
@@ -1308,7 +1299,39 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 </table>
 </div></div></div>
 </div>
-<p>Passe ja a construir la matriu dinàmica</p>
+</div>
+<div class="section" id="tensor-de-constants-de-forca-i-matriu-dinamica">
+<h2>Tensor de constants de forca i matriu dinàmica<a class="headerlink" href="#tensor-de-constants-de-forca-i-matriu-dinamica" title="Link permanent a aquest títol">¶</a></h2>
+<p>Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d’aquest, ja que com hem vist els seus valors propis, <span class="math notranslate nohighlight">\(\omega^2\)</span>, ens donen la freqüència de propagació de cadascun dels modes.</p>
+<p>Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la <span class="math notranslate nohighlight">\(\vec 0\)</span>, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.</p>
+<p>La forma general del tensor de forces d’un <span class="math notranslate nohighlight">\(n\)</span>-èssim veí és de la forma (cite wirtz04 phonon disper graph revis):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-58e9c7a8-a54d-4d61-80df-a891e1ab82e8">
+<span class="eqno">(5)<a class="headerlink" href="#equation-58e9c7a8-a54d-4d61-80df-a891e1ab82e8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^1&amp;\xi_n &amp;0\\
+-\xi_n &amp; \phi_n^{ti} &amp; 0 \\
+0 &amp; 0 &amp; \phi_n^{to}
+\end{pmatrix}
+\label{eq:tensordeforces}
+\end{equation}\]</div>
+<p>on el sistema de coordenadas se eligeix de manera que <span class="math notranslate nohighlight">\(x\)</span> és la coordenada longitudinal (en la línia que conecta els dos àtomos), <span class="math notranslate nohighlight">\(y\)</span> la coordenada transversal en el planol i <span class="math notranslate nohighlight">\(z\)</span> la coordenada perperndicular al planol. L’estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció <span class="math notranslate nohighlight">\(z\)</span>) estan completament desacoblades.</p>
+<p>Anem a supossar (per simplificar) que un desplaçament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una força radial o transversal, es a dir, <span class="math notranslate nohighlight">\(\xi_n=0\)</span> tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com l’aproximació /4NNFC/, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.</p>
+<p>Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d’un àtom classificat com <span class="math notranslate nohighlight">\(n\)</span>-èssim, situat en la direcció <span class="math notranslate nohighlight">\(\hat x\)</span> respecte del átom de la ce\l.la <span class="math notranslate nohighlight">\(\vec 0\)</span>, té la forma diagonal:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-99adbb20-7449-4de5-9580-9978759cb43e">
+<span class="eqno">(6)<a class="headerlink" href="#equation-99adbb20-7449-4de5-9580-9978759cb43e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^r&amp; 0 &amp;0\\
+0 &amp; \phi_n^{ti} &amp; 0 \\
+0 &amp; 0 &amp; \phi_n^{to}
+\end{pmatrix}
+\end{equation}\]</div>
+<p>i per tant el tensor de constants de for\c{c}a de cadascun dels <span class="math notranslate nohighlight">\(n\)</span>-èssims veïns reals l’obtenim rotant esta matriu:
+\vspace{4cm}</p>
+<p>Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l’àtom que estamos considerant de la ce.l.la <span class="math notranslate nohighlight">\(\vec 0\)</span>. Esta contribució podem derivar-la de la condició d’estabilitat, \cite{falkovsky08_symmet_const_phonon_disper_graph}
+\cite{wirtz04_phonon_disper_graph_revis}</p>
+<p>Si es desplaca el cristall com un tot no canvia l’energía potencial, cosa que implica s’ha de complir:</p>
+<p>……</p>
+<p>Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components …) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, <span class="math notranslate nohighlight">\(\omega^2\)</span> tenen que ser reals.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Angle que forma l&#39;àtom considerat respecte a l&#39;eix x</span>
@@ -1482,6 +1505,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 </div>
 </div>
 </div>
+<p>Tenim per tant que la matriu dinàmica serà una matriu <span class="math notranslate nohighlight">\(6x6\)</span> hermítica. Però donat que les components en <span class="math notranslate nohighlight">\(z\)</span> d’esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.</p>
 </div>
 <div class="section" id="vibracions-fora-de-pla">
 <h2>Vibracions fora de pla<a class="headerlink" href="#vibracions-fora-de-pla" title="Link permanent a aquest títol">¶</a></h2>
@@ -1571,15 +1595,17 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">D_M_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omegaM1cuadrado</span><span class="p">):</span>
     <span class="n">Eq5</span><span class="o">=</span><span class="p">(</span><span class="n">omegaM1cuadrado</span><span class="o">==</span><span class="n">omega_M_ZO</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">omegaM2cuadrado</span><span class="o">=-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">/</span><span class="n">M_B</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toNN</span><span class="o">/</span><span class="n">M_N</span><span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">+</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">-</span><span class="n">M_B</span><span class="o">*</span><span class="n">phi2toNN</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span>
+<span class="n">omegaM2cuadrado</span><span class="o">=-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">/</span><span class="n">M_B</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">phi2toNN</span><span class="o">/</span><span class="n">M_N</span><span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">+</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="o">*</span><span class="p">(</span><span class="n">phi1toBN</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">phi3toBN</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">phi2toBB</span><span class="o">-</span><span class="n">M_B</span><span class="o">*</span><span class="n">phi2toNN</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">M_B</span><span class="o">*</span><span class="n">M_N</span><span class="p">)</span>
 <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">D_M_zz</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">omegaM2cuadrado</span><span class="p">):</span>
     <span class="n">Eq6</span><span class="o">=</span><span class="p">(</span><span class="n">omegaM2cuadrado</span><span class="o">==</span><span class="n">omega_M_ZA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     
-<span class="c1">#show(Eq5)</span>
-<span class="c1">#show(Eq6)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">omegaM1cuadrado</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">omegaM2cuadrado</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,to}^{BN}} + {\phi_{3,to}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} - \frac{4 \, {\phi_{2,to}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,to}^{NN}}}{M_{N}} - \frac{\sqrt{M_{B} M_{N} {\left({\phi_{1,to}^{BN}} - 3 \, {\phi_{3,to}^{BN}}\right)}^{2} + 16 \, {\left(M_{N} {\phi_{2,to}^{BB}} - M_{B} {\phi_{2,to}^{NN}}\right)}^{2}}}{M_{B} M_{N}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\left({\phi_{1,to}^{BN}} + {\phi_{3,to}^{BN}}\right)}}{\sqrt{M_{B} M_{N}}} - \frac{4 \, {\phi_{2,to}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,to}^{NN}}}{M_{N}} + \frac{\sqrt{M_{B} M_{N} {\left({\phi_{1,to}^{BN}} - 3 \, {\phi_{3,to}^{BN}}\right)}^{2} + 16 \, {\left(M_{N} {\phi_{2,to}^{BB}} - M_{B} {\phi_{2,to}^{NN}}\right)}^{2}}}{M_{B} M_{N}}</script></html></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1621,7 +1647,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <div class="cell_output docutils container">
 <div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{2,to}^{NN}} = -\frac{21575}{9} \, M_{N}, {\phi_{2,to}^{BB}} = \frac{240766}{9} \, M_{B}\right]</script></html></div></div>
 </div>
-<p>Podemos comprobar que en el caso que fuesen los átomos identicos obtenemos las mismas expresiones que en Falkowsky</p>
+<p>És directe comprobar que en el cas que els àtoms foren idèntics obtindríem les mateixes expressions que en Falkowsky</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sol.append(solve(((Eq5-Eq6)**2).subs(sol[0], sol[1], solEq1[0],M_N=N.mass, M_B=B.mass), phi1toBN)[1])</span>
@@ -1720,13 +1746,13 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <td><p>Marro</p></td>
 <td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
 <td><p>0</p></td>
-<td><p>2</p></td>
+<td><p>2 (TA)</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
 <td><p>Marro</p></td>
 <td><p>M</p></td>
 <td><p>553</p></td>
-<td><p>2</p></td>
+<td><p>2 (TA)</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
 <td><p>Marro</p></td>
@@ -1738,7 +1764,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <td><p>Negre</p></td>
 <td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
 <td><p>4</p></td>
-<td><p>3</p></td>
+<td><p>3 (LA)</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
 <td><p>Negre</p></td>
@@ -1750,7 +1776,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <td><p>Negre</p></td>
 <td><p>K</p></td>
 <td><p>878</p></td>
-<td><p>2</p></td>
+<td><p>2(TA)</p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
 <td><p>Rosa</p></td>
@@ -1762,49 +1788,49 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <td><p>Rosa</p></td>
 <td><p>M</p></td>
 <td><p>1173</p></td>
-<td><p>3</p></td>
+<td><p>3 (LA)</p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
 <td><p>Rosa</p></td>
 <td><p>K</p></td>
 <td><p>1080</p></td>
-<td><p>3</p></td>
+<td><p>3 (LA)</p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>B.clar</p></td>
 <td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
 <td><p>1394</p></td>
-<td><p>5</p></td>
+<td><p>5 (TO)</p></td>
 </tr>
 <tr class="row-odd"><td><p>5</p></td>
 <td><p>B.clar</p></td>
 <td><p>M</p></td>
 <td><p>1292</p></td>
-<td><p>5</p></td>
+<td><p>5 (TO)</p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>B.clar</p></td>
 <td><p>K</p></td>
 <td><p>1204</p></td>
-<td><p>5</p></td>
+<td><p>5 (TO)</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
 <td><p>Blau</p></td>
 <td><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
 <td><p>1394</p></td>
-<td><p>6</p></td>
+<td><p>6 (LO)</p></td>
 </tr>
 <tr class="row-even"><td><p>6</p></td>
 <td><p>Blau</p></td>
 <td><p>M</p></td>
 <td><p>1320</p></td>
-<td><p>6</p></td>
+<td><p>6 (LO)</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
 <td><p>Blau</p></td>
 <td><p>K</p></td>
 <td><p>1304</p></td>
-<td><p>6</p></td>
+<td><p>6 (LO)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1852,8 +1878,8 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <div class="cell_output docutils container">
 <div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, \sqrt{M_{B} M_{N}} {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}} + {\phi_{4,r}^{BN}} + {\phi_{4,ti}^{BN}}\right)}}{M_{B} M_{N}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, \sqrt{M_{B} M_{N}} {\left({\phi_{1,r}^{BN}} + {\phi_{1,ti}^{BN}} + {\phi_{3,r}^{BN}} + {\phi_{3,ti}^{BN}} + {\phi_{4,r}^{BN}} + {\phi_{4,ti}^{BN}}\right)}}{M_{B} M_{N}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{3 \, \sqrt{M_{B} M_{N}} {\left({\phi_{4,r}^{BN}} + {\phi_{4,ti}^{BN}}\right)}}{M_{B} M_{N}}</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{3 \, \sqrt{M_{B} M_{N}} {\left({\phi_{4,r}^{BN}} + {\phi_{4,ti}^{BN}}\right)}}{M_{B} M_{N}}</script></html></div></div>
 </div>
-<p>Si considerem fins a 3ers veïns obtenim 0 dues vegades, tal i com tenim en les dades propocionades. L’altre valor propi també correspon a dues rames, com en les dades.</p>
-<p>En el cas de considerar fins 4ts veïns, per tal d’obtindre <span class="math notranslate nohighlight">\(0\)</span> per a <span class="math notranslate nohighlight">\(\omega^2\)</span> té que complir-se que: <span class="math notranslate nohighlight">\(\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}\)</span></p>
+<p>Obtenim dos valors propis:
+per tal que un d’ells siga <span class="math notranslate nohighlight">\(0\)</span> té que complir-se que: <span class="math notranslate nohighlight">\(\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4tiBN</span><span class="o">=-</span><span class="n">phi4rBN</span><span class="p">)</span>
@@ -1885,22 +1911,14 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <p>Amb aquesta simplificació podem calcular fàcilment els valors propis de la matriu original</p>
 </div>
 </div>
-<div class="section" id="per-al-punt-m">
-<h3>Per al punt <span class="math notranslate nohighlight">\(M\)</span><a class="headerlink" href="#per-al-punt-m" title="Link permanent a aquest títol">¶</a></h3>
+<div class="section" id="al-punt-m">
+<h3>Al punt <span class="math notranslate nohighlight">\(M\)</span><a class="headerlink" href="#al-punt-m" title="Link permanent a aquest títol">¶</a></h3>
 <p>En (<span class="math notranslate nohighlight">\(q_x=\pi/a,q_y=\pi/(\sqrt{3} a\)</span>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_xy</span><span class="o">=</span><span class="n">matriu_simplificada</span><span class="p">(</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="n">a</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">phi4tiBN</span><span class="o">=-</span><span class="n">phi4rBN</span><span class="p">),</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="simplificant">
-<h4>Simplificant<a class="headerlink" href="#simplificant" title="Link permanent a aquest títol">¶</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_xy_3</span><span class="o">=</span><span class="n">D_M_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
-<span class="n">Valors_propis_M</span><span class="o">=</span><span class="n">D_M_xy_3</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_M_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="n">a</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">phi4tiBN</span><span class="o">=-</span><span class="n">phi4rBN</span><span class="p">)</span>
+<span class="n">D_M_xy_simplificada</span><span class="o">=</span><span class="n">D_M_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
+<span class="n">Valors_propis_M</span><span class="o">=</span><span class="n">D_M_xy_simplificada</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
 
 <span class="n">Valors_propis_de_M</span><span class="o">=</span><span class="p">[</span><span class="n">M_B</span><span class="o">*</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span>
     <span class="n">phi1rBN</span><span class="o">=</span><span class="n">phi1rBN</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">),</span> <span class="n">phi1tiBN</span><span class="o">=</span><span class="n">phi1tiBN</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">),</span> 
@@ -1923,158 +1941,58 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <span class="n">omega_M_3</span><span class="o">=</span><span class="mi">1173</span>
 <span class="n">omega_M_5</span><span class="o">=</span><span class="mi">1292</span>
 <span class="n">omega_M_6</span><span class="o">=</span><span class="mi">1320</span>
-<span class="c1">#Eq_M_6=(D_M_xy_0.eigenvalues()[0]==omega_M_6**2)</span>
-<span class="c1">#Eq_M_5=(D_M_xy_0.eigenvalues()[2]==omega_M_5**2)</span>
-<span class="c1">#Eq_M_3=(D_M_xy_0.eigenvalues()[1]==omega_M_3**2)</span>
-<span class="c1">#Eq_M_2=(D_M_xy_0.eigenvalues()[3]==omega_M_2**2)</span>
-<span class="c1">#(Eq_M_3+Eq_M_6).expand()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_0.eigenvalues()[0]+D_M_xy_0.eigenvalues()[1]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_0.eigenvalues()[2]+D_M_xy_0.eigenvalues()[3]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#D_M_xy_1=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2tiNN=phi2tiBB,M_N=M_B)</span>
-<span class="c1">#for i in range(0,4):</span>
-<span class="c1">#    show(D_M_xy_1.eigenvalues()[i])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_1.eigenvalues()[0]+D_M_xy_1.eigenvalues()[1]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#D_M_xy_2=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2rNN=phi2rBB,M_N=M_B)</span>
-<span class="c1">#for i in range(0,4):</span>
-<span class="c1">#    show(D_M_xy_2.eigenvalues()[i])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_2.eigenvalues()[0]+D_M_xy_2.eigenvalues()[1]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(D_M_xy_2.eigenvalues()[2]+D_M_xy_2.eigenvalues()[3]).expand()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#for i in range(0,4):</span>
-<span class="c1">#    show(D_M_x=D_M_xy_3.eigenvalues()_#3.eigenvalues()[i])#</span>
-
-<span class="c1">#show(&quot;--------------------------------------------------------&quot;)</span>
-<span class="c1">#show((D_M_xy_3.eigenvalues()[0]+D_M_xy_3.eigenvalues()[1]).expand())</span>
-<span class="c1">#show((D_M_xy_3.eigenvalues()[2]+D_M_xy_3.eigenvalues()[3]).expand())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\phi_{1,r}^{BN}}}{M_{B}} - \frac{3 \, {\phi_{1,ti}^{BN}}}{M_{B}} - \frac{2 \, {\phi_{2,r}^{BB}}}{M_{B}} - \frac{2 \, {\phi_{2,r}^{NN}}}{M_{B}} - \frac{6 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{6 \, {\phi_{2,ti}^{NN}}}{M_{B}} - \frac{3 \, {\phi_{3,r}^{BN}}}{M_{B}} - \frac{3 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\phi_{1,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{3 \, {\phi_{1,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{2 \, {\phi_{2,r}^{BB}}}{M_{B}} - \frac{2 \, {\phi_{2,r}^{NN}}}{M_{N}} - \frac{6 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{6 \, {\phi_{2,ti}^{NN}}}{M_{N}} - \frac{3 \, {\phi_{3,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{3 \, {\phi_{3,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}}</script></html></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\phi_{1,r}^{BN}}}{M_{B}} - \frac{3 \, {\phi_{1,ti}^{BN}}}{M_{B}} - \frac{6 \, {\phi_{2,r}^{BB}}}{M_{B}} - \frac{6 \, {\phi_{2,r}^{NN}}}{M_{B}} - \frac{2 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{2 \, {\phi_{2,ti}^{NN}}}{M_{B}} - \frac{3 \, {\phi_{3,r}^{BN}}}{M_{B}} - \frac{3 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{3 \, {\phi_{1,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{3 \, {\phi_{1,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{6 \, {\phi_{2,r}^{BB}}}{M_{B}} - \frac{6 \, {\phi_{2,r}^{NN}}}{M_{N}} - \frac{2 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{2 \, {\phi_{2,ti}^{NN}}}{M_{N}} - \frac{3 \, {\phi_{3,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} - \frac{3 \, {\phi_{3,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}}</script></html></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span><span class="p">(</span>
+    <span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{4 \, {\phi_{2,r}^{BB}}}{M_{B}} + \frac{4 \, {\phi_{2,r}^{NN}}}{M_{B}} - \frac{4 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,ti}^{NN}}}{M_{B}}</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{4 \, {\phi_{2,r}^{BB}}}{M_{B}} + \frac{4 \, {\phi_{2,r}^{NN}}}{M_{N}} - \frac{4 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{4 \, {\phi_{2,ti}^{NN}}}{M_{N}}</script></html></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span>
+    <span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{6 \, {\phi_{1,r}^{BN}}}{M_{B}} + \frac{6 \, {\phi_{1,ti}^{BN}}}{M_{B}} + \frac{16 \, {\phi_{2,r}^{BB}}}{M_{B}} + \frac{16 \, {\phi_{2,r}^{NN}}}{M_{B}} + \frac{6 \, {\phi_{3,r}^{BN}}}{M_{B}} + \frac{6 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}-\frac{6 \, {\phi_{1,r}^{BN}}}{M_{B}} - \frac{6 \, {\phi_{1,ti}^{BN}}}{M_{B}} - \frac{16 \, {\phi_{2,ti}^{BB}}}{M_{B}} - \frac{16 \, {\phi_{2,ti}^{NN}}}{M_{B}} - \frac{6 \, {\phi_{3,r}^{BN}}}{M_{B}} - \frac{6 \, {\phi_{3,ti}^{BN}}}{M_{B}}</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{6 \, {\phi_{1,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} + \frac{6 \, {\phi_{1,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} + \frac{16 \, {\phi_{2,r}^{BB}}}{M_{B}} + \frac{16 \, {\phi_{2,r}^{NN}}}{M_{N}} + \frac{6 \, {\phi_{3,r}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}} + \frac{6 \, {\phi_{3,ti}^{BN}}}{\sqrt{M_{B}} \sqrt{M_{N}}}</script></html></div></div>
 </div>
 <p>Al punt <span class="math notranslate nohighlight">\(M\)</span> obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.</p>
 </div>
-</div>
-<div class="section" id="per-al-punt-k">
-<h3>Per al punt <span class="math notranslate nohighlight">\(K\)</span><a class="headerlink" href="#per-al-punt-k" title="Link permanent a aquest títol">¶</a></h3>
+<div class="section" id="al-punt-k">
+<h3>Al punt <span class="math notranslate nohighlight">\(K\)</span><a class="headerlink" href="#al-punt-k" title="Link permanent a aquest títol">¶</a></h3>
 <p>En <span class="math notranslate nohighlight">\(\left(k_x=\frac{4\pi}{3a}, k_y=0\right)\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_K_xy</span><span class="o">=</span><span class="n">matriu_simplificada</span><span class="p">(</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">phi4tiBN</span><span class="o">=-</span><span class="n">phi4rBN</span><span class="p">),</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="id1">
-<h4>Simplificant<a class="headerlink" href="#id1" title="Link permanent a aquest títol">¶</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_K_xy_3</span><span class="o">=</span><span class="n">D_K_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
-<span class="n">Valors_propis_K</span><span class="o">=</span><span class="n">D_K_xy_3</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_K_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">),</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">phi4tiBN</span><span class="o">=-</span><span class="n">phi4rBN</span><span class="p">)</span>
+<span class="n">D_K_xy_simplificada</span><span class="o">=</span><span class="n">D_K_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M_N</span><span class="o">=</span><span class="n">M_B</span><span class="p">)</span>
+<span class="n">Valors_propis_K</span><span class="o">=</span><span class="n">D_K_xy_simplificada</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
 
 <span class="n">Valors_propis_de_K</span><span class="o">=</span><span class="p">[</span><span class="n">M_B</span><span class="o">*</span><span class="n">Valors_propis_K</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span>
     <span class="n">phi1rBN</span><span class="o">=</span><span class="n">phi1rBN</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">),</span> <span class="n">phi1tiBN</span><span class="o">=</span><span class="n">phi1tiBN</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M_N</span><span class="o">*</span><span class="n">M_B</span><span class="p">),</span> 
@@ -2148,14 +2066,13 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">+</span><span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span> <span class="o">+</span> 
-                                <span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">-</span> <span class="p">(</span>
+    <span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Valors_propis_de_M</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span> <span class="o">+</span> <span class="mi">8</span><span class="o">/</span><span class="mi">9</span><span class="o">*</span><span class="p">((</span><span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">Valors_propis_de_K</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}0</script></html></div></div>
-</div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{8 \, {\phi_{2,r}^{BB}}}{M_{B}} - \frac{8 \, {\phi_{2,ti}^{NN}}}{M_{N}}</script></html></div></div>
 </div>
 </div>
 </div>

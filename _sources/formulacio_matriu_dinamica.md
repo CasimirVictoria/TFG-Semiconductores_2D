@@ -103,7 +103,7 @@ show(arrow((0,0),(a_1/a),color="blue")+
 
 ## Identificació dels veins segons la seua distància
 
-Determinem els veins dels àtoms situats en la cel.la 0⃗, per poder classificar-los segons la seua distància a cadascun d'aquests àtoms.
+Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la cel.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asxignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -174,7 +174,53 @@ def lista_atomos(l_1, l_2):
 table(lista_atomos(2,2).to_html(index=False))
 ```
 
-Passe ja a construir la matriu dinàmica
+## Tensor de constants de forca i matriu dinàmica
+
+Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
+
+Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.
+
+La forma general del tensor de forces d'un $n$-èssim veí és de la forma (cite wirtz04 phonon disper graph revis): 
+
+
+\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^1&\xi_n &0\\
+-\xi_n & \phi_n^{ti} & 0 \\
+0 & 0 & \phi_n^{to}
+\end{pmatrix}
+\label{eq:tensordeforces}
+\end{equation}
+
+on el sistema de coordenadas se eligeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $y$ la coordenada transversal en el planol i $z$ la coordenada perperndicular al planol. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció $z$) estan completament desacoblades.
+
+
+
+Anem a supossar (per simplificar) que un desplaçament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una força radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com l'aproximació /4NNFC/, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
+
+Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d'un àtom classificat com $n$-èssim, situat en la direcció $\hat x$ respecte del átom de la ce\l.la $\vec 0$, té la forma diagonal:
+
+\begin{equation}
+C_n=\begin{pmatrix}
+\phi_n^r& 0 &0\\
+0 & \phi_n^{ti} & 0 \\
+0 & 0 & \phi_n^{to}
+\end{pmatrix}
+\end{equation}
+
+i per tant el tensor de constants de for\c{c}a de cadascun dels $n$-èssims veïns reals l'obtenim rotant esta matriu:
+\vspace{4cm}
+
+
+Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estamos considerant de la ce\.l.la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, \cite{falkovsky08_symmet_const_phonon_disper_graph}
+\cite{wirtz04_phonon_disper_graph_revis}
+
+Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que implica s'ha de complir:
+ 
+......
+
+
+Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
 
 ```{code-cell} ipython3
 #Angle que forma l'àtom considerat respecte a l'eix x
@@ -346,6 +392,9 @@ D2BB=D2BB-D01BN-D02BB-D03BN
 D2NN=D2NN-D01NB-D02NN-D03NB                    
 ```
 
+Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però donat que les components en $z$ d'esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.
+
+
 ## Vibracions fora de pla
 
 Donat que les vibracions fora de pla són, per com hem construït la matriu dinàmica, independients de les interplanars, podem estudiar primer les vibracions fora de pla.
@@ -412,12 +461,12 @@ omegaM1cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toB
 if bool(D_M_zz.eigenvalues()[0]==omegaM1cuadrado):
     Eq5=(omegaM1cuadrado==omega_M_ZO**2)
 
-    omegaM2cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)+sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
+omegaM2cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)+sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
 if bool(D_M_zz.eigenvalues()[1]==omegaM2cuadrado):
     Eq6=(omegaM2cuadrado==omega_M_ZA**2)
     
-#show(Eq5)
-#show(Eq6)
+show(omegaM1cuadrado)
+show(omegaM2cuadrado)
 ```
 
 ```{code-cell} ipython3
@@ -447,7 +496,7 @@ sol.append(solve(Eq3.subs(Eq1),phi2toBB)[0])
 sol
 ```
 
-Podemos comprobar que en el caso que fuesen los átomos identicos obtenemos las mismas expresiones que en Falkowsky
+És directe comprobar que en el cas que els àtoms foren idèntics obtindríem les mateixes expressions que en Falkowsky
 
 ```{code-cell} ipython3
 #sol.append(solve(((Eq5-Eq6)**2).subs(sol[0], sol[1], solEq1[0],M_N=N.mass, M_B=B.mass), phi1toBN)[1])
@@ -508,21 +557,21 @@ points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="blue")
 |     1 | Roig   | $\Gamma$ |       0    |  1 (ZA) |
 |     1 | Roig   | M     |        314    | 1 (ZA) |
 |     1 | Roig   | K     |       320     |1 (ZA) |
-|     2 | Marro  | $\Gamma$ |       0    |     2 |
-|     2 | Marro  | M     |           553 |      2 |
+|     2 | Marro  | $\Gamma$ |       0    |2 (TA) |
+|     2 | Marro  | M     |           553 |2 (TA) |
 |     2 | Marro  | K     |           602 | 4 (ZO) |
-|     3 | Negre  | $\Gamma$ |         4  |      3 |
+|     3 | Negre  | $\Gamma$ |         4  | 3 (LA) |
 |     3 | Negre  | M     |           638 | 4 (ZO) |
-|     3 | Negre  | K     |           878 |       2 |
+|     3 | Negre  | K     |           878 |     2(TA) |
 |     4 | Rosa   | $\Gamma$ |        831 |  4 (ZO) |
-|     4 | Rosa   | M     |          1173 |       3 |
-|     4 | Rosa   | K     |          1080 |       3 |
-|     5 | B.clar | $\Gamma$ |       1394 |       5 |
-|     5 | B.clar | M     |          1292 |       5 |
-|     5 | B.clar | K     |          1204 |       5 |
-|     6 | Blau   | $\Gamma$ |       1394 |       6 |
-|     6 | Blau   | M     |          1320 |       6 |
-|     6 | Blau   | K     |          1304 |       6 |
+|     4 | Rosa   | M     |          1173 |       3 (LA) |
+|     4 | Rosa   | K     |          1080 |       3 (LA) |
+|     5 | B.clar | $\Gamma$ |       1394 |       5 (TO) |
+|     5 | B.clar | M     |          1292 |       5 (TO)|
+|     5 | B.clar | K     |          1204 |       5 (TO)|
+|     6 | Blau   | $\Gamma$ |       1394 |       6 (LO)|
+|     6 | Blau   | M     |          1320 |       6 (LO)|
+|     6 | Blau   | K     |          1304 |       6 (LO)|
 
 +++
 
@@ -558,9 +607,8 @@ for i in range(4):
     
 ```
 
-Si considerem fins a 3ers veïns obtenim 0 dues vegades, tal i com tenim en les dades propocionades. L'altre valor propi també correspon a dues rames, com en les dades.
-
-En el cas de considerar fins 4ts veïns, per tal d'obtindre $0$ per a $\omega^2$ té que complir-se que: $\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}$
+Obtenim dos valors propis:
+per tal que un d'ells siga $0$ té que complir-se que: $\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}$
 
 ```{code-cell} ipython3
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0,phi4tiBN=-phi4rBN)
@@ -583,18 +631,13 @@ Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourcefor
 Amb aquesta simplificació podem calcular fàcilment els valors propis de la matriu original
 ```
 
-### Per al punt $M$
+### Al punt $M$
 En ($q_x=\pi/a,q_y=\pi/(\sqrt{3} a$)
 
 ```{code-cell} ipython3
-D_M_xy=matriu_simplificada(D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a),phi4tiBN=-phi4rBN),4,4)
-```
-
-#### Simplificant
-
-```{code-cell} ipython3
-D_M_xy_3=D_M_xy.subs(M_N=M_B)
-Valors_propis_M=D_M_xy_3.eigenvalues()
+D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a),phi4tiBN=-phi4rBN)
+D_M_xy_simplificada=D_M_xy.subs(M_N=M_B)
+Valors_propis_M=D_M_xy_simplificada.eigenvalues()
 
 Valors_propis_de_M=[M_B*Valors_propis_M[i].expand().subs(
     phi1rBN=phi1rBN/sqrt(M_N*M_B), phi1tiBN=phi1tiBN/sqrt(M_N*M_B), 
@@ -612,97 +655,36 @@ omega_M_2=553
 omega_M_3=1173
 omega_M_5=1292
 omega_M_6=1320
-#Eq_M_6=(D_M_xy_0.eigenvalues()[0]==omega_M_6**2)
-#Eq_M_5=(D_M_xy_0.eigenvalues()[2]==omega_M_5**2)
-#Eq_M_3=(D_M_xy_0.eigenvalues()[1]==omega_M_3**2)
-#Eq_M_2=(D_M_xy_0.eigenvalues()[3]==omega_M_2**2)
-#(Eq_M_3+Eq_M_6).expand()
 ```
 
 ```{code-cell} ipython3
-#(D_M_xy_0.eigenvalues()[0]+D_M_xy_0.eigenvalues()[1]).expand()
+(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()
 ```
 
 ```{code-cell} ipython3
-#(D_M_xy_0.eigenvalues()[2]+D_M_xy_0.eigenvalues()[3]).expand()
+(Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
 
 ```{code-cell} ipython3
-#D_M_xy_1=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2tiNN=phi2tiBB,M_N=M_B)
-#for i in range(0,4):
-#    show(D_M_xy_1.eigenvalues()[i])
+(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()-(
+    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
 
 ```{code-cell} ipython3
-#(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()
-```
-
-```{code-cell} ipython3
-#(D_M_xy_1.eigenvalues()[0]+D_M_xy_1.eigenvalues()[1]).expand()
-```
-
-```{code-cell} ipython3
-#(D_M_xy_1.eigenvalues()[2]+D_M_xy_1.eigenvalues()[3]).expand()
-```
-
-```{code-cell} ipython3
-#D_M_xy_2=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a), phi2rNN=phi2rBB,M_N=M_B)
-#for i in range(0,4):
-#    show(D_M_xy_2.eigenvalues()[i])
-```
-
-```{code-cell} ipython3
-#(D_M_xy_2.eigenvalues()[0]+D_M_xy_2.eigenvalues()[1]).expand()
-```
-
-```{code-cell} ipython3
-#(D_M_xy_2.eigenvalues()[2]+D_M_xy_2.eigenvalues()[3]).expand()
-```
-
-```{code-cell} ipython3
-#for i in range(0,4):
-#    show(D_M_x=D_M_xy_3.eigenvalues()_#3.eigenvalues()[i])#
-
-#show("--------------------------------------------------------")
-#show((D_M_xy_3.eigenvalues()[0]+D_M_xy_3.eigenvalues()[1]).expand())
-#show((D_M_xy_3.eigenvalues()[2]+D_M_xy_3.eigenvalues()[3]).expand())
-```
-
-```{code-cell} ipython3
-(Valors_propis_M[0]+Valors_propis_M[1]).expand()
-```
-
-```{code-cell} ipython3
-(Valors_propis_M[2]+Valors_propis_M[3]).expand()
-```
-
-```{code-cell} ipython3
-(Valors_propis_M[0]+Valors_propis_M[1]).expand()-(Valors_propis_M[2]+Valors_propis_M[3]).expand()
-```
-
-```{code-cell} ipython3
-(Valors_propis_M[0]+Valors_propis_M[1]).expand()-3*(Valors_propis_M[2]+Valors_propis_M[3]).expand()
-```
-
-```{code-cell} ipython3
-3*(Valors_propis_M[0]+Valors_propis_M[1]).expand()-(Valors_propis_M[2]+Valors_propis_M[3]).expand()
+(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand() - 3*(
+    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
 
 Al punt $M$ obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.
 
 
-### Per al punt $K$ 
+### Al punt $K$ 
 En $\left(k_x=\frac{4\pi}{3a}, k_y=0\right)$
 
 ```{code-cell} ipython3
-D_K_xy=matriu_simplificada(D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi4tiBN=-phi4rBN),4,4)
-```
-
-#### Simplificant
-
-```{code-cell} ipython3
-D_K_xy_3=D_K_xy.subs(M_N=M_B)
-Valors_propis_K=D_K_xy_3.eigenvalues()
+D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi4tiBN=-phi4rBN)
+D_K_xy_simplificada=D_K_xy.subs(M_N=M_B)
+Valors_propis_K=D_K_xy_simplificada.eigenvalues()
 
 Valors_propis_de_K=[M_B*Valors_propis_K[i].expand().subs(
     phi1rBN=phi1rBN/sqrt(M_N*M_B), phi1tiBN=phi1tiBN/sqrt(M_N*M_B), 
@@ -749,6 +731,10 @@ omega_K_6=1304
 ```
 
 ```{code-cell} ipython3
-Valors_propis_de_K[0].expand()+Valors_propis_de_K[1].expand()-(Valors_propis_de_K[2].expand() + 
-                                Valors_propis_de_K[3].expand())
+(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()- (
+    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand() + 8/9*((Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand())
+```
+
+```{code-cell} ipython3
+
 ```
