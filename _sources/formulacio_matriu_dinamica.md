@@ -49,6 +49,7 @@ $$
 $$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 var('a', domain='positive')
 a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
@@ -57,6 +58,8 @@ a_2=a*vector([-1/2,sqrt(3)/2])
 Comprobem que efectivament els dos vectors base formen un angle de
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 angle=arccos(a_1*a_2/(norm(a_1)*norm(a_2)))
 #glue("angle_cela", angle, display=False)
 show(angle, " radians")
@@ -70,6 +73,8 @@ Les posicions dels nucs són $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no àtoms), així com la corresponent cel.la unitat,
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 nucs=points([l_1*a_1/a+l_2*a_2/a for l_1 in range(-3, 4) for l_2 in range(-3,4)], 
              size=40, color="blue", frame=False)
 
@@ -92,6 +97,8 @@ $$
 $$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
 show(arrow((0,0),(a_1/a),color="blue")+
       arrow((0,0),(a_2/a),color="red")+
@@ -103,10 +110,11 @@ show(arrow((0,0),(a_1/a),color="blue")+
 
 ## Identificació dels veins segons la seua distància
 
-Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la cel.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asxignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
+Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la cel.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els assignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 
 #Posicins d'equilibri dels àtoms
 def RB(l_1,l_2):
@@ -122,7 +130,7 @@ show(AtomosB+AtomosN, figsize=4)
 ```
 
 ```{code-cell} ipython3
-:tags: [output_scroll]
+:tags: [hide-input,output_scroll]
 
 var('q_x, q_y'); assume(q_x, q_y, 'real'); q=vector([q_x,q_y])
 
@@ -178,7 +186,7 @@ table(lista_atomos(2,2).to_html(index=False))
 
 Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
 
-Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.
+Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la cel.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.
 
 La forma general del tensor de forces d'un $n$-èssim veí és de la forma (cite wirtz04 phonon disper graph revis): 
 
@@ -223,6 +231,8 @@ Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que i
 Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 #Angle que forma l'àtom considerat respecte a l'eix x
 
 def angulo(alphaprima,alpha,l_1,l_2):
@@ -400,6 +410,8 @@ Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però 
 Donat que les vibracions fora de pla són, per com hem construït la matriu dinàmica, independients de les interplanars, podem estudiar primer les vibracions fora de pla.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 D1BN_zz=D1BN[2,2]
 D1NB_zz=D1NB[2,2]
 
@@ -426,6 +438,7 @@ D_zz=Matrix([[D2BB_zz,D1BN_zz+D3BN_zz], [D1NB_zz+D3NB_zz,D2NN_zz]])
 Per al punt $(k_x=0, k_y=0)$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 from periodictable import C, B, N, constants
 u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
 
@@ -436,10 +449,12 @@ D_Gamma_zz
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D_Gamma_zz.eigenvalues()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 Eq1=solve(D_Gamma_zz.eigenvalues()[0]==omega_Gamma_ZO**2, phi3toBN)
 #Eq1
 ```
@@ -448,6 +463,7 @@ Eq1=solve(D_Gamma_zz.eigenvalues()[0]==omega_Gamma_ZO**2, phi3toBN)
 Al punt $\left(q_x=\pi/a,q_y=\pi/(\sqrt 3 a\right)$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 omega_M_ZO=635 #cm-1
 omega_M_ZA=314
 
@@ -456,6 +472,7 @@ D_M_zz=D_zz.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 # Podem simplificar un poc l'expressió obtessa per als valores propios al punto $M$ (simplement reescribint l'argumento de l'arrel quadrada)
 omegaM1cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)-sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
 if bool(D_M_zz.eigenvalues()[0]==omegaM1cuadrado):
@@ -470,6 +487,7 @@ show(omegaM2cuadrado)
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 # Si considerem que els àtoms són iguals
 #D_M_zz.subs(M_B=M_N, phi2toBB=phi2toNN).eigenvalues()
 ```
@@ -478,6 +496,7 @@ show(omegaM2cuadrado)
 Per al punt ($k_x=4\pi/(3 a)$, $k_y=0$)
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 omega_K_ZO=605 #cm-1
 omega_K_ZA=322
 D_K_zz=D_zz.subs(q_x=4*pi/(3*a),q_y=0)
@@ -488,6 +507,7 @@ D_K_zz.eigenvalues()
 Notem que en el cas del BN, a diferència del cas del grafè, obtenim 2 freqüenciès distintes al punt K ja que la base està constituïda per dos àtoms d'elements distints.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 sol=[]
 Eq2=D_K_zz.eigenvalues()[0]==omega_K_ZO**2
 Eq3=D_K_zz.eigenvalues()[1]==omega_K_ZA**2
@@ -499,6 +519,7 @@ sol
 És directe comprobar que en el cas que els àtoms foren idèntics obtindríem les mateixes expressions que en Falkowsky
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 #sol.append(solve(((Eq5-Eq6)**2).subs(sol[0], sol[1], solEq1[0],M_N=N.mass, M_B=B.mass), phi1toBN)[1])
 sol1=(phi1toBN==n(solve(((Eq6-Eq5)**2).subs(Eq1), phi1toBN)[0].subs(sol[0], sol[1]).subs(M_B=B.mass, \
     M_N=N.mass).rhs()))
@@ -512,12 +533,13 @@ show(sol4)
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 dades=loadtxt("../Dades/freq.dat")
 #data = pd.read_csv('../../Dades/freq.dat', header = None)
 ```
 
 ```{code-cell} ipython3
-:tags: []
+:tags: [hide-input]
 
 show(\
 list_plot(
@@ -579,6 +601,7 @@ points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="blue")
 En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$)
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D1BN_xy=D1BN.matrix_from_rows_and_columns([0,1],[0,1])
 D1NB_xy=D1NB.matrix_from_rows_and_columns([0,1],[0,1])
 
@@ -598,10 +621,12 @@ D_xy=block_matrix([[D2BB_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, 
 Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0)
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 for i in range(4):
     show(D_Gamma_xy.eigenvalues()[i])
     
@@ -611,6 +636,7 @@ Obtenim dos valors propis:
 per tal que un d'ells siga $0$ té que complir-se que: $\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0,phi4tiBN=-phi4rBN)
 for i in range(4):
     show(D_Gamma_xy.eigenvalues()[i])
@@ -618,6 +644,7 @@ for i in range(4):
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 omega_Gamma_5i6=1394
 Eq_Gamma_5i6=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5i6**2)
 #Eq_Gamma_5
@@ -635,6 +662,7 @@ Amb aquesta simplificació podem calcular fàcilment els valors propis de la mat
 En ($q_x=\pi/a,q_y=\pi/(\sqrt{3} a$)
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a),phi4tiBN=-phi4rBN)
 D_M_xy_simplificada=D_M_xy.subs(M_N=M_B)
 Valors_propis_M=D_M_xy_simplificada.eigenvalues()
@@ -651,6 +679,7 @@ Valors_propis_de_M=[M_B*Valors_propis_M[i].expand().subs(
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 omega_M_2=553
 omega_M_3=1173
 omega_M_5=1292
@@ -658,19 +687,23 @@ omega_M_6=1320
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()-(
     Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand() - 3*(
     Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
 ```
@@ -682,6 +715,7 @@ Al punt $M$ obtenim  4 valors propis diferents. Cosa que sembla raonable observa
 En $\left(k_x=\frac{4\pi}{3a}, k_y=0\right)$
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi4tiBN=-phi4rBN)
 D_K_xy_simplificada=D_K_xy.subs(M_N=M_B)
 Valors_propis_K=D_K_xy_simplificada.eigenvalues()
@@ -700,11 +734,13 @@ Valors_propis_de_K=[M_B*Valors_propis_K[i].expand().subs(
 Dos dels valors propis contenen una arrel amb prou termes, que no val la pena mostrar, mostre sols els més "sencills":
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 for i in range(2):
     show(Valors_propis_de_K[i].expand())
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 omega_K_2=878
 omega_K_3=1089
 omega_K_5=1204
@@ -719,22 +755,27 @@ omega_K_6=1304
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_K[0].expand()+Valors_propis_de_K[1]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_K[2].expand()+Valors_propis_de_K[3]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 (Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()- (
     Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand() + 8/9*((Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand())
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 
 ```
