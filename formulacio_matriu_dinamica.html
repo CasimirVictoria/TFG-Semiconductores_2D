@@ -1305,8 +1305,8 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <p>Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d’aquest, ja que com hem vist els seus valors propis, <span class="math notranslate nohighlight">\(\omega^2\)</span>, ens donen la freqüència de propagació de cadascun dels modes.</p>
 <p>Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la cel.la <span class="math notranslate nohighlight">\(\vec 0\)</span>, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.</p>
 <p>La forma general del tensor de forces d’un <span class="math notranslate nohighlight">\(n\)</span>-èssim veí és de la forma (cite wirtz04 phonon disper graph revis):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-db8fec3a-1a46-4dd3-847a-892b962d0ed9">
-<span class="eqno">(5)<a class="headerlink" href="#equation-db8fec3a-1a46-4dd3-847a-892b962d0ed9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3e2b540-fac2-4c34-870f-a28a62994952">
+<span class="eqno">(5)<a class="headerlink" href="#equation-a3e2b540-fac2-4c34-870f-a28a62994952" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 C_n=\begin{pmatrix}
 \phi_n^1&amp;\xi_n &amp;0\\
 -\xi_n &amp; \phi_n^{ti} &amp; 0 \\
@@ -1317,8 +1317,8 @@ C_n=\begin{pmatrix}
 <p>on el sistema de coordenadas se eligeix de manera que <span class="math notranslate nohighlight">\(x\)</span> és la coordenada longitudinal (en la línia que conecta els dos àtomos), <span class="math notranslate nohighlight">\(y\)</span> la coordenada transversal en el planol i <span class="math notranslate nohighlight">\(z\)</span> la coordenada perperndicular al planol. L’estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció <span class="math notranslate nohighlight">\(z\)</span>) estan completament desacoblades.</p>
 <p>Anem a supossar (per simplificar) que un desplaçament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una força radial o transversal, es a dir, <span class="math notranslate nohighlight">\(\xi_n=0\)</span> tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com l’aproximació /4NNFC/, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.</p>
 <p>Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d’un àtom classificat com <span class="math notranslate nohighlight">\(n\)</span>-èssim, situat en la direcció <span class="math notranslate nohighlight">\(\hat x\)</span> respecte del átom de la ce\l.la <span class="math notranslate nohighlight">\(\vec 0\)</span>, té la forma diagonal:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ecfe0215-2c3f-42b6-9a12-b9c5b4062704">
-<span class="eqno">(6)<a class="headerlink" href="#equation-ecfe0215-2c3f-42b6-9a12-b9c5b4062704" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14e051c9-b4ce-47a4-af42-61f2aed696ad">
+<span class="eqno">(6)<a class="headerlink" href="#equation-14e051c9-b4ce-47a4-af42-61f2aed696ad" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 C_n=\begin{pmatrix}
 \phi_n^r&amp; 0 &amp;0\\
 0 &amp; \phi_n^{ti} &amp; 0 \\
@@ -1881,16 +1881,10 @@ C_n=\begin{pmatrix}
 <div class="section" id="al-punt-gamma">
 <h3>Al punt <span class="math notranslate nohighlight">\(\Gamma\)</span><a class="headerlink" href="#al-punt-gamma" title="Link permanent a aquest títol">¶</a></h3>
 <p>Al punt <span class="math notranslate nohighlight">\(\Gamma\)</span> obtinc 2 valors propis, de multiplicitat <span class="math notranslate nohighlight">\(2\)</span> cadascun:</p>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_hide-input tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">show</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span>
     
 </pre></div>
@@ -1901,19 +1895,12 @@ C_n=\begin{pmatrix}
 </div>
 <p>Obtenim dos valors propis:
 per tal que un d’ells siga <span class="math notranslate nohighlight">\(0\)</span> té que complir-se que: <span class="math notranslate nohighlight">\(\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}\)</span></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Eq_Gamma_LA</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span><span class="n">phi4tiBN</span><span class="p">)</span>
 <span class="n">Eq_Gamma_LA</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{4,ti}^{BN}} = -{\phi_{4,r}^{BN}}\right]</script></html></div></div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_Gamma_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Eq_Gamma_LA</span><span class="p">)</span>
+
+<span class="n">D_Gamma_xy</span><span class="o">=</span><span class="n">D_xy</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">q_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">q_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Eq_Gamma_LA</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">show</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
@@ -1926,7 +1913,6 @@ per tal que un d’ells siga <span class="math notranslate nohighlight">\(0\)</s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#omega_Gamma_5i6=1394</span>
 <span class="n">Eq_Gamma_TO</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">D_Gamma_xy</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">omegaGammaTO</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">phi3rBN</span><span class="p">)</span>
-<span class="c1">#Eq7=solve(Eq_Gamma_5i6,phi3rBN)[0]</span>
 <span class="n">Eq_Gamma_TO</span>
 </pre></div>
 </div>
@@ -2129,7 +2115,7 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Aquestes últimes dues relacions tenen que estar mal (repassar-ho), ja que evidentment la suma de les freqüències al quadrat per LO i TO no poden ser iguals que per LA i TA. ERROR</p>
+<p>Aquestes últimes dues relacions tenen que estar mal (repassar-ho), ja que evidentment la suma de les freqüències al quadrat per LO i TO no poden ser iguals que per LA i TA. ERROR. El que tinc que mirar és que 2 i 3, sense les arrels correspón al valor intermig entre 0 i 1 …</p>
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">

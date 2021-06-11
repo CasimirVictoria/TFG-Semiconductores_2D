@@ -654,14 +654,9 @@ D_xy=block_matrix([[D2BB_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, 
 Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [hide-input, hide-output]
 
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
 for i in range(4):
     show(D_Gamma_xy.eigenvalues()[i])
     
@@ -671,12 +666,10 @@ Obtenim dos valors propis:
 per tal que un d'ells siga $0$ té que complir-se que: $\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}$
 
 ```{code-cell} ipython3
+:tags: [hide-input, hide-output]
+
 Eq_Gamma_LA=solve(D_Gamma_xy.eigenvalues()[2]==0,phi4tiBN)
 Eq_Gamma_LA
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0).subs(Eq_Gamma_LA)
 for i in range(4):
@@ -688,7 +681,6 @@ for i in range(4):
 
 #omega_Gamma_5i6=1394
 Eq_Gamma_TO=solve(D_Gamma_xy.eigenvalues()[0]==omegaGammaTO**2,phi3rBN)
-#Eq7=solve(Eq_Gamma_5i6,phi3rBN)[0]
 Eq_Gamma_TO
 ```
 
@@ -830,9 +822,8 @@ Eq_K_TA = (Valors_propis_en_K[3] == omegaKTA^2)
 ```
 
 ```{note}
-Aquestes últimes dues relacions tenen que estar mal (repassar-ho), ja que evidentment la suma de les freqüències al quadrat per LO i TO no poden ser iguals que per LA i TA. ERROR
+Aquestes últimes dues relacions tenen que estar mal (repassar-ho), ja que evidentment la suma de les freqüències al quadrat per LO i TO no poden ser iguals que per LA i TA. ERROR. El que tinc que mirar és que 2 i 3, sense les arrels correspón al valor intermig entre 0 i 1 ... 
 ```
-
 
 ```{code-cell} ipython3
 :tags: [hide-input]
