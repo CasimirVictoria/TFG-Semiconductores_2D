@@ -50,6 +50,7 @@ $$
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 var('a', domain='positive')
 a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
@@ -130,7 +131,7 @@ show(AtomosB+AtomosN, figsize=4)
 ```
 
 ```{code-cell} ipython3
-:tags: [hide-input,output_scroll]
+:tags: [hide-input, output_scroll]
 
 var('q_x, q_y'); assume(q_x, q_y, 'real'); q=vector([q_x,q_y])
 
@@ -399,7 +400,28 @@ for k in [1,2]:
 # Tenemos en cuenta la contribución a la matriz dinámica de los átomos situados en 
 # la celdilla 0
 D2BB=D2BB-D01BN-D02BB-D03BN
-D2NN=D2NN-D01NB-D02NN-D03NB                    
+D2NN=D2NN-D01NB-D02NN-D03NB
+
+omegaGammaZA=var('omegaGammaZA',latex_name='\\omega(\\Gamma)_{ZA}',domain='positive')
+omegaGammaTA=var('omegaGammaTA',latex_name='\\omega(\\Gamma)_{TA}',domain='positive')
+omegaGammaLA=var('omegaGammaLA',latex_name='\\omega(\\Gamma)_{LA}',domain='positive')
+omegaGammaZO=var('omegaGammaZO',latex_name='\\omega(\\Gamma)_{ZO}',domain='positive')
+omegaGammaTO=var('omegaGammaTO',latex_name='\\omega(\\Gamma)_{TO}',domain='positive')
+omegaGammaLO=var('omegaGammaLO',latex_name='\\omega(\\Gamma)_{LO}',domain='positive')
+
+omegaMZA=var('omegaMZA',latex_name='\\omega(M)_{ZA}',domain='positive')
+omegaMTA=var('omegaMTA',latex_name='\\omega(M)_{TA}',domain='positive')
+omegaMLA=var('omegaMLA',latex_name='\\omega(M)_{LA}',domain='positive')
+omegaMZO=var('omegaMZO',latex_name='\\omega(M)_{ZO}',domain='positive')
+omegaMTO=var('omegaMTO',latex_name='\\omega(M)_{TO}',domain='positive')
+omegaMLO=var('omegaMLO',latex_name='\\omega(M)_{LO}',domain='positive')
+
+omegaKZA=var('omegaKZA',latex_name='\\omega(K)_{ZA}',domain='positive')
+omegaKTA=var('omegaKTA',latex_name='\\omega(K)_{TA}',domain='positive')
+omegaKLA=var('omegaKLA',latex_name='\\omega(K)_{LA}',domain='positive')
+omegaKZO=var('omegaKZO',latex_name='\\omega(K)_{ZO}',domain='positive')
+omegaKTO=var('omegaKTO',latex_name='\\omega(K)_{TO}',domain='positive')
+omegaKLO=var('omegaKLO',latex_name='\\omega(K)_{LO}',domain='positive')
 ```
 
 Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però donat que les components en $z$ d'esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.
@@ -439,6 +461,7 @@ Per al punt $(k_x=0, k_y=0)$
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 from periodictable import C, B, N, constants
 u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
 
@@ -450,11 +473,13 @@ D_Gamma_zz
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 D_Gamma_zz.eigenvalues()
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 Eq1=solve(D_Gamma_zz.eigenvalues()[0]==omega_Gamma_ZO**2, phi3toBN)
 #Eq1
 ```
@@ -464,6 +489,7 @@ Al punt $\left(q_x=\pi/a,q_y=\pi/(\sqrt 3 a\right)$
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 omega_M_ZO=635 #cm-1
 omega_M_ZA=314
 
@@ -473,6 +499,7 @@ D_M_zz=D_zz.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 # Podem simplificar un poc l'expressió obtessa per als valores propios al punto $M$ (simplement reescribint l'argumento de l'arrel quadrada)
 omegaM1cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)-sqrt(M_B*M_N*(phi1toBN-3*phi3toBN)^2+(4*(M_N*phi2toBB-M_B*phi2toNN))^2)/(M_B*M_N)
 if bool(D_M_zz.eigenvalues()[0]==omegaM1cuadrado):
@@ -488,6 +515,7 @@ show(omegaM2cuadrado)
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 # Si considerem que els àtoms són iguals
 #D_M_zz.subs(M_B=M_N, phi2toBB=phi2toNN).eigenvalues()
 ```
@@ -497,6 +525,7 @@ Per al punt ($k_x=4\pi/(3 a)$, $k_y=0$)
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 omega_K_ZO=605 #cm-1
 omega_K_ZA=322
 D_K_zz=D_zz.subs(q_x=4*pi/(3*a),q_y=0)
@@ -508,6 +537,7 @@ Notem que en el cas del BN, a diferència del cas del grafè, obtenim 2 freqüen
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 sol=[]
 Eq2=D_K_zz.eigenvalues()[0]==omega_K_ZO**2
 Eq3=D_K_zz.eigenvalues()[1]==omega_K_ZA**2
@@ -520,6 +550,7 @@ sol
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 #sol.append(solve(((Eq5-Eq6)**2).subs(sol[0], sol[1], solEq1[0],M_N=N.mass, M_B=B.mass), phi1toBN)[1])
 sol1=(phi1toBN==n(solve(((Eq6-Eq5)**2).subs(Eq1), phi1toBN)[0].subs(sol[0], sol[1]).subs(M_B=B.mass, \
     M_N=N.mass).rhs()))
@@ -534,6 +565,7 @@ show(sol4)
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 dades=loadtxt("../Dades/freq.dat")
 #data = pd.read_csv('../../Dades/freq.dat', header = None)
 ```
@@ -602,6 +634,7 @@ En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 D1BN_xy=D1BN.matrix_from_rows_and_columns([0,1],[0,1])
 D1NB_xy=D1NB.matrix_from_rows_and_columns([0,1],[0,1])
 
@@ -622,11 +655,13 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 D_Gamma_xy=D_xy.subs(q_x=0,q_y=0)
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 for i in range(4):
     show(D_Gamma_xy.eigenvalues()[i])
     
@@ -636,26 +671,29 @@ Obtenim dos valors propis:
 per tal que un d'ells siga $0$ té que complir-se que: $\phi_{4,ti}^{BN}=-\phi_{4,r}^{BN}$
 
 ```{code-cell} ipython3
-:tags: [hide-input]
-D_Gamma_xy=D_xy.subs(q_x=0,q_y=0,phi4tiBN=-phi4rBN)
-for i in range(4):
-    show(D_Gamma_xy.eigenvalues()[i])
-       
+Eq_Gamma_LA=solve(D_Gamma_xy.eigenvalues()[2]==0,phi4tiBN)
+Eq_Gamma_LA
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-omega_Gamma_5i6=1394
-Eq_Gamma_5i6=(D_Gamma_xy.eigenvalues()[0]==omega_Gamma_5i6**2)
-#Eq_Gamma_5
-Eq7=solve(Eq_Gamma_5i6,phi3rBN)[0].subs(M_B=B.mass,M_N=N.mass)
-Eq7
+
+D_Gamma_xy=D_xy.subs(q_x=0,q_y=0).subs(Eq_Gamma_LA)
+for i in range(4):
+    show(D_Gamma_xy.eigenvalues()[i])
+```
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+#omega_Gamma_5i6=1394
+Eq_Gamma_TO=solve(D_Gamma_xy.eigenvalues()[0]==omegaGammaTO**2,phi3rBN)
+#Eq7=solve(Eq_Gamma_5i6,phi3rBN)[0]
+Eq_Gamma_TO
 ```
 
 ```{note}
-Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourceforge.io/)) no obté una expressió analítica però el que fem és calcular els valors propis supossant que els 2 àtoms de la base tenen la mateixa massa (no fa falta supossar que les constants de força entre àtoms del mateix tipus -segons veïns- són iguals). 
-
-Amb aquesta simplificació podem calcular fàcilment els valors propis de la matriu original
+Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourceforge.io/)) no obté una expressió analítica però si supossem que els 2 àtoms de la base tenen la mateixa massa  ($M_N=M_B$)podem obtindre fàcilment els valors propis de la matriu original
 ```
 
 ### Al punt $M$
@@ -663,11 +701,14 @@ En ($q_x=\pi/a,q_y=\pi/(\sqrt{3} a$)
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a),phi4tiBN=-phi4rBN)
+
+D_M_xy=D_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a)).subs(Eq_Gamma_LA)
+
 D_M_xy_simplificada=D_M_xy.subs(M_N=M_B)
+
 Valors_propis_M=D_M_xy_simplificada.eigenvalues()
 
-Valors_propis_de_M=[M_B*Valors_propis_M[i].expand().subs(
+Valors_propis_en_M=[M_B*Valors_propis_M[i].subs(
     phi1rBN=phi1rBN/sqrt(M_N*M_B), phi1tiBN=phi1tiBN/sqrt(M_N*M_B), 
     phi2rBB=phi2rBB/M_B, phi2tiBB=phi2tiBB/M_B,
     phi2rNN=phi2rNN/M_N, phi2tiNN=phi2tiNN/M_N,
@@ -675,37 +716,63 @@ Valors_propis_de_M=[M_B*Valors_propis_M[i].expand().subs(
     phi4rBN=phi4rBN/sqrt(M_N*M_B), phi4tiBN=phi4tiBN/sqrt(M_N*M_B)) for i in range(4)]
 
 #Comprobem que sí són els valors propis:
-[det(D_M_xy-Valors_propis_de_M[i]) for i in range(4)]
+[det(D_M_xy-Valors_propis_en_M[i]) for i in range(4)]
+```
+
+```{code-cell} ipython3
+#for i in range(4):
+#    show(Valors_propis_en_M[i].expand())
+# Obtenim  4 valors propis amb arrels quadrades amb molts termes, deduirem unes altres expressions
+#a partir d'estes més sencilles
+```
+
+Podem observar que els valors propis en M 0 i 1 (així com 2 i 3) es difereixen en una arrel quadrada (negativa i per tant amb valor propi corresponent major  per a 0 i 2).
+Per una altra banda els termes de fora de l'arrel sols difereixen en 2 i 3 respecte els de 1 i 2 que els termes $\phi_{2,r}$ ($BB$ i $NN$) van multiplicats pel factor 3 en el cas de $2$ i $3$ mentre que en $0$ i $1$ son els termes $\phi_{2,ti}$ els que van multiplicats per 3.
+
+Així que supossant que les constants de força radials són més grans que les tangencials puc concloure que:
+
+```{code-cell} ipython3
+Eq_M_LO = (Valors_propis_en_M[2] == omegaMLO^2)
+Eq_M_TO = (Valors_propis_en_M[3] == omegaMTO^2)
+Eq_M_LA = (Valors_propis_en_M[0] == omegaMLA^2)
+Eq_M_TA = (Valors_propis_en_M[1] == omegaMTA^2)
+```
+
+```{code-cell} ipython3
+Eq_M_LA + Eq_M_TA
+```
+
+```{code-cell} ipython3
+Eq_M_LO+Eq_M_TO
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-omega_M_2=553
-omega_M_3=1173
-omega_M_5=1292
-omega_M_6=1320
+
+(Eq_M_LO+Eq_M_TO) - (Eq_M_LA+Eq_M_TA)
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()
+
+(Eq_M_LO+Eq_M_TO) - 3*(Eq_M_LA+Eq_M_TA)
+```
+
+```{code-cell} ipython3
+3*(Eq_M_LO+Eq_M_TO) - (Eq_M_LA+Eq_M_TA)
+```
+
+```{code-cell} ipython3
+(Eq_M_LO+Eq_M_TO) + (Eq_M_LA+Eq_M_TA)
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
-```
 
-```{code-cell} ipython3
-:tags: [hide-input]
-(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()-(
-    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand() - 3*(
-    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand()
+#omega_M_TA=553
+#omega_M_3=1173
+#omega_M_5=1292
+#omega_M_6=1320
 ```
 
 Al punt $M$ obtenim  4 valors propis diferents. Cosa que sembla raonable observant la gràfica de les dades proporcionades.
@@ -716,11 +783,12 @@ En $\left(k_x=\frac{4\pi}{3a}, k_y=0\right)$
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi4tiBN=-phi4rBN)
 D_K_xy_simplificada=D_K_xy.subs(M_N=M_B)
 Valors_propis_K=D_K_xy_simplificada.eigenvalues()
 
-Valors_propis_de_K=[M_B*Valors_propis_K[i].expand().subs(
+Valors_propis_en_K=[M_B*Valors_propis_K[i].expand().subs(
     phi1rBN=phi1rBN/sqrt(M_N*M_B), phi1tiBN=phi1tiBN/sqrt(M_N*M_B), 
     phi2rBB=phi2rBB/M_B, phi2tiBB=phi2tiBB/M_B,
     phi2rNN=phi2rNN/M_N, phi2tiNN=phi2tiNN/M_N,
@@ -728,23 +796,51 @@ Valors_propis_de_K=[M_B*Valors_propis_K[i].expand().subs(
     phi4rBN=phi4rBN/sqrt(M_N*M_B), phi4tiBN=phi4tiBN/sqrt(M_N*M_B)) for i in range(4)]
 
 #Comprobem que sí són els valors propis:
-[det(D_K_xy-Valors_propis_de_K[i]) for i in range(4)]
+[det(D_K_xy-Valors_propis_en_K[i]) for i in range(4)]
 ```
 
 Dos dels valors propis contenen una arrel amb prou termes, que no val la pena mostrar, mostre sols els més "sencills":
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-for i in range(2):
-    show(Valors_propis_de_K[i].expand())
+
+for i in range(4):
+    show(Valors_propis_en_K[i].expand())
+```
+
+Emprant un argument anàleg que per als valors ropis en $M$ anem a supossar que:
+
+```{code-cell} ipython3
+Eq_K_LO = (Valors_propis_en_K[0] == omegaKLO^2)
+Eq_K_TO = (Valors_propis_en_K[1] == omegaKTO^2)
+Eq_K_LA = (Valors_propis_en_K[2] == omegaKLA^2)
+Eq_K_TA = (Valors_propis_en_K[3] == omegaKTA^2)
 ```
 
 ```{code-cell} ipython3
+(Eq_K_LO-Eq_K_TO).expand()
+```
+
+```{code-cell} ipython3
+(Eq_K_LO+Eq_K_TO).expand()
+```
+
+```{code-cell} ipython3
+(Eq_K_LA+Eq_K_TA).expand()
+```
+
+```{note}
+Aquestes últimes dues relacions tenen que estar mal (repassar-ho), ja que evidentment la suma de les freqüències al quadrat per LO i TO no poden ser iguals que per LA i TA. ERROR
+```
+
+
+```{code-cell} ipython3
 :tags: [hide-input]
-omega_K_2=878
-omega_K_3=1089
-omega_K_5=1204
-omega_K_6=1304
+
+#omega_K_2=878
+#omega_K_3=1089
+#omega_K_5=1204
+#omega_K_6=1304
 #Eq_K_5i6=(D_K_xy_0.eigenvalues()[2]==omega_K_2**2)
 #Eq_K_3=(D_K_xy_0.eigenvalues()[1]==omega_K_3**2)
 #Eq_K_2=(D_K_xy_0.eigenvalues()[0]==omega_K_2**2)
@@ -756,26 +852,31 @@ omega_K_6=1304
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_K[0].expand()+Valors_propis_de_K[1]).expand()
+
+#(Valors_propis_de_K[0].expand()+Valors_propis_de_K[1]).expand()
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_K[2].expand()+Valors_propis_de_K[3]).expand()
+
+#(Valors_propis_de_K[2].expand()+Valors_propis_de_K[3]).expand()
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand()
+
+#(Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand()
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()- (
-    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand() + 8/9*((Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand())
+
+#(Valors_propis_de_M[0]+Valors_propis_de_M[1]).expand()- (
+#    Valors_propis_de_M[2]+Valors_propis_de_M[3]).expand() + 8/9*((Valors_propis_de_K[0]-Valors_propis_de_K[1]).expand())
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 
 ```
