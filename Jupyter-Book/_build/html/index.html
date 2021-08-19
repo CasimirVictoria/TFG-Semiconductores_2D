@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sobre este TFG &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -45,7 +42,7 @@
     <script src="_static/copybutton.js"></script>
     <script src="_static/translations.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -58,14 +55,14 @@
     <link rel="index" title="Índex" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
     <link rel="next" title="Introducció" href="introduccio.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,34 +71,41 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="#">
-  
-  <img src="_static/logo_tfg.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="#">
+      
+      <img src="_static/logo_tfg.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Cerca en aquest llibre ..." aria-label="Cerca en aquest llibre ..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1 current active">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
   <a class="reference internal" href="#">
+   <!-- #region -->
    Sobre este TFG
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduccio.html">
    Introducció
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="formulacio_matriu_dinamica.html">
+   Descripció del cristall de BN
+  </a>
+ </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -117,21 +121,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Commuta la navegació" aria-controls="site-navigation"
-            title="Commuta la navegació" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Commuta la navegació" aria-controls="site-navigation"
+                title="Commuta la navegació" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Descarregueu aquesta pàgina"><i
             class="fas fa-download"></i></button>
@@ -149,7 +153,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -167,25 +171,25 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objectius-del-treball-proposat">
    Objectius del treball proposat
@@ -198,8 +202,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -207,11 +211,16 @@
         
               <div>
                 
-  <div class="section" id="sobre-este-tfg">
-<h1>Sobre este TFG<a class="headerlink" href="#sobre-este-tfg" title="Link permanent a aquest títol">¶</a></h1>
+  <div class="section" id="region-sobre-este-tfg">
+<h1><!-- #region -->
+Sobre este TFG<a class="headerlink" href="#region-sobre-este-tfg" title="Link permanent a aquest títol">¶</a></h1>
 <div class="section" id="objectius-del-treball-proposat">
 <h2>Objectius del treball proposat<a class="headerlink" href="#objectius-del-treball-proposat" title="Link permanent a aquest títol">¶</a></h2>
 <p>Els materials bidimensionals (2D) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L’estudi de la dinàmica de la xarxa cristallina (<strong>fonons</strong>) d’estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>No conseguisc que funcionen les cites</p>
+</div>
 <p>Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.</p>
 <p>L’estudiant treballarà la bibliografia pertinent per documentar-se sobre l’estat d’art teòric, i aprendrà una metodologia de càlcul basada en l’aproximació armònica a la dinàmica de una xarxa bidimensional. Seguidament, l’estudiant implementarà un model de constants de força per calcular els modes vibracionals d’un material 2D model.
 Seguidament podran  determinar-se els modes vibracionals actius Raman.</p>
@@ -220,9 +229,13 @@ Seguidament podran  determinar-se els modes vibracionals actius Raman.</p>
 <div class="section" id="metodologia">
 <h2>Metodologia<a class="headerlink" href="#metodologia" title="Link permanent a aquest títol">¶</a></h2>
 <p>El càlculs s’han realitzar en python, emprant el software <a class="reference external" href="https://www.sagemath.org/index.html">sagemath</a> i <a class="reference external" href="https://www.jupyter.org">jupyter</a> com a entorn de treball. Els notebooks amb el càlculs es troben accessibles al repossitori públic de github <a class="reference external" href="https://github.com/CasimirVictoria/TFG-Semiconductores_2D">TFG-Semicunductores_2D</a>. També es pot consultar una versió en html del TFG, realitzada amb <a class="reference external" href="https://jupyterbook.org/intro.html">jupyter{book}</a>; en la versió online es mostra per defecte el codi emprat.</p>
-<p>Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no emprar fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com <a class="reference external" href="https://git-scm.com">git</a> (entre altres coses). Per aquesta raó s’ha emprat també el plugin <a class="reference external" href="https://github.com/mwouts/jupytext">jupytext</a> per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla amb el codi en python (com a fitxer python, markdown, …), cosa que seu torn facilita enormement emprar el codi en altres entorns (editors de text, IDEs, …), importar-lo, etc.</p>
-<div class="toctree-wrapper compound">
+<p>Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no emprar fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com <a class="reference external" href="https://git-scm.com">git</a>. Per aquesta raó s’ha emprat també el plugin <a class="reference external" href="https://github.com/mwouts/jupytext">jupytext</a> per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla (com a fitxer python ,.py,, markdown + python, ..), cosa que seu torn facilita emprar el codi en altres entorns (editors de text, IDEs, …), importar-lo, etc.</p>
+<!-- #endregion -->
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -248,22 +261,22 @@ Seguidament podran  determinar-se els modes vibracionals actius Raman.</p>
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='right-next' id="next-link" href="introduccio.html" title="next page">Introducció</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         
-          By Casimiro Victoria Castillo<br/>
+          Per Casimiro Victoria Castillo<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -272,11 +285,9 @@ Seguidament podran  determinar-se els modes vibracionals actius Raman.</p>
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.10.2
+    jupytext_version: 1.10.3
 kernelspec:
   display_name: SageMath 9.2
   language: sage
@@ -18,7 +18,7 @@ Per ara sols són algunes idees a desenvolupar, fins que no acabe els càlculs n
 ```
 
 ## Model de Born i Von Karman
-- Explicar el **model de  Born y  Von Karman (1921)**, tal y com ve en {cite}` brueesch82_phonon` (pàgina 4).
+- Explicar el **model de  Born y  Von Karman (1921)**, tal y com ve en {% cite brueesch82_phonon %} (pàgina 4).
 
 
 ## Aproximació adiabàtica

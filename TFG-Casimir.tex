@@ -58,7 +58,7 @@
 \includepdf{./Altres/portada_tfg_casimir.pdf}
 
 \begin{abstract}
-  Els materials bidimensionals ($2D$) com el grafé són de gran interés tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristallina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
+  Els materials bidimensionals ($2D$) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristallina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
 
 
   Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
@@ -77,23 +77,23 @@
 
 
 \subsection{Aproximació adiabàtica}
-Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considearar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
+Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
   
 \subsection{Aproximació armònica}
-Passar a descriure l'\textbf{aproximació amònica}: escriure el potencial, les equacions de moviment de Lagrange, y passar d'estes equacions de moviment en l'espai de posiciones al problema de valors propis de la matriu dinàmica en l'espai de vectores de onda (o moments).
+Passar a descriure l'\textbf{aproximació harmònica}: escriure el potencial, les equacions de moviment de Lagrange, y passar d'estes equacions de moviment en l'espai de posiciones al problema de valors propis de la matriu dinàmica en l'espai de vectores de onda (o moments).
 
 Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d'equilibri. La primera hipòtesi és que cada àtom té una posició d'equilibri en el cristall, y considerarem que estos àtoms vibren amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d'aquesta, de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament e\l.làstic lineal}, on es verifica la llei de Hooke.
 
 Podem per tant aproximar l'energia potencial de interacció pel terme armònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament ....
 
 
-- Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aqests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
+- Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
 
-- Explicar també que una vegada descrit el cristall en l'espai de posicions tenim que descriure la xarxa cristalina en l'espai de moments ...
+- Explicar també que una vegada descrit el cristall en l'espai de posicions tenim que descriure la xarxa cristallina en l'espai de moments ...
 
-- Una vegada concluida la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristalina, base, xarxa en l'esspai $2\pi\text{-recíproc}$.
+- Una vegada conclosa la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristallina, base, xarxa en l'espai $2\pi\text{-recíproc}$.
 
-- Pasar a contruir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, ...), cite aizawa90 bond soften monol graph formed (en el apèndix). 
+- Passar a construir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, ...), cite aizawa90 bond soften monol graph formed (en el apèndix). 
 
 
 \subsection{Xarxa recíproca. Primera zona de Brillouin.}
@@ -172,14 +172,13 @@ Donat que el càlcul dels modes de vibració per primers principis comen\c{c}a p
 var('a', domain='positive')
 a_1=a*vector([1,0])
 a_2=a*vector([-1/2,sqrt(3)/2])
-print(a_2)
 \end{sagesilent}
 
 \begin{equation}
 \vec a_1=\sage{a_1}\qquad\vec a_2=\sage{a_2} 
 \end{equation}
 
-I les posiciones atòmiques d'equilibri en la ce\l.la unitat són:
+I les posicions atòmiques d'equilibri en la ce\l.la unitat són:
 
 \begin{sagesilent}
 r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
@@ -196,14 +195,11 @@ cela=arrow((0,0),(a_1/a),color="blue")+\
 \vec R_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2} 
 \end{equation} 
 
-
-
 Podem comprobar que efectivament es tracta de una ce\l.la hexagonal, ja que els seus vectors primitius formen un angle de $\sage{arccos(a_1*a_2/(norm(a_1)*norm(a_2)).simplify())}$ \SI{}{\radian}
 
 Numerarem les ce\l.les amb un índex vectorial $\vec l=\left(l_1, l_2\right)$, on $l_1$ i $l_2$ són dos nombres enters, encara que en la literatura les trobem habitualment numerades amb un índex enter,$n$, ja que així resulta més sencill identificar les ce\l.les.
 
 Les posicions del nucs de la xarxa són $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
-
 
 \begin{sagesilent}
 nucs=points([l_1*a_1/a+l_2*a_2/a for l_1 in range(-3, 4) for l_2 in range(-3,4)], size=40, color="blue", frame=False)
@@ -722,7 +718,7 @@ omegaM2cuadrado=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toB
 \end{align*}
 \end{small}
 
-Comprobem que les expresions obtesses es redueixen a les que aparéixen en la ref: Falkowsky en el cas que es àtoms de la base foen iguals.
+Comprobem que les expresions obtesses es redueixen a les que aparéixen en la ref: Falkowsky en el cas que es àtoms de la base foren iguals.
 
 \begin{sagesilent}
 Eq5=(omegaM1cuadrado==omega_M_ZO**2)
