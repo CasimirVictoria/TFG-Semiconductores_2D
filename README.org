@@ -6,7 +6,7 @@ Els materials bidimensionals (2D) com el grafè són de gran interès tant per l
 
 Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D i la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
 
-L'estudiant treballarà la bibliografia pertinent per documentar-se sobre l'estat d'art teòric, i aprendrà una metodologia de càlcul basada en l'aproximació armònica a la dinàmica de una xarxa bidimensional. Seguidament, l'estudiant implementarà un model de constants de for\c{c}a per calcular els modes vibracionals d'un material 2D model.
+L'estudiant treballarà la bibliografia pertinent per documentar-se sobre l'estat d'art teòric, i aprendrà una metodologia de càlcul basada en l'aproximació armònica a la dinàmica de una xarxa bidimensional. Seguidament, l'estudiant implementarà un model de constants de força per calcular els modes vibracionals d'un material 2D model.
 Seguidament podran  determinar-se els modes vibracionals actius Raman.
 
 Este treball està dissenyat especialment per a estudiants interessats en programació emprant llenguatges avan\c{c}ats tipus python, sempre orientats a aplicar l'aprés en les assignatures de Mecànica Quàntica o Física de l'Estat Sòlid.
