@@ -1,0 +1,21 @@
+* Fonons i espectroscòpia Raman en semiconductors bidimensionals
+
+** Objectius del treball proposat
+
+Els materials bidimensionals (2D) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristal·lina (fonons) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.
+
+Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D i la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
+
+L'estudiant treballarà la bibliografia pertinent per documentar-se sobre l'estat d'art teòric, i aprendrà una metodologia de càlcul basada en l'aproximació armònica a la dinàmica de una xarxa bidimensional. Seguidament, l'estudiant implementarà un model de constants de for\c{c}a per calcular els modes vibracionals d'un material 2D model.
+Seguidament podran  determinar-se els modes vibracionals actius Raman.
+
+Este treball està dissenyat especialment per a estudiants interessats en programació emprant llenguatges avan\c{c}ats tipus python, sempre orientats a aplicar l'aprés en les assignatures de Mecànica Quàntica o Física de l'Estat Sòlid.
+
+
+** Metodologia
+
+El càlculs s'han realitzar en python, emprant el software [[https://www.sagemath.org/index.html][sagemath]], i com a entorn de desenvolupament [[https://www.jupyter.org][jupyterlab]]. El notebook amb tots el càlculs es troba accessible al repositori de github [[https://github.com/CasimirVictoria/TFG-Semiconductores_2D][TFG-Semicunductores_2D]].
+
+Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no emprar fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com [[https://git-scm.com/][git]]. Per aquesta raó s'ha emprat també el plugin [[https://github.com/mwouts/jupytext][jupytext]] per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla( amb el codi en python, markdown, etc.). En este projecte he decidit emprar el format [[https://jupyterbook.org/content/myst.html][myst markdown]].
+
+Per ralitzar la memòria del treball he emprat l'editor [[https://www.gnu.org/software/emacs/][Emacs]] +emprant [[https://orgmode.org/index.html][org-mode]] ,així com [[https://orgmode.org/worg/org-contrib/babel/][babel]] que permet executar codi dins dels documents d'org-mode, i [[https://github.com/jkitchin/org-ref][org-ref]] per a la gestió bibliogràfica, cites, etc.+

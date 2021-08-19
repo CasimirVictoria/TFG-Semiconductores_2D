@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introducció &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Índex" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+    <link rel="next" title="Descripció del cristall de BN" href="formulacio_matriu_dinamica.html" />
+    <link rel="prev" title="Sobre este TFG" href="index.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo_tfg.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Cerca en aquest llibre ..." aria-label="Cerca en aquest llibre ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Sobre este TFG
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introducció
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="formulacio_matriu_dinamica.html">
+   Descripció del cristall de BN
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Commuta la navegació" aria-controls="site-navigation"
+            title="Commuta la navegació" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Descarregueu aquesta pàgina"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/introduccio.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Descarregar fitxer de quadern" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/introduccio.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Baixeu el fitxer font" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Imprimeix a PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Dipòsit de fonts"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintroduccio.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Obriu un número"><i class="fas fa-lightbulb"></i>número obert</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/introduccio.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Llançament Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-de-born-i-von-karman">
+   Model de Born i Von Karman
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aproximacio-adiabatica">
+   Aproximació adiabàtica
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aproximacio-harmonica">
+   Aproximació harmònica
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#xarxa-reciproca-primera-zona-de-brillouin">
+   Xarxa recíproca. Primera zona de Brillouin
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#celles-de-wigner-seitz-ws">
+     Cel·les de Wigner-Seitz (WS)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matriu-dinamica">
+   Matriu dinàmica
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduccio">
+<h1>Introducció<a class="headerlink" href="#introduccio" title="Link permanent a aquest títol">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Per ara sols són algunes idees a desenvolupar, fins que no acabe els càlculs no vaig a posar-me a redactar la memòria, però mentres tant vaig provant les funcionalitats combinades de sagemath, jupyter, jupytext i jupyterbook.</p>
+</div>
+<div class="section" id="model-de-born-i-von-karman">
+<h2>Model de Born i Von Karman<a class="headerlink" href="#model-de-born-i-von-karman" title="Link permanent a aquest títol">¶</a></h2>
+<ul class="simple">
+<li><p>Explicar el <strong>model de  Born y  Von Karman (1921)</strong>, tal y com ve en <span id="id1">[<span>brueesch82_phonon</span>]</span> (pàgina 4).</p></li>
+</ul>
+</div>
+<div class="section" id="aproximacio-adiabatica">
+<h2>Aproximació adiabàtica<a class="headerlink" href="#aproximacio-adiabatica" title="Link permanent a aquest títol">¶</a></h2>
+<p>Desprès explicar que fent ús de l”<strong>aproximació adiabàtica</strong>, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l’energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.</p>
+</div>
+<div class="section" id="aproximacio-harmonica">
+<h2>Aproximació harmònica<a class="headerlink" href="#aproximacio-harmonica" title="Link permanent a aquest títol">¶</a></h2>
+<p>Passar a descriure l”<strong>aproximació harmònica</strong>: escriure el potencial, les equacions de moviment de Lagrange, y passar d’estes equacions de moviment en l’espai de posiciones al problema de valors propis de la matriu dinàmica en l’espai de vectores de onda (o moments).</p>
+<p>Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d’equilibri. La primera hipòtesi és que cada àtom té una posició d’equilibri en el cristall, y considerarem que estos àtoms vibren amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d’aquesta, de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com <em>la regió de comportament el·lastic lineal</em>, on es verifica la llei de Hooke.</p>
+<p>Podem per tant aproximar l’energia potencial de interacció pel terme armònic del seu desenvolupament en sèrie de potencies del desplaçament ….</p>
+<ul class="simple">
+<li><p>Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure’s com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.</p></li>
+<li><p>Explicar també que una vegada descrit el cristall en l’espai de posicions tenim que descriure la xarxa cristallina en l’espai de moments …</p></li>
+<li><p>Una vegada conclosa la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristallina, base, xarxa en l’espai <span class="math notranslate nohighlight">\(2\pi\text{-recíproc}\)</span>.</p></li>
+<li><p>Passar a construir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, …), cite aizawa90 bond soften monol graph formed (en el apèndix).</p></li>
+</ul>
+</div>
+<div class="section" id="xarxa-reciproca-primera-zona-de-brillouin">
+<h2>Xarxa recíproca. Primera zona de Brillouin<a class="headerlink" href="#xarxa-reciproca-primera-zona-de-brillouin" title="Link permanent a aquest títol">¶</a></h2>
+<p>Donada una terna de vectors base primitius, <span class="math notranslate nohighlight">\(p_i\)</span>, de la xarxa cristallina en l’espai de posicion, la condició:</p>
+<div class="math notranslate nohighlight" id="equation-rec-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-rec-1" title="Permalink to this equation">¶</a></span>\[\vec p_i\cdot\vec p_j^{*}=\delta_{ij}\]</div>
+<p>on <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> és la delta de Kronecker, pot considerar-se un sistema d’equacions que defineix una altra terna de vectors <span class="math notranslate nohighlight">\(p_j^*\)</span>. La solució de l’equació <a class="reference internal" href="#equation-rec-1">(1)</a> és</p>
+<div class="math notranslate nohighlight" id="equation-rec-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-rec-2" title="Permalink to this equation">¶</a></span>\[\vec p_1^*=\frac{\vec p_2\times\vec p_3}{\vec p_1\cdot(\vec p_2\times\vec p_3)},\quad \vec p_2^*=\frac{\vec p_3\times\vec p_1}{\vec p_1\cdot(\vec p_2\times\vec p_3)}, \quad \vec p_3^*=\frac{\vec p_1\times\vec p_2}{\vec p_1\cdot(\vec p_2\times\vec p_3)}\]</div>
+<p>Els <em>vectors recíprocs</em> <span class="math notranslate nohighlight">\(\vec p_j^{*}\)</span> són els vectors d’una altra xarxa cristallina coneguda com <em>xarxa recíproca</em>. Els  vectors recíprocs, i els vectors de translació cristallina recíprocs, tenen dimensions de inversa de longitud i es representen en l”<em>espaci recíproc</em> o de números d’ona. <strong>Les xarxes cristallines real y recíproca són dues descripcions equivalents del matexi sistema físic: el sòlido cristallí</strong> que s’està estudiant.</p>
+<p>Tenim que tindre present que l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és el fonamental en l’estudi de la Física de l’Estado Sòlid ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l’espai de vectors d’ona.</p>
+<p>Podem interpretar que</p>
+<div class="math notranslate nohighlight" id="equation-rec-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-rec-3" title="Permalink to this equation">¶</a></span>\[\vec K_{h_1h_2h_3}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}+h_3\vec a_3^{*}\right)\]</div>
+<p>són els vectors de translació cristallina que defineixen una xarxa cristallina en aquest espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc (sols es diferencia de l’espai recíproc en un factor d’escala <span class="math notranslate nohighlight">\(2\pi\)</span>). En termes físics, l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és l”/espai de vectors d’ona/ <span class="math notranslate nohighlight">\(\vec k\)</span>, i a falta d’un factors d’escala <span class="math notranslate nohighlight">\(\hbar\)</span>, coincideix amb l’espai de moments  <span class="math notranslate nohighlight">\(\vec p=\hbar\vec k\)</span>.</p>
+<div class="section" id="celles-de-wigner-seitz-ws">
+<h3>Cel·les de Wigner-Seitz (WS)<a class="headerlink" href="#celles-de-wigner-seitz-ws" title="Link permanent a aquest títol">¶</a></h3>
+<p>Para descrire la xarxa 2<span class="math notranslate nohighlight">\(\pi\)</span>-recíproca, emprarem el criteri de <em>Wigner-Seitz</em>. Les <em>cel·les de Wigner-Seitz</em> estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d’un nuc qualsevol com a origen, construim els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d’estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l’origen que està delimitada per estos plans (rectes en el caso d’una xarxa bidimensional).</p>
+<p>Notem que en l’espai de <span class="math notranslate nohighlight">\(\vec k\)</span> emprarem cel·les unitat de WS mentre que en l’espai de posicions sempre emprem cel·les unitat de Bravais.
+La cel·la de WS de la xarxa <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproca es coneix com <strong>primera zona de Brillouin</strong> (ZB)</p>
+</div>
+</div>
+<div class="section" id="matriu-dinamica">
+<h2>Matriu dinàmica<a class="headerlink" href="#matriu-dinamica" title="Link permanent a aquest títol">¶</a></h2>
+<p>La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{\alpha\prime}D_{\alpha\alpha\prime}\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)\]</div>
+<p>Per tant, les freqüències <span class="math notranslate nohighlight">\(\omega\)</span> com funció del vector d’ones <span class="math notranslate nohighlight">\(\vec q\)</span> del fonó són solució de l’equació secular:</p>
+<div class="math notranslate nohighlight">
+\[\det\left|\frac{1}{\sqrt{M_\alpha M_{\alpha\prime}}}D^{ij}_{\alpha\alpha\prime}\left(\vec q\right)-\omega^2\left(\vec q\right)\right|=0 \]</div>
+<p>on <span class="math notranslate nohighlight">\(M_{\alpha}\)</span> es la massa de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> y la matriu dinàmica ve definida por:</p>
+<div class="math notranslate nohighlight" id="equation-matriu-dinamica">
+<span class="eqno">(4)<a class="headerlink" href="#equation-matriu-dinamica" title="Permalink to this equation">¶</a></span>\[D_{\alpha,\alpha\prime}^{i,j}=\frac{\partial^2 E}{\partial u_{\alpha}^{*i}(\vec q)\partial u_{\alpha\prime}^{j}(\vec q)}\]</div>
+<p>on <span class="math notranslate nohighlight">\(u_{\alpha}^{i}\)</span> representa el desplaçament de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>La segona derivada de l’energia de l’equació <a class="reference internal" href="#equation-matriu-dinamica">(4)</a> correspon al canvi en la força que actua sobre l’àtom <span class="math notranslate nohighlight">\(\alpha\prime\)</span> en la direcció <span class="math notranslate nohighlight">\(j\)</span> quan es desplaça l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="math notranslate nohighlight">
+\[D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha\prime}(\vec q)\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "sagemath"
+        },
+        kernelOptions: {
+            kernelName: "sagemath",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'sagemath'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">Sobre este TFG</a>
+    <a class='right-next' id="next-link" href="formulacio_matriu_dinamica.html" title="next page">Descripció del cristall de BN</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Casimiro Victoria Castillo<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,21 @@
+  ------- -------- ------- --------------- ---------------- --------
+  Serie   Color    Punt    omega (Taula)   omega(propor.)   Rama
+  1       Roig     Gamma   Negatiu         0                1 (ZA)
+  1       Roig     M       293             314              1 (ZA)
+  1       Roig     K       284             322              1 (ZA)
+  2       Marro    Gamma   Negatiu                          2
+  2       Marro    M       544                              2
+  2       Marro    K       640             605              4 (ZO)
+  3       Negre    Gamma   4                                3
+  3       Negre    M       654             635              4 (ZO)
+  3       Negre    K       771                              2
+  4       Rosa     Gamma   832             830              4 (ZO)
+  4       Rosa     M       1114                             3
+  4       Rosa     K       1111                             3
+  5       B.clar   Gamma   1394                             5
+  5       B.clar   M       1296                             5
+  5       B.clar   K       1299                             5
+  6       Blau     Gamma   1394                             6
+  6       Blau     M       1362                             6
+  6       Blau     K       1323                             6
+  ------- -------- ------- --------------- ---------------- --------
