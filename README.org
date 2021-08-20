@@ -14,7 +14,16 @@ Este treball està dissenyat especialment per a estudiants interessats en progra
 
 ** Metodologia
 
-El càlculs s'han realitzar en python, emprant el software [[https://www.sagemath.org/index.html][sagemath]], i com a entorn de desenvolupament [[https://www.jupyter.org][jupyterlab]]. El notebook amb tots el càlculs es troba accessible al repositori de github [[https://github.com/CasimirVictoria/TFG-Semiconductores_2D][TFG-Semicunductores_2D]].
+El càlculs s'han realitzar en python, emprant el software [[https://www.sagemath.org/index.html][sagemath]], i com a entorn de desenvolupament [[https://www.jupyter.org][jupyterlab]]. El projecte, incloguent els notebooks amb el càlculs, es troba accessible al repossitori de github [[https://github.com/CasimirVictoria/TFG-Semiconductores_2D][TFG-Semicunductores_2D]].
+
+Una versió online es troba publicada en [[https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html][Github Pages]].
+Per publicar-la sols he necessitat instal·lar /ghp-import/, crear una branca /gh-pages/ del repositori i còrrer el comandament
+
+#+begin_src bash
+ghp-import -n -p -f _build/html
+#+end_src
+
+És important recordar no treballar en la branca /gh-pages/ ja que l'anterior comandament la destrueix i regenera.
 
 Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no emprar fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com [[https://git-scm.com/][git]]. Per aquesta raó s'ha emprat també el plugin [[https://github.com/mwouts/jupytext][jupytext]] per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla( amb el codi en python, markdown, etc.). En este projecte he decidit emprar el format [[https://jupyterbook.org/content/myst.html][myst markdown]].
 

@@ -18,6 +18,7 @@ En este notebook va la major part del codi. De fet és on estan tots els càlcul
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 # Netejem totes les variables 
 reset()
 ```
@@ -540,7 +541,7 @@ show(Eq_M_ZA3ers)
 show(Eq_M_ZO3ers)
 ```
 
-Notem que el segon valor propi és major que el primer (l'arrel quadrada és possitiva) i per tant correspon a la rama $ZO$, i el primer a $ZA$. 
+Notem que el segon valor propi és major que el primer (l'arrel quadrada és possitiva) i per tant correspon a la rama $ZO$, i el primer a $ZA$.
 
 +++
 
@@ -661,6 +662,10 @@ ola=real_part(sqrt(numpy.linalg.eigvals(\
      numpy.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),M_B=B.mass, M_N=N.mass\
                                ).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
 #pd.DataFrame(ola)
+dades_calculades=pd.DataFrame(ola)
+dades_calculades.to_csv("dades_calculades.dat", sep='\t', encoding='utf-8', header=False)
+datos=loadtxt("dades_calculades.dat")
+points(zip(datos[:,0], datos[:,1]), color="red")
 ```
 
 ```{raw-cell}
@@ -706,7 +711,9 @@ points(zip(dades[524:1048,0]/524*30, dades[524:1048,1]), color="black") +\
 points(zip(dades[1048:1572,0]/524*30, dades[1048:1572,1]), color="black") +\
 points(zip(dades[1572:2096,0]/525*30, dades[1572:2096,1]), color="black") +\
 points(zip(dades[2096:2620,0]/525*30, dades[2096:2620,1]), color="black") +\
-points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="black")     
+points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="black") +\
+points(zip(datos[:,0]/524*30, datos[:,1]), color="red")+\
+points(zip(datos[:,0]/524*30, datos[:,2]), color="red")     
      ,figsize=9) 
 ```
 
@@ -897,7 +904,7 @@ D4ts_xy=block_matrix([[D2BB4ts_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4N
 
 +++
 
-##### Al punt $\Gamma$
+#### Al punt $\Gamma$
 
 Fins 3ers veïns
 
@@ -1079,7 +1086,7 @@ Equacionspla3ers=[Eq_Gamma_TO3ers.subs(valors_numerics_pla_emprats),
                   Eq_K_TO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_K_LA3ers.subs(valors_numerics_pla_emprats),\
                   Eq_K_TA3ers.subs(valors_numerics_pla_emprats)]
-solucionspla3ers=minimize(norm(vector((Equacionspla3ers))),[1.,1.,1.,1.,1.,1.,1.,1.])
+solucionspla3ers=minimize(norm(vector((Equacionspla3ers))),[-200000.,1.,1.,1.,1.,1.,1.,1.])
 Solucionspla3ers=[phi1rBN==round(solucionspla3ers[0]),\
                   phi1tiBN==round(solucionspla3ers[1]),\
                   phi2rBB==round(solucionspla3ers[2]),\
@@ -1093,8 +1100,68 @@ Solucionspla3ers
 ```
 
 ```{code-cell} ipython3
-u,v=numpy.linalg.eig(D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1, q_x=n(pi), q_y=n(pi/sqrt(3))).numpy(dtype='complex64'))
-sqrt(round(u))
+u,v=numpy.linalg.eig(D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1, q_x=pi, q_y=pi/sqrt(3)).numpy(dtype='complex64'))
+sqrt(round(real_part(u)))
+v
+```
+
+```{code-cell} ipython3
+#Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
+freq_planol_Gamma_a_M=real_part(sqrt(numpy.linalg.eigvals(\
+     numpy.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+
+DF_freq_planol_Gamma_a_M=pd.DataFrame(freq_planol_Gamma_a_M)
+```
+
+```{code-cell} ipython3
+#Freqüències de M a K (i les guardem com un dataframe). Calculem 100 punts en este interval
+freq_planol_M_a_K=real_part(sqrt(numpy.linalg.eigvals(\
+     numpy.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=pi*(1+x/3), q_y=pi/sqrt(3)*(1-x),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./100)]))))
+
+DF_freq_planol_M_a_K=pd.DataFrame(freq_planol_M_a_K)
+```
+
+```{code-cell} ipython3
+#Freqüències de K a Gamma (i les guardem com un dataframe). Calculem 124 punts en este interval
+
+freq_planol_K_a_Gamma=real_part(sqrt(numpy.linalg.eigvals(\
+     numpy.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=n(4*pi/3*(1-x)), q_y=0,\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./224)]))))
+
+DF_freq_planol_K_a_Gamma=pd.DataFrame(freq_planol_K_a_Gamma)
+```
+
+```{code-cell} ipython3
+DF_freq_calculades_planol=pd.concat([DF_freq_planol_Gamma_a_M,DF_freq_planol_M_a_K,\
+                                    DF_freq_planol_K_a_Gamma],ignore_index=True)
+DF_freq_calculades_planol
+DF_freq_calculades_planol.to_csv("freq_calculades_planol.dat", sep='\t', encoding='utf-8', header=False)
+```
+
+```{code-cell} ipython3
+dades_calculades_planol=loadtxt("freq_calculades_planol.dat")
+show(\
+points(zip(dades_calculades_planol[:200,0]/524*30, dades_calculades_planol[:200,1]), color="red")+\
+points(zip(dades_calculades_planol[:200,0]/524*30, dades_calculades_planol[:200,2]), color="red")+\
+points(zip(dades_calculades_planol[:200,0]/524*30, dades_calculades_planol[:200,3]), color="red")+\
+points(zip(dades_calculades_planol[:200,0]/524*30, dades_calculades_planol[:200,4]), color="red")+\
+points(zip(dades_calculades_planol[200:300,0]/524*30, dades_calculades_planol[200:300,1]), color="blue")+\
+points(zip(dades_calculades_planol[200:300,0]/524*30, dades_calculades_planol[200:300,2]), color="blue")+\
+points(zip(dades_calculades_planol[200:300,0]/524*30, dades_calculades_planol[200:300,3]), color="blue")+\
+points(zip(dades_calculades_planol[200:300,0]/524*30, dades_calculades_planol[200:300,4]), color="blue")+\
+points(zip(dades_calculades_planol[300:524,0]/524*30, dades_calculades_planol[300:524,1]), color="green")+\
+points(zip(dades_calculades_planol[300:524,0]/524*30, dades_calculades_planol[300:524,2]), color="green")+\
+points(zip(dades_calculades_planol[300:524,0]/524*30, dades_calculades_planol[300:524,3]), color="green")+\
+points(zip(dades_calculades_planol[300:524,0]/524*30, dades_calculades_planol[300:524,4]), color="green")+\
+points(zip(dades[:524,0]/524*30, dades[:524,1]), color="black") +\
+points(zip(dades[524:1048,0]/524*30, dades[524:1048,1]), color="black") +\
+points(zip(dades[1048:1572,0]/524*30, dades[1048:1572,1]), color="black") +\
+points(zip(dades[1572:2096,0]/525*30, dades[1572:2096,1]), color="black") +\
+points(zip(dades[2096:2620,0]/525*30, dades[2096:2620,1]), color="black") +\
+points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="black")     
+     ,figsize=9) 
 ```
 
 ```{code-cell} ipython3
@@ -1102,10 +1169,16 @@ v
 ```
 
 ```{code-cell} ipython3
-[D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1).numpy() for (q_x=0.0, q_y=0)]
+real_part(sqrt(numpy.linalg.eigvals(\
+     numpy.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),M_B=B.mass, M_N=N.mass\
+                               ).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
 ```
 
 ```{code-cell} ipython3
+#[D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1).numpy() for (q_x=0.0, q_y=0)]
+```
+
+```{raw-cell}
 D_Gamma4ts_xy=D4ts_xy.subs(q_x=0,q_y=0)
 
 show(D_Gamma4ts_xy.eigenvalues())
