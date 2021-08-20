@@ -17,13 +17,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-[D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1).numpy() for (q_x=0.0, q_y=0)]
+#Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
+freq_planol_Gamma_a_M4ts=real_part(sqrt(numpy.linalg.eigvals(\
+     numpy.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+
+DF_freq_planol_Gamma_a_M4ts=pd.DataFrame(freq_planol_Gamma_a_M4ts)
 ------------------
 
-[0;36m  File [0;32m"<ipython-input-41-77d7cb626810>"[0;36m, line [0;32m1[0m
-[0;31m    [D3ers_xy.subs(Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=Integer(1)).numpy() for (q_x=RealNumber('0.0'), q_y=Integer(0))][0m
-[0m                                                                                           ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/usr/lib/python3/dist-packages/sage/all_cmdline.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m#Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m freq_planol_Gamma_a_M4ts=real_part(sqrt(numpy.linalg.eigvals(\
+[0m[1;32m      3[0m      numpy.array([D4ts_xy.subs(Solucionspla4ts, a=Integer(1), q_x=x*pi, q_y=x*pi/sqrt(Integer(3)),\
+[1;32m      4[0m                     M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(Integer(0),Integer(1),RealNumber('1.')/Integer(200))]))))
+[1;32m      5[0m [0;34m[0m[0m
 
-SyntaxError: invalid syntax (<ipython-input-41-77d7cb626810>, line 1)
+[0;31mNameError[0m: name 'numpy' is not defined
+NameError: name 'numpy' is not defined
 
