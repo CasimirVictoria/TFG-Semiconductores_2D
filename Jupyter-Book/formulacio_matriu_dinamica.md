@@ -29,7 +29,7 @@ reset()
 ```
 
 ```{note}
-En firefox cambiar "Math Renderer a Mathml" per visualitzar millor tant la web com el notebook.
+En firefox cambiar "Math Renderer a Mathml" per visualitzar millor tant la web com el notebook, pulsant amb el botó dret del ratoli sobre qualsevol de les equacions.
 ```
 
 ```{code-cell} ipython3
@@ -45,6 +45,11 @@ import pandas as pd
 import numpy as np
 from numpy import arange
 #from myst_nb import glue
+
+from periodictable import C, B, N, constants
+u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
+
+from scipy.constants import c
 
 # Defineisc algunes funcions que empraré més endavant
 def matriu_simplificada(matriu,m,n):
@@ -252,7 +257,7 @@ Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que i
 ......
 
 
-Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
+Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components ...) però sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -271,7 +276,7 @@ def angle(alphaprima,alpha,l_1,l_2):
 def U(theta):
     return matrix([[cos(theta),sin(theta),0], [-sin(theta), cos(theta),0],[0,0,1]])
 
-#Matriu de força per als primers veins
+#Matriu de força per als primers veïns
 
 var('M_B,M_N', domain='positive')
 var('omega')
@@ -352,7 +357,7 @@ def D_3l_BN(alphaprima,alpha,l_1,l_2):
 def D_3l_NB(alphaprima,alpha,l_1,l_2):
     return Phi_3l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
 
-#Matriz de força per als quarts veïns
+#Matriu de força per als quart veïns
 phi4rBN=var('phi4rBN',latex_name='\\phi_{4,r}^{BN}',domain='real')
 phi4tiBN=var('phi4tiBN',latex_name='\\phi_{4,ti}^{BN}',domain='real')
 phi4toBN=var('phi4toBN',latex_name='\\phi_{4,to}^{BN}',domain='real')
@@ -417,8 +422,6 @@ for k in [1,2]:
                     D4NB += D_4l_NB(k,m,i,j)
                     D04NB += Phi_4l__NB(k,m,i,j)
 
-#A tener en cuenta: cuando consideramos el mismo tipo de átomos 
-# (de la misma subred, no porque sean el mismmo elemento)
 
 # Tenemos en cuenta la contribución a la matriz dinámica de los átomos situados en 
 # la celdilla 0
@@ -492,10 +495,7 @@ Per al punt $(k_x=0, k_y=0)$, la matriu que tenim és:
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-from periodictable import C, B, N, constants
-u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
-
-omega_Gamma_ZO=830 #cm-1
+omega_Gamma_ZO=832 #cm-1
 omega_Gamma_ZA=0
 D_Gamma3ers_zz=D_zz3ers.subs(q_x=0,q_y=0) #,(M_B,B.mass*u),(M_N,N.mass*u)])
 show(D_Gamma3ers_zz)
@@ -525,8 +525,8 @@ Al punt $M$ $\left(q_x=\pi/a,q_y=\pi/(\sqrt 3 a\right)$ els valors propis de la 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-omega_M_ZO=635 #cm-1
-omega_M_ZA=314
+omega_M_ZO=638 #cm-1
+omega_M_ZA=315
 
 D_M3ers_zz=D_zz3ers.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
 
@@ -567,8 +567,8 @@ Per al punt ($k_x=4\pi/(3 a)$, $k_y=0$) obtenim els autovalors:
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-omega_K_ZO=605 #cm-1
-omega_K_ZA=322
+omega_K_ZO=602 #cm-1
+omega_K_ZA=320
 D_K_zz3ers=D_zz3ers.subs(q_x=4*pi/(3*a),q_y=0)
 
 Eq_K_ZA3ers=(D_K_zz3ers.eigenvalues()[0]==omegaKZA**2).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
@@ -652,13 +652,13 @@ Solucions3ers2
 Realitzant diferents gràfiques podem comprobar que realment ajusta millor al conjunt de dades experimentals la primera solució que hem trobat, de manera que escollim com a conjunt de constants de força:
 
 ```{code-cell} ipython3
-Equacions3ers=[Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
+Equacions3ers=[2*Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZA3ers.subs(valors_numerics_emprats),\
                Eq_K_ZO3ers.subs(valors_numerics_emprats),\
                Eq_K_ZA3ers.subs(valors_numerics_emprats)]
 
-solucions3ers=minimize(norm(vector((Equacions3ers))),[-1490000.,1.,1.,1.])
+solucions3ers=minimize(norm(vector((Equacions3ers))),[-1490000.,1.,1.,1.]) #[-1490000.,1.,1.,1.])
 
 Solucions3ers=[phi1toBN==round(solucions3ers[0]), phi2toBB==round(solucions3ers[1]),\
                 phi2toNN==round(solucions3ers[2]), phi3toBN==round(solucions3ers[3])]
@@ -682,45 +682,30 @@ En compte calcular els valors i vectors propis analíticament, ara que tenim tot
 
 #Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
 freq_perp_planol_Gamma_a_M=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]))))
 
 DF_freq_perp_planol_Gamma_a_M=pd.DataFrame(freq_perp_planol_Gamma_a_M)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 #Freqüències de M a K (i les guardem com un dataframe). Calculem 100 punts en este interval
 freq_perp_planol_M_a_K=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=pi*(1+x/3), q_y=pi/sqrt(3)*(1-x),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./100)]))))
+     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(100)]))))
 
 DF_freq_perp_planol_M_a_K=pd.DataFrame(freq_perp_planol_M_a_K)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 #Freqüències de K a Gamma (i les guardem com un dataframe). Calculem 124 punts en este interval
 freq_perp_planol_K_a_Gamma=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=n(4*pi/3*(1-x)), q_y=0,\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./224)]))))
+     np.array([D_zz3ers.subs(Solucions3ers, a=1, q_x=4*pi/3*(1-x/223), q_y=0,\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(224)]))))
 
 DF_freq_perp_planol_K_a_Gamma=pd.DataFrame(freq_perp_planol_K_a_Gamma)
-```
 
-```{code-cell} ipython3
-:tags: [hide-input]
-
-DF_freq_calculades_perp_planol=pd.concat([DF_freq_perp_planol_Gamma_a_M,DF_freq_perp_planol_M_a_K,\
-                                    DF_freq_perp_planol_K_a_Gamma],ignore_index=True)
+DF_freq_calculades_perp_planol=pd.concat([\
+        DF_freq_perp_planol_Gamma_a_M,DF_freq_perp_planol_M_a_K,\
+        DF_freq_perp_planol_K_a_Gamma],ignore_index=True)
 DF_freq_calculades_perp_planol
 DF_freq_calculades_perp_planol.to_csv("freq_calculades_perp_planol.dat", sep='\t', encoding='utf-8', header=False)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 dades_calculades_perp_planol=loadtxt("freq_calculades_perp_planol.dat")
 show(\
@@ -730,10 +715,10 @@ points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol
 points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,2]), color="red")+\
 points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,2]), color="red")+\
-points(zip(dades[:524,0], dades[:524,1]), color="black") +\
-points(zip(dades[524:1048,0], dades[524:1048,1]), color="black") +\
-points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="black") +\
-points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="black") +\
+points(zip(dades[:524,0], dades[:524,1]), color="blue") +\
+points(zip(dades[524:1048,0], dades[524:1048,1]), color="pink") +\
+points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="steelblue") +\
+points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="brown") +\
 points(zip(dades[2096:2620,0], dades[2096:2620,1]), color="black") +\
 points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")     
      ,figsize=9) 
@@ -804,8 +789,8 @@ show(Eq_M_ZO4ts)
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-omega_K_ZO=605 #cm-1
-omega_K_ZA=322
+omega_K_ZO=602 #cm-1
+omega_K_ZA=320
 D_K_zz4ts=D_zz4ts.subs(q_x=4*pi/(3*a),q_y=0)
 
 Eq_K_ZA4ts=(D_K_zz4ts.eigenvalues()[0]==omegaKZA**2).expand() #.subs(Eq_Gamma_ZO4ts.solve(phi4toBN)[0]).expand()
@@ -839,45 +824,29 @@ Solucions4ts
 
 #Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
 freq_perp_planol_Gamma_a_M=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]))))
 
 DF_freq_perp_planol_Gamma_a_M=pd.DataFrame(freq_perp_planol_Gamma_a_M)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 #Freqüències de M a K (i les guardem com un dataframe). Calculem 100 punts en este interval
 freq_perp_planol_M_a_K=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=pi*(1+x/3), q_y=pi/sqrt(3)*(1-x),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./100)]))))
+     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(100)]))))
 
 DF_freq_perp_planol_M_a_K=pd.DataFrame(freq_perp_planol_M_a_K)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 #Freqüències de K a Gamma (i les guardem com un dataframe). Calculem 124 punts en este interval
 freq_perp_planol_K_a_Gamma=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=n(4*pi/3*(1-x)), q_y=0,\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./224)]))))
+     np.array([D_zz4ts.subs(Solucions4ts, a=1, q_x=4*pi/3*(1-x/223), q_y=0,\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(224)]))))
 
 DF_freq_perp_planol_K_a_Gamma=pd.DataFrame(freq_perp_planol_K_a_Gamma)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 DF_freq_calculades_perp_planol=pd.concat([DF_freq_perp_planol_Gamma_a_M,DF_freq_perp_planol_M_a_K,\
                                     DF_freq_perp_planol_K_a_Gamma],ignore_index=True)
 DF_freq_calculades_perp_planol
 DF_freq_calculades_perp_planol.to_csv("freq_calculades_perp_planol4ts.dat", sep='\t', encoding='utf-8', header=False)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 dades_calculades_perp_planol=loadtxt("freq_calculades_perp_planol4ts.dat")
 show(\
@@ -896,12 +865,132 @@ points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")
      ,figsize=9) 
 ```
 
+### Numèricament
+
++++
+
+La idea ara es realitzar l'ajust a les dades experimentals numèricament, per a la qual cosa necessite la matriu com a array de numpy:
+
+```{raw-cell}
+def Dzz(phi1BN,phi2BB,phi2NN,phi3BN,phi4BN,qx,qy):
+    return D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=qx,q_y=qy).numpy()
+
+def autovalor(i):
+    return np.array(dades)[i][1]**2
+
+for x in range(2):
+    print(Dzz(4.,3.,2.,5.,7.,2,2))
+```
+
+```{raw-cell}
+D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=qx,q_y=qy).numpy()
+```
+
+```{raw-cell}
+def autovalor(i):
+    return np.array(dades)[i][1]**2
+
+[D_zz4ts.subs(a=1,M_B=B.mass, M_N=N.mass, qx=x/199*pi, qy=x/199*pi/sqrt(3))-autovalor(x)*matrix.identity(2) for x in range(2)]
+```
+
+```{raw-cell}
+def my_func(phi):
+    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = phi
+    eigenValues, eigenVectors= np.linalg.eig([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,\
+                                                           a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
+    ordre = eigenValues.argsort()[::-1]
+    eigenValues = eigenValues[ordre]
+    eigenVectors = eigenVectors[:,ordre]
+    return(eigenValues)
+
+phi0 = np.array([1.,1.,1.,1.,1.])  # Initial guess
+
+my_func(phi0)
+
+#autovalors_Z=np.linalg.eigvals(my_func(phi0))
+
+#ordre=autovalors_Z.argsort()[::1]
+#autovalors_ZA=autovalors_Z[ordre]
+```
+
+```{raw-cell}
+u1,v1 = np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
+               q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
+
+with open("matdyn_casi.modes", "x") as f:
+    for x in range(200):
+        f.write("     diagonalizing the dynamical matrix ...\n\n")
+        q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
+        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
+        f.write(" **************************************************************************\n")
+        ordre=u1[x].argsort()[::1]
+        u1[x]=u1[x][ordre]
+        v1[x]=v1[x][:,ordre]
+        for i in range(6):
+            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u1[x][i])):9.6f} [THz] =    {real_part(sqrt(u1[x][i])):11.6f} [cm-1]\n')
+            f.write(f' ( {real_part(v1[x][i][0]):9.6f}  {imag_part(v1[x][i][0]):9.6f}    {real_part(v1[x][i][1]):9.6f}  {imag_part(v1[x][i][1]):9.6f}    {real_part(v1[x][i][2]):9.6f}  {imag_part(v1[x][i][2]):9.6f}   )\n')
+            f.write(f' ( {real_part(v1[x][i][3]):9.6f}  {imag_part(v1[x][i][3]):9.6f}    {real_part(v1[x][i][4]):9.6f}  {imag_part(v1[x][i][4]):9.6f}    {real_part(v1[x][i][5]):9.6f}  {imag_part(v1[x][i][5]):9.6f}   )\n')     
+        f.write(" **************************************************************************\n")
+ 
+
+#autovalors_Z[:,1]
+```
+
+```{raw-cell}
+np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
+    dtype='complex64') - dades[x,1] for x in range(20)])
+```
+
+```{raw-cell}
+def my_func(phi):
+    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = phi
+    arr = np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
+    dtype='complex64') for x in range(20)])
+    ev, ew=np.linalg.eig(arr)
+    return ev[0]
+```
+
+```{raw-cell}
+phi0 = np.array([1.,1.,1.,1.,1.])  # Initial guess
+
+#minimize(my_func, phi0)
+my_func
+```
+
+```{raw-cell}
+minimize(norm(vector(ola)),[1.,1.,1.,1.,1.])
+```
+
+```{raw-cell}
+def my_func(x):
+    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = x
+    arr = np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
+    dtype='complex64') for x in range(20)])
+    ev, ew=np.linalg.eig(arr)
+    return ev[0]
+
+#x0 = np.array([1000, 3.45])  # Initial guess
+#minimize(my_func, x0)
+#autovalor(0)*np.identity(2)
+```
+
+Al fitxer *freq.dat* tenim l'arrel quadrada dels valors propis d'esta matriu als punts q_x, q_y, de manera que per ajustar el valor de les constants emprarem que té que complir-se
+$det(D-\lambda_i I)=0$ o, el que és el mateix, $eigval(D)-\lambda_i=0$
+
+```{raw-cell}
+[Dzz.subs(a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3), M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]
+```
+
+```{raw-cell}
+minimize(D_zz4ts.subs(a=1, M_B=B.mass, M_N=N.mass,q_x=pi/a,q_y=pi/(sqrt(3)*a)).det(),[-1463658.,-24083.,-373442,1.,42685])
+```
+
 ## Vibracions al pla del cristall
 
 +++
 
 Vibracions dins del pla del cristall
-En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$) en cada punt $q_x$, $q_y$, que corresponen a cuatre rames.
+En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$) en cada punt ($q_x$, $q_y$), que corresponen a quatre rames.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -921,7 +1010,6 @@ D3NB_xy=D3NB.matrix_from_rows_and_columns([0,1],[0,1])
 D4BN_xy=D4BN.matrix_from_rows_and_columns([0,1],[0,1])
 D4NB_xy=D4NB.matrix_from_rows_and_columns([0,1],[0,1])
 
-#D_xy=block_matrix([[D2BB_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, D2NN_xy]])
 D3ers_xy=block_matrix([[D2BB3ers_xy, D1BN_xy+D3BN_xy],[D1NB_xy+D3NB_xy, D2NN3ers_xy]])
 
 D4ts_xy=block_matrix([[D2BB4ts_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, D2NN4ts_xy]])
@@ -940,24 +1028,24 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
 ```{code-cell} ipython3
 :tags: [hide-input, hide-output]
 
-omega_Gamma_TO=1394
+omega_Gamma_TO=1395
+omega_Gamma_LO=1395
 D_Gamma3ers_xy=D3ers_xy.subs(q_x=0,q_y=0)
 show([D_Gamma3ers_xy.eigenvalues()[0], D_Gamma3ers_xy.eigenvalues()[2]])
 ```
 
-De manera que obtenim les següents equacions:
+De manera que obtenim la següent equació:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-omega_Gamma_TO=1394
 Eq_Gamma_TO3ers=(D_Gamma3ers_xy.eigenvalues()[0]==omegaGammaTO**2)
-#show(Eq_Gamma_LA)
-show(Eq_Gamma_TO3ers)
+Eq_Gamma_LO3ers=(D_Gamma3ers_xy.eigenvalues()[1]==omegaGammaLO**2)
+show(Eq_Gamma_LO3ers)
 ```
 
 ```{note}
-Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourceforge.io/)) no obté una expressió analítica però si supossem que els 2 àtoms de la base tenen la mateixa massa  ($M_N=M_B$) podem obtindre fàcilment els valors propis de la matriu original realitzant les substitucions pertinents als resultats obtessos
+Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourceforge.io/)) no obté una expressió analítica però si abans simplifique el problema, supossant que els 2 àtoms de la base tenen la mateixa massa  ($M_N=M_B$), sí que obtenim una solució analítica, i després podem obtindre els valors propis correctes per al nostre model realitzant les substitucions pertinents als resultats obtessos (cada constant apareix sempre dividida per l'arrel quadrada de les masses pertinenets)
 ```
 
 +++
@@ -983,13 +1071,11 @@ Valors_propis_en_M3ers=[M_B*Valors_propis_M3ers[i].subs(
 
 
 omega_M_LO=1320
-omega_M_TO=1292
-omega_M_LA=1173
+omega_M_TO=1293
+omega_M_LA=1174
 omega_M_TA=553
 #Comprobem que sí són els valors propis:
-[det(D_M3ers_xy-Valors_propis_en_M3ers[i]) for i in range(4)]
-
-
+#[det(D_M3ers_xy-Valors_propis_en_M3ers[i]) for i in range(4)]
 for i in range(4):
     show(Valors_propis_en_M3ers[i].expand())
 ```
@@ -1002,15 +1088,20 @@ Supossant que les constants de força radials són més grans que les transversa
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-Eq_M_TA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
-Eq_M_LO3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLO^2)
-Eq_M_LA3ers = (Valors_propis_en_M3ers[2].expand() == omegaMLA^2)
-Eq_M_TO3ers = (Valors_propis_en_M3ers[3].expand() == omegaMTO^2)
+Eq_M_LA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
+Eq_M_TA3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLO^2)
+Eq_M_TO3ers = (Valors_propis_en_M3ers[2].expand() == omegaMLA^2)
+Eq_M_LO3ers = (Valors_propis_en_M3ers[3].expand() == omegaMTO^2)
 
-show(Eq_M_LO3ers)
-show(Eq_M_TO3ers)
+#Eq_M_LA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
+#Eq_M_LO3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLO^2)
+#Eq_M_TA3ers = (Valors_propis_en_M3ers[2].expand() == omegaMLA^2)
+#Eq_M_TO3ers = (Valors_propis_en_M3ers[3].expand() == omegaMTO^2)
+
 show(Eq_M_LA3ers)
+show(Eq_M_LO3ers)
 show(Eq_M_TA3ers)
+show(Eq_M_TO3ers)
 
 #Eq_M_TA_mes_M_LO3ers=(Eq_M_TA3ers + Eq_M_LO3ers)
 #show(Eq_M_TA_mes_M_LO3ers)
@@ -1023,6 +1114,9 @@ show(Eq_M_TA3ers)
 #Fem notar que la suma de tots els valors propis en $M$ compleix l'equació:
 #(3*Eq_M_LA_mes_M_TO3ers-Eq_M_TA_mes_M_LO3ers).subs(solve(Eq_Gamma_TO3ers,phi3rBN)).expand()
 #(Eq_M_LA_mes_M_TO-3*Eq_M_TA_mes_M_LO).subs(solve(Eq_Gamma_TO,phi3rBN)).expand()
+
+show(Eq_M_TA3ers+Eq_M_LO3ers)
+show(Eq_M_LA3ers+Eq_M_TO3ers)
 ```
 
 ### Al punt $K$ 
@@ -1031,11 +1125,12 @@ En $\left(k_x=\frac{4\pi}{3a}, k_y=0\right)$
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-omega_K_LO=1304
+omega_K_LO=1305
+omega_K_TO=1293
 omega_K_LA=1080
-omega_K_TA=553
+omega_K_TA=879
 
-omega_K_TO=sqrt(omega_K_LO**2+omega_K_TA**2-omega_K_LA)
+#sqrt(omega_K_LO**2+omega_K_TA**2-omega_K_LA)
 
 D_K3ers_xy=D3ers_xy.subs(q_x=4*pi/(3*a),q_y=0)# phi4tiBN=-phi4rBN)
 D_K3ers_xy_simplificada=D_K3ers_xy.subs(M_N=M_B)
@@ -1052,28 +1147,36 @@ Valors_propis_en_K3ers=[M_B*Valors_propis_K3ers[i].expand().subs(
 #[det(D_K_xy-Valors_propis_en_K[i]) for i in range(4)]
 for i in range(4):
     show(Valors_propis_en_K3ers[i].expand())
-
-#Comprobem que sí són els valors propis:
-#[det(D_K_xy-Valors_propis_en_K[i]) for i in range(4)]
 ```
 
+```{code-cell} ipython3
+#Comprobem que sí són els valors propis:
+[det(D_K3ers_xy-Valors_propis_en_K3ers[i]) for i in range(4)]
+```
+
+Notem que el tenim un valor propi degenerat, cosa que no observem en les dades experimentals, així que el que fem es supossar que correspon als valors intermijos ($LA$ i $TO$)
 Emprant un argument anàleg a l'emprat per als valors propis en $M$ assignem cada valor propi a cadascuna de les rames, de manera que:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-Eq_K_LA3ers = (Valors_propis_en_K3ers[0].expand() == omegaKLA^2)
-Eq_K_TO3ers = (Valors_propis_en_K3ers[1].expand() == omegaKTO^2)
+Eq_K_LO3ers = (Valors_propis_en_K3ers[0].expand() == omegaKLO^2)
+Eq_K_LA3ers = (Valors_propis_en_K3ers[1].expand() == omegaKLA^2)
 Eq_K_TA3ers = (Valors_propis_en_K3ers[2].expand() == omegaKTA^2)
-Eq_K_LO3ers = (Valors_propis_en_K3ers[3].expand() == omegaKLO^2)
+Eq_K_TO3ers = (Valors_propis_en_K3ers[3].expand() == omegaKTO^2)
 
-Eq_KTA_mes_KLO3ers=(Eq_K_TA3ers + Eq_K_LO3ers)
-Eq_KLA_mes_KTO3ers=(Eq_K_LA3ers + Eq_K_TO3ers)
+show(Eq_K_TO3ers+Eq_K_LO3ers)
+show(Eq_K_TA3ers+Eq_K_LA3ers)
 
-show(Eq_K_LA3ers)
-show(Eq_K_TO3ers)
-show(Eq_K_TA3ers)
-show(Eq_K_LO3ers)
+show(omega_K_LO^2+omega_K_TO^2-(omega_K_TA^2+omega_K_LA^2))
+#show(omega_K_TA^2+omega_K_LA^2-(omega_K_LO^2+omega_K_TO^2))
+#Eq_KTA_mes_KLO3ers=(Eq_K_TA3ers + Eq_K_LO3ers)
+#Eq_KLA_mes_KTO3ers=(Eq_K_LA3ers + Eq_K_TO3ers)
+
+#show(Eq_K_LA3ers)
+#show(Eq_K_TO3ers)
+#show(Eq_K_TA3ers)
+#show(Eq_K_LO3ers)
 
 #Eq_KLO_menys_KTA_quadrat3ers=((Eq_K_LO3ers-Eq_K_TA3ers)**2).expand()
 #Eq_KTO_menys_KLA_quadrat3ers=((Eq_K_TO3ers-Eq_K_LA3ers)**2).expand()
@@ -1093,16 +1196,16 @@ show(Eq_K_LO3ers)
 
 valors_numerics_pla_emprats=[omegaGammaTO==omega_Gamma_TO,\
                              omegaMLO==omega_M_LO,\
-                             omegaMTO==omega_M_TO,\
-                             omegaMLA==omega_M_LA,\
+                             omegaMTO==omega_M_TO-sqrt(362583/2),\
+                             omegaMLA==omega_M_LA+sqrt(362583/2),\
                              omegaMTA==omega_M_TA,\
                              omegaKLO==omega_K_LO,\
                              omegaKTO==omega_K_TO,\
                              omegaKLA==omega_K_LA,\
-                             omegaKTA==omega_K_TO,\
+                             omegaKTA==omega_K_TA,\
                              M_B==B.mass, M_N==N.mass \
                             ]
-Equacionspla3ers=[Eq_Gamma_TO3ers.subs(valors_numerics_pla_emprats),
+Equacionspla3ers=[Eq_Gamma_TO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_M_LO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_M_TO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_M_LA3ers.subs(valors_numerics_pla_emprats),\
@@ -1111,7 +1214,10 @@ Equacionspla3ers=[Eq_Gamma_TO3ers.subs(valors_numerics_pla_emprats),
                   Eq_K_TO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_K_LA3ers.subs(valors_numerics_pla_emprats),\
                   Eq_K_TA3ers.subs(valors_numerics_pla_emprats)]
-solucionspla3ers=minimize(norm(vector((Equacionspla3ers))),[1.,1.,1.,1.,1.,1.,1.,1.])
+
+solucionspla3ers=minimize(norm(vector((Equacionspla3ers))),\
+                          [-1400000.,1.,1.,1.,1.,1.,1.,1.])
+#\[-140000,-300000.,1.,1.,1.,1.,1.,1.])
 Solucionspla3ers=[phi1rBN==round(solucionspla3ers[0]),\
                   phi1tiBN==round(solucionspla3ers[1]),\
                   phi2rBB==round(solucionspla3ers[2]),\
@@ -1121,42 +1227,34 @@ Solucionspla3ers=[phi1rBN==round(solucionspla3ers[0]),\
                   phi3rBN==round(solucionspla3ers[6]),\
                   phi3tiBN==round(solucionspla3ers[7])]
                   
-Solucionspla3ers
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
+#Solucionspla3ers
 #Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
 freq_planol_Gamma_a_M=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]))))
 
 DF_freq_planol_Gamma_a_M=pd.DataFrame(freq_planol_Gamma_a_M)
 
 #Freqüències de M a K (i les guardem com un dataframe). Calculem 100 punts en este interval
 freq_planol_M_a_K=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=pi*(1+x/3), q_y=pi/sqrt(3)*(1-x),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./100)]))))
+     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(100)]))))
 
 DF_freq_planol_M_a_K=pd.DataFrame(freq_planol_M_a_K)
 
 #Freqüències de K a Gamma (i les guardem com un dataframe). Calculem 124 punts en este interval
 
 freq_planol_K_a_Gamma=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=n(4*pi/3*(1-x)), q_y=0,\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./224)]))))
+     np.array([D3ers_xy.subs(Solucionspla3ers, a=1, q_x=4*pi/3*(1-x/223), q_y=0,\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(224)]))))
 
 DF_freq_planol_K_a_Gamma=pd.DataFrame(freq_planol_K_a_Gamma)
 
 DF_freq_calculades_planol=pd.concat([DF_freq_planol_Gamma_a_M,DF_freq_planol_M_a_K,\
                                     DF_freq_planol_K_a_Gamma],ignore_index=True)
-DF_freq_calculades_planol
-DF_freq_calculades_planol.to_csv("freq_calculades_planol.dat", sep='\t', encoding='utf-8', header=False)
-```
 
-```{code-cell} ipython3
-:tags: [hide-input]
+DF_freq_calculades_planol.to_csv("freq_calculades_planol.dat",\
+                                 sep='\t', encoding='utf-8', header=False)
 
 dades_calculades_planol=loadtxt("freq_calculades_planol.dat")
 show(\
@@ -1184,34 +1282,110 @@ points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="black") +\
 points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="black") +\
 points(zip(dades[2096:2620,0], dades[2096:2620,1]), color="black") +\
 points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")     
-     ,figsize=9) 
+     ,figsize=9)
+show(Solucionspla3ers)
+```
+
+```{code-cell} ipython3
+u1,v1 = np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
+               q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
+
+u2,v2= np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
+               q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99)).numpy(dtype='complex64') for x in range(100)])
+
+u3,v3=np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
+               q_x=4*pi/3*(1-x/223), q_y=0).numpy(dtype='complex64') for x in range(224)])
+```
+
+```{code-cell} ipython3
+:tags: []
+
+with open("matdyn_casi.modes", "x") as f:
+    for x in range(200):
+        f.write("     diagonalizing the dynamical matrix ...\n\n")
+        q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
+        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
+        f.write(" **************************************************************************\n")
+        ordre=u1[x].argsort()[::1]
+        u1[x]=u1[x][ordre]
+        v1[x]=v1[x][:,ordre]
+        for i in range(6):
+            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u1[x][i])):9.6f} [THz] =    {real_part(sqrt(u1[x][i])):11.6f} [cm-1]\n')
+            f.write(f' ( {real_part(v1[x][:,i][0]):9.6f}  {imag_part(v1[x][:,i][0]):9.6f}    {real_part(v1[x][:,i][1]):9.6f}  {imag_part(v1[x][:,i][1]):9.6f}    {real_part(v1[x][:,i][2]):9.6f}  {imag_part(v1[x][:,i][2]):9.6f}   )\n')
+            f.write(f' ( {real_part(v1[x][:,i][3]):9.6f}  {imag_part(v1[x][:,i][3]):9.6f}    {real_part(v1[x][:,i][4]):9.6f}  {imag_part(v1[x][:,i][4]):9.6f}    {real_part(v1[x][:,i][5]):9.6f}  {imag_part(v1[x][:,i][5]):9.6f}   )\n')     
+        f.write(" **************************************************************************\n")
+        
+    for x in range(100):
+        f.write("     diagonalizing the dynamical matrix ...\n\n")
+        q_x, q_y, q_z = pi*(1+x/(3*99)), pi/sqrt(3)*(1-x/99), 0.0
+        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
+        f.write(" **************************************************************************\n")
+        ordre=u2[x].argsort()[::1]
+        u2[x]=u2[x][ordre]
+        v2[x]=v2[x][:,ordre]
+        for i in range(6):
+            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u2[x][i])):9.6f} [THz] =    {real_part(sqrt(u2[x][i])):11.6f} [cm-1]\n')
+            f.write(f' ( {real_part(v2[x][:,i][0]):9.6f}  {imag_part(v2[x][:,i][0]):9.6f}    {real_part(v2[x][:,i][1]):9.6f}  {imag_part(v2[x][:,i][1]):9.6f}    {real_part(v2[x][:,i][2]):9.6f}  {imag_part(v2[x][:,i][2]):9.6f}   )\n')
+            f.write(f' ( {real_part(v2[x][:,i][3]):9.6f}  {imag_part(v2[x][:,i][3]):9.6f}    {real_part(v2[x][:,i][4]):9.6f}  {imag_part(v2[x][:,i][4]):9.6f}    {real_part(v2[x][:,i][5]):9.6f}  {imag_part(v2[x][:,i][5]):9.6f}   )\n')     
+        f.write(" **************************************************************************\n")    
+
+    for x in range(224):
+        f.write("     diagonalizing the dynamical matrix ...\n\n")
+        q_x, q_y, q_z = 4*pi/3*(1-x/223), 0.0 , 0.0
+        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
+        f.write(" **************************************************************************\n")
+        ordre=u3[x].argsort()[::1]
+        u3[x]=u3[x][ordre]
+        v3[x]=v3[x][:,ordre]
+        for i in range(6):
+            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u3[x][i])):9.6f} [THz] =    {real_part(sqrt(u3[x][i])):11.6f} [cm-1]\n')
+            f.write(f' ( {real_part(v3[x][:,i][0]):9.6f}  {imag_part(v3[x][:,i][0]):9.6f}    {real_part(v3[x][:,i][1]):9.6f}  {imag_part(v3[x][:,i][1]):9.6f}    {real_part(v3[x][:,i][2]):9.6f}  {imag_part(v3[x][:,i][2]):9.6f}   )\n')
+            f.write(f' ( {real_part(v3[x][:,i][3]):9.6f}  {imag_part(v3[x][:,i][3]):9.6f}    {real_part(v3[x][:,i][4]):9.6f}  {imag_part(v3[x][:,i][4]):9.6f}    {real_part(v3[x][:,i][5]):9.6f}  {imag_part(v3[x][:,i][5]):9.6f}   )\n')     
+        f.write(" **************************************************************************\n")    
 ```
 
 ### Fins 4ts veïns
 
 ```{code-cell} ipython3
+#Autovalores en Gamma--------------------------------------------
 D_Gamma4ts_xy=D4ts_xy.subs(q_x=0,q_y=0)
 Eq_Gamma_TO4ts=(D_Gamma4ts_xy.eigenvalues()[0]==omegaGammaTO**2)
+#----------------------------------------------------------------
+
+#Autovalors en M-------------------------------------------------
 
 D_M4ts_xy=D4ts_xy.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
 
+#Per calcular els autovalors en M simplifiquem la matriu
 D_M4ts_xy_simplificada=D_M4ts_xy.subs(M_N=M_B)
 
 Valors_propis_M4ts=D_M4ts_xy_simplificada.eigenvalues()
 
+# Y substituïm després en la solucio trobada
 Valors_propis_en_M4ts=[M_B*Valors_propis_M4ts[i].subs(
     phi1rBN=phi1rBN/sqrt(M_N*M_B), phi1tiBN=phi1tiBN/sqrt(M_N*M_B), 
     phi2rBB=phi2rBB/M_B, phi2tiBB=phi2tiBB/M_B,
     phi2rNN=phi2rNN/M_N, phi2tiNN=phi2tiNN/M_N,
     phi3rBN=phi3rBN/sqrt(M_N*M_B), phi3tiBN=phi3tiBN/sqrt(M_N*M_B),
     phi4rBN=phi4rBN/sqrt(M_N*M_B), phi4tiBN=phi4tiBN/sqrt(M_N*M_B)) for i in range(4)]
-    
 
+#Comprobem que realment son els valors propis de la matriu original
+show([det(D_M4ts_xy-Valors_propis_en_M4ts[i]) for i in range(4)])
+
+#Assignem a cada valor propi el su valor numèric
 Eq_M_TA4ts = (Valors_propis_en_M4ts[0].expand() == omegaMTA^2)
 Eq_M_LO4ts = (Valors_propis_en_M4ts[1].expand() == omegaMLO^2)
 Eq_M_LA4ts = (Valors_propis_en_M4ts[2].expand() == omegaMLA^2)
 Eq_M_TO4ts = (Valors_propis_en_M4ts[3].expand() == omegaMTO^2)
+#----------------------------------------------------------------
+Equacions_en_M=[Eq_M_LO4ts,Eq_M_TO4ts,Eq_M_LA4ts,Eq_M_TA4ts]
+for i in range(4):
+    show(Equacions_en_M[i])
+    
+```
 
+```{code-cell} ipython3
+#Autovalors en K
 D_K4ts_xy=D4ts_xy.subs(q_x=4*pi/(3*a),q_y=0)# phi4tiBN=-phi4rBN)
 D_K4ts_xy_simplificada=D_K4ts_xy.subs(M_N=M_B)
 Valors_propis_K4ts=D_K4ts_xy_simplificada.eigenvalues()
@@ -1223,19 +1397,21 @@ Valors_propis_en_K4ts=[M_B*Valors_propis_K4ts[i].expand().subs(
     phi3rBN=phi3rBN/sqrt(M_N*M_B), phi3tiBN=phi3tiBN/sqrt(M_N*M_B),
     phi4rBN=phi4rBN/sqrt(M_N*M_B), phi4tiBN=phi4tiBN/sqrt(M_N*M_B)) for i in range(4)]
 
-Eq_K_LA4ts = (Valors_propis_en_K4ts[0].expand() == omegaKLA^2)
+Eq_K_LO4ts = (Valors_propis_en_K4ts[0].expand() == omegaKLO^2)
 Eq_K_TO4ts = (Valors_propis_en_K4ts[1].expand() == omegaKTO^2)
 Eq_K_TA4ts = (Valors_propis_en_K4ts[2].expand() == omegaKTA^2)
-Eq_K_LO4ts = (Valors_propis_en_K4ts[3].expand() == omegaKLO^2)
+Eq_K_LA4ts = (Valors_propis_en_K4ts[3].expand() == omegaKLA^2)
 
-#Comprobem que sí són els valors propis:
-#[det(D_Gamma4ts_xy-Valors_propis_en_Gamma4ts[i]) for i in range(4)]
-[[det(D_M4ts_xy-Valors_propis_en_M4ts[i]) for i in range(4)],[det(D_K4ts_xy-Valors_propis_en_K4ts[i]) for i in range(4)]]
+Equacions_en_K=[Eq_K_LO4ts,Eq_K_TO4ts,Eq_K_LA4ts,Eq_K_TA4ts]
+for i in range(4):
+    show(Equacions_en_K[i])
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
+#----------------------------------------------------------------
+#                 Càlcul de les constants de força
 valors_numerics_pla_emprats=[omegaGammaTO==omega_Gamma_TO,\
                              omegaMLO==omega_M_LO,\
                              omegaMTO==omega_M_TO,\
@@ -1250,13 +1426,16 @@ valors_numerics_pla_emprats=[omegaGammaTO==omega_Gamma_TO,\
 Equacionspla4ts=[Eq_Gamma_TO4ts.subs(valors_numerics_pla_emprats),
                   Eq_M_LO4ts.subs(valors_numerics_pla_emprats),\
                   Eq_M_TO4ts.subs(valors_numerics_pla_emprats),\
-                  Eq_M_LA4ts.subs(valors_numerics_pla_emprats),\
-                  Eq_M_TA4ts.subs(valors_numerics_pla_emprats),\
+                  3*Eq_M_LA4ts.subs(valors_numerics_pla_emprats),\
+                  2*Eq_M_TA4ts.subs(valors_numerics_pla_emprats),\
                   Eq_K_LO4ts.subs(valors_numerics_pla_emprats),\
                   Eq_K_TO4ts.subs(valors_numerics_pla_emprats),\
-                  Eq_K_LA4ts.subs(valors_numerics_pla_emprats),\
-                  Eq_K_TA4ts.subs(valors_numerics_pla_emprats)]
-solucionspla4ts=minimize(norm(vector((Equacionspla4ts))),[-5332900.,1.,1.,1.,1.,1.,1.,1.,1.,1.])
+                  3*Eq_K_LA4ts.subs(valors_numerics_pla_emprats),\
+                  2*Eq_K_TA4ts.subs(valors_numerics_pla_emprats)]
+
+solucionspla4ts=minimize(norm(vector((Equacionspla4ts))),\
+                         [-1400000.,1.,1.,1.,1.,1.,1.,1.,1.,1.])
+#                         [-5332900.,1.,1.,1.,1.,1.,1.,1.,1.,1.])
 Solucionspla4ts=[phi1rBN==round(solucionspla4ts[0]),\
                   phi1tiBN==round(solucionspla4ts[1]),\
                   phi2rBB==round(solucionspla4ts[2]),\
@@ -1267,89 +1446,70 @@ Solucionspla4ts=[phi1rBN==round(solucionspla4ts[0]),\
                   phi3tiBN==round(solucionspla4ts[7]),\
                   phi4rBN==round(solucionspla4ts[8]),\
                   phi4tiBN==round(solucionspla4ts[9])]
-                  
-Solucionspla4ts
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
+#-----------------------------------------------------------------
+#          Calculem les freqüències i grafiquem el diagrama de dispersió
 #Freqüències de Gamma a M (i les guardem com un dataframe). Calculem 200 punts en este interval
 freq_planol_Gamma_a_M4ts=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=x*pi, q_y=x*pi/sqrt(3),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./200)]))))
+     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]))))
 
 DF_freq_planol_Gamma_a_M4ts=pd.DataFrame(freq_planol_Gamma_a_M4ts)
 #Freqüències de M a K (i les guardem com un dataframe). Calculem 100 punts en este interval
 freq_planol_M_a_K4ts=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=pi*(1+x/3), q_y=pi/sqrt(3)*(1-x),\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./100)]))))
+     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99),\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(100)]))))
 
 DF_freq_planol_M_a_K4ts=pd.DataFrame(freq_planol_M_a_K4ts)
 
 #Freqüències de K a Gamma (i les guardem com un dataframe). Calculem 124 punts en este interval
 
 freq_planol_K_a_Gamma4ts=real_part(sqrt(np.linalg.eigvals(\
-     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=n(4*pi/3*(1-x)), q_y=0,\
-                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in arange(0,1,1./224)]))))
+     np.array([D4ts_xy.subs(Solucionspla4ts, a=1, q_x=4*pi/3*(1-x/223), q_y=0,\
+                    M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(224)]))))
 
 DF_freq_planol_K_a_Gamma4ts=pd.DataFrame(freq_planol_K_a_Gamma4ts)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 DF_freq_calculades_planol4ts=pd.concat([DF_freq_planol_Gamma_a_M4ts,DF_freq_planol_M_a_K4ts,\
                                     DF_freq_planol_K_a_Gamma4ts],ignore_index=True)
 DF_freq_calculades_planol4ts.to_csv("freq_calculades_planol4ts.dat", sep='\t', encoding='utf-8', header=False)
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 dades_calculades_planol4ts=loadtxt("freq_calculades_planol4ts.dat")
+
 show(\
-points(zip(dades_calculades_planol4ts[:200,0]/524*30, dades_calculades_planol4ts[:200,1]), color="red")+\
-points(zip(dades_calculades_planol4ts[:200,0]/524*30, dades_calculades_planol4ts[:200,2]), color="red")+\
-points(zip(dades_calculades_planol4ts[:200,0]/524*30, dades_calculades_planol4ts[:200,3]), color="red")+\
-points(zip(dades_calculades_planol4ts[:200,0]/524*30, dades_calculades_planol4ts[:200,4]), color="red")+\
-points(zip(dades_calculades_planol4ts[200:300,0]/524*30, dades_calculades_planol4ts[200:300,1]), color="blue")+\
-points(zip(dades_calculades_planol4ts[200:300,0]/524*30, dades_calculades_planol4ts[200:300,2]), color="blue")+\
-points(zip(dades_calculades_planol4ts[200:300,0]/524*30, dades_calculades_planol4ts[200:300,3]), color="blue")+\
-points(zip(dades_calculades_planol4ts[200:300,0]/524*30, dades_calculades_planol4ts[200:300,4]), color="blue")+\
-points(zip(dades_calculades_planol4ts[300:524,0]/524*30, dades_calculades_planol4ts[300:524,1]), color="green")+\
-points(zip(dades_calculades_planol4ts[300:524,0]/524*30, dades_calculades_planol4ts[300:524,2]), color="green")+\
-points(zip(dades_calculades_planol4ts[300:524,0]/524*30, dades_calculades_planol4ts[300:524,3]), color="green")+\
-points(zip(dades_calculades_planol4ts[300:524,0]/524*30, dades_calculades_planol4ts[300:524,4]), color="green")+\
-points(zip(dades[:524,0]/524*30, dades[:524,1]), color="black") +\
-points(zip(dades[524:1048,0]/524*30, dades[524:1048,1]), color="black") +\
-points(zip(dades[1048:1572,0]/524*30, dades[1048:1572,1]), color="black") +\
-points(zip(dades[1572:2096,0]/525*30, dades[1572:2096,1]), color="black") +\
-points(zip(dades[2096:2620,0]/525*30, dades[2096:2620,1]), color="black") +\
-points(zip(dades[2620:3144,0]/525*30, dades[2620:3144,1]), color="black")     
+points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,1]), color="blue")+\
+points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,2]), color="blue")+\
+points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,1]), color="blue")+\
+points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,2]), color="blue")+\
+points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,1]), color="blue")+\
+points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,2]), color="blue")+\
+points(zip(dades_calculades_planol4ts[:200,0], dades_calculades_planol4ts[:200,1]), color="red")+\
+points(zip(dades_calculades_planol4ts[:200,0], dades_calculades_planol4ts[:200,2]), color="red")+\
+points(zip(dades_calculades_planol4ts[:200,0], dades_calculades_planol4ts[:200,3]), color="red")+\
+points(zip(dades_calculades_planol4ts[:200,0], dades_calculades_planol4ts[:200,4]), color="red")+\
+points(zip(dades_calculades_planol4ts[200:300,0], dades_calculades_planol4ts[200:300,1]), color="red")+\
+points(zip(dades_calculades_planol4ts[200:300,0], dades_calculades_planol4ts[200:300,2]), color="red")+\
+points(zip(dades_calculades_planol4ts[200:300,0], dades_calculades_planol4ts[200:300,3]), color="red")+\
+points(zip(dades_calculades_planol4ts[200:300,0], dades_calculades_planol4ts[200:300,4]), color="red")+\
+points(zip(dades_calculades_planol4ts[300:524,0], dades_calculades_planol4ts[300:524,1]), color="red")+\
+points(zip(dades_calculades_planol4ts[300:524,0], dades_calculades_planol4ts[300:524,2]), color="red")+\
+points(zip(dades_calculades_planol4ts[300:524,0], dades_calculades_planol4ts[300:524,3]), color="red")+\
+points(zip(dades_calculades_planol4ts[300:524,0], dades_calculades_planol4ts[300:524,4]), color="red")+\
+points(zip(dades[:524,0], dades[:524,1]), color="black") +\
+points(zip(dades[524:1048,0], dades[524:1048,1]), color="black") +\
+points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="black") +\
+points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="black") +\
+points(zip(dades[2096:2620,0], dades[2096:2620,1]), color="black") +\
+points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")     
      ,figsize=9) 
 ```
 
-```{raw-cell}
-Eq_freq_K3ers=((Eq_K_LO3ers+Eq_K_TA3ers).rhs()==(Eq_K_TO3ers+Eq_K_LA3ers).rhs())
-Eq_freq_K3ers
+```{code-cell} ipython3
+show(Solucionspla4ts)
 ```
 
-```{raw-cell}
-Per poder calcular les constants de força necessitem que es complisca esta equació,
+```{code-cell} ipython3
+D2BB.parent()
 ```
-
-```{raw-cell}
-omega_K_LO=1304
-#omega_K_TO=1204
-omega_K_LA=1080
-omega_K_TA=878
-
-omega_K_TO=sqrt(omega_K_LO**2+omega_K_TA**2-omega_K_LA**2)
-#show(EqKTO)
-```
-
-{% bibliography %}
 
 ```{code-cell} ipython3
 
