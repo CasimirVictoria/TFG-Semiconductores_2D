@@ -260,6 +260,10 @@ Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que i
 Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components ...) però sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
 
 ```{code-cell} ipython3
+
+```
+
+```{code-cell} ipython3
 :tags: [hide-input]
 
 #Angle que forma l'àtom considerat respecte a l'eix x

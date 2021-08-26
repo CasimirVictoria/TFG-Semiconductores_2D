@@ -1,142 +1,197 @@
-\documentclass[12pt,twoside,a4paper, notitlepage]{article}%,a4paper
+\documentclass[12pt]{article} %,twoside,a4paper
+
+\usepackage[a4paper,margin=24.5mm]{geometry} %\usepackage[left=2cm,right=2cm,top=1.5cm, bottom=2cm]
+
+\usepackage[utf8]{inputenc}
+\usepackage[english,catalan]{babel}
+%%%\usepackage[english,spanish]{babel}
+\usepackage{natbib}
+\usepackage{float} 
+\usepackage{graphicx}
+
 
 % Establim el format de la pàgina:
-\usepackage{fancyhdr}
-%\usepackage[a4paper]{geometry}
-\usepackage[left=2cm,right=2cm,top=1.5cm, bottom=2cm]{geometry}
-\setlength{\parskip}{0.2cm}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[catalan]{babel}
-\usepackage{newunicodechar}
-\newunicodechar{Ŀ}{\L.}
-\newunicodechar{ŀ}{\l.}
+%\usepackage{fancyhdr}
+
+%\setlength{\parskip}{0.2cm}
+%\usepackage[T1]{fontenc}
+%\usepackage{newunicodechar}
+%\newunicodechar{Ŀ}{\L.}
+%\newunicodechar{ŀ}{\l.}
 \usepackage{siunitx}
 \usepackage{amsmath}
 %\usepackage{adjustbox}
 %\usepackage{tabularx}
 \usepackage{mathtools}
-\usepackage{graphicx}
 \usepackage{color}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
 %\usepackage{booktabs} %Publication quality tables in LaTeX.
 %\usepackage{pdflscape}
-\usepackage{attachfile}
+%\usepackage{attachfile}
 \usepackage{todonotes}
-\usepackage{pdfpages}
+%\usepackage{pdfpages}
 
 \usepackage{sagetex}
-\usepackage{color}
-\definecolor{gris}{RGB}{220,220,220}
+%\definecolor{gris}{RGB}{220,220,220}
+\let\vec\mathbf %vectors en negreta en compte de arrow
 
 \author{Casimiro Victoria Castillo}
 
 
 \begin{document}
 
-%\title{}
-%\author{}
-%\date{}
-%\date{}607123000
-%\maketitle 
-%\begin{titlepage}
-%  \vspace*{4cm}
-%  {\fontsize{28}{34}\selectfont\bfseries Fonons y espectroscòpia Raman en semiconductors bidimensionals}
-%  \hfill
-  % Logo
-  %\includegraphics[height=2cm]{example-image-a} \\
-  % Línea gris
-%  {%\color{gris}
-%  \hrule}
-  %\Large{\itshape Subtítulo}
-%  \vfill
-%  {\large Casimiro Victoria Castillo \hfill 11 de Abril de 2021}
-%\end{titlepage}
+\newgeometry{margin=1in}
+\begin{titlepage}
+   \noindent\raisebox{0pt}[0pt][0pt]{
+	\includegraphics[width=10.5cm]{./portada-TFG-LaTeX/marca-Facultat-Fisica-UV-1-linia.pdf}}\par
+   \vspace{8.5cm}
+   % Titles
+   {\centering
+      \scalebox{1.125}{\bfseries\sffamily\Huge
+		Treball de Fi de Grau en Física}\par
+      \rule{16.13cm}{1.5pt}\par
+      \vspace{4.5cm}
+      {\bfseries\sffamily\LARGE Fonons i espectroscòpia Ramman en semiconductors bidimensionals}\par
+   }
+   \vfill
+   {\raggedleft\sffamily
+		AGOST de 2021\par
+      \vspace{\baselineskip}
+		Alumne/a: Casimiro Victoria Castillo\par
+      \vspace{\baselineskip}
+		Tutor/a (1): Alberto García Cristóbal\par
+		Tutor/a (2): Alejandro Molina Sanchez\par
+   }
+\end{titlepage}
+\restoregeometry
 
-\includepdf{./Altres/portada_tfg_casimir.pdf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{abstract}
-  Els materials bidimensionals ($2D$) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristallina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
+%\begin{abstract}
+\subsection*{Resum / \emph{Abstract}}
+
+Els materials bidimensionals ($2D$) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristal·lina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques.   
 
 
-  Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
-\end{abstract}
+Este Treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de dispersió de la llum.
+\vspace{\baselineskip}
 
-\textit{Nota: s'ajunta el codi font del document: \attachfile[author=Casimir]{TFG-Casimir.tex}}
+\begin{otherlanguage}{english}\itshape
 
-\newpage
+\noindent Abstract\ldots
+The long-range character of the dynamical matrix limits the validity of
+force-constant approaches that take only interaction with few neighboring atoms into account. However, by fitting the force-
+constants to the ab initio dispersion relation, we show that the popular 4th-nearest-neighbor force-constant approach yields an
+excellent fit for the low frequency modes and a moderately good fit (with a 
+maximum deviation of $6 \%$) for the high-frequency modes \cite{wirtz04_phonon_disper_graph_revis}
+\end{otherlanguage}
+
+%\textit{Nota: s'ajunta el codi font del document: \attachfile[author=Casimir]{TFG-Casimir.tex}}
+
+%\newpage
+%\end{abstract}
 
 \section{Introducció}
 
-\todo[inline]{Per ara sols són algunes idees a desenvolupar}
+En este treball s'empra el mètode de constants de força (\emph{FCM} per les seues sigles en anglés, \foreignlanguage{english}{force constant method}), per descriure la dinàmica reticular de un material bidimensional, el nitrur de bor monocapa, \emph{BN}.\\
 
-\subsection{Model de BORN i VON KARMAN}
-- Explicar el \textbf{model de  Born y  Von Karman (1921}), tal y com ve en \cite{Balkanski_2000} \cite{brueesch82_phonon} (pàgina 4).
-
-
-\subsection{Aproximació adiabàtica}
-Desprès explicar que fent ús de l'\textbf{aproximació adiabàtica}, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
-  
-\subsection{Aproximació armònica}
-Passar a descriure l'\textbf{aproximació harmònica}: escriure el potencial, les equacions de moviment de Lagrange, y passar d'estes equacions de moviment en l'espai de posiciones al problema de valors propis de la matriu dinàmica en l'espai de vectores de onda (o moments).
-
-Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d'equilibri. La primera hipòtesi és que cada àtom té una posició d'equilibri en el cristall, y considerarem que estos àtoms vibren amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d'aquesta, de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament e\l.làstic lineal}, on es verifica la llei de Hooke.
-
-Podem per tant aproximar l'energia potencial de interacció pel terme armònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament ....
+En este model la dinàmica dels àtoms es descriu per un conjunt de simples constants de força de molls que conecten cada àtom amb els del seu entorn, fins a un nombre determinat de veïns. Altres métodes com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoría del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs. El métode de constants de força empra un conjunt reduït de parámetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis.  I encara que estem tractant amb un mètode sencill, este ha demostat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
 
 
-- Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
+\subsection{Xarxa cristal·lina}
 
-- Explicar també que una vegada descrit el cristall en l'espai de posicions tenim que descriure la xarxa cristallina en l'espai de moments ...
+Abans d'explicar el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
 
-- Una vegada conclosa la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristallina, base, xarxa en l'espai $2\pi\text{-recíproc}$.
+Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts de una manera regular en l'espai, y per descriure esta distribució regular s'empra el concepte matemàtic de \emph{xarxa cristal·lina}, introduït per A. Bravais en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.
 
-- Passar a construir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, ...), cite aizawa90 bond soften monol graph formed (en el apèndix). 
+En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina bidimensional pot generar-se a partir de dos vectors base, de manera que els vectors de posició dels \emph{nucs de la xarxa}, els vectors de translació cristal·lina,  tenen la forma:
+\begin{equation}
+ \vec R_\vec l=\vec R_{l_1 l_2}=l_1 \vec a_1 +l_2\vec a_2
+\end{equation}
 
+on $\vec l$ es denomina índex del nuc.
 
-\subsection{Xarxa recíproca. Primera zona de Brillouin.}
-Donada una terna de vectors base primitius, $p_i$, de la xarxa cristalina en l'espai de posicion, la condició:
+Els cristalls o \emph{estructures cristallines} són distribucions regulars d'àtoms en l'espai de posicions i els podem descriure associant a cadascun dels nucs d'una xarxa cristallina en l'espai de posicions un conjunt d'àtoms o base (\emph{producte de convolució de la base y la xarxa de nucs}. En el cas del \emph{BN} tractem amb una base diatòmica. 
+
+\subsubsection{Xarxa recíproca. Primera zona de Brillouin.}
+Donat un conjunt de vectors base primitius, $p_i$, de la xarxa cristalina en l'espai de posicions, la condició:
 
 \begin{equation}
 \label{eq:rec1}
 \vec p_i\cdot\vec p_j^{*}=\delta_{ij}
 \end{equation}
-on $\delta_{ij}$ és la delta de Kronecker, pot considerar-se un sistema d'equacions que defieix una altra terna de vectors $p_j^*$. La solució de l'equació (\ref{eq:rec1}) és
 
-\begin{equation}
-\label{eq:rec2}
-\vec p_1^*=\frac{\vec p_2\times\vec p_3}{\vec p_1\cdot(\vec p_2\times\vec p_3)},\quad \vec p_2^*=\frac{\vec p_3\times\vec p_1}{\vec p_1\cdot(\vec p_2\times\vec p_3)}, \quad \vec p_3^*=\frac{\vec p_1\times\vec p_2}{\vec p_1\cdot(\vec p_2\times\vec p_3)}
-\end{equation} 
+on $\delta_{ij}$ és la delta de Kronecker, defineix un altre conjunt de vector $p_j^*$, coneguts com vectors primitius recíprocs, i què son els vectors primitius que defineixen una altra xarxa coneguda com coneguda com \textit{xarxa recíproca}. Els  vectors recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l'\textit{espai recíproc} o de números d'ona. \textbf{Les xarxes cristal·lines real y recíproca són dues descripcions equivalents del mateix sistema físic: el sòlid cristal·lí} que s'està estudiant.
 
-Els \textit{vectors recíprocs} $\vec p_j^{*}$ són els vectors d'una altra xarxa cristallina coneguda com \textit{xarxa recíproca}. Els  vectors recíprocs, i els vectors de translació cristallina recíprocs, tenen dimendions de inversa de longitut i es representen en l'\textit{espaci recíproc} o de números d'ona. \textbf{Les xarxes cristallines real y recíproca són dues descripcions equivalents del matexi sistema físic: el sòlido cristallí} que s'està estudiant.
+L'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona, $\vec k$.
 
 
-Tenim que tindre present que l'espai $2\pi-$ recíproc és el fonamental en l'estudi de la Física de l'Estado Sòlid ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona.
 
 Podem interpretar que 
 
 \begin{equation}
 \label{eq:rec3}
-\vec K_{h_1h_2h_3}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}+h_3\vec a_3^{*}\right)
+\vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
 \end{equation}
 
-són els vectors de traslació cristallina que defineixen una xarxa cristallina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproco és l'/espai de vectors d'ona/ $\vec k$, i a falta d'un factors d'escala $\hbar$, coincide amb l'espai de moments  $\vec p=\hbar\vec k$. 
+són els vectors de traslació cristal·lina que defineixen una xarxa cristal·lina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$. 
 
-\subsubsection{Ce\l.les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
-Para descrire la xarxa 2$\pi$-recíproca, emprarem el criteri de \textit{Wigner-Seitz}. Las \textit{ce\l.les de Wigner-Seitz} estan centradas en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la ce\l.la) que a quasevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construim els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bissecten cadascun d'estos segments: la ce\l.la de WS és la ce\l.la de menor volumn al voltant de l'origen que està delimitadda per estos plans (rectes en el caso d'una xarxa bidimensional).
+\paragraph{Cel·les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
+
+Per descriure la xarxa $2\pi$-recíproca, emprarem el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
 
 Notem que en l'espai de $\vec k$ emprarem ce\l.les unitat de WS mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
 La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zona de Brillouin} (ZB)
 
-\newpage
-\subsection{Matriu dinàmica}
+
+\subsection{Vibracions atòmiques en cristalls}
+\subsubsection{Model de BORN i VON KARMAN}
+Els àtoms constituents de un sólid cristallí no estan immòbils sino que vibren al voltant de la seua posició de equilibri.
+
+En 1912, Born y Von Karman \cite{Born:1912:SRG} introduiren un model realístic per de la dinámica cristal·lina, on la idea fonamental es que cada mode normal té l'energia de un oscil·lador de Planck. La dinámica del sistema es descriu de manera sencilla, no en termes de les vibracions de àtoms individuals, sino en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines (\foreignlanguage{english}{lattice vibrations}) per Born. Cada vibració cristal·lina es caracteritza per una freqüencia y un vector de ona.
+La vibració cristal·lina quantitzada, o mode normal, s'anomena fonó per analogía amb el fotó. %i te propietats de quasi-partícula
+
+%Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristal·lina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
+
+\subsubsection{Aproximació adiabàtica}
+
+Moltes propietats físiques dels sòlids poden classificar-se bé com electròniques o bé com vibracionals segons estiguen determinades pels electrons (de valència) o per les vibracions dels àtoms (nuclis iònics): normalment considerem els nuclis i els electrons com a constituent independents del sòlid, ja que les masses dels electrons i dels nuclis són tan diferents que el moviment dels nuclis és molt més lent que el dels electrons. L'\emph{aproximació adiabàtica}, introduïda per Born i Oppenheimer \cite{ANDP:ANDP19273892002} estableix que els electrons responen de manera pràcticament instantània als desplaçaments atòmics, de manera que el seu estat ve determinat per los posicions atómiques instantànies, mentre que els àtoms no poden respondre a les ràpides variacions espacials dels electrons: diguem que els electrons segueixen el moviment iònic adiabàticament.
+%els electrons no realitzen transicions abruptes de un estat a altres estats, si no que un estat electrònic es deforma progressivament degut als desplaçaments iònics.
+
+Notem però que estem tractant amb una primera aproximació al problema y algunes propietats físiques venen determinades per la interacció entre els electrons y les vibracions atòmiques.
+
+
+
+%podem escriure l'energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.
+  
+\subsubsection{Aproximació harmònica}
+
+Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d'equilibri. La primera hipòtesi és que cada àtom té una posició d'equilibri en el cristall, que denotem per $\vec r^{(0)}_{\vec l,\vec\alpha}=\vec R_\vec l+\vec d_\alpha$ y considerarem que estos àtoms vibren al voltant d'esta posició d'equilibri, $\vec r_{\vec l,\vec\alpha}=\vec r^{(0)}_{\vec l,\vec\alpha}+\vec u_{\vec l,\alpha}(t)$, amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d'aquesta,   de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament elàstic lineal}, on es verifica la llei de Hooke.
+
+Podem per tant aproximar l'energia potencial de interacció pel terme harmònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament:
+
+Les equacions de moviment en l'aproximació harmònica s'escriuen en la coneguda forma:
+
+\begin{equation}
+ M_\alpha\vec{\ddot{u}}_{\vec l,\alpha}(t)=-\sum_{\vec l',\alpha'}\vec\Phi_{\alpha,\alpha'}\left(\vec R_\vec l-\vec R_\vec l'\right)\cdot\vec u_{\vec n',\alpha'}(t)
+\end{equation}
+ Aquesta equació representa un sistema  d'oscil·ladors harmònics acoblats, on $\alpha$ i $\alpha'$ fan referència al àtoms de la base considerats, l'índex vectorial $\vec l$ (que sol aparèixer en la literatura com $n$) índica el nuc considerat i $\vec R_\vec l$ és el vector de translació cristal·lina.
+ 
+\vdots 
+
+
+
+
+\subsubsection{Matriu dinàmica}
 
 La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica:
 
 \begin{equation}
-\sum_{\alpha\prime}D_{\alpha\alpha\prime}\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)
+\sum_{\alpha\prime}D_{\alpha\alpha\prime}(\vec q)\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)
 \end{equation}   
 
 Per tant, les freqüències $\omega$ com funció del vector d'ones $\vec q$ del fonó són solució de l'equació secular:
@@ -157,16 +212,19 @@ on $u_{\alpha}^{i}$ representa el despla\c{c}ament de l'àtom $\alpha$ en la dir
 La segona derivada de l'energia de l'equació \ref{eq:Matriz_Dinámica} correspon al canvi en la for\c{c}a que actua sobre l'àtom $\alpha\prime$ en la direcció $j$ quan es despla\c{c}a l'àtom $\alpha$ en la direcció $i$
 
 \begin{equation}
-D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha\prime}(\vec q)
+D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha'}(\vec q)
 \end{equation}
 
+\vdots
+
+Passem ara a descriure el sistema que volem estudiar
 
 
 \newpage
 
 \section{Descripció del cristall de BN}
 
-Donat que el càlcul dels modes de vibració per primers principis comen\c{c}a per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatómica, la ce\l.la unitat del qual ve donada per (dades proporcionades):
+Donat que el càlcul dels modes de vibració comen\c{c}a per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatómica, la ce\l.la unitat del qual ve donada per (dades proporcionades):
 
 \begin{sagesilent}
 var('a', domain='positive')
@@ -178,7 +236,9 @@ a_2=a*vector([-1/2,sqrt(3)/2])
 \vec a_1=\sage{a_1}\qquad\vec a_2=\sage{a_2} 
 \end{equation}
 
-I les posicions atòmiques d'equilibri en la ce\l.la unitat són:
+Podem comprobar que efectivament es tracta de una ce\l.la hexagonal, ja que els seus vectors primitius formen un angle de $\sage{arccos(a_1*a_2/(norm(a_1)*norm(a_2)).simplify())}$ \SI{}{\radian}.
+
+Les posicions atòmiques d'equilibri en la ce\l.la unitat són:
 
 \begin{sagesilent}
 r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
@@ -191,13 +251,13 @@ cela=arrow((0,0),(a_1/a),color="blue")+\
 \end{sagesilent}
 
 \begin{equation}
-\vec R_B=\frac{1}{3}\vec{a_1}+2\vec{a_2}\qquad
-\vec R_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2} 
+\vec d_B=\frac{1}{3}\vec{a_1}+2\vec{a_2}\qquad
+\vec d_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2} 
 \end{equation} 
 
-Podem comprobar que efectivament es tracta de una ce\l.la hexagonal, ja que els seus vectors primitius formen un angle de $\sage{arccos(a_1*a_2/(norm(a_1)*norm(a_2)).simplify())}$ \SI{}{\radian}
 
-Numerarem les ce\l.les amb un índex vectorial $\vec l=\left(l_1, l_2\right)$, on $l_1$ i $l_2$ són dos nombres enters, encara que en la literatura les trobem habitualment numerades amb un índex enter,$n$, ja que així resulta més sencill identificar les ce\l.les.
+
+Tal com s'indica en la introducció teòrica, enumere les ce\l.les amb un índex vectorial $\vec l=\left(l_1, l_2\right)$, on $l_1$ i $l_2$ són dos nombres enters.
 
 Les posicions del nucs de la xarxa són $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
 
@@ -300,12 +360,10 @@ def fase(l_1,l_2):
 \end{sagesilent}
 
 
-\subsubsection{Primera zona de Brillouin}
+\subsection{Primera zona de Brillouin}
 Passe ara a mostrar la xarxa $2\pi$-recíproca associada a la xarxa de nucs del cristall de $BN$, la primera zona de Brillouin y calcular els punts de màxima simetria de la primera zona de Brillouin:
 
-Los vectores recíprocos son
-
-En nuestro caso los vectores primitivos de la red $2\pi\text{-recíproca}$ son:
+Els vectors primitivos de la xarxa $2\pi\text{-recíproca}$ són:
 
 \begin{equation}
 \label{eq:11}
@@ -332,7 +390,7 @@ x = reddenudos[:,0]
 y = reddenudos[:,1]
 plt.plot(x,y,"o")
 plt.axis('scaled')
-plt.savefig("Grafiques/Xarxa2pireciproca.jpg")
+plt.savefig("../Grafiques/Xarxa2pireciproca.jpg")
 plt.close()
 
 #from math import sqrt, pi
@@ -362,7 +420,7 @@ lattice.add_hoppings(
 
 lattice.plot()
 lattice.plot_brillouin_zone()
-plt.savefig("Grafiques/1aBZ.jpg")
+plt.savefig("../Grafiques/1aBZ.jpg")
 plt.close()
 reset('a')
 var('a', domain='positive')
@@ -371,11 +429,11 @@ var('a', domain='positive')
 \begin{figure}[h]
 \centering
 \begin{subfigure}[b]{0.4\textwidth}
-\includegraphics[width=8cm]{./Grafiques/Xarxa2pireciproca.jpg}
+\includegraphics[width=8cm]{../Grafiques/Xarxa2pireciproca.jpg}
 \subcaption{Xarxa en l'espai $2\pi$-recíproc}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
-\includegraphics[width=6cm]{./Grafiques/1aBZ.jpg}
+\includegraphics[width=6cm]{../Grafiques/1aBZ.jpg}
 \subcaption{Primera zona de Brillouin}
 \end{subfigure}
 \end{figure}
@@ -388,27 +446,27 @@ var('a', domain='positive')
 
 Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
 
-Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtomo amb el seu n-èssimo veí.
+Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtom amb el seu n-èssim veí.
 
-La forma general del tensor de forces d'un $n$-èssim veí és de la forma (cite wirtz04 phonon disper graph revis): 
+La forma general del tensor de forces d'un $n$-èssim veí és de la forma \cite{wirtz04_phonon_disper_graph_revis}:
 
 
 \begin{equation}
 C_n=\begin{pmatrix}
-\phi_n^1&\xi_n &0\\
+\phi_n^{r}&\xi_n &0\\
 -\xi_n & \phi_n^{ti} & 0 \\
 0 & 0 & \phi_n^{to}
 \end{pmatrix}
 \label{eq:tensordeforces}
 \end{equation}
 
-on el sistema de coordenadas se eligeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $y$ la coordenada transversal en el planol i $z$ la coordenada perperndicular al planol. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció $z$) estan completament desacoblades.
+on el sistema de coordenades se elegeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $r$; $y$ la coordenada transversal en el planol, $ti$, i $z$ la coordenada perperndicular al planol $to$. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de ,$to$, (en la direcció $z$) estan completament desacoblades.
 
 
 
-Anem a supossar (per simplificar) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una for\c{c}a radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com la aproximación \textit{4NNFC}, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
+Anem a supossar (per simplificar) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una for\c{c}a radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza \cite{Balkanski_2000}. Esta aproximació es coneix com la aproximación \textit{4NNFC},% i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
 
-\missingfigure{Ací va imatge mostrant el cristall i les forces}
+%\missingfigure{Ací va imatge mostrant el cristall i les forces}
 
 
 %\begin{figure}[h]
@@ -418,28 +476,40 @@ Anem a supossar (per simplificar) que un despla\c{c}ament longitudinal (radial, 
 %\end{figure}
 
 
-Una altra aproximació al problema trobada en la literatura sobre els fonons del grafé és la coneguda com el modelo \textit{VFF} (\textit{valence-force field}), la qual determina els paràmetros de la matriu en l'equació \ref{eq:tensordeforces} introduïnt \textit{constants de moll} que determinen el canvi en l'energia potencial segons diferents deformacions; una introducción a esta aproximació es troba en l'annexe de la referència (cite aizawa90 bond soften monol graph formed). Amb aquesta aproximació 
-es necesiten menys paràmetres (\textit{constantes de fuerza}) per  obtindre una qualitat similar a la parametrizació \textit{4NNFC} (cite wirtz04 phonon disper graph revis).
+%Una altra aproximació al problema trobada en la literatura sobre els fonons del grafé és la coneguda com el modelo \textit{VFF} (\textit{valence-force field}), la qual determina els paràmetros de la matriu en l'equació \ref{eq:tensordeforces} introduïnt \textit{constants de moll} que determinen el canvi en l'energia potencial segons diferents deformacions; una introducción a esta aproximació es troba en l'annexe de la referència (cite aizawa90 bond soften monol graph formed). Amb aquesta aproximació es necesiten menys paràmetres (\textit{constantes de fuerza}) per  obtindre una qualitat similar a la parametrizació \textit{4NNFC} (cite wirtz04 phonon disper graph revis).
 
-Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d'un àtom classificat com $n$-èssim, situat en la direcció $\hat x$ respecte del átom de la ce\l.la $\vec 0$, té la forma diagonal:
+Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d'un àtom classificat com $n$-èssim veí, situat en la direcció $\hat x$ respecte del átom de la ce\l.la $\vec 0$, té la forma diagonal:
 
 \begin{equation}
-C_n=\begin{pmatrix}
+\label{eq:rotacio}
+C_n(0)=\begin{pmatrix}
 \phi_n^r& 0 &0\\
 0 & \phi_n^{ti} & 0 \\
 0 & 0 & \phi_n^{to}
 \end{pmatrix}
 \end{equation}
 
-i per tant el tensor de constants de for\c{c}a de cadascun dels $n$-èssims veïns reals l'obtenim rotant esta matriu:
-\vspace{4cm}
+i per tant el tensor de constants de for\c{c}a de cadascun dels $n$-èssims veïns reals l'obtenim rotant la matriu de l'equació \ref{eq:rotacio}:
+
+\begin{equation}
+ C_n(\theta)=U^{-1}(\theta)C_n(0)U(\theta)
+\end{equation}
 
 
-Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estamos considerant de la ce\.l.la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, \cite{falkovsky08_symmet_const_phonon_disper_graph}
-\cite{wirtz04_phonon_disper_graph_revis}
+on $\vec U(\theta)$ ve donada per:
+\begin{equation}
+\vec U(\theta)=
+\begin{pmatrix}
+\cos(\theta)  & \sin(\theta) & 0 \\
+-\sin(\theta) & \cos(\theta) & 0  \\
+0             & 0            & 1
+\end{pmatrix}
+\end{equation}
+
+Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estamos considerant de la ce\.l.la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, %(falkovsky08_symmet_const_phonon_disper_graph)
+%(wirtz04_phonon_disper_graph_revis)
 Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que implica s'ha de complir:
 
-\vspace{4cm}
 
 Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
 
@@ -747,7 +817,7 @@ Y les relacions de dispersió per als modes $ZO$ i $ZA$ tenen la foma:
 \begin{sagesilent}
 from pylab import loadtxt
 #data = pd.read_csv('../Dades/freq.dat', header = None)
-dades=loadtxt("./Dades/freq.dat")
+dades=loadtxt("../Dades/freq.dat")
 ZAZO=\
 list_plot(
     [real_part(n(sqrt(D_zz.subs(sol1, sol2, sol3, sol4, M_B=B.mass, \
@@ -864,7 +934,7 @@ D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi2rNN=phi2rBB,phi2tiNN=phi2tiBB, M_N=M_
 Passem ara a intentar calcular els valors de les constants de for\c{c}a, emprant els valors de les freqüències dels modes de vibració en estes punts de la primera zona de Brillouin.
 \newpage
 
-\bibliography{Referencies.bib}
+\bibliography{TFG-Casimir}
 \bibliographystyle{plain}
 
 \end{document}
