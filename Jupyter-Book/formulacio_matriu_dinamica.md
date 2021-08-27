@@ -46,6 +46,7 @@ import numpy as np
 from numpy import arange
 #from myst_nb import glue
 
+# Constants emprades
 from periodictable import C, B, N, constants
 u=constants.atomic_mass_constant*10**3 #para que este en CGS (y las const. de fuerza en dyn)
 
@@ -98,15 +99,17 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 nucs=points([l_1*a_1/a+l_2*a_2/a for l_1 in range(-3, 4) for l_2 in range(-3,4)], 
              size=40, color="blue", frame=False)
 
-show(nucs+
-    line([(0,0),(a_1/a)],color="red")+
-     line([(0,0),(a_2/a)],color="red")+
-     line([(a_1/a),(a_1/a+a_2/a)],color="red")+
-     line([(a_2/a),(a_2/a+a_1/a)],color="red")+
-     line([(a_2/a),(a_1/a+2*a_2/a)],linestyle="--")+
-     line([(a_1/a+2*a_2/a),(2*a_1/a+2*a_2/a)],linestyle="--")+
-     line([(2*a_1/a+2*a_2/a),(2*a_1/a+a_2/a)],linestyle="--")+
-     line([(2*a_1/a+a_2/a),(a_1/a)],linestyle="--"), figsize=4)
+xarxa=nucs+\
+    line([(0,0),(a_1/a)],color="red")+\
+     line([(0,0),(a_2/a)],color="red")+\
+     line([(a_1/a),(a_1/a+a_2/a)],color="red")+\
+     line([(a_2/a),(a_2/a+a_1/a)],color="red")+\
+     line([(a_2/a),(a_1/a+2*a_2/a)],linestyle="--")+\
+     line([(a_1/a+2*a_2/a),(2*a_1/a+2*a_2/a)],linestyle="--")+\
+     line([(2*a_1/a+2*a_2/a),(2*a_1/a+a_2/a)],linestyle="--")+\
+     line([(2*a_1/a+a_2/a),(a_1/a)],linestyle="--")
+
+show(xarxa, figsize=4)
 ```
 
 Les posicions atòmiques d'equilibri en la cel·la unitat són (també proporcionades com a dades):
@@ -120,12 +123,14 @@ $$
 :tags: [hide-input]
 
 r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
-show(arrow((0,0),(a_1/a),color="blue")+
-      arrow((0,0),(a_2/a),color="red")+
-      line([(a_1/a),(a_1/a+a_2/a)],linestyle="--",color="red")+
-      line([(a_2/a),(a_2/a+a_1/a)],linestyle="--",color="red")+
-      point(r_B/a, size=120,color="blue")+
-      point(r_N/a, size=100,color="red"), frame=False, figsize=4)
+cela=arrow((0,0),(a_1/a),color="blue")+\
+      arrow((0,0),(a_2/a),color="red")+\
+      line([(a_1/a),(a_1/a+a_2/a)],linestyle="--",color="red")+\
+      line([(a_2/a),(a_2/a+a_1/a)],linestyle="--",color="red")+\
+      point(r_B/a, size=120,color="blue")+\
+      point(r_N/a, size=100,color="red")
+
+show(cela,  frame=False, figsize=4)
 ```
 
 +++ {"tags": []}
@@ -139,17 +144,17 @@ Per construir la matriu dinàmica necessitem com a pas previ classificar el áto
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-#Posicins d'equilibri dels àtoms
+#Posicins d'equilibri dels àtoms en la cel·la (l1, l2)
 def RB(l_1,l_2):
     return (l_1*a_1+l_2*a_2+r_B)
 
 def RN(l_1,l_2):
     return (l_1*a_1+l_2*a_2+r_N)
 
-AtomosB=points([RB(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='blue')
-AtomosN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='red')
+AtomsB=points([RB(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='blue')
+AtomsN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='red')
 
-show(AtomosB+AtomosN, figsize=4)
+show(AtomsB+AtomsN, figsize=4)
 ```
 
 ```{code-cell} ipython3
@@ -258,10 +263,6 @@ Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que i
 
 
 Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components ...) però sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
-
-```{code-cell} ipython3
-
-```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -560,6 +561,19 @@ show(Eq_M_ZO3ers)
 
 Notem que el segon valor propi és major que el primer (l'arrel quadrada és possitiva) i per tant correspon a la rama $ZO$, i el primer a $ZA$.
 
+```{code-cell} ipython3
+#D_M32ers_zz=D_zz3ers.subs(q_x=pi/(3*a),q_y=pi/(3*sqrt(3)*a))
+#D_zz3ers.subs(q_x=4*pi/(9*a),q_y=0).eigenvalues()[0]
+
+#D_M32ers_zz.eigenvalues()[0]
+```
+
+Podem observar que si considerem que les masses dels àtoms son iguals recuperem les expresions trobades per falkowsky_2008
+
+```{code-cell} ipython3
+show(Eq_M_ZO3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
+```
+
 +++ {"tags": []}
 
 #### Punt $K$
@@ -588,10 +602,13 @@ Tenim que tindre en compte que en aquest cas no sabem a priori a quina rama corr
 
 +++
 
+Observerm que les equacions per als modes al punt $K$ són formalment idèntiques a les que trobem en falkowski_2008 per al grafé, sols que en aquest cas, com estem tractant amb una base amb dos àtoms des distint tipus no tenim degeneració en este punt.
+
++++
+
 #### Constants de força
 <b>Passem a resoldre el sistema d'equacions que hem obtés per obtindre les constants de força</b>:</p>
-Tenim més equacions que incògnites, i segons les ecuacions escollides obtenim valors diferents, ja que per una banda emprem equacions teòriques i per altra valos experimentals. El sistema d'equacions que obtenim el podem resoldre, en este cas, tant analítica com numèricament.</p>
-Segons les equacions que escollim per construir el sistema d'equacions amb el qual resoldre les constants de força obtenim diferents valors per estes constants.
+Tenim més equacions que incògnites, i segons les ecuacions escollides obtenim valors diferents. El sistema d'equacions que obtenim el podem resoldre, en este cas, tant analítica com numèricament.</p>
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -669,16 +686,16 @@ Solucions3ers=[phi1toBN==round(solucions3ers[0]), phi2toBB==round(solucions3ers[
 Solucions3ers
 ```
 
+```{note}
+En compte calcular els valors i vectors propis analíticament, ara que tenim tots els valors numérics  per construir la matriu de dispersió en cada punt, és molt més eficient convertir les matrius de sagemath en arrays de numpy, executant el mètode numpy sobre l'array en qüestió
+```
+
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 dades=loadtxt("../Dades/freq.dat")
 #data = pd.read_csv('../../Dades/freq.dat', header = None)
 #show(pd.DataFrame(dades))
-```
-
-```{note}
-En compte calcular els valors i vectors propis analíticament, ara que tenim tots els valors numérics  per construir la matriu de dispersió en cada punt, és molt més eficient convertir les matrius de sagemath en arrays de numpy, executant el mètode numpy sobre l'array en qüestió
 ```
 
 ```{code-cell} ipython3
@@ -1017,6 +1034,12 @@ D4NB_xy=D4NB.matrix_from_rows_and_columns([0,1],[0,1])
 D3ers_xy=block_matrix([[D2BB3ers_xy, D1BN_xy+D3BN_xy],[D1NB_xy+D3NB_xy, D2NN3ers_xy]])
 
 D4ts_xy=block_matrix([[D2BB4ts_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, D2NN4ts_xy]])
+
+D3ers=block_matrix([[D2BB3ers, D1BN+D3BN],[D1NB+D3NB, D2NN3ers]])
+```
+
+```{code-cell} ipython3
+D3ers
 ```
 
 ### Considerem sols fins als 3ers veïns
@@ -1290,7 +1313,7 @@ points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")
 show(Solucionspla3ers)
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 u1,v1 = np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
                q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
 
@@ -1301,7 +1324,7 @@ u3,v3=np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N
                q_x=4*pi/3*(1-x/223), q_y=0).numpy(dtype='complex64') for x in range(224)])
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 :tags: []
 
 with open("matdyn_casi.modes", "x") as f:
@@ -1348,9 +1371,11 @@ with open("matdyn_casi.modes", "x") as f:
         f.write(" **************************************************************************\n")    
 ```
 
+```{raw-cell}
 ### Fins 4ts veïns
+```
 
-```{code-cell} ipython3
+```{raw-cell}
 #Autovalores en Gamma--------------------------------------------
 D_Gamma4ts_xy=D4ts_xy.subs(q_x=0,q_y=0)
 Eq_Gamma_TO4ts=(D_Gamma4ts_xy.eigenvalues()[0]==omegaGammaTO**2)
@@ -1388,7 +1413,7 @@ for i in range(4):
     
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 #Autovalors en K
 D_K4ts_xy=D4ts_xy.subs(q_x=4*pi/(3*a),q_y=0)# phi4tiBN=-phi4rBN)
 D_K4ts_xy_simplificada=D_K4ts_xy.subs(M_N=M_B)
@@ -1411,7 +1436,7 @@ for i in range(4):
     show(Equacions_en_K[i])
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 :tags: [hide-input]
 
 #----------------------------------------------------------------
@@ -1507,11 +1532,11 @@ points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")
      ,figsize=9) 
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 show(Solucionspla4ts)
 ```
 
-```{code-cell} ipython3
+```{raw-cell}
 D2BB.parent()
 ```
 

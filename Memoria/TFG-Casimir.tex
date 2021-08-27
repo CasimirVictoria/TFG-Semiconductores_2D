@@ -97,14 +97,13 @@ maximum deviation of $6 \%$) for the high-frequency modes \cite{wirtz04_phonon_d
 
 \section{Introducció}
 
-En este treball s'empra el mètode de constants de força (\emph{FCM} per les seues sigles en anglés, \foreignlanguage{english}{force constant method}), per descriure la dinàmica reticular de un material bidimensional, el nitrur de bor monocapa, \emph{BN}.\\
+En este treball s'empra el mètode de constants de força (\emph{FCM} per les seues sigles en anglés, \emph{\foreignlanguage{english}{force constant method})}, per descriure la dinàmica reticular de un material bidimensional, el nitrur de bor monocapa, \emph{BN}.\\
 
-En este model la dinàmica dels àtoms es descriu per un conjunt de simples constants de força de molls que conecten cada àtom amb els del seu entorn, fins a un nombre determinat de veïns. Altres métodes com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoría del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs. El métode de constants de força empra un conjunt reduït de parámetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis.  I encara que estem tractant amb un mètode sencill, este ha demostat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
+En este model la dinàmica dels àtoms es descriu per un conjunt de simples constants de força, on estes forces conecten cada àtom amb els àtoms del seu entorn, fins a un nombre determinat de veïns. Altres métodes com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoría del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs. El métode de constants de força empra un conjunt reduït de parámetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis pel mètode de \textcolor{red}{QUIN MÈTODE S'HA EMPRAT PER AL CÀLCUL freq.dat??}.  I encara que estem tractant amb un mètode sencill, este ha demostat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
 
+Abans d'explicar en detall el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
 
 \subsection{Xarxa cristal·lina}
-
-Abans d'explicar el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
 
 Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts de una manera regular en l'espai, y per descriure esta distribució regular s'empra el concepte matemàtic de \emph{xarxa cristal·lina}, introduït per A. Bravais en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.
 
@@ -113,23 +112,21 @@ En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina 
  \vec R_\vec l=\vec R_{l_1 l_2}=l_1 \vec a_1 +l_2\vec a_2
 \end{equation}
 
-on $\vec l$ es denomina índex del nuc.
+on $\vec l$ es denomina índex del nuc (notem que en la literatura sobre el tema sol emprar-se com a índex la lletra $n$, però crec que un índex vectorial especifica millor els nucs). Si tots els nucs de la xarxa tenen índexs enters llavors els vectors base s'anomenen \emph{primitius}.
 
-Els cristalls o \emph{estructures cristallines} són distribucions regulars d'àtoms en l'espai de posicions i els podem descriure associant a cadascun dels nucs d'una xarxa cristallina en l'espai de posicions un conjunt d'àtoms o base (\emph{producte de convolució de la base y la xarxa de nucs}. En el cas del \emph{BN} tractem amb una base diatòmica. 
+Els cristalls o \emph{estructures cristal·lines} són distribucions regulars d'àtoms en l'espai de posicions i els podem descriure associant a cadascun dels nucs d'una xarxa cristallina en l'espai de posicions un conjunt d'àtoms o base (\emph{matemàticament és producte de convolució de la base y la xarxa de nucs}. En el cas del \emph{BN} tractem amb una base diatòmica, formada per un nucli de bor, $B$ i un de nitr,ogen, $N$. 
+
+En dues dimensions, els paral·lelograms amb els quals podem omplir completament l'espai per translació cristal·lina i que contenen almenys un nuc de la xarxa es coneixen com cel·les unitat. La cel·la unitat més sencilla és la que té per costats el vectors base, i es coneixen com cel·les de Bravais.
 
 \subsubsection{Xarxa recíproca. Primera zona de Brillouin.}
-Donat un conjunt de vectors base primitius, $p_i$, de la xarxa cristalina en l'espai de posicions, la condició:
+Donat un conjunt de vectors base, $p_i$, de la xarxa cristalina en l'espai de posicions, la condició:
 
 \begin{equation}
 \label{eq:rec1}
 \vec p_i\cdot\vec p_j^{*}=\delta_{ij}
 \end{equation}
 
-on $\delta_{ij}$ és la delta de Kronecker, defineix un altre conjunt de vector $p_j^*$, coneguts com vectors primitius recíprocs, i què son els vectors primitius que defineixen una altra xarxa coneguda com coneguda com \textit{xarxa recíproca}. Els  vectors recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l'\textit{espai recíproc} o de números d'ona. \textbf{Les xarxes cristal·lines real y recíproca són dues descripcions equivalents del mateix sistema físic: el sòlid cristal·lí} que s'està estudiant.
-
-L'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona, $\vec k$.
-
-
+on $\delta_{ij}$ és la delta de Kronecker, defineix un altre conjunt de vectors $p_j^*$, coneguts com vectors recíprocs, i què son els vectors base que defineixen una altra xarxa coneguda com \textit{xarxa recíproca}. Els  vectors base recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l'\textit{espai recíproc} o de nombres d'ona. \textbf{Les xarxes cristal·lines real y recíproca són dues descripcions equivalents del mateix sistema físic: el sòlid cristal·lí} que s'està estudiant.
 
 Podem interpretar que 
 
@@ -138,31 +135,35 @@ Podem interpretar que
 \vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
 \end{equation}
 
-són els vectors de traslació cristal·lina que defineixen una xarxa cristal·lina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$. 
+són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$.
+
+Cal tenir present que l'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona, $\vec k$.
+
 
 \paragraph{Cel·les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
 
-Per descriure la xarxa $2\pi$-recíproca, emprarem el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
+Per descriure la xarxa $2\pi$-recíproca, s'empra el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
 
-Notem que en l'espai de $\vec k$ emprarem ce\l.les unitat de WS mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
+Notem que en l'espai de $\vec k$ s'empren ce\l.les unitat de \emph{WS} mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
 La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zona de Brillouin} (ZB)
 
 
 \subsection{Vibracions atòmiques en cristalls}
+Passem ara a descriure el model emprat per descriure les vibracions dels àtoms del cristall.
 \subsubsection{Model de BORN i VON KARMAN}
 Els àtoms constituents de un sólid cristallí no estan immòbils sino que vibren al voltant de la seua posició de equilibri.
 
-En 1912, Born y Von Karman \cite{Born:1912:SRG} introduiren un model realístic per de la dinámica cristal·lina, on la idea fonamental es que cada mode normal té l'energia de un oscil·lador de Planck. La dinámica del sistema es descriu de manera sencilla, no en termes de les vibracions de àtoms individuals, sino en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines (\foreignlanguage{english}{lattice vibrations}) per Born. Cada vibració cristal·lina es caracteritza per una freqüencia y un vector de ona.
+En 1912, Born y Von Karman \cite{Born:1912:SRG} introduiren un model per explicar de la dinámica cristal·lina, on la idea fonamental es que cada mode normal té l'energia de un oscil·lador de Planck. La dinámica del sistema es descriu de manera sencilla, no en termes de les vibracions de àtoms individuals, sino en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines \emph{(\foreignlanguage{english}{lattice vibrations})} per Born. Cada vibració cristal·lina es caracteritza per una freqüencia y un vector de ona.
 La vibració cristal·lina quantitzada, o mode normal, s'anomena fonó per analogía amb el fotó. %i te propietats de quasi-partícula
 
 %Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristal·lina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
 
 \subsubsection{Aproximació adiabàtica}
 
-Moltes propietats físiques dels sòlids poden classificar-se bé com electròniques o bé com vibracionals segons estiguen determinades pels electrons (de valència) o per les vibracions dels àtoms (nuclis iònics): normalment considerem els nuclis i els electrons com a constituent independents del sòlid, ja que les masses dels electrons i dels nuclis són tan diferents que el moviment dels nuclis és molt més lent que el dels electrons. L'\emph{aproximació adiabàtica}, introduïda per Born i Oppenheimer \cite{ANDP:ANDP19273892002} estableix que els electrons responen de manera pràcticament instantània als desplaçaments atòmics, de manera que el seu estat ve determinat per los posicions atómiques instantànies, mentre que els àtoms no poden respondre a les ràpides variacions espacials dels electrons: diguem que els electrons segueixen el moviment iònic adiabàticament.
+Moltes propietats físiques dels sòlids poden classificar-se bé com electròniques o bé com vibracionals, segons estiguen determinades pels electrons (de valència) o per les vibracions dels àtoms (nuclis iònics): normalment considerem els nuclis i els electrons com a constituent independents del sòlid, ja que les masses dels electrons i dels nuclis són tan diferents que el moviment dels nuclis és molt més lent que el dels electrons. L'\emph{aproximació adiabàtica}, introduïda per Born i Oppenheimer \cite{ANDP:ANDP19273892002} estableix que els electrons responen de manera pràcticament instantània als desplaçaments atòmics, de manera que el seu estat ve determinat per los posicions atómiques instantànies, mentre que els àtoms no poden respondre a les ràpides variacions espacials dels electrons: diguem que els electrons segueixen el moviment iònic adiabàticament.
 %els electrons no realitzen transicions abruptes de un estat a altres estats, si no que un estat electrònic es deforma progressivament degut als desplaçaments iònics.
 
-Notem però que estem tractant amb una primera aproximació al problema y algunes propietats físiques venen determinades per la interacció entre els electrons y les vibracions atòmiques.
+Notem, però, que estem tractant amb una primera aproximació al problema y algunes propietats físiques venen determinades per la interacció entre els electrons y les vibracions atòmiques.
 
 
 
@@ -217,19 +218,113 @@ D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{
 
 \vdots
 
-Passem ara a descriure el sistema que volem estudiar
+\begin{equation}
+ \label{eq:matriu_dinàmica}
+ \boxed{
+ \vec D^{\alpha',\alpha}(q)=\frac{1}{\sqrt{M_\alpha' M_{\alpha}}}\sum_\vec l\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l\right)e^{-i\vec q\cdot\vec R_\vec l}}
+\end{equation}
+
+
+%Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtom amb el seu n-èssim veí.
+
+
+Per calcular la matriu dinàmica emprant el model de constants de forces necessitem, per tant, constuir el tensor de constants de forces. Anem a suposar que les forces entre àtoms sols depenen del tipus d'elements de la taula periòdica a la que pertany cada àtom considerat i de la seua distància relativa.
+
+Considerem un àtom de tipus $\alpha$ situat en la cel·la $\vec l$ a una certa distància, $|\vec R_{\alpha,\vec l}-\vec R_{\alpha',\vec{l'}}|$ de l'àtom de tipus $\alpha'$  situat en la cel·la $\l'$, i escollint el sistema de coordenades cartesianes de manera que la direcció del vector que uneix ambdós àtoms coincideix amb l'eix de les $x$, escollim l'eix $y$ com la coordenada transversal en el plànol, $ti$, i $z$ la coordenada perpendicular al plànol $to$, podem escriure el tensor de forces d'este àtom (que segons el mòdul de la distància a l'àtom $\alpha'$ classificarem com $n$-èssim veí) de la forma \cite{wirtz04_phonon_disper_graph_revis}:
+
+
+\begin{equation}
+\vec\Phi_n^{\alpha',\alpha}=\begin{pmatrix}
+\phi_{n,to}^{\alpha',\alpha}&\xi_n^{\alpha',\alpha} &0\\
+-\xi_n^{\alpha',\alpha} & \phi_{n,ti}^{\alpha',\alpha} & 0 \\
+0 & 0 & \phi_{n,to}^{\alpha',\alpha}
+\end{pmatrix}
+\label{eq:tensordeforces}
+\end{equation}
+
+L'estructura diagonal a blocs de la matriu reflexa el fet que estem supossant que  les vibracions interplanars y les de fora de pla, $to$, (en la direcció $z$) estan completament desacoblades.
+
+Anem a suposar (simplificant encara més com són les interaccions entre àtoms) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al plànol) sols genera una for\c{c}a radial o transversal, es a dir, $\xi_n^{\alpha,\alpha'}=0$ tal y com es realitza en \cite{Balkanski_2000}. %Esta aproximació es coneix com la aproximació dels quatre veïns més pròxims \textit{4NNFC},% i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
+
+%\missingfigure{Ací va imatge mostrant el cristall i les forces}
+
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=40mm,height=40mm]{example-image-a}
+%\caption{Caption}
+%\end{figure}
+
+
+%Una altra aproximació al problema trobada en la literatura sobre els fonons del grafé és la coneguda com el modelo \textit{VFF} (\textit{valence-force field}), la qual determina els paràmetros de la matriu en l'equació \ref{eq:tensordeforces} introduïnt \textit{constants de moll} que determinen el canvi en l'energia potencial segons diferents deformacions; una introducción a esta aproximació es troba en l'annexe de la referència (cite aizawa90 bond soften monol graph formed). Amb aquesta aproximació es necesiten menys paràmetres (\textit{constantes de fuerza}) per  obtindre una qualitat similar a la parametrizació \textit{4NNFC} (cite wirtz04 phonon disper graph revis).
+
+Per tant, anem a considerar que el tensor de constants de forces  d'un àtom $\alpha$ classificat com $n$-èssim veí, situat en la direcció $\hat x$ respecte de l'átom  $\alpha'$, té la forma diagonal (notem que en la xarxa real que estem estudiant no té perque haver cap $n$-èssim vei en aquesta posició):
+
+\begin{equation}
+\vec\Phi_n^{\alpha'\alpha}=\begin{pmatrix}
+\phi_{n,to}^{\alpha,\alpha}&0 &0\\
+0& \phi_{n,ti}^{\alpha',\alpha} & 0 \\
+0 & 0 & \phi_{n,to}^{\alpha',\alpha}
+\end{pmatrix}
+\label{eq:tensordeforcessimplificat}
+\end{equation}
+
+Per calcular el tensor de constants de forces de cadascun dels altres $n$-èssims veïns reals de l'atom $\alpha'$ tenim que rotar la matriu de l'equació \ref{eq:tensordeforcessimplificat}:
+
+\begin{equation}
+ \vec\Phi_n^{\alpha'\alpha}(\theta)=\vec U^{-1}(\theta)\vec\Phi_n^{\alpha'\alpha}(0)\vec U(\theta)
+\end{equation}
+
+
+on $\vec U(\theta)$ ve donada per:
+\begin{equation}
+\vec U(\theta)=
+\begin{pmatrix}
+\cos(\theta)  & \sin(\theta) & 0 \\
+-\sin(\theta) & \cos(\theta) & 0  \\
+0             & 0            & 1
+\end{pmatrix}
+\end{equation}
+
+
+Una vegada que sabem com tenim que construir el tensor de constants de forces, el càlcul de la matriu dinàmica és directe, ja que sols tenim que fer ús de l'equació \ref{eq:matriu_dinàmica}, és a dir multipliquem el tensor de constants de forces del átom considerat per la fase, $e^{i \vec q\cdot \vec R_\vec l}$, on recordem, $\vec R_\vec l=l_1 \vec a_1+ l_2 \vec a_2$
+
+En el codi programat per calcular l'expressió de la matriu dinàmica pot observar-se que l'he construït a capes i un punt important és que quan es calcula la matriu dinàmica per a segons veïns, com estem considerant la interacció entre àtoms del mateix tipus (de la mateixa subxarxa, no tenen perquè ser del mateix element, encara que en el cas del $BN$ és fácil discriminar-los, ja que sí són àtoms d'elements distints els que conformen la base), tenim que considerar la contribució a la matriu dinàmica de l'àtom situat en la cel·la $\vec l=\vec 0$. Per a estos àtoms no necessitem escriure el tensor de constants de forces (ni la matriu dinàmica) explicitament, ja que la seua contribució la podem calcular a partir del fet que si traslladem el conjunt d'àtoms la força total és nula (si es desplaça el cristall com un tot no canvia l'energia potencial) i tal com ve indicat en \cite{falkovsky08_symmet_const_phonon_disper_graph}
+
+Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
+vspace{5cm}
+
+
+Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però donat que les components en $z$ d'esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.
+
+ 
+%En este treball, per constuir la matriu de constants de forces $\vec\Phi_{\alpha,\alpha'}$, el que faig es classificar els àtoms per la seua distància i sumar els tensors segons està distància 
+
+
+\
 
 
 \newpage
+\section{Eines emprades}
 
+Els càlculs s'han realitzat en el llenguatge de programació python \cite{4160250}, emprant el software matematic Sagemath \cite{sagemath} i biblioteques disponibles per aquest llenguatge orientades a càlcul numeric com numpy \cite{harris2020array} i scipy \cite{2020SciPy-NMeth}. Com a entorn de desenvolupament s'ha emprat \href{https://jupyter.org/}{jupyterlab} i \href{https://git-scm.com/}{git} com sistema de control de versions distribuït. 
+
+El projecte, incloent els \textit{\foreignlanguage{english}{jupyter notebooks}} amb els càlculs, es troba accessible al repositori públic de github \href{https://github.com/CasimirVictoria/TFG-Semiconductores\_2D}{TFG-Semiconductores\_2D}. Així mateix, una versió en línea  es troba publicada en \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{github pages}; la creació i publicació d'esta versió online s'ha realitzat automàticament a partir dels \textit{notebooks} emprant \href{https://jupyterbook.org/intro.html}{jupyterbook}.
+
+Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no emprar fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com git. Per aquesta raó s’ha emprat també el plugin \href{https://jupytext.readthedocs.io/en/latest/}{jupytext} per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla (amb el codi en python, markdown, etc.). En este projecte he decidit emprar el format \href{https://jupyterbook.org/content/myst.html}{myst markdown}, de manera que des de jupyterlab obric un fitxer markdown i la extensió jupytext manté un fitxer en format \textit{.ipynb} sincronitzat amb este fitxer i que és amb el realment que treballa jupyterlab. Este \emph{notebook} l'exporte després a un fitxer python que carregue posteriorment al fitxer \LaTeX, on he escrit la memòria emprant el paquet \href{https://ctan.org/pkg/sagetex}{sagetex}, de manera que puc incloure tots els càlculs realitzats (incloent expressions analítiques, no sols numèriques i gràfics) de manera automàtica en la memòria sense tindre que escriure-la manualment.
+
+Notem que tot els software emprat per a la realització del treball es de codi obert i gratuït.
+
+
+Passem ara a descriure el sistema que s'ha estudiat i els resultats dels càlculs realitzats.
+
+\newpage
 \section{Descripció del cristall de BN}
 
 Donat que el càlcul dels modes de vibració comen\c{c}a per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatómica, la ce\l.la unitat del qual ve donada per (dades proporcionades):
 
 \begin{sagesilent}
-var('a', domain='positive')
-a_1=a*vector([1,0])
-a_2=a*vector([-1/2,sqrt(3)/2])
+load("formulacio_matriu_dinamica.sage")
 \end{sagesilent}
 
 \begin{equation}
@@ -240,52 +335,11 @@ Podem comprobar que efectivament es tracta de una ce\l.la hexagonal, ja que els 
 
 Les posicions atòmiques d'equilibri en la ce\l.la unitat són:
 
-\begin{sagesilent}
-r_B=1/3*a_1+2/3*a_2; r_N=2/3*a_1+1/3*a_2
-cela=arrow((0,0),(a_1/a),color="blue")+\
-      arrow((0,0),(a_2/a),color="red")+\
-      line([(a_1/a),(a_1/a+a_2/a)],linestyle="--",color="red")+\
-      line([(a_2/a),(a_2/a+a_1/a)],linestyle="--",color="red")+\
-      point(r_B/a, size=120,color="blue")+\
-      point(r_N/a, size=100,color="red")
-\end{sagesilent}
+\begin{equation}\begin{split}
+\vec d_B=&\frac{1}{3}\vec{a_1}+2\vec{a_2}=\sage{r_B}\qquad\\
+\vec d_N=&\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2}=\sage{r_N} 
+\end{split}\end{equation} 
 
-\begin{equation}
-\vec d_B=\frac{1}{3}\vec{a_1}+2\vec{a_2}\qquad
-\vec d_N=\frac{2}{3}\vec{a_1}+\frac{1}{3}\vec{a_2} 
-\end{equation} 
-
-
-
-Tal com s'indica en la introducció teòrica, enumere les ce\l.les amb un índex vectorial $\vec l=\left(l_1, l_2\right)$, on $l_1$ i $l_2$ són dos nombres enters.
-
-Les posicions del nucs de la xarxa són $\vec R_{\vec l}=l_1\vec{a}_1+l_2\vec{a}_2$.
-
-\begin{sagesilent}
-nucs=points([l_1*a_1/a+l_2*a_2/a for l_1 in range(-3, 4) for l_2 in range(-3,4)], size=40, color="blue", frame=False)
-
-xarxa=nucs+\
-line([(0,0),(a_1/a)],color="red")+\
-line([(0,0),(a_2/a)],color="red")+\
-line([(a_1/a),(a_1/a+a_2/a)],color="red")+\
-line([(a_2/a),(a_2/a+a_1/a)],color="red")+\
-line([(a_2/a),(a_1/a+2*a_2/a)],linestyle="--")+\
-line([(a_1/a+2*a_2/a),(2*a_1/a+2*a_2/a)],linestyle="--")+\
-line([(2*a_1/a+2*a_2/a),(2*a_1/a+a_2/a)],linestyle="--")+\
-line([(2*a_1/a+a_2/a),(a_1/a)],linestyle="--")
-
-#Posicions d'equilibri dels àtomos
-def RB(l_1,l_2):
-    return (l_1*a_1+l_2*a_2+r_B)
-
-def RN(l_1,l_2):
-    return (l_1*a_1+l_2*a_2+r_N)
-
-AtomsB=points([RB(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='blue')
-
-AtomsN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='red')
-
-\end{sagesilent}
 
 \begin{figure}[h]
 \centering
@@ -306,64 +360,13 @@ AtomsN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],siz
 \end{subfigure}
 \end{figure}
 
-Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la ce\l.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
-
-\begin{sagesilent}
-#import pandas as pd
-var('q_x, q_y'); assume(q_x, q_y, 'real'); q=vector([q_x,q_y])
-
-
-## Parametros de la red, de la celdilla y del cristal
-## Vector R_l (vector de traslación primitivo)
-def R_l(l_1,l_2):
-    return l_1*a_1+l_2*a_2
-
-## Vector de posición de los átomos del cristal (en equilibrio)
-def R_alpha_l(alpha,l_1,l_2):
-    if alpha == 1:
-        return l_1*a_1+l_2*a_2+r_B
-
-    elif alpha == 2:
-        return l_1*a_1+l_2*a_2+r_N
-
-    else:
-        print("Error, alpha solo puede ser 1 o 2 ")
-
-## Vector unitario que une uno de los átomo alphaprima con el átomo considerado alpha, l_1,l_2
-def R_hat(alphaprima,alpha,l_1,l_2):
-    if (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()>0:
-        return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))/(R_alpha_l(alpha,l_1,l_2)\
-                                                                 -R_alpha_l(alphaprima,0,0)).norm()
-    else:
-        return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))
-
-# Distancia entre el átomo alphaprime y su vecino alpha situado en la celdilla l_1,l_2
-def distancia(alphaprime,alpha,l_1,l_2):
-    return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprime,0,0)).norm()/a    
-
-def fase(l_1,l_2):
-    return exp(I*q*R_l(l_1,l_2))
-
-#Genero una lista con la distancia de cada átomo a los átomos de la celdilla unidad 
-#def valores_atomos(l_1, l_2):
-#    return [(k, m, i, j, R_hat(k, m, i, j), distancia(k,m,i,j)) for k in [1,2] for m in [1,2]  \
-#            for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
-
-## Construyo un DataFrame de pandas con la información necesaria para identificar a los primeros, segundos, ... vecinos, según su distancia a cada uno de los átomos de la celdilla unidad
-#columnas = [r"$\alpha\prime$",r"$\alpha$",r"$l_1$", r"$l_2$", r"$\hat R$",'Distancia']
-
-#def lista_atomos(l_1, l_2):
-#    return pd.DataFrame(valores_atomos(l_1,l_2),columns=columnas).sort_values(['Distancia',r"$\alpha\prime$"], ascending=[True,True])
-
-## Mostramos el dataframe como una tabla
-#table(lista_atomos(2,2).to_html(index=False))
-\end{sagesilent}
+%Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la ce\l.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
 
 
 \subsection{Primera zona de Brillouin}
 Passe ara a mostrar la xarxa $2\pi$-recíproca associada a la xarxa de nucs del cristall de $BN$, la primera zona de Brillouin y calcular els punts de màxima simetria de la primera zona de Brillouin:
 
-Els vectors primitivos de la xarxa $2\pi\text{-recíproca}$ són:
+Els vectors primitius de la xarxa $2\pi\text{-recíproca}$ són:
 
 \begin{equation}
 \label{eq:11}
@@ -371,6 +374,8 @@ Els vectors primitivos de la xarxa $2\pi\text{-recíproca}$ són:
 \end{equation} 
 
 i la xarxa $2\pi$-recíproca és:
+
+\missingfigure{Aci falta incloure la grafica de la xarxa $2\pi$, de la zona de brillouin, i possar els punts de màxima simetria d'aquesta, fet per mi, clar}
 
 \begin{sagesilent}
 import numpy as np
@@ -439,274 +444,10 @@ var('a', domain='positive')
 \end{figure}
 
 
-
-
-
-\subsection{Tensor de constants de forca i matriu dinàmica}
-
-Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
-
-Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtom amb el seu n-èssim veí.
-
-La forma general del tensor de forces d'un $n$-èssim veí és de la forma \cite{wirtz04_phonon_disper_graph_revis}:
-
-
-\begin{equation}
-C_n=\begin{pmatrix}
-\phi_n^{r}&\xi_n &0\\
--\xi_n & \phi_n^{ti} & 0 \\
-0 & 0 & \phi_n^{to}
-\end{pmatrix}
-\label{eq:tensordeforces}
-\end{equation}
-
-on el sistema de coordenades se elegeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $r$; $y$ la coordenada transversal en el planol, $ti$, i $z$ la coordenada perperndicular al planol $to$. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de ,$to$, (en la direcció $z$) estan completament desacoblades.
-
-
-
-Anem a supossar (per simplificar) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una for\c{c}a radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza \cite{Balkanski_2000}. Esta aproximació es coneix com la aproximación \textit{4NNFC},% i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
-
-%\missingfigure{Ací va imatge mostrant el cristall i les forces}
-
-
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=40mm,height=40mm]{example-image-a}
-%\caption{Caption}
-%\end{figure}
-
-
-%Una altra aproximació al problema trobada en la literatura sobre els fonons del grafé és la coneguda com el modelo \textit{VFF} (\textit{valence-force field}), la qual determina els paràmetros de la matriu en l'equació \ref{eq:tensordeforces} introduïnt \textit{constants de moll} que determinen el canvi en l'energia potencial segons diferents deformacions; una introducción a esta aproximació es troba en l'annexe de la referència (cite aizawa90 bond soften monol graph formed). Amb aquesta aproximació es necesiten menys paràmetres (\textit{constantes de fuerza}) per  obtindre una qualitat similar a la parametrizació \textit{4NNFC} (cite wirtz04 phonon disper graph revis).
-
-Por tant, com primera aproximació anem a considerar que el tensor de constants de for\c{c}a  d'un àtom classificat com $n$-èssim veí, situat en la direcció $\hat x$ respecte del átom de la ce\l.la $\vec 0$, té la forma diagonal:
-
-\begin{equation}
-\label{eq:rotacio}
-C_n(0)=\begin{pmatrix}
-\phi_n^r& 0 &0\\
-0 & \phi_n^{ti} & 0 \\
-0 & 0 & \phi_n^{to}
-\end{pmatrix}
-\end{equation}
-
-i per tant el tensor de constants de for\c{c}a de cadascun dels $n$-èssims veïns reals l'obtenim rotant la matriu de l'equació \ref{eq:rotacio}:
-
-\begin{equation}
- C_n(\theta)=U^{-1}(\theta)C_n(0)U(\theta)
-\end{equation}
-
-
-on $\vec U(\theta)$ ve donada per:
-\begin{equation}
-\vec U(\theta)=
-\begin{pmatrix}
-\cos(\theta)  & \sin(\theta) & 0 \\
--\sin(\theta) & \cos(\theta) & 0  \\
-0             & 0            & 1
-\end{pmatrix}
-\end{equation}
-
-Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estamos considerant de la ce\.l.la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, %(falkovsky08_symmet_const_phonon_disper_graph)
-%(wirtz04_phonon_disper_graph_revis)
-Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que implica s'ha de complir:
-
-
-Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components ...) però per ara sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
-
-\vspace{5cm}
-
-\begin{sagesilent}
-#Angulo que forma el átomo considerado respecto al eje x
-
-def angulo(alphaprima,alpha,l_1,l_2):
-    if R_hat(alphaprima,alpha,l_1,l_2)[1] <0:
-        return -acos(R_hat(alphaprima,alpha,l_1,l_2)*vector([1,0]))
-    
-    else:
-        return acos(R_hat(alphaprima,alpha,l_1,l_2)*vector([1,0]))
-
-#Matriz unitaria de rotación para cambio de ejes coordenados (entorno al eje z)
-
-def U(theta):
-    return matrix([[cos(theta),sin(theta),0], [-sin(theta), cos(theta),0],[0,0,1]])
-
-#Matriz de fuerza para los primeros vecinos
-
-var('M_B,M_N', domain='positive')
-var('omega')
-
-phi1rBN=var('phi1rBN',latex_name='\\phi_{1,r}^{BN}')
-phi1tiBN=var('phi1tiBN',latex_name='\\phi_{1,ti}^{BN}')
-phi1toBN=var('phi1toBN',latex_name='\\phi_{1,to}^{BN}',domain='real')
-
-phi1rNB=phi1rBN; phi1tiNB=phi1tiBN; phi1toNB=phi1toBN
-
-
-Phi_10__BN=1/sqrt(M_B*M_N)*Matrix([[phi1rBN,0,0],[0,phi1tiBN,0],[0,0,phi1toBN]])
-Phi_10__NB=1/sqrt(M_N*M_B)*Matrix([[phi1rNB,0,0],[0,phi1tiNB,0],[0,0,phi1toNB]])
-
-
-def Phi_1l__BN(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_10__BN*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def Phi_1l__NB(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_10__NB*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def D_1l_BN(alphaprima,alpha,l_1,l_2):
-    return Phi_1l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-def D_1l_NB(alphaprima,alpha,l_1,l_2):
-    return Phi_1l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-# Matriz de fuerza para los segundos vecinos
-
-phi2rBB=var('phi2rBB',latex_name='\\phi_{2,r}^{BB}')
-phi2tiBB=var('phi2tiBB',latex_name='\\phi_{2,ti}^{BB}')
-phi2toBB=var('phi2toBB',latex_name='\\phi_{2,to}^{BB}',domain='real')
-
-phi2rNN=var('phi2rNN',latex_name='\\phi_{2,r}^{NN}')
-phi2tiNN=var('phi2tiNN',latex_name='\\phi_{2,ti}^{NN}')
-phi2toNN=var('phi2toNN',latex_name='\\phi_{2,to}^{NN}',domain='real')
-
-Phi_20__BB=1/M_B*Matrix([[phi2rBB,0,0],[0,phi2tiBB,0],[0,0,phi2toBB]])
-Phi_20__NN=1/M_N*Matrix([[phi2rNN,0,0],[0,phi2tiNN,0],[0,0,phi2toNN]])
-
-#A tener en cuenta: cuando consideramos el mismo tipo de átomos 
-# (de la misma subred, no porque sean el mismmo elemento)
-
-def Phi_2l__BB(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_20__BB*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def Phi_2l__NN(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_20__NN*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def D_2l_BB(alphaprima,alpha,l_1,l_2):
-    return Phi_2l__BB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-def D_2l_NN(alphaprima,alpha,l_1,l_2):
-    return Phi_2l__NN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-
-#Matriz de fuerza para los terceros vecinos
-
-phi3rBN=var('phi3rBN',latex_name='\\phi_{3,r}^{BN}')
-phi3tiBN=var('phi3tiBN',latex_name='\\phi_{3,ti}^{BN}')
-phi3toBN=var('phi3toBN',latex_name='\\phi_{3,to}^{BN}',domain='real')
-phi3rNB,phi3tiNB,phi3toNB=phi3rBN,phi3tiBN,phi3toBN
-Phi_30__BN=1/sqrt(M_B*M_N)*Matrix([[phi3rBN,0,0],[0,phi3tiBN,0],[0,0,phi3toBN]])
-Phi_30__NB=1/sqrt(M_N*M_B)*Matrix([[phi3rNB,0,0],[0,phi3tiNB,0],[0,0,phi3toNB]])
-                   
-def Phi_3l__BN(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_30__BN*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def Phi_3l__NB(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_30__NB*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def D_3l_BN(alphaprima,alpha,l_1,l_2):
-    return Phi_3l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-def D_3l_NB(alphaprima,alpha,l_1,l_2):
-    return Phi_3l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-#Matriz de fuerza para los cuartos vecinos
-phi4rBN=var('phi4rBN',latex_name='\\phi_{4,r}^{BN}')
-phi4tiBN=var('phi4tiBN',latex_name='\\phi_{4,ti}^{BN}')
-phi4toBN=var('phi4toBN',latex_name='\\phi_{4,to}^{BN}',domain='real')
-phi4rNB,phi4tiNB,phi4toNB=phi4rBN,phi4tiBN,phi4toBN
-
-Phi_40__BN=1/sqrt(M_B*M_N)*Matrix([[phi4rBN,0,0],[0,phi4tiBN,0],[0,0,phi4toBN]])
-Phi_40__NB=1/sqrt(M_N*M_B)*Matrix([[phi4rNB,0,0],[0,phi4tiNB,0],[0,0,phi4toNB]])
-
-def Phi_4l__BN(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_40__BN*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def Phi_4l__NB(alphaprima,alpha,l_1,l_2):
-    return U(-angulo(alphaprima,alpha,l_1,l_2))*Phi_40__NB*\
-           U(angulo(alphaprima,alpha,l_1,l_2))
-
-def D_4l_BN(alphaprima,alpha,l_1,l_2):
-    return Phi_4l__BN(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-def D_4l_NB(alphaprima,alpha,l_1,l_2):
-    return Phi_4l__NB(alphaprima,alpha,l_1,l_2)*fase(l_1,l_2)
-
-# Finalmente construimos la matriz dinámica "a capas"
-# Con la tabla de la celda de codigo anterior comprobamos que para considerar 
-# hasta los cuartos vecinos es suficiente con l_1,l_2=2
-                   
-D1BN, D1NB, D2BB, D2NN, D3BN, D3NB, D4BN, D4NB = (matrix(3) for i in range(8))
-D01BN, D01NB, D02BB, D02NN, D03BN, D03NB, D04BN, D04NB= (matrix(3) for i in range(8))
-for k in [1,2]:
-    for m in [1,2]:
-         for i in range(-2,3):
-            for j in range(-2,4):
-                if (k==1) & bool( distancia(k,m,i,j) == sqrt(3)/3 ):
-                    D1BN += D_1l_BN(k,m,i,j)
-                    D01BN += Phi_1l__BN(k,m,i,j)
-
-                elif (k==2) & bool( distancia(k,m,i,j) == sqrt(3)/3 ):
-                    D1NB += D_1l_NB(k,m,i,j)
-                    D01NB += Phi_1l__NB(k,m,i,j)
-                 
-                elif (k==1) & bool( distancia(k,m,i,j) == 1):
-                    D2BB += D_2l_BB(k,m,i,j)
-                    D02BB += Phi_2l__BB(k,m,i,j)
-
-                elif (k==2) & bool( distancia(k,m,i,j) == 1):
-                    D2NN += D_2l_NN(k,m,i,j)
-                    D02NN += Phi_2l__NN(k,m,i,j)
-
-                elif (k==1) & bool( distancia(k,m,i,j) == 2*sqrt(3)/3 ):
-                    D3BN += D_3l_BN(k,m,i,j)
-                    D03BN += Phi_3l__BN(k,m,i,j)
-
-                elif (k==2) & bool( distancia(k,m,i,j) == 2*sqrt(3)/3 ):
-                    D3NB += D_3l_NB(k,m,i,j)
-                    D03NB += Phi_3l__NB(k,m,i,j)
-                    
-                elif (k==1) & bool( distancia(k,m,i,j) == sqrt(7/3)):
-                    D4BN += D_4l_BN(k,m,i,j)
-                    D04BN += Phi_4l__NB(k,m,i,j)
-
-                elif (k==2) & bool( distancia(k,m,i,j) == sqrt(7/3)):
-                    D4NB += D_4l_NB(k,m,i,j)
-                    D04NB += Phi_4l__NB(k,m,i,j)
-
-# Tenemos en cuenta la contribución a la matriu dinámica de los átomos situados en 
-# la celdilla 0
-D2BB=D2BB-D01BN-D02BB-D03BN
-D2NN=D2NN-D01NB-D02NN-D03NB                    
-\end{sagesilent}
-
-Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però donat que les components en $z$ d'esta matriu es troben desacoblades podem tractar aquestes vibracions de manera independent.
-
 \newpage
-
+Passem ja a estudiar les vibracions en el $BN$.
 \subsection{Vibracions transversales fora de pla}
-Donat que en el nostre model, per com hem construït la matriu dinàmica, les vibracions fora de pla són independents de les interplanars passem a estudiar-les.
-
-\begin{sagesilent}
-D1BN_zz=D1BN[2,2]
-D1NB_zz=D1NB[2,2]
-
-D2BB_zz=D2BB[2,2]
-D2NN_zz=D2NN[2,2]
-
-D3BN_zz=D3BN[2,2]
-D3NB_zz=D3NB[2,2]
-D4BN_zz=D4BN[2,2]
-D4NB_zz=D4NB[2,2]
-
-D_zz=Matrix([[D2BB_zz,D1BN_zz+D3BN_zz], [D1NB_zz+D3NB_zz,D2NN_zz]])
-#valors_propis_D_zz=D_zz.eigenvalues()
-\end{sagesilent}
+Donat que en el nostre model, per com hem construït la matriu dinàmica, les vibracions fora de pla són independents de les interplanars passem a estudiar les primeres, ja que són més sencilles (traballarem amb una matriu 2x2). 
 
 \subsubsection{En $\Gamma (k_x=0, k_y=0)$}
 Al punt $\Gamma$, ($q_x=0, q_y=0$), la matriu dinámica per a les vibracions fora de pla pren el valor:
@@ -933,6 +674,7 @@ D_K_xy=D_xy.subs(q_x=4*pi/(3*a),q_y=0, phi2rNN=phi2rBB,phi2tiNN=phi2tiBB, M_N=M_
 
 Passem ara a intentar calcular els valors de les constants de for\c{c}a, emprant els valors de les freqüències dels modes de vibració en estes punts de la primera zona de Brillouin.
 \newpage
+
 
 \bibliography{TFG-Casimir}
 \bibliographystyle{plain}
