@@ -1,4 +1,4 @@
-\documentclass[12pt]{article} %,twoside,a4paper
+\documentclass[12pt,twoside]{article} %,twoside,a4paper
 
 \usepackage[a4paper,margin=24.5mm]{geometry} %\usepackage[left=2cm,right=2cm,top=1.5cm, bottom=2cm]
 
@@ -100,7 +100,7 @@ maximum deviation of $6 \%$) for the high-frequency modes \cite{wirtz04_phonon_d
 
 En este treball s'empra el mètode de constants de força (\emph{FCM} per les seues sigles en anglés, \emph{\foreignlanguage{english}{force constant method})}, per descriure la dinàmica reticular de un material bidimensional, el nitrur de bor monocapa, \emph{BN}.\\
 
-En este model la dinàmica dels àtoms es descriu considerant que cada àtom interacciona amb els del seu entorn fins a un determinat nombre de veïns (els veïns es classifiquen segons la seua distància), caracteritzant les interaccions amb els veïns mitjançant un tensor de forces, una manera visual de representar el model seria considerar que els àtoms estan conectats per molls. Altres mètodes, com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoria del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs. El mètode de constants de força empra un conjunt reduït de paràmetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis pel mètode de \textcolor{red}{QUIN MÈTODE S'HA EMPRAT PER AL CÀLCUL freq.dat??}.  I encara que estem tractant amb un mètode senzill, este ha demostrat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
+En este model la dinàmica dels àtoms es descriu considerant que cada àtom interacciona amb els del seu entorn fins a un determinat nombre de veïns (els veïns es classifiquen segons la seua distància), caracteritzant les interaccions amb els veïns mitjançant un tensor de forces, una manera visual de representar el model seria considerar que els àtoms estan conectats per molls. Altres mètodes, com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoria del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs. El mètode de constants de força empra un conjunt reduït de paràmetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis pel mètode de \emph{Density Functional Perturbation Theory}.  I encara que estem tractant amb un mètode senzill, este ha demostrat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
 
 Abans d'explicar en detall el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
 
@@ -127,10 +127,9 @@ Donat un conjunt de vectors base, $p_i$, de la xarxa cristalina en l'espai de po
 \vec p_i\cdot\vec p_j^{*}=\delta_{ij}
 \end{equation}
 
-on $\delta_{ij}$ és la delta de Kronecker, defineix un altre conjunt de vectors $p_j^*$, coneguts com vectors recíprocs, i què son els vectors base que defineixen una altra xarxa coneguda com \textit{xarxa recíproca}. Els  vectors base recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l'\textit{espai recíproc} o de nombres d'ona. \textbf{Les xarxes cristal·lines real y recíproca són dues descripcions equivalents del mateix sistema físic: el sòlid cristal·lí} que s'està estudiant.
+on $\delta_{ij}$ és la delta de Kronecker, defineix un altre conjunt de vectors $p_j^*$, coneguts com vectors recíprocs, i què són els vectors base que defineixen una altra xarxa coneguda com \textit{xarxa recíproca}. Els  vectors base recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l'\textit{espai recíproc} o de nombres d'ona. \textbf{Les xarxes cristal·lines real y recíproca són dues descripcions equivalents del mateix sistema físic: el sòlid cristal·lí} que s'està estudiant.
 
-Podem interpretar que 
-
+Podem interpretar que
 \begin{equation}
 \label{eq:rec3}
 \vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
@@ -138,12 +137,12 @@ Podem interpretar que
 
 són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en aquest espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$.
 
-Cal tenir present que l'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interés es descriuen en l'espai de vectors d'ona, $\vec k$.
+Cal tenir present que l'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l'espai de vectors d'ona, $\vec k$.
 
 
 \paragraph{Cel·les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
 
-Per descriure la xarxa $2\pi$-recíproca, s'empra el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
+Per descriure la xarxa $2\pi$-recíproca, s'empra el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de \emph{WS} és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
 
 Notem que en l'espai de $\vec k$ s'empren ce\l.les unitat de \emph{WS} mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
 La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zona de Brillouin} (ZB)
