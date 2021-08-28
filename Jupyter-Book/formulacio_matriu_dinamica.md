@@ -214,6 +214,25 @@ def llista_atoms(l_1, l_2):
 table(llista_atoms(2,2).to_html(index=False))
 ```
 
+```{code-cell} ipython3
+var('b', domain='positive')
+b_1=b*vector([1,1/sqrt(3)])
+b_2=b*vector([0,2/sqrt(3)])
+nucsR=points([l_1*b_1/b+l_2*b_2/b for l_1 in range(-3, 4) for l_2 in range(-3,4)], 
+             size=40, color="blue", frame=False)
+
+xarxaR=nucsR
+
+show(xarxaR, figsize=4)
+```
+
+```{code-cell} ipython3
+angleR=arccos(b_1*b_2/(norm(b_1)*norm(b_2)))
+#glue("angle_cela", angle, display=False)
+show(angleR, " radians")
+#In-line text; {glue:}`angle`
+```
+
 +++ {"tags": []}
 
 ## Tensor de constants de forca i matriu dinàmica
@@ -221,7 +240,7 @@ table(llista_atoms(2,2).to_html(index=False))
 +++ {"tags": []}
 
 Construisc el tensor de constants de forces, així com la matriu dinàmica "a capes".
-Notar que la contribució a la matriu dinàmica, en les submatrius de la diagonal, les que impliquen elements de la mateixa subxarxa que el ($\alpha', 0$), obtenim la contribució dinàmica d'este element a partir de la invariança a traslacions del cristall com un tot
+Notar que la contribució a la matriu dinàmica, en les submatrius de la diagonal, les que impliquen elements de la mateixa subxarxa que el ($\alpha', 0$), obtenim la contribució dinàmica d'este element sobre sí mateix a partir de la invariança a traslacions del cristall com un tot.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -870,126 +889,6 @@ save(dispersioZ4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\G
      axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/DisZ4ts.pdf")
 ```
 
-### Numèricament
-
-+++
-
-La idea ara es realitzar l'ajust a les dades experimentals numèricament, per a la qual cosa necessite la matriu com a array de numpy:
-
-```{raw-cell}
-def Dzz(phi1BN,phi2BB,phi2NN,phi3BN,phi4BN,qx,qy):
-    return D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=qx,q_y=qy).numpy()
-
-def autovalor(i):
-    return np.array(dades)[i][1]**2
-
-for x in range(2):
-    print(Dzz(4.,3.,2.,5.,7.,2,2))
-```
-
-```{raw-cell}
-D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=qx,q_y=qy).numpy()
-```
-
-```{raw-cell}
-def autovalor(i):
-    return np.array(dades)[i][1]**2
-
-[D_zz4ts.subs(a=1,M_B=B.mass, M_N=N.mass, qx=x/199*pi, qy=x/199*pi/sqrt(3))-autovalor(x)*matrix.identity(2) for x in range(2)]
-```
-
-```{raw-cell}
-def my_func(phi):
-    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = phi
-    eigenValues, eigenVectors= np.linalg.eig([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,\
-                                                           a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
-    ordre = eigenValues.argsort()[::-1]
-    eigenValues = eigenValues[ordre]
-    eigenVectors = eigenVectors[:,ordre]
-    return(eigenValues)
-
-phi0 = np.array([1.,1.,1.,1.,1.])  # Initial guess
-
-my_func(phi0)
-
-#autovalors_Z=np.linalg.eigvals(my_func(phi0))
-
-#ordre=autovalors_Z.argsort()[::1]
-#autovalors_ZA=autovalors_Z[ordre]
-```
-
-```{raw-cell}
-u1,v1 = np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
-               q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
-
-with open("matdyn_casi.modes", "x") as f:
-    for x in range(200):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u1[x].argsort()[::1]
-        u1[x]=u1[x][ordre]
-        v1[x]=v1[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u1[x][i])):9.6f} [THz] =    {real_part(sqrt(u1[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v1[x][i][0]):9.6f}  {imag_part(v1[x][i][0]):9.6f}    {real_part(v1[x][i][1]):9.6f}  {imag_part(v1[x][i][1]):9.6f}    {real_part(v1[x][i][2]):9.6f}  {imag_part(v1[x][i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v1[x][i][3]):9.6f}  {imag_part(v1[x][i][3]):9.6f}    {real_part(v1[x][i][4]):9.6f}  {imag_part(v1[x][i][4]):9.6f}    {real_part(v1[x][i][5]):9.6f}  {imag_part(v1[x][i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")
- 
-
-#autovalors_Z[:,1]
-```
-
-```{raw-cell}
-np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
-    dtype='complex64') - dades[x,1] for x in range(20)])
-```
-
-```{raw-cell}
-def my_func(phi):
-    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = phi
-    arr = np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
-    dtype='complex64') for x in range(20)])
-    ev, ew=np.linalg.eig(arr)
-    return ev[0]
-```
-
-```{raw-cell}
-phi0 = np.array([1.,1.,1.,1.,1.])  # Initial guess
-
-#minimize(my_func, phi0)
-my_func
-```
-
-```{raw-cell}
-minimize(norm(vector(ola)),[1.,1.,1.,1.,1.])
-```
-
-```{raw-cell}
-def my_func(x):
-    phi1BN,phi2BB,phi2NN,phi3BN,phi4BN = x
-    arr = np.array([D_zz4ts.subs(phi1toBN=phi1BN, phi2toBB=phi2BB, phi2toNN=phi2NN, phi3toBN=phi3BN, phi4toBN=phi4BN,a=1,M_B=B.mass, M_N=N.mass, q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(\
-    dtype='complex64') for x in range(20)])
-    ev, ew=np.linalg.eig(arr)
-    return ev[0]
-
-#x0 = np.array([1000, 3.45])  # Initial guess
-#minimize(my_func, x0)
-#autovalor(0)*np.identity(2)
-```
-
-Al fitxer *freq.dat* tenim l'arrel quadrada dels valors propis d'esta matriu als punts q_x, q_y, de manera que per ajustar el valor de les constants emprarem que té que complir-se
-$det(D-\lambda_i I)=0$ o, el que és el mateix, $eigval(D)-\lambda_i=0$
-
-```{raw-cell}
-[Dzz.subs(a=1, q_x=x/199*pi, q_y=x/199*pi/sqrt(3), M_B=B.mass, M_N=N.mass).numpy(dtype='complex64') for x in range(200)]
-```
-
-```{raw-cell}
-minimize(D_zz4ts.subs(a=1, M_B=B.mass, M_N=N.mass,q_x=pi/a,q_y=pi/(sqrt(3)*a)).det(),[-1463658.,-24083.,-373442,1.,42685])
-```
-
 ## Vibracions al pla del cristall
 
 +++
@@ -1544,11 +1443,6 @@ show(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Ga
 ```
 
 ```{code-cell} ipython3
-for i in range(9):
-    show(Solucionspla4ts[i])
-```
-
-```{code-cell} ipython3
 u1,v1 = np.linalg.eig([D3ers.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
                q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
 
@@ -1607,6 +1501,16 @@ with open("matdyn_casi_4ts.modes", "x") as f:
 ```{code-cell} ipython3
 save(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.pdf")
+```
+
+En esta web podem simular els modes vibracionals calculats <a href="https://henriquemiranda.github.io/phononwebsite/phonon.html">Phononwebsite </a>
+
+```{code-cell} ipython3
+Solucions4ts
+```
+
+```{code-cell} ipython3
+Solucionspla4ts
 ```
 
 ```{code-cell} ipython3
