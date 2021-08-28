@@ -130,7 +130,7 @@ cela=arrow((0,0),(a_1/a),color="blue")+\
       point(r_B/a, size=120,color="blue")+\
       point(r_N/a, size=100,color="red")
 
-show(cela,  frame=False, figsize=4)
+show(cela, frame=False, figsize=4)
 ```
 
 +++ {"tags": []}
@@ -180,7 +180,7 @@ def R_alpha_l(alpha,l_1,l_2):
     else:
         print("Error, alpha sols pot ser 1 o 2 ")
 
-## Vector unitari que uneix un dels àtoms alphaprima amb l'àtom considerat (alpha, l_1,l_2)
+## Vector unitari que uneix un l'àtoms alphaprima de (0,0), amb l'àtom considerat (alpha, l_1,l_2)
 def R_hat(alphaprima,alpha,l_1,l_2):
     if (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()>0:
         return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0))/(R_alpha_l(alpha,l_1,l_2)\
@@ -192,6 +192,7 @@ def R_hat(alphaprima,alpha,l_1,l_2):
 def distancia(alphaprima,alpha,l_1,l_2):
     return (R_alpha_l(alpha,l_1,l_2)-R_alpha_l(alphaprima,0,0)).norm()/a    
 
+#Fase per poder calcular la matriu dinàmica, notar que emprem R_l, no R_alpha_l
 def fase(l_1,l_2):
     return exp(I*q*R_l(l_1,l_2))
 
@@ -201,7 +202,8 @@ def valors_atoms(l_1, l_2):
       for i in range(-l_1,l_1+1) for j in range(-l_2,l_2+1)]
 
 ## Construisc un DataFrame de pandas amb la informació necessaria per identificar els 1ers, 2ons, ... veïns
-## segons la seua distància a cadascun del àtoms de la cel·la unitat
+## segons la seua distància a cadascun del àtoms de la cel·la unitat, per comprobar que la classificació es
+## correcta
 columnes = [r"$\alpha\prime$",r"$\alpha$",r"$l_1$", r"$l_2$", r"$\hat R$",'Distància']
 
 def llista_atoms(l_1, l_2):
@@ -218,51 +220,8 @@ table(llista_atoms(2,2).to_html(index=False))
 
 +++ {"tags": []}
 
-Una vegada descrit el nostre sistema físic anem a obtindre la matriu dinàmica d'aquest, ja que com hem vist els seus valors propis, $\omega^2$, ens donen la freqüència de propagació de cadascun dels modes.
-
-Obtesses les possicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la cel·la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de força que correspon a la interacció de cada àtom amb el seu n-èssim veí.
-
-La forma general del tensor de forces d'un $n$-èssim veí és de la forma  {% cite wirtz04_phonon_disper_graph_revis %} : 
-
-
-\begin{equation}
-C_n=\begin{pmatrix}
-\phi_n^1&\xi_n &0\\
--\xi_n & \phi_n^{ti} & 0 \\
-0 & 0 & \phi_n^{to}
-\end{pmatrix}
-\label{eq:tensordeforces}
-\end{equation}
-
-on el sistema de coordenadas s'elegeix de manera que $x$ és la coordenada longitudinal (en la línia que conecta els dos àtomos), $y$ la coordenada transversal en el planol i $z$ la coordenada perperndicular al planol. L'estructura diagonal a blocs de la matriu reflexa el fet que las vibracions interplanars y les de fora de plà (en la direcció $z$) estan completament desacoblades.
-
-
-
-Anem a supossar (per simplificar) que un desplaçament longitudinal (radial, que estarà contés en el planol del cristall) o transversal (tangencial, siga en el planol o perpendicular al planol) sols genera una força radial o transversal, es a dir, $\xi_n=0$ tal y com es realitza en la referència cite Balkanski 2000. Esta aproximació es coneix com l'aproximació *4NNFC*, i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
-
-Por tant, com primera aproximació anem a considerar que el tensor de constants de força d'un àtom classificat com $n$-èssim, situat en la direcció $\hat x$ respecte del átom de la cel·la $\vec 0$, té la forma diagonal:
-
-\begin{equation}
-C_n=\begin{pmatrix}
-\phi_n^r& 0 &0\\
-0 & \phi_n^{ti} & 0 \\
-0 & 0 & \phi_n^{to}
-\end{pmatrix}
-\end{equation}
-
-i per tant el tensor de constants de força de cadascun dels $n$-èssims veïns reals l'obtenim rotant esta matriu:
-\vspace{4cm}
-
-
-Un punt important és que quan considerem la interacció entre àtoms del mateix tipus (en el cas del BN és fácil discriminarlos, ja que són àtoms de distints elements els que conformen la base), tenim que considerar la contribució a la matriu dinámica de l'àtom que estem considerant de la cel·la $\vec 0$. Esta contribució podem derivar-la de la condició d'estabilitat, \cite{falkovsky08_symmet_const_phonon_disper_graph}
-\cite{wirtz04_phonon_disper_graph_revis}
-
-Si es desplaca el cristall com un tot no canvia l'energía potencial, cosa que implica s'ha de complir:
- 
-......
-
-
-Podem tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components ...) però sols tindrem en compte que la matriu dinàmica es una matri hermítica, i per tant els seus valors propis, $\omega^2$ tenen que ser reals.
+Construisc el tensor de constants de forces, així com la matriu dinàmica "a capes".
+Notar que la contribució a la matriu dinàmica, en les submatrius de la diagonal, les que impliquen elements de la mateixa subxarxa que el ($\alpha', 0$), obtenim la contribució dinàmica d'este element a partir de la invariança a traslacions del cristall com un tot
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -428,8 +387,8 @@ for k in [1,2]:
                     D04NB += Phi_4l__NB(k,m,i,j)
 
 
-# Tenemos en cuenta la contribución a la matriz dinámica de los átomos situados en 
-# la celdilla 0
+# Tenint en compte que la contribució a la matriu dinàmica dels àtoms situats en la cel·la 0 l'obtenim de la condició d'estabilitat
+
 D2BB3ers=D2BB-D01BN-D02BB-D03BN
 D2NN3ers=D2NN-D01NB-D02NN-D03NB
 
@@ -572,6 +531,7 @@ Podem observar que si considerem que les masses dels àtoms son iguals recuperem
 
 ```{code-cell} ipython3
 show(Eq_M_ZO3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
+show(Eq_M_ZA3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
 ```
 
 +++ {"tags": []}
@@ -580,7 +540,7 @@ show(Eq_M_ZO3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
 
 +++
 
-Per al punt ($k_x=4\pi/(3 a)$, $k_y=0$) obtenim els autovalors:
+Per al punt ($q_x=4\pi/(3 a)$, $q_y=0$) obtenim els autovalors:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -589,10 +549,11 @@ omega_K_ZO=602 #cm-1
 omega_K_ZA=320
 D_K_zz3ers=D_zz3ers.subs(q_x=4*pi/(3*a),q_y=0)
 
-Eq_K_ZA3ers=(D_K_zz3ers.eigenvalues()[0]==omegaKZA**2).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
+Eq_K_ZA3ers=(omegaKZA**2)==D_K_zz3ers.eigenvalues()[0].subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
 
-Eq_K_ZO3ers=(D_K_zz3ers.eigenvalues()[1]==omegaKZO**2).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
+Eq_K_ZO3ers=(omegaKZO**2==D_K_zz3ers.eigenvalues()[1]).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
 
+show(D_K_zz3ers)
 show(Eq_K_ZA3ers)
 show(Eq_K_ZO3ers)
 ```
@@ -622,11 +583,15 @@ Per exemple, una solució analítica que trobem és:
 ```{code-cell} ipython3
 solucions_perp3ers= solve([Eq_Gamma_ZO3ers,Eq_M_ZOmenysZA3ers_quadrat,Eq_K_ZO3ers,Eq_K_ZA3ers],\
                           phi1toBN,phi2toBB,phi2toNN,phi3toBN,algorithm="sympy")
+show(solucions_perp3ers[0])
+show(solucions_perp3ers[1])
+```
 
+```{code-cell} ipython3
 show([(key, '=', round(value.subs(valors_numerics_emprats))) for key,value in solucions_perp3ers[0].items()])
 ```
 
-Notem que en este cas hem emprat obtenim dues solucions diferent perque hem emprat una equació amb variables al quadrat, i la solució mostrada es la que millor s'ajusta a les dades proporcionades.<p>
+Notem que en este cas hem emprat obtenim dues solucions diferent perque hem emprat una equació amb variables al quadrat, i la solució mostrada es la que millor s'ajusta a les dades proporcionades de les dos.<p>
 Si escollim un altre conjunt d'equacions (sols canviem una):
 
 ```{code-cell} ipython3
@@ -679,7 +644,7 @@ Equacions3ers=[2*Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
                Eq_K_ZO3ers.subs(valors_numerics_emprats),\
                Eq_K_ZA3ers.subs(valors_numerics_emprats)]
 
-solucions3ers=minimize(norm(vector((Equacions3ers))),[-1490000.,1.,1.,1.]) #[-1490000.,1.,1.,1.])
+solucions3ers=minimize(norm(vector((Equacions3ers))),[-1400000.,1.,1.,1.]) #[-1490000.,1.,1.,1.])
 
 Solucions3ers=[phi1toBN==round(solucions3ers[0]), phi2toBB==round(solucions3ers[1]),\
                 phi2toNN==round(solucions3ers[2]), phi3toBN==round(solucions3ers[3])]
@@ -729,20 +694,28 @@ DF_freq_calculades_perp_planol
 DF_freq_calculades_perp_planol.to_csv("freq_calculades_perp_planol.dat", sep='\t', encoding='utf-8', header=False)
 
 dades_calculades_perp_planol=loadtxt("freq_calculades_perp_planol.dat")
-show(\
-points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,1]), color="red")+\
+dispersioZ3ers=points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,2]), color="red")+\
 points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,2]), color="red")+\
 points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[300:524,0], dades_calculades_perp_planol[300:524,2]), color="red")+\
-points(zip(dades[:524,0], dades[:524,1]), color="blue") +\
-points(zip(dades[524:1048,0], dades[524:1048,1]), color="pink") +\
-points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="steelblue") +\
-points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="brown") +\
+points(zip(dades[:524,0], dades[:524,1]), color="black") +\
+points(zip(dades[524:1048,0], dades[524:1048,1]), color="black") +\
+points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="black") +\
+points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="black") +\
 points(zip(dades[2096:2620,0], dades[2096:2620,1]), color="black") +\
-points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")     
-     ,figsize=9) 
+points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black") +\
+line([(0,0), (0,1600)],color="black")+\
+line([(200,0), (200,1600)],color="black")+\
+line([(300,0), (300,1600)],color="black")+\
+line([(524,0), (524,1600)],color="black")
+show(dispersioZ3ers,figsize=9,ticks=[[10,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.)
+```
+
+```{code-cell} ipython3
+ola.save("/home/casimir/ola.png")
 ```
 
 +++ {"tags": []}
