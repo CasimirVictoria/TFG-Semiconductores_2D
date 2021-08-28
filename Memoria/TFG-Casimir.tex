@@ -198,6 +198,7 @@ La matriu dinàmica és la magnitud central de la dinàmica reticular: les freq�
 Per tant, les freqüències $\omega$ com funció del vector d'ones $\vec q$ del fonó són solució de l'equació secular:
 
 \begin{equation}
+\label{eq:secular}
 \det\left|\frac{1}{\sqrt{M'_\alpha M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
 \end{equation}
 
@@ -338,7 +339,7 @@ treballarem sobre dues matrius
 \begin{enumerate}
  \item Primer tractarem les vibracions transversal al pla del cristall mitjançant una matriu $2x2$:
  \begin{equation}
-  \vec D(\vec q)=
+  \vec D_z(\vec q)=
   \begin{pmatrix}
     D_{zz}^{BB}  & D_{zz}^{BN}        \\
     D_{zz}^{NB}  & D_{zz}^{NN} 
@@ -347,7 +348,7 @@ treballarem sobre dues matrius
 
  \item Després tractarem les vibracions al pla del cristall emprant una matriu $4x4$:
  \begin{equation}
-  \vec D(\vec q)=
+  \vec D_{xy}(\vec q)=
   \begin{pmatrix}
    D_{xx}^{BB} & D_{xy}^{BB} & D_{xx}^{BN} & D_{xy}^{BN}  \\
    D_{yx}^{BB} & D_{yy}^{BB} & D_{xx}^{BN} & D_{xy}^{BN}  \\
@@ -580,17 +581,77 @@ Tenim que tindre en compte que en no sabem, a priori, a quina rama correspon cad
 
 Passem a resoldre el sistema d'equacions que hem obtés per determinar les constants de força.
 Tenim més equacions que incògnites, i segons les ecuacions escollides obtenim valors diferents. El sistema d'equacions que obtenim el podem resoldre, en este cas, tant analítica com numèricament.
-En la \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{versió en línia del notebook amb els càlculs}) es mostren diferents solucions trobades (tan analítiques com numèriques), ací es mostra la solució que millor ajusta a les corbes de dispersió proporcionades:
+En la \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{versió en línia del notebook amb els càlculs}) es mostren diferents solucions trobades (tan analítiques com numèriques), ací es mostra la solució que millor ajusta a les corbes de dispersió proporcionades.
+
+Les constants de forces s'han obtés minimitzant:
+
+\begin{equation}
+\chi^2=\sum_{n=1}^3\sum_{i=1}^2\left(\omega_{i,n}^\text{model}-\omega_{i, n}^\text{DFPT}\right)
+\end{equation}
+
 
 \begin{equation}
  \sage{Solucions3ers}
 \end{equation}
 
-Les corbes de dispersió que obtenim amb aquesta solució es mostren a continuació (en roig)
+Les dues corbes de dispersió que obtenim amb aquesta solució es mostren a continuació (en roig), front a les corbes de dispersió calculades mitjançant el mètode de \emph{Density Functional Perturbation Theory}
 
-\sageplot{plot(dispersioZ3ers,figsize=9,ticks=[[10,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500], axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.)}
+\begin{center}
+\includegraphics[width=10cm]{../Grafiques/DisZ3ers.pdf}
+\end{center}
+
+Si en compte de fins 3ers veïns considerem fins als 4ts, conseguim obtindre els autovalors de la matriu dinàmica analíticament, però el sistema d'equacions que obtenim no puc resoldre'l algebraicament (emprant \textit{sagemath}, que al seu torn permet emprar tant la biblioteca \textit{sympy} com \textit{maxima} per realitzar els càlculs).  Resolguent el problema numèricament obtenim un millor ajust a estes dues corbes (els càlculs es poden consultar en línia):
+
+\begin{equation}\small{
+ \sage{Solucions4ts}}
+\end{equation}
+
+\begin{center}
+\includegraphics[width=10cm]{../Grafiques/DisZ4ts.pdf}
+\end{center}
+
+Passem ara a estudiar les vibracions dins del pla del cristall.
+
+\subsection{Vibracions dins del pla del cristall}
+
+En este cas tractem amb una matriu $4\times 4$, i per tant tenim 4 valors propis ($\omega^2$) en cada punt $\vec q$ de la primera zona de Brillouin.
 
 
+\subsubsection{Punt $\Gamma$}
+
+Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun, els que tenen valor propi $0$ corresponen a les dues rames acústiques (recordem que en un cristall bidimensional tenim $2(N_\alpha -1)$ rames òptiques (2 en el nostre cas ja que al tractar-se d'un cristall amb base diatòmica $N_\alpha=2$, i les altres $2$ són acústiques, per tant: 
+
+\begin{equation}
+ \begin{split}
+\sage{Eq_Gamma_TO3ers}\\
+\sage{Eq_Gamma_TO3ers}
+ \end{split}
+\end{equation}
+
+\subsubsection{Als punts $M$ i $K$}
+Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica però si abans simplifique el problema supossant que: 
+
+\begin{itemize}
+
+\item Els dos àtoms tenen la mateixa massa, $M_N=M_B$
+\item Les constants de for\c{c}a entre àtoms del mateix tipus són també iguals: $\phi_{2,r}^{NN}=\phi_{2,r}^{BB}$, $\phi_{2,ti}^{NN}=\phi_{2,ti}^{BB}$ 
+\end{itemize}
+
+sí que obté una solució analítica. Després obtinc valors propis correctes per al nostre model realitzant les substitucions pertinents al resultat obtés: cada constant apareix sempre dividida per l'arrel quadrada de les masses pertinents).
+Podem estar segurs que les expressions analítiques trobades per als autovalors de la matriu $\vec D_{xy}$, ja que comprobem que es compleix l'equació \ref{eq:secular}
+
+
+Sols mostre dues de les solucions trobades, al punt $K$, perquè les altres tenen expressions massa llargues
+
+\begin{equation}
+ \begin{split}
+\sage{Eq_K_LO3ers}\\
+\sage{Eq_K_LA3ers}
+ \end{split}
+\end{equation}
+Podem
+
+\newpage
 
 \bibliography{TFG-Casimir}
 \bibliographystyle{plain}

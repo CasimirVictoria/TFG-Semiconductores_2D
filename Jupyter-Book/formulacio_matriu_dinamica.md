@@ -710,12 +710,13 @@ line([(0,0), (0,1600)],color="black")+\
 line([(200,0), (200,1600)],color="black")+\
 line([(300,0), (300,1600)],color="black")+\
 line([(524,0), (524,1600)],color="black")
-show(dispersioZ3ers,figsize=9,ticks=[[10,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
-     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.)
+show(dispersioZ3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.2, frame=True)
 ```
 
 ```{code-cell} ipython3
-ola.save("/home/casimir/ola.png")
+save(dispersioZ3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/DisZ3ers.pdf")
 ```
 
 +++ {"tags": []}
@@ -843,8 +844,7 @@ DF_freq_calculades_perp_planol
 DF_freq_calculades_perp_planol.to_csv("freq_calculades_perp_planol4ts.dat", sep='\t', encoding='utf-8', header=False)
 
 dades_calculades_perp_planol=loadtxt("freq_calculades_perp_planol4ts.dat")
-show(\
-points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,1]), color="red")+\
+dispersioZ4ts=(points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[:200,0], dades_calculades_perp_planol[:200,2]), color="red")+\
 points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,1]), color="red")+\
 points(zip(dades_calculades_perp_planol[200:300,0], dades_calculades_perp_planol[200:300,2]), color="red")+\
@@ -855,8 +855,19 @@ points(zip(dades[524:1048,0], dades[524:1048,1]), color="black") +\
 points(zip(dades[1048:1572,0], dades[1048:1572,1]), color="black") +\
 points(zip(dades[1572:2096,0], dades[1572:2096,1]), color="black") +\
 points(zip(dades[2096:2620,0], dades[2096:2620,1]), color="black") +\
-points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")     
-     ,figsize=9) 
+points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black") +\
+line([(0,0), (0,1600)],color="black")+\
+line([(200,0), (200,1600)],color="black")+\
+line([(300,0), (300,1600)],color="black")+\
+line([(524,0), (524,1600)],color="black"))
+
+show(dispersioZ4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.2, frame=True)
+```
+
+```{code-cell} ipython3
+save(dispersioZ4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/DisZ4ts.pdf")
 ```
 
 ### Numèricament
@@ -1012,7 +1023,7 @@ D3ers=block_matrix([[D2BB3ers, D1BN+D3BN],[D1NB+D3NB, D2NN3ers]])
 ```
 
 ```{code-cell} ipython3
-D3ers
+D3ers_xy
 ```
 
 ### Considerem sols fins als 3ers veïns
@@ -1115,8 +1126,8 @@ show(Eq_M_TO3ers)
 #(3*Eq_M_LA_mes_M_TO3ers-Eq_M_TA_mes_M_LO3ers).subs(solve(Eq_Gamma_TO3ers,phi3rBN)).expand()
 #(Eq_M_LA_mes_M_TO-3*Eq_M_TA_mes_M_LO).subs(solve(Eq_Gamma_TO,phi3rBN)).expand()
 
-show(Eq_M_TA3ers+Eq_M_LO3ers)
-show(Eq_M_LA3ers+Eq_M_TO3ers)
+#show(Eq_M_TA3ers+Eq_M_LO3ers)
+#show(Eq_M_LA3ers+Eq_M_TO3ers)
 ```
 
 ### Al punt $K$ 
@@ -1154,7 +1165,6 @@ for i in range(4):
 [det(D_K3ers_xy-Valors_propis_en_K3ers[i]) for i in range(4)]
 ```
 
-Notem que el tenim un valor propi degenerat, cosa que no observem en les dades experimentals, així que el que fem es supossar que correspon als valors intermijos ($LA$ i $TO$)
 Emprant un argument anàleg a l'emprat per als valors propis en $M$ assignem cada valor propi a cadascuna de les rames, de manera que:
 
 ```{code-cell} ipython3
