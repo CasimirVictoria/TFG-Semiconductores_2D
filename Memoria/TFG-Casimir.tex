@@ -630,12 +630,12 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun, els que 
 
 \subsubsection{Als punts $M$ i $K$}
 
-Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica, però si abans simplifique el problema supossant que: 
+Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica, però si abans simplifique el problema supossant que els àtoms de la base son iguals:
 
 \begin{itemize}
 
 \item Els dos àtoms tenen la mateixa massa, $M_N=M_B$
-\item Les constants de for\c{c}a entre àtoms del mateix tipus són també iguals: $\phi_{2,r}^{NN}=\phi_{2,r}^{BB}$, $\phi_{2,ti}^{NN}=\phi_{2,ti}^{BB}$ 
+\item  $\phi_{2,r}^{NN}=\phi_{2,r}^{BB}$, $\phi_{2,ti}^{NN}=\phi_{2,ti}^{BB}$ 
 \end{itemize}
 
 sí que obté una solució analítica. Després obtinc valors propis correctes per al nostre model realitzant les substitucions pertinents al resultat obtés: cada constant apareix sempre dividida per l'arrel quadrada de les masses pertinents.
@@ -661,6 +661,23 @@ Podem observar que els valors propis trobats en $\Gamma$ i estos dos en $K$ són
 \end{equation}
 
 és formalment idèntica a la de dita referencia.
+
+Finalment, assignant a cadascuna de les equacions obtesses per als valors propis el valor numèric corresponent, obtenim el següent ajust:
+
+\begin{center}
+\includegraphics[width=10cm]{../Grafiques/Dispersio3ers.pdf}
+\end{center}
+
+Ampliant lleugerament el codi emprat per considerar fins el quarts veïns millorem un poc l'ajust:
+
+\begin{center}
+\includegraphics[width=10cm]{../Grafiques/Dispersio4ts.pdf}
+\end{center}
+
+Els valors de les constants que obtenim son:
+\begin{equation}\small{
+\sage{Solucionspla4ts}}
+\end{equation}
 
 \newpage
 
