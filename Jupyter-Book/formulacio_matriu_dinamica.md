@@ -1091,6 +1091,11 @@ for i in range(4):
     show(Valors_propis_en_M3ers[i].expand())
 ```
 
+```{code-cell} ipython3
+show((Valors_propis_en_M3ers[0]+Valors_propis_en_M3ers[1]).expand())
+show((Valors_propis_en_M3ers[2]+Valors_propis_en_M3ers[3]).expand())
+```
+
 Podem observar que els valors propis en M 0 i 1 (així com 2 i 3) difereixen en una arrel quadrada (negativa i per tant amb valor propi corresponent menor per a 0 i 2).
 Per una altra banda els termes de fora de l'arrel sols difereixen en 2 i 3 respecte els de 1 i 2 que els termes $\phi_{2,r}$ ($BB$ i $NN$) van multiplicats pel factor 3 en el cas de $2$ i $3$ mentre que en $0$ i $1$ son els termes $\phi_{2,ti}$ els que van multiplicats per 3.
 
@@ -1099,10 +1104,10 @@ Supossant que les constants de força radials són més grans que les transversa
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-Eq_M_LA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
-Eq_M_TA3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLO^2)
-Eq_M_TO3ers = (Valors_propis_en_M3ers[2].expand() == omegaMLA^2)
-Eq_M_LO3ers = (Valors_propis_en_M3ers[3].expand() == omegaMTO^2)
+Eq_M_TA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
+Eq_M_LA3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLA^2)
+Eq_M_TO3ers = (Valors_propis_en_M3ers[2].expand() == omegaMTO^2)
+Eq_M_LO3ers = (Valors_propis_en_M3ers[3].expand() == omegaMLO^2)
 
 #Eq_M_LA3ers = (Valors_propis_en_M3ers[0].expand() == omegaMTA^2)
 #Eq_M_LO3ers = (Valors_propis_en_M3ers[1].expand() == omegaMLO^2)
@@ -1157,7 +1162,11 @@ Valors_propis_en_K3ers=[M_B*Valors_propis_K3ers[i].expand().subs(
 #Comprobem que sí són els valors propis:
 #[det(D_K_xy-Valors_propis_en_K[i]) for i in range(4)]
 for i in range(4):
-    show(Valors_propis_en_K3ers[i].expand())
+    show(Valors_propis_en_K3ers[i].subs(M_N==M_B, phi2rNN==phi2rBB, phi2tiNN==phi2tiBB).expand())
+```
+
+```{code-cell} ipython3
+(Valors_propis_en_K3ers[2]+Valors_propis_en_K3ers[3]).expand()
 ```
 
 ```{code-cell} ipython3
@@ -1170,15 +1179,15 @@ Emprant un argument anàleg a l'emprat per als valors propis en $M$ assignem cad
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-Eq_K_LO3ers = (Valors_propis_en_K3ers[0].expand() == omegaKLO^2)
+Eq_K_TO3ers = (Valors_propis_en_K3ers[0].expand() == omegaKTO^2)
 Eq_K_LA3ers = (Valors_propis_en_K3ers[1].expand() == omegaKLA^2)
 Eq_K_TA3ers = (Valors_propis_en_K3ers[2].expand() == omegaKTA^2)
-Eq_K_TO3ers = (Valors_propis_en_K3ers[3].expand() == omegaKTO^2)
+Eq_K_LO3ers = (Valors_propis_en_K3ers[3].expand() == omegaKLO^2)
 
-show(Eq_K_TO3ers+Eq_K_LO3ers)
-show(Eq_K_TA3ers+Eq_K_LA3ers)
-
-show(omega_K_LO^2+omega_K_TO^2-(omega_K_TA^2+omega_K_LA^2))
+EqKTAmesEqKLO_3ers=(Eq_K_TA3ers+Eq_K_LO3ers).expand()
+show(EqKTAmesEqKLO_3ers)
+#show(Eq_K_TA3ers+Eq_K_LA3ers)
+#show(omega_K_LO^2+omega_K_TO^2-(omega_K_TA^2+omega_K_LA^2))
 #show(omega_K_TA^2+omega_K_LA^2-(omega_K_LO^2+omega_K_TO^2))
 #Eq_KTA_mes_KLO3ers=(Eq_K_TA3ers + Eq_K_LO3ers)
 #Eq_KLA_mes_KTO3ers=(Eq_K_LA3ers + Eq_K_TO3ers)
@@ -1206,8 +1215,8 @@ show(omega_K_LO^2+omega_K_TO^2-(omega_K_TA^2+omega_K_LA^2))
 
 valors_numerics_pla_emprats=[omegaGammaTO==omega_Gamma_TO,\
                              omegaMLO==omega_M_LO,\
-                             omegaMTO==omega_M_TO-sqrt(362583/2),\
-                             omegaMLA==omega_M_LA+sqrt(362583/2),\
+                             omegaMTO==omega_M_TO,\
+                             omegaMLA==omega_M_LA,\
                              omegaMTA==omega_M_TA,\
                              omegaKLO==omega_K_LO,\
                              omegaKTO==omega_K_TO,\
@@ -1226,7 +1235,7 @@ Equacionspla3ers=[Eq_Gamma_TO3ers.subs(valors_numerics_pla_emprats),\
                   Eq_K_TA3ers.subs(valors_numerics_pla_emprats)]
 
 solucionspla3ers=minimize(norm(vector((Equacionspla3ers))),\
-                          [-1400000.,1.,1.,1.,1.,1.,1.,1.])
+                          [1.,1.,1.,1.,1.,1.,1.,1.])
 #\[-140000,-300000.,1.,1.,1.,1.,1.,1.])
 Solucionspla3ers=[phi1rBN==round(solucionspla3ers[0]),\
                   phi1tiBN==round(solucionspla3ers[1]),\
@@ -1310,7 +1319,7 @@ u3,v3=np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N
 ```{raw-cell}
 :tags: []
 
-with open("matdyn_casi.modes", "x") as f:
+with open("matdyn_casi.modes_prova", "x") as f:
     for x in range(200):
         f.write("     diagonalizing the dynamical matrix ...\n\n")
         q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0

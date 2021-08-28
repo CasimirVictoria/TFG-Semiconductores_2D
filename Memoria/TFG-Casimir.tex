@@ -629,7 +629,8 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun, els que 
 \end{equation}
 
 \subsubsection{Als punts $M$ i $K$}
-Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica però si abans simplifique el problema supossant que: 
+
+Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica, però si abans simplifique el problema supossant que: 
 
 \begin{itemize}
 
@@ -637,19 +638,29 @@ Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourcef
 \item Les constants de for\c{c}a entre àtoms del mateix tipus són també iguals: $\phi_{2,r}^{NN}=\phi_{2,r}^{BB}$, $\phi_{2,ti}^{NN}=\phi_{2,ti}^{BB}$ 
 \end{itemize}
 
-sí que obté una solució analítica. Després obtinc valors propis correctes per al nostre model realitzant les substitucions pertinents al resultat obtés: cada constant apareix sempre dividida per l'arrel quadrada de les masses pertinents).
-Podem estar segurs que les expressions analítiques trobades per als autovalors de la matriu $\vec D_{xy}$, ja que comprobem que es compleix l'equació \ref{eq:secular}
+sí que obté una solució analítica. Després obtinc valors propis correctes per al nostre model realitzant les substitucions pertinents al resultat obtés: cada constant apareix sempre dividida per l'arrel quadrada de les masses pertinents.
+Podem estar segurs que les expressions analítiques trobades són  realment els autovalors de la matriu $\vec D_{xy}$, ja que comprobem que es compleix l'equació \ref{eq:secular}
 
 
 Sols mostre dues de les solucions trobades, al punt $K$, perquè les altres tenen expressions massa llargues
 
-\begin{equation}
+\begin{equation}\small{
  \begin{split}
-\sage{Eq_K_LO3ers}\\
+\sage{Eq_K_TO3ers}\\
 \sage{Eq_K_LA3ers}
- \end{split}
+ \end{split}}
 \end{equation}
-Podem
+
+Podem observar que els valors propis trobats en $\Gamma$ i estos dos en $K$ són també idèntics als que apareixen en les equacions (10) de \cite{falkovsky08_symmet_const_phonon_disper_graph}, sols que en este cas al tindre dos àtoms distints en la base no hi ha degeneració per als valors propis mostrats en $K$ (i que correspondrien a $\omega_{1,2}^\text{in-pl}(K)$ de l'esmentada referència. Podem observar en la relació de dispersió de dita referència que el valor degenerat en $K$ correspon a les branques TO i LA, i ens serveix per assignar tals valors en este treball. Com en el cas de $K$ per a les vibracions fora de pla, no sabem a quina rama correspon a priori (prove i segons isca l'ajust escollisc). Les equacions per als valors propis $\omega_{3,4}^\text{in-pl}(K)$ de dit conjunt d'equacións de \cite{falkovsky08_symmet_const_phonon_disper_graph} podem vore que també es corresponen a les que hem calculat en este treball, ja que si bé les que obtenim ací són més complicades, si sumem ambdos valors propis al quadrat, com estos difereixen, igual que en \cite{falkovsky08_symmet_const_phonon_disper_graph} en que un dels termes de l'equació apareix sumant en un cas i restant en l'altre l'equació que obtenim:
+
+\begin{equation}\small{\begin{split}
+\label{sumaktaiklo3ers}
+ &\sage{EqKTAmesEqKLO_3ers.lhs()}\\
+ &=\sage{EqKTAmesEqKLO_3ers.rhs()}
+ \end{split}}
+\end{equation}
+
+és formalment idèntica a la de dita referencia.
 
 \newpage
 
