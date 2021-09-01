@@ -2741,6 +2741,20 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileExistsError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">sage</span><span class="o">/</span><span class="n">all_cmdline</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;matdyn_casi_4ts.modes&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">200</span><span class="p">)):</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;     diagonalizing the dynamical matrix ...</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="n">q_x</span><span class="p">,</span> <span class="n">q_y</span><span class="p">,</span> <span class="n">q_z</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">Integer</span><span class="p">(</span><span class="mi">199</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="n">x</span><span class="o">/</span><span class="n">Integer</span><span class="p">(</span><span class="mi">199</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">RealNumber</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; q =       </span><span class="si">%.4f</span><span class="s2">      </span><span class="si">%.4f</span><span class="s2">      </span><span class="si">%.4f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">q_x</span><span class="p">,</span><span class="n">q_y</span><span class="p">,</span><span class="n">q_z</span><span class="p">))</span>
+
+<span class="ne">FileExistsError</span>: [Errno 17] File exists: &#39;matdyn_casi_4ts.modes&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2757,8 +2771,6 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{1,to}^{BN}} = \left(-1463658\right), {\phi_{2,to}^{BB}} = \left(-24083\right), {\phi_{2,to}^{NN}} = 373442, {\phi_{3,to}^{BN}} = \left(-42438\right), {\phi_{4,to}^{BN}} = 42685\right]</script></html></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2766,8 +2778,6 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left[{\phi_{1,r}^{BN}} = \left(-6083041\right), {\phi_{1,ti}^{BN}} = \left(-1955334\right), {\phi_{2,r}^{BB}} = \left(-1181800\right), {\phi_{2,ti}^{BB}} = \left(-1310140\right), {\phi_{2,r}^{NN}} = \left(-264417\right), {\phi_{2,ti}^{NN}} = 1009685, {\phi_{3,r}^{BN}} = 253491, {\phi_{3,ti}^{BN}} = \left(-336637\right), {\phi_{4,r}^{BN}} = \left(-53183\right), {\phi_{4,ti}^{BN}} = 126435\right]</script></html></div></div>
 </div>
 </div>
 </div>
