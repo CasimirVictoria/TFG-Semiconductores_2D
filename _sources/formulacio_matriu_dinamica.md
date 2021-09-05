@@ -11,14 +11,22 @@ kernelspec:
   name: sagemath
 ---
 
-+++ {"tags": []}
++++ {"tags": [], "slideshow": {"slide_type": "slide"}}
 
 # Descripció del cristall de BN
 
 +++
 
+Passem ara a descriure el sistema que s'ha estudiat i els resultats dels càlculs realitzats.
+
++++
+
 ```{note}
-En este notebook va la major part del codi. De fet és on estan tots els càlculs.
+En este notebook va la major part del codi. De fet és on estan tots els càlculs. La major part dels quals no és mostra per defecte, però polsant en la icona $+$ es desplega la cel·la amb el codi.
+```
+
+```{note}
+En firefox cambiar "Math Renderer a Mathml o SVG" per visualitzar millor tant la web com el notebook, pulsant amb el botó dret del ratoli sobre qualsevol de les equacions.
 ```
 
 ```{code-cell} ipython3
@@ -26,14 +34,6 @@ En este notebook va la major part del codi. De fet és on estan tots els càlcul
 
 # Netejem totes les variables 
 reset()
-```
-
-```{note}
-En firefox cambiar "Math Renderer a Mathml" per visualitzar millor tant la web com el notebook, pulsant amb el botó dret del ratoli sobre qualsevol de les equacions.
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
 
 # Eixida per defecte en LaTeX. 
 %display latex
@@ -62,7 +62,7 @@ def matriu_simplificada(matriu,m,n):
     return matsimp
 ```
 
-Donat que el càlcul dels modes de vibració comença per establir la geomeria del cristall en equilibri, comprobem que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatómica la cel·la unitat del qual ve donada per (dades proporcionades):
+Donat que el càlcul dels modes de vibració comença per establir la geometria del cristall en equilibri, comprovem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatòmica, la cel·la unitat del qual ve donada per (dades proporcionades):
 
 $$
 \vec a_1=a(1,0);\qquad\vec a_2=a\left(-\frac{1}{2},\frac{\sqrt{3}}{2}\right);
@@ -158,7 +158,7 @@ show(AtomsB+AtomsN, figsize=4)
 ```
 
 ```{code-cell} ipython3
-:tags: [hide-input, output_scroll, hide-output]
+:tags: [hide-input, output_scroll]
 
 var('q_x, q_y',domain='positive'); q=vector([q_x,q_y])
 
@@ -214,7 +214,11 @@ def llista_atoms(l_1, l_2):
 table(llista_atoms(2,2).to_html(index=False))
 ```
 
+Podem vore que la xarxa $2\pi$-recíproca es també una xarxa hexagonal
+
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 var('b', domain='positive')
 b_1=b*vector([1,1/sqrt(3)])
 b_2=b*vector([0,2/sqrt(3)])
@@ -227,6 +231,8 @@ show(xarxaR, figsize=4)
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 angleR=arccos(b_1*b_2/(norm(b_1)*norm(b_2)))
 #glue("angle_cela", angle, display=False)
 show(angleR, " radians")
@@ -239,8 +245,8 @@ show(angleR, " radians")
 
 +++ {"tags": []}
 
-Construisc el tensor de constants de forces, així com la matriu dinàmica "a capes".
-Notar que la contribució a la matriu dinàmica, en les submatrius de la diagonal, les que impliquen elements de la mateixa subxarxa que el ($\alpha', 0$), obtenim la contribució dinàmica d'este element sobre sí mateix a partir de la invariança a traslacions del cristall com un tot.
+Construisc el tensor de constants de forces, així com la matriu dinàmica *a capes*.
+Notar que la contribució a la matriu dinàmica, en les submatrius de la diagonal, les que impliquen elements de la mateixa subxarxa que el ($\alpha', 0$), obtenim la contribució dinàmica d'este element sobre sí mateix a partir de la invariança a traslacions del cristall com un tot :cite:`falkovsky08_symmet_const_phonon_disper_graph`
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -406,7 +412,7 @@ for k in [1,2]:
                     D04NB += Phi_4l__NB(k,m,i,j)
 
 
-# Tenint en compte que la contribució a la matriu dinàmica dels àtoms situats en la cel·la 0 l'obtenim de la condició d'estabilitat
+# La contribució a la matriu dinàmica dels àtoms situats en la cel·la 0 l'obtenim de la condició d'estabilitat
 
 D2BB3ers=D2BB-D01BN-D02BB-D03BN
 D2NN3ers=D2NN-D01NB-D02NN-D03NB
@@ -444,7 +450,7 @@ Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però 
 Donat que les vibracions fora de pla són, per com hem construït la matriu dinàmica, independients de les interplanars, procedim a estudiar-les, de manera que treballarem primer amb una matriu $2\times 2$, en compte de directament amb una matriu $6\times 6$ (i quan estudiem les vibracions dins del pla treballarem amb una matriu $4\times 4$
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [hide-input, output_scroll]
 
 D1BN_zz=D1BN[2,2]
 D1NB_zz=D1NB[2,2]
@@ -463,6 +469,8 @@ D4NB_zz=D4NB[2,2]
 D_zz3ers=Matrix([[D2BB3ers_zz,D1BN_zz+D3BN_zz],        [D1NB_zz+D3NB_zz,D2NN3ers_zz]])
 
 D_zz4ts=Matrix([[D2BB4ts_zz,D1BN_zz+D3BN_zz+D4BN_zz], [D1NB_zz+D3NB_zz+D4BN_zz,D2NN4ts_zz]])
+
+show(D_zz3ers)
 ```
 
 ### Primer considerem fins 3ers veïns
@@ -473,7 +481,7 @@ D_zz4ts=Matrix([[D2BB4ts_zz,D1BN_zz+D3BN_zz+D4BN_zz], [D1NB_zz+D3NB_zz+D4BN_zz,D
 
 +++
 
-Per al punt $(k_x=0, k_y=0)$, la matriu que tenim és:
+Per al punt $(q_x=0, q_y=0)$, la matriu que tenim és:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -495,15 +503,19 @@ D_Gamma3ers_zz.eigenvalues()
 De manera que al punt $\Gamma$ trobem que s'ha de complir l'equació:
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 Eq_Gamma_ZO3ers=(D_Gamma3ers_zz.eigenvalues()[0]==omegaGammaZO**2)
 show(Eq_Gamma_ZO3ers)
 ```
+
++++ {"tags": []}
 
 #### Punt $M$
 
 +++
 
-Al punt $M$ $\left(q_x=\pi/a,q_y=\pi/(\sqrt 3 a\right)$ els valors propis de la matriu dinàmica són:
+Al punt $M$ $\left(q_x=\frac{\pi}{a},q_y=\frac{\pi}{\sqrt 3 a}\right)$ la matriu dinàmica i  els valors propis són:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -513,7 +525,7 @@ omega_M_ZA=315
 
 D_M3ers_zz=D_zz3ers.subs(q_x=pi/a,q_y=pi/(sqrt(3)*a))
 
-# Podem simplificar un poc l'expressió obtessa per als valores propios al punto $M$ 
+# Podem simplificar un poc l'expressió obtessa per als valors propis al punt $M$ 
 #(simplement reescribint l'argument de l'arrel quadrada)
 
 omegaM1quadrat3ers=-4*phi2toBB/M_B-4*phi2toNN/M_N-3/sqrt(M_B*M_N)*(phi1toBN+phi3toBN)\
@@ -533,33 +545,25 @@ if bool(D_M3ers_zz.eigenvalues()[1]==omegaM2quadrat3ers):
 Eq_M_ZOmesZA3ers=(Eq_M_ZO3ers+Eq_M_ZA3ers).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0]).expand()
 Eq_M_ZOmenysZA3ers_quadrat=((Eq_M_ZO3ers-Eq_M_ZA3ers)**2).subs(Eq_Gamma_ZO3ers.solve(phi3toBN)[0])
 
+show(D_M3ers_zz)
 show(Eq_M_ZA3ers)
 show(Eq_M_ZO3ers)
 ```
 
 Notem que el segon valor propi és major que el primer (l'arrel quadrada és possitiva) i per tant correspon a la rama $ZO$, i el primer a $ZA$.
+Podem comprobar que si considerem que els àtoms foren del mateix tipus obtenim exactament les mateixes expresions que en {cite:p}`falkovsky08_symmet_const_phonon_disper_graph`
 
 ```{code-cell} ipython3
-#D_M32ers_zz=D_zz3ers.subs(q_x=pi/(3*a),q_y=pi/(3*sqrt(3)*a))
-#D_zz3ers.subs(q_x=4*pi/(9*a),q_y=0).eigenvalues()[0]
+:tags: [hide-input]
 
-#D_M32ers_zz.eigenvalues()[0]
+show(D_M3ers_zz.subs(M_B==M_N, phi2toNN=phi2toBB).eigenvalues())
 ```
-
-Podem observar que si considerem que les masses dels àtoms son iguals recuperem les expresions trobades per falkowsky_2008
-
-```{code-cell} ipython3
-show(Eq_M_ZO3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
-show(Eq_M_ZA3ers.subs(M_B==M_N, phi2toNN=phi2toBB).expand())
-```
-
-+++ {"tags": []}
 
 #### Punt $K$
 
 +++
 
-Per al punt ($q_x=4\pi/(3 a)$, $q_y=0$) obtenim els autovalors:
+Per al punt ($q_x=\frac{4\pi}{3 a}$, $q_y=0$) la matriu dinàmica i esl autovalors són:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -577,12 +581,8 @@ show(Eq_K_ZA3ers)
 show(Eq_K_ZO3ers)
 ```
 
-Notem que en el cas del BN, a diferència del cas del grafè, obtenim 2 freqüenciès distintes al punt $K$ ja que la base està constituïda per dos àtoms d'elements distints (el segon terme d'ambdues equacions es diferent en este cas).
-Tenim que tindre en compte que en aquest cas no sabem a priori a quina rama correspon cada valor propi, segons l'elecció que realitzem obtindrem els valors de les constants $\phi_{2,to}^{NN}$ i $\phi_{2,to}^{BB}$ intercambiades.
-
-+++
-
-Observerm que les equacions per als modes al punt $K$ són formalment idèntiques a les que trobem en falkowski_2008 per al grafé, sols que en aquest cas, com estem tractant amb una base amb dos àtoms des distint tipus no tenim degeneració en este punt.
+Observerm també que les equacions per als modes al punt $K$ són formalment idèntiques a les que trobem en {cite:p}`falkovsky08_symmet_const_phonon_disper_graph` per al grafé, sols que en aquest cas, com estem tractant amb una base amb dos àtoms des distint tipus no tenim degeneració en este punt (el segon terme d'ambdues equacions es diferent en este cas).
+Tenim que tindre en compte que en no sabem, a priori, a quina rama correspon cada valor propi, segons l'elecció que realitzem obtindrem els valors de les constants $\phi_{2,to}^{NN}$ i $\phi_{2,to}^{BB}$ intercambiades.
 
 +++
 
@@ -600,6 +600,8 @@ valors_numerics_emprats=[omegaGammaZO==omega_Gamma_ZO,omegaMZO==omega_M_ZO,omega
 Per exemple, una solució analítica que trobem és:
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 solucions_perp3ers= solve([Eq_Gamma_ZO3ers,Eq_M_ZOmenysZA3ers_quadrat,Eq_K_ZO3ers,Eq_K_ZA3ers],\
                           phi1toBN,phi2toBB,phi2toNN,phi3toBN,algorithm="sympy")
 show(solucions_perp3ers[0])
@@ -607,6 +609,8 @@ show(solucions_perp3ers[1])
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 show([(key, '=', round(value.subs(valors_numerics_emprats))) for key,value in solucions_perp3ers[0].items()])
 ```
 
@@ -614,6 +618,8 @@ Notem que en este cas hem emprat obtenim dues solucions diferent perque hem empr
 Si escollim un altre conjunt d'equacions (sols canviem una):
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 solucions_perp3ers= solve([Eq_Gamma_ZO3ers,Eq_M_ZA3ers,Eq_K_ZO3ers,Eq_K_ZA3ers],\
                           phi1toBN,phi2toBB,phi2toNN,phi3toBN,algorithm="sympy")
 
@@ -621,10 +627,10 @@ show([(key, '=', round(value.subs(valors_numerics_emprats))) for key,value in so
 ```
 
 Les solucions anteriors les hem obtés resolguent algebraicament el sistema d'equacions. Ara el resoldrem numèricament (podríem fer ús de les funcions disponibles en *scipy.optimize*, per exemple, però sagemath ens proporciona la funció minimize directament).
-El que faig es construir un vector les components del qual són les equacions que volem resoldre y minimitzar el seu mòdul:
+El que faig es construir un vector les components del qual són les equacions que volem resoldre y minimitzar la norma d'este vector:
 
 ```{code-cell} ipython3
-:tags: []
+:tags: [hide-input]
 
 Equacions3ers=[Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZA3ers.subs(valors_numerics_emprats),\
@@ -635,13 +641,15 @@ solucions3ers=minimize(norm(vector((Equacions3ers))),[1.,1.,1.,1.])
 
 Solucions3ers=[phi1toBN==round(solucions3ers[0]), phi2toBB==round(solucions3ers[1]),\
                phi2toNN==round(solucions3ers[2]), phi3toBN==round(solucions3ers[3])]
-Solucions3ers
+show(Solucions3ers)
 ```
 
 Podem comprobar que obtenim la mateixa solució que si resolguem analíticament.
 Així mateix, si emprem un altre sistema d'equacions les solucions són diferents:
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 Equacions3ers=[Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZO3ers.subs(valors_numerics_emprats),\
                Eq_K_ZO3ers.subs(valors_numerics_emprats),\
@@ -654,9 +662,11 @@ Solucions3ers2=[phi1toBN==round(solucions3ers2[0]), phi2toBB==round(solucions3er
 Solucions3ers2
 ```
 
-Realitzant diferents gràfiques podem comprobar que realment ajusta millor al conjunt de dades experimentals la primera solució que hem trobat, de manera que escollim com a conjunt de constants de força:
+Realitzant diferents gràfiques escollim la que millor ajusta al conjunt de dades experimentals:
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 Equacions3ers=[2*Eq_Gamma_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZO3ers.subs(valors_numerics_emprats),\
                Eq_M_ZA3ers.subs(valors_numerics_emprats),\
@@ -734,6 +744,8 @@ show(dispersioZ3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 save(dispersioZ3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/DisZ3ers.pdf")
 ```
@@ -756,6 +768,7 @@ Si considerem fins als quarts veïns, també obtenim expresions analítiques per
 D_Gamma4ts_zz=D_zz4ts.subs(q_x=0,q_y=0) #,(M_B,B.mass*u),(M_N,N.mass*u)])
 D_Gamma4ts_zz.eigenvalues()
 Eq_Gamma_ZO4ts=(D_Gamma4ts_zz.eigenvalues()[0]==omegaGammaZO**2)
+show(D_Gamma4ts_zz)
 show(Eq_Gamma_ZO4ts)
 ```
 
@@ -818,6 +831,8 @@ show(Eq_K_ZA4ts)
 show(Eq_K_ZO4ts)
 ```
 
+#### Constants de força
+
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -830,7 +845,7 @@ solucions4ts=minimize(norm(vector((Equacions4ts))),[-1485000.,1.,1.,1.,1.])
 Solucions4ts=[phi1toBN==round(solucions4ts[0]), phi2toBB==round(solucions4ts[1]),\
               phi2toNN==round(solucions4ts[2]), phi3toBN==round(solucions4ts[3]),\
               phi4toBN==round(solucions4ts[4])]
-Solucions4ts
+show(Solucions4ts)
 ```
 
 ```{code-cell} ipython3
@@ -885,6 +900,8 @@ show(dispersioZ4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\G
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 save(dispersioZ4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/DisZ4ts.pdf")
 ```
@@ -919,10 +936,8 @@ D3ers_xy=block_matrix([[D2BB3ers_xy, D1BN_xy+D3BN_xy],[D1NB_xy+D3NB_xy, D2NN3ers
 D4ts_xy=block_matrix([[D2BB4ts_xy, D1BN_xy+D3BN_xy+D4BN_xy],[D1NB_xy+D3NB_xy+D4NB_xy, D2NN4ts_xy]])
 
 D3ers=block_matrix([[D2BB3ers, D1BN+D3BN],[D1NB+D3NB, D2NN3ers]])
-```
 
-```{code-cell} ipython3
-D3ers_xy
+D4ts=block_matrix([[D2BB4ts, D1BN+D3BN+D4BN],[D1NB+D3NB+D4NB, D2NN4ts]])
 ```
 
 ### Considerem sols fins als 3ers veïns
@@ -941,6 +956,7 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun:
 omega_Gamma_TO=1395
 omega_Gamma_LO=1395
 D_Gamma3ers_xy=D3ers_xy.subs(q_x=0,q_y=0)
+#show(D_Gamma3ers_xy)
 show([D_Gamma3ers_xy.eigenvalues()[0], D_Gamma3ers_xy.eigenvalues()[2]])
 ```
 
@@ -961,7 +977,7 @@ Per als punts $K$ i $M$, sagemath (mitjançant [maxima](https://maxima.sourcefor
 +++
 
 ### Al punt $M$
-En ($q_x=\pi/a,q_y=\pi/(\sqrt{3} a$)
+En $\left(q_x=\frac{\pi}{a},q_y=\frac{\pi}{\sqrt 3 a}\right)$
 
 ```{code-cell} ipython3
 :tags: [hide-input, hide-output]
@@ -991,6 +1007,8 @@ for i in range(4):
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 show((Valors_propis_en_M3ers[0]+Valors_propis_en_M3ers[1]).expand())
 show((Valors_propis_en_M3ers[2]+Valors_propis_en_M3ers[3]).expand())
 ```
@@ -1066,15 +1084,21 @@ for i in range(4):
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 for i in range(4):
     show(Valors_propis_en_K3ers[i].subs(M_N==M_B, phi2rNN==phi2rBB, phi2tiNN==phi2tiBB).expand())
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 (Valors_propis_en_K3ers[2]+Valors_propis_en_K3ers[3]).expand()
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 #Comprobem que sí són els valors propis:
 [det(D_K3ers_xy-Valors_propis_en_K3ers[i]) for i in range(4)]
 ```
@@ -1184,6 +1208,8 @@ dades_calculades_planol=loadtxt("freq_calculades_planol.dat")
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 dispersio3ers=(\
 points(zip(dades_calculades_perp_planol3ers[:200,0], dades_calculades_perp_planol3ers[:200,1]), color="blue")+\
 points(zip(dades_calculades_perp_planol3ers[:200,0], dades_calculades_perp_planol3ers[:200,2]), color="blue")+\
@@ -1212,7 +1238,19 @@ points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black") +\
 line([(0,0), (0,1600)],color="black")+\
 line([(200,0), (200,1600)],color="black")+\
 line([(300,0), (300,1600)],color="black")+\
-line([(524,0), (524,1600)],color="black"))
+line([(524,0), (524,1600)],color="black")+\
+text("LO", (10,1500))+\
+text("TO", (10,1350))+\
+text("LO", (512,1500))+\
+text("TO", (512,1350))+\
+text("ZO", (10,860))+\
+text("ZO", (512,860))+\
+text("ZA", (150,160))+\
+text("ZA", (380,160))+\
+text("TA", (150,480))+\
+text("TA", (410,480))+\
+text("LA", (150,920))+\
+text("LA", (370,900)))
 
 show(dispersio3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True)
@@ -1220,67 +1258,18 @@ save(dispersio3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\G
      axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio3ers.pdf")
 ```
 
-```{raw-cell}
-u1,v1 = np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
-               q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
-
-u2,v2= np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
-               q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99)).numpy(dtype='complex64') for x in range(100)])
-
-u3,v3=np.linalg.eig([D3ers.subs(Solucions3ers, Solucionspla3ers, M_B=B.mass, M_N=N.mass, a=1,\
-               q_x=4*pi/3*(1-x/223), q_y=0).numpy(dtype='complex64') for x in range(224)])
-```
-
-```{raw-cell}
-:tags: []
-
-with open("matdyn_casi.modes_prova", "x") as f:
-    for x in range(200):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u1[x].argsort()[::1]
-        u1[x]=u1[x][ordre]
-        v1[x]=v1[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u1[x][i])):9.6f} [THz] =    {real_part(sqrt(u1[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v1[x][:,i][0]):9.6f}  {imag_part(v1[x][:,i][0]):9.6f}    {real_part(v1[x][:,i][1]):9.6f}  {imag_part(v1[x][:,i][1]):9.6f}    {real_part(v1[x][:,i][2]):9.6f}  {imag_part(v1[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v1[x][:,i][3]):9.6f}  {imag_part(v1[x][:,i][3]):9.6f}    {real_part(v1[x][:,i][4]):9.6f}  {imag_part(v1[x][:,i][4]):9.6f}    {real_part(v1[x][:,i][5]):9.6f}  {imag_part(v1[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")
-        
-    for x in range(100):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = pi*(1+x/(3*99)), pi/sqrt(3)*(1-x/99), 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u2[x].argsort()[::1]
-        u2[x]=u2[x][ordre]
-        v2[x]=v2[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u2[x][i])):9.6f} [THz] =    {real_part(sqrt(u2[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v2[x][:,i][0]):9.6f}  {imag_part(v2[x][:,i][0]):9.6f}    {real_part(v2[x][:,i][1]):9.6f}  {imag_part(v2[x][:,i][1]):9.6f}    {real_part(v2[x][:,i][2]):9.6f}  {imag_part(v2[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v2[x][:,i][3]):9.6f}  {imag_part(v2[x][:,i][3]):9.6f}    {real_part(v2[x][:,i][4]):9.6f}  {imag_part(v2[x][:,i][4]):9.6f}    {real_part(v2[x][:,i][5]):9.6f}  {imag_part(v2[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")    
-
-    for x in range(224):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = 4*pi/3*(1-x/223), 0.0 , 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u3[x].argsort()[::1]
-        u3[x]=u3[x][ordre]
-        v3[x]=v3[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u3[x][i])):9.6f} [THz] =    {real_part(sqrt(u3[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v3[x][:,i][0]):9.6f}  {imag_part(v3[x][:,i][0]):9.6f}    {real_part(v3[x][:,i][1]):9.6f}  {imag_part(v3[x][:,i][1]):9.6f}    {real_part(v3[x][:,i][2]):9.6f}  {imag_part(v3[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v3[x][:,i][3]):9.6f}  {imag_part(v3[x][:,i][3]):9.6f}    {real_part(v3[x][:,i][4]):9.6f}  {imag_part(v3[x][:,i][4]):9.6f}    {real_part(v3[x][:,i][5]):9.6f}  {imag_part(v3[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")    
-```
-
 ### Fins 4ts veïns
 
++++
+
+Ampliant lleugerament el codi emprat per considerar fins el quarts veïns millorem un poc l'ajust
+
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: '-'
+tags: [hide-input]
+---
 #Autovalores en Gamma--------------------------------------------
 D_Gamma4ts_xy=D4ts_xy.subs(q_x=0,q_y=0)
 Eq_Gamma_TO4ts=(D_Gamma4ts_xy.eigenvalues()[0]==omegaGammaTO**2)
@@ -1319,6 +1308,8 @@ for i in range(4):
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 #Autovalors en K
 D_K4ts_xy=D4ts_xy.subs(q_x=4*pi/(3*a),q_y=0)# phi4tiBN=-phi4rBN)
 D_K4ts_xy_simplificada=D_K4ts_xy.subs(M_N=M_B)
@@ -1436,25 +1427,62 @@ points(zip(dades[2620:3144,0], dades[2620:3144,1]), color="black")+\
 line([(0,0), (0,1600)],color="black")+\
 line([(200,0), (200,1600)],color="black")+\
 line([(300,0), (300,1600)],color="black")+\
-line([(524,0), (524,1600)],color="black"))
+line([(524,0), (524,1600)],color="black")+\
+text("LO", (10,1500))+\
+text("TO", (10,1350))+\
+text("LO", (512,1500))+\
+text("TO", (512,1350))+\
+text("ZO", (10,860))+\
+text("ZO", (512,860))+\
+text("ZA", (150,160))+\
+text("ZA", (380,160))+\
+text("TA", (150,480))+\
+text("TA", (410,480))+\
+text("LA", (150,920))+\
+text("LA", (370,900)))
 
 show(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True)
 ```
 
 ```{code-cell} ipython3
-u1,v1 = np.linalg.eig([D3ers.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
+:tags: [hide-input]
+
+save(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.pdf")
+```
+
+Podem observar que el model  proporciona un bon ajust per a les branques fora de pla, ZO i ZA, així com per a les acústiques en el pla, sobretot la TA. Per a la branca LA, sobretot en la part central, a altes freqüències, els resultats no són bons, però la corba té la forma pertinent (encara que les freqüències estan infravalorades).
+
+A altes freqüències, per a les branques TO i sobretot LO el model no ajusta bé, el TO podem considerar que el model el descriu qualitativament.
+
+
+Substituïm aquestes constants en la matriu $\mathbf D(\vec q)$ $6x6$ calcule els autovalors i autovectors per als 524 punts en que he discretitzat el recorregut per la primera zona de Brillouin. Tenim 6 autovalors i 6 autovectors en cadascun d'estos punts, de 6 components cada autovector (les 3 primeres son les components cartesianes del vector desplaçament per l'àtom de bor i les 3 últimes del de nitrogen). El resultat es guarda en un fitxer ,*matdyn_casi_4ts.modes*, amb el qual podem, emprant [TSS Physics - Home](https://henriquemiranda.github.io/phononwebsite/index.html) visualitzar interactivament els modes de propagació al cristall de BN: polsant sobre qualsevol punt del diagrama de dispersió obtenim una simulació del moviment del àtoms del cristall:
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+u1,v1 = np.linalg.eig([D4ts.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
                q_x=x/199*pi, q_y=x/199*pi/sqrt(3)).numpy(dtype='complex64') for x in range(200)])
 
-u2,v2= np.linalg.eig([D3ers.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
+u2,v2= np.linalg.eig([D4ts.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
                q_x=pi*(1+x/(3*99)), q_y=pi/sqrt(3)*(1-x/99)).numpy(dtype='complex64') for x in range(100)])
 
-u3,v3=np.linalg.eig([D3ers.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
+u3,v3=np.linalg.eig([D4ts.subs(Solucions4ts, Solucionspla4ts, M_B=B.mass, M_N=N.mass, a=1,\
                q_x=4*pi/3*(1-x/223), q_y=0).numpy(dtype='complex64') for x in range(224)])
 ```
 
 ```{code-cell} ipython3
-with open("matdyn_casi_4ts.modes", "x") as f:
+:tags: [hide-input]
+
+filename = "matdyn_casi_4ts.modes"
+
+if os.path.exists(filename):
+    os.remove(filename)
+else:
+    print("Can not delete the file as it doesn't exists")
+
+with open(filename, "x") as f:
     for x in range(200):
         f.write("     diagonalizing the dynamical matrix ...\n\n")
         q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
@@ -1499,18 +1527,17 @@ with open("matdyn_casi_4ts.modes", "x") as f:
 ```
 
 ```{code-cell} ipython3
-save(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
-     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.pdf")
-```
-
-En esta web podem simular els modes vibracionals calculats <a href="https://henriquemiranda.github.io/phononwebsite/phonon.html">Phononwebsite </a>
-
-```{code-cell} ipython3
-Solucions4ts
-```
-
-```{code-cell} ipython3
 Solucionspla4ts
+```
+
+```{code-cell} ipython3
+from IPython.display import IFrame
+```
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+IFrame("https://henriquemiranda.github.io/phononwebsite/phonon.html",width="1680", height="800")
 ```
 
 ```{code-cell} ipython3

@@ -17,59 +17,9 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-with open("matdyn_casi_4ts.modes", "x") as f:
-    for x in range(200):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = x/199*pi, x/199*pi/sqrt(3), 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u1[x].argsort()[::1]
-        u1[x]=u1[x][ordre]
-        v1[x]=v1[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u1[x][i])):9.6f} [THz] =    {real_part(sqrt(u1[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v1[x][:,i][0]):9.6f}  {imag_part(v1[x][:,i][0]):9.6f}    {real_part(v1[x][:,i][1]):9.6f}  {imag_part(v1[x][:,i][1]):9.6f}    {real_part(v1[x][:,i][2]):9.6f}  {imag_part(v1[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v1[x][:,i][3]):9.6f}  {imag_part(v1[x][:,i][3]):9.6f}    {real_part(v1[x][:,i][4]):9.6f}  {imag_part(v1[x][:,i][4]):9.6f}    {real_part(v1[x][:,i][5]):9.6f}  {imag_part(v1[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")
-        
-    for x in range(100):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = pi*(1+x/(3*99)), pi/sqrt(3)*(1-x/99), 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u2[x].argsort()[::1]
-        u2[x]=u2[x][ordre]
-        v2[x]=v2[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u2[x][i])):9.6f} [THz] =    {real_part(sqrt(u2[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v2[x][:,i][0]):9.6f}  {imag_part(v2[x][:,i][0]):9.6f}    {real_part(v2[x][:,i][1]):9.6f}  {imag_part(v2[x][:,i][1]):9.6f}    {real_part(v2[x][:,i][2]):9.6f}  {imag_part(v2[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v2[x][:,i][3]):9.6f}  {imag_part(v2[x][:,i][3]):9.6f}    {real_part(v2[x][:,i][4]):9.6f}  {imag_part(v2[x][:,i][4]):9.6f}    {real_part(v2[x][:,i][5]):9.6f}  {imag_part(v2[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")    
-
-    for x in range(224):
-        f.write("     diagonalizing the dynamical matrix ...\n\n")
-        q_x, q_y, q_z = 4*pi/3*(1-x/223), 0.0 , 0.0
-        f.write(" q =       %.4f      %.4f      %.4f\n" %(q_x,q_y,q_z))
-        f.write(" **************************************************************************\n")
-        ordre=u3[x].argsort()[::1]
-        u3[x]=u3[x][ordre]
-        v3[x]=v3[x][:,ordre]
-        for i in range(6):
-            f.write(f'     omega({i+1:2d}) =      {real_part(c*10**-10*sqrt(u3[x][i])):9.6f} [THz] =    {real_part(sqrt(u3[x][i])):11.6f} [cm-1]\n')
-            f.write(f' ( {real_part(v3[x][:,i][0]):9.6f}  {imag_part(v3[x][:,i][0]):9.6f}    {real_part(v3[x][:,i][1]):9.6f}  {imag_part(v3[x][:,i][1]):9.6f}    {real_part(v3[x][:,i][2]):9.6f}  {imag_part(v3[x][:,i][2]):9.6f}   )\n')
-            f.write(f' ( {real_part(v3[x][:,i][3]):9.6f}  {imag_part(v3[x][:,i][3]):9.6f}    {real_part(v3[x][:,i][4]):9.6f}  {imag_part(v3[x][:,i][4]):9.6f}    {real_part(v3[x][:,i][5]):9.6f}  {imag_part(v3[x][:,i][5]):9.6f}   )\n')     
-        f.write(" **************************************************************************\n")    
+%%html
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mFileExistsError[0m                           Traceback (most recent call last)
-[0;32m/usr/lib/python3/dist-packages/sage/all_cmdline.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mwith[0m [0mopen[0m[0;34m([0m[0;34m"matdyn_casi_4ts.modes"[0m[0;34m,[0m [0;34m"x"[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m     [0;32mfor[0m [0mx[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mInteger[0m[0;34m([0m[0;36m200[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m         [0mf[0m[0;34m.[0m[0mwrite[0m[0;34m([0m[0;34m"     diagonalizing the dynamical matrix ...\n\n"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m         [0mq_x[0m[0;34m,[0m [0mq_y[0m[0;34m,[0m [0mq_z[0m [0;34m=[0m [0mx[0m[0;34m/[0m[0mInteger[0m[0;34m([0m[0;36m199[0m[0;34m)[0m[0;34m*[0m[0mpi[0m[0;34m,[0m [0mx[0m[0;34m/[0m[0mInteger[0m[0;34m([0m[0;36m199[0m[0;34m)[0m[0;34m*[0m[0mpi[0m[0;34m/[0m[0msqrt[0m[0;34m([0m[0mInteger[0m[0;34m([0m[0;36m3[0m[0;34m)[0m[0;34m)[0m[0;34m,[0m [0mRealNumber[0m[0;34m([0m[0;34m'0.0'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m         [0mf[0m[0;34m.[0m[0mwrite[0m[0;34m([0m[0;34m" q =       %.4f      %.4f      %.4f\n"[0m [0;34m%[0m[0;34m([0m[0mq_x[0m[0;34m,[0m[0mq_y[0m[0;34m,[0m[0mq_z[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mFileExistsError[0m: [Errno 17] File exists: 'matdyn_casi_4ts.modes'
-FileExistsError: [Errno 17] File exists: 'matdyn_casi_4ts.modes'
+UsageError: %%html is a cell magic, but the cell body is empty.
 

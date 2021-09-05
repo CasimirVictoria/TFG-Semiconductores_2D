@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introducció &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
+    <title>Introducció teòrica &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,7 +55,7 @@
     <link rel="index" title="Índex" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
     <link rel="next" title="Descripció del cristall de BN" href="formulacio_matriu_dinamica.html" />
-    <link rel="prev" title="Sobre este TFG" href="index.html" />
+    <link rel="prev" title="Sobre este treball" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -88,20 +88,32 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   <!-- #region -->
-   Sobre este TFG
+   Sobre este treball
   </a>
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Introducció
+   Introducció teòrica
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="formulacio_matriu_dinamica.html">
    Descripció del cristall de BN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Conclusions.html">
+   Conclusions /
+   <em>
+    Conclusions
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zbibliografia.html">
+   Referències
   </a>
  </li>
 </ul>
@@ -212,9 +224,28 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-de-born-i-von-karman">
-   Model de Born i Von Karman
+  <a class="reference internal nav-link" href="#xarxa-cristallina">
+   Xarxa cristal·lina
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xarxa-reciproca-primera-zona-de-brillouin">
+     Xarxa recíproca. Primera zona de Brillouin
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vibracions-atomiques-en-cristalls">
+   Vibracions atòmiques en cristalls
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-de-born-i-von-karman">
+     Model de BORN i VON KARMAN}
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aproximacio-adiabatica">
@@ -225,23 +256,13 @@
   <a class="reference internal nav-link" href="#aproximacio-harmonica">
    Aproximació harmònica
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#xarxa-reciproca-primera-zona-de-brillouin">
-   Xarxa recíproca. Primera zona de Brillouin
-  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#celles-de-wigner-seitz-ws">
-     Cel·les de Wigner-Seitz (WS)
+    <a class="reference internal nav-link" href="#matriu-dinamica">
+     Matriu dinàmica
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matriu-dinamica">
-   Matriu dinàmica
-  </a>
  </li>
 </ul>
 
@@ -254,70 +275,197 @@
         
               <div>
                 
-  <div class="section" id="introduccio">
-<h1>Introducció<a class="headerlink" href="#introduccio" title="Link permanent a aquest títol">¶</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Per ara sols són algunes idees a desenvolupar, fins que no acabe els càlculs no vaig a posar-me a redactar la memòria, però mentres tant vaig provant les funcionalitats combinades de sagemath, jupyter, jupytext i jupyterbook.</p>
+  <div class="section" id="introduccio-teorica">
+<h1>Introducció teòrica<a class="headerlink" href="#introduccio-teorica" title="Link permanent a aquest títol">¶</a></h1>
+<p>En este treball s’empra el model de constants de força (<em>FCM</em> pel seu acrònim en anglés, <em>force-constant method</em>), per descriure la dinàmica de la xarxa cristal·lina d’un material bidimensional, el <strong>nitrur de bor</strong> monocapa, <em>BN</em>. La metodología emprada per realitzar els càlculs es basa sobretot en els articles recomanats pels tutors, en particular <span id="id1">[<a class="reference internal" href="zbibliografia.html#id4">WR04</a>]</span> i <span id="id2">[<a class="reference internal" href="zbibliografia.html#id5">Fal08</a>]</span>, tot i que en estos articles es tracta el grafé, i en el present treball estudiem el nitrur de bor.</p>
+<p>En este model la dinàmica dels àtoms es descriu considerant que cada àtom interacciona amb els del seu entorn fins a un determinat nombre de veïns (els veïns es classifiquen segons la seua distància), caracteritzant les interaccions amb els veïns mitjançant un tensor de constants de forces, una manera visual de representar el model seria considerar que els àtoms estan conectats per molls. Altres mètodes, com els càlculs realitzats a partir de primers principis (<em>ab initio</em>) emprant la teoria del funcional densitat (<em>DFT</em>, pel seu acrònim en anglés <em>density-functional density</em>) o el mètode de camp de força de valència (<em>VFF</em>, <em>valence force field</em>) necessiten temps de càlcul molt més llargs (i donen resultats molt més precissos, clar). El mètode de constants de força empra un conjunt reduït de paràmetres que poden ajustar-se a les mesures experimentals o bé, com s’ha fet en este treball, a la relació de dispersió calculada per primers principis, pel mètode de <em>Density Functional Perturbation Theory</em> em este treball.  Notem que encara que estem tractant amb un mètode senzill, este ha demostrat que pot proporcionar resultats fiables <span id="id3">[<a class="reference internal" href="zbibliografia.html#id4">WR04</a>]</span> .</p>
+<p>Abans d’explicar amb detall el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.</p>
+<div class="section" id="xarxa-cristallina">
+<h2>Xarxa cristal·lina<a class="headerlink" href="#xarxa-cristallina" title="Link permanent a aquest títol">¶</a></h2>
+<p>Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts d’una manera regular en l’espai, y per descriure esta distribució regular s’empra el concepte matemàtic de <em>xarxa cristal·lina</em>, introduït per <em>A. Bravais</em> en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts (<em>nucs</em>) que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.</p>
+<p>En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina bidimensional pot generar-se a partir de dos vectors base, de manera que els vectors de posició dels <em>nucs de la xarxa</em>, els vectors de translació cristal·lina,  tenen la forma:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c7900223-e8f3-4d82-a777-1f682877ee7a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-c7900223-e8f3-4d82-a777-1f682877ee7a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+ \vec R_\vec l=\vec R_{l_1 l_2}=l_1 \vec a_1 +l_2\vec a_2
+\end{equation}\]</div>
+<p>on <span class="math notranslate nohighlight">\(\vec l\)</span> es denomina índex del nuc (notem que en la literatura sobre el tema sol emprar-se com a índex la lletra <span class="math notranslate nohighlight">\(n\)</span>, però crec que un índex vectorial especifica millor els nucs). Si tots els nucs de la xarxa tenen índexs enters llavors els vectors base s’anomenen <em>primitius</em>.</p>
+<p>Els cristalls o <em>estructures cristal·lines</em> són distribucions regulars d’àtoms en l’espai de posicions i els podem descriure associant a cadascun dels nucs d’una xarxa cristal·lina en l’espai de posicions un conjunt d’àtoms o base (matemàticament és el producte de <em>convolució</em> de la base y la xarxa de nucs). En el cas del <em>BN</em> tractem amb una base diatòmica, formada per un nucli de bor, <span class="math notranslate nohighlight">\(B\)</span>, i un de nitrogen, <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>En dues dimensions, els paral·lelograms amb els quals podem omplir completament l’espai per translació cristal·lina i que contenen almenys un nuc de la xarxa es coneixen com cel·les unitat. La cel·la unitat més sencilla és la que té per costats el vectors base, i es coneixen com <em>cel·les de Bravais</em>.</p>
+<div class="section" id="xarxa-reciproca-primera-zona-de-brillouin">
+<h3>Xarxa recíproca. Primera zona de Brillouin<a class="headerlink" href="#xarxa-reciproca-primera-zona-de-brillouin" title="Link permanent a aquest títol">¶</a></h3>
+<p>Donat un conjunt de vectors base, <span class="math notranslate nohighlight">\(p_i\)</span>, de la xarxa cristal·lina en l’espai de posicions, la condició:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d26e73d7-2c30-432f-a50e-2e04c79c60a0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-d26e73d7-2c30-432f-a50e-2e04c79c60a0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\label{eq:rec1}
+\vec p_i\cdot\vec p_j^{*}=\delta_{ij}
+\end{equation}\]</div>
+<p>on <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> és la delta de Kronecker, defineix un altre conjunt de vectors <span class="math notranslate nohighlight">\(p_j^*\)</span>, coneguts com vectors recíprocs, i què són els vectors base que defineixen una altra xarxa coneguda com <em>xarxa recíproca</em>. Els  vectors base recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l”<em>espai recíproc</em> o de nombres d’ona. <strong>Les xarxes cristal·lines real y recíproca són dues descripcions equivalents</strong> del mateix sistema físic: el sòlid cristal·lí que s’està estudiant.</p>
+<p>Podem interpretar que</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e2789791-2577-44cc-ae58-e2bb0d700a99">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e2789791-2577-44cc-ae58-e2bb0d700a99" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\label{eq:rec3}
+\vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
+\end{equation}\]</div>
+<p>són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc (sols es diferencia de l’espai recíproc en un factor d’escala <span class="math notranslate nohighlight">\(2\pi\)</span>). En termes físics, l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és l”<em>espai de vectors d’ona</em> <span class="math notranslate nohighlight">\(\vec k\)</span>, i a falta d’un factors d’escala <span class="math notranslate nohighlight">\(\hbar\)</span>, coincideix amb l’espai de moments  <span class="math notranslate nohighlight">\(\vec p=\hbar\vec k\)</span>.</p>
+<p>Cal tenir present que l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és el fonamental en l’estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l’espai de vectors d’ona, <span class="math notranslate nohighlight">\(\vec k\)</span>.</p>
+<p><b>Cel·les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)</b></p>
+<p>Per descriure la xarxa <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproca, s’empra el criteri de <em>Wigner-Seitz</em>. Les <em>cel·les de Wigner-Seitz</em> estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d’un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d’estos segments: la cel·la de <em>WS</em> és la cel·la de menor volum al voltant de l’origen que està delimitada per estos plans (rectes en el cas d’una xarxa bidimensional).</p>
+<p>Notem que en l’espai de <span class="math notranslate nohighlight">\(\vec k\)</span> s’empren cel·les unitat de <em>WS</em> mentre que en l’espai de posicions sempre emprem cel·les unitat de Bravais.
+La cel·la de WS de la xarxa <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproca es coneix com <strong>primera zona de Brillouin</strong></p>
 </div>
+</div>
+<div class="section" id="vibracions-atomiques-en-cristalls">
+<h2>Vibracions atòmiques en cristalls<a class="headerlink" href="#vibracions-atomiques-en-cristalls" title="Link permanent a aquest títol">¶</a></h2>
+<p>Passem ara a descriure el model emprat per descriure les vibracions dels àtoms del cristall.</p>
 <div class="section" id="model-de-born-i-von-karman">
-<h2>Model de Born i Von Karman<a class="headerlink" href="#model-de-born-i-von-karman" title="Link permanent a aquest títol">¶</a></h2>
-<ul class="simple">
-<li><p>Explicar el <strong>model de  Born y  Von Karman (1921)</strong>, tal y com ve en {% cite brueesch82_phonon %} (pàgina 4).</p></li>
-</ul>
+<h3>Model de BORN i VON KARMAN}<a class="headerlink" href="#model-de-born-i-von-karman" title="Link permanent a aquest títol">¶</a></h3>
+<p>Els àtoms constituents d’un sòlid cristal·lí no estan immòbils sinó que vibren al voltant de la seua posició de equilibri.</p>
+<p>En 1912, Born y Von Karman <span id="id4">[<a class="reference internal" href="zbibliografia.html#id8">BK12</a>]</span> introduïren un model per explicar la dinàmica cristal·lina, on la idea fonamental és que cada mode normal té l’energia de un oscil·lador de Planck.</p>
+<p>Assumiren que els àtoms es troben disposats en una matriu tridimensional periòdica, i que la força sobre un àtom depèn no del desplaçament d’este respecte de la seua posició d’equilibri, sinó del desplaçament relatiu d’este àtom respecte als seus veïns. Introduïren també les condicions de contorn periòdiques que simplifiquen considerablement els càlculs.</p>
+<p>La dinàmica del sistema es descriu de manera senzilla, no en termes de les vibracions de àtoms individuals, sinó en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines (<em>lattice vibrations</em>) per Born. Cada vibració cristal·lina es caracteritza per una freqüència y un vector de ona.
+La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per analogia amb el fotó.</p>
+<p>Un fonó és un mode normal de vibració quantitzat que té lloc en una xarxa cristal·lina.  Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure’s com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids.</p>
+</div>
 </div>
 <div class="section" id="aproximacio-adiabatica">
 <h2>Aproximació adiabàtica<a class="headerlink" href="#aproximacio-adiabatica" title="Link permanent a aquest títol">¶</a></h2>
-<p>Desprès explicar que fent ús de l”<strong>aproximació adiabàtica</strong>, podem, sempre que siga vàlida tal aproximació -explicar quan ho és- considerar els nuclis iònics y els electrons de valència com constituents del sòlid independents, de manera que podem escriure l’energia potencial (o el Hamiltonià) como una suma de les distintes contribucions.</p>
+<p>Moltes propietats físiques dels sòlids poden classificar-se bé com electròniques o bé com vibracionals, segons estiguen determinades pels electrons (de valència) o per les vibracions dels àtoms (nuclis iònics): normalment considerem els nuclis i els electrons com a constituent independents del sòlid, ja que les masses dels electrons i dels nuclis són tan diferents que el moviment dels nuclis és molt més lent que el dels electrons. L <em>aproximació adiabàtica</em>, introduïda per Born i Oppenheimer <span id="id5">[<a class="reference internal" href="zbibliografia.html#id9">BO27</a>]</span> estableix que els electrons responen de manera pràcticament instantània als desplaçaments atòmics, de manera que el seu estat ve determinat per los posicions atómiques instantànies, mentre que els àtoms no poden respondre a les ràpides variacions espacials dels electrons: diguem que els electrons segueixen el moviment iònic adiabàticament.</p>
+<p>Notem, però, que estem tractant amb una primera aproximació al problema y algunes propietats físiques venen determinades per la interacció entre els electrons y les vibracions atòmiques.</p>
 </div>
 <div class="section" id="aproximacio-harmonica">
 <h2>Aproximació harmònica<a class="headerlink" href="#aproximacio-harmonica" title="Link permanent a aquest títol">¶</a></h2>
-<p>Passar a descriure l”<strong>aproximació harmònica</strong>: escriure el potencial, les equacions de moviment de Lagrange, y passar d’estes equacions de moviment en l’espai de posiciones al problema de valors propis de la matriu dinàmica en l’espai de vectores de onda (o moments).</p>
-<p>Les vibracions reticulars estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d’equilibri. La primera hipòtesi és que cada àtom té una posició d’equilibri en el cristall, y considerarem que estos àtoms vibren amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d’aquesta, de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com <em>la regió de comportament el·lastic lineal</em>, on es verifica la llei de Hooke.</p>
-<p>Podem per tant aproximar l’energia potencial de interacció pel terme armònic del seu desenvolupament en sèrie de potencies del desplaçament ….</p>
-<ul class="simple">
-<li><p>Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristallina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure’s com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.</p></li>
-<li><p>Explicar també que una vegada descrit el cristall en l’espai de posicions tenim que descriure la xarxa cristallina en l’espai de moments …</p></li>
-<li><p>Una vegada conclosa la introducció teòrica general, descriure el cristall de BN monocapa (xarxa cristallina, base, xarxa en l’espai <span class="math notranslate nohighlight">\(2\pi\text{-recíproc}\)</span>.</p></li>
-<li><p>Passar a construir la matriu dinàmica a partir del tensor de constants de for\c{c}a (cite Balkanski 2000) en coordenades cartesianes, tenint en compte que degut a la simetria del cristal la matriz de constantes de fuerza (y su transformada de Fourier, la matriz dinámica), té que complir certes relacions (forma de la matriz, elementos nulos, relación entre elementos, …), cite aizawa90 bond soften monol graph formed (en el apèndix).</p></li>
-</ul>
-</div>
-<div class="section" id="xarxa-reciproca-primera-zona-de-brillouin">
-<h2>Xarxa recíproca. Primera zona de Brillouin<a class="headerlink" href="#xarxa-reciproca-primera-zona-de-brillouin" title="Link permanent a aquest títol">¶</a></h2>
-<p>Donada una terna de vectors base primitius, <span class="math notranslate nohighlight">\(p_i\)</span>, de la xarxa cristallina en l’espai de posicion, la condició:</p>
-<div class="math notranslate nohighlight" id="equation-rec-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-rec-1" title="Permalink to this equation">¶</a></span>\[\vec p_i\cdot\vec p_j^{*}=\delta_{ij}\]</div>
-<p>on <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> és la delta de Kronecker, pot considerar-se un sistema d’equacions que defineix una altra terna de vectors <span class="math notranslate nohighlight">\(p_j^*\)</span>. La solució de l’equació <a class="reference internal" href="#equation-rec-1">(1)</a> és</p>
-<div class="math notranslate nohighlight" id="equation-rec-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-rec-2" title="Permalink to this equation">¶</a></span>\[\vec p_1^*=\frac{\vec p_2\times\vec p_3}{\vec p_1\cdot(\vec p_2\times\vec p_3)},\quad \vec p_2^*=\frac{\vec p_3\times\vec p_1}{\vec p_1\cdot(\vec p_2\times\vec p_3)}, \quad \vec p_3^*=\frac{\vec p_1\times\vec p_2}{\vec p_1\cdot(\vec p_2\times\vec p_3)}\]</div>
-<p>Els <em>vectors recíprocs</em> <span class="math notranslate nohighlight">\(\vec p_j^{*}\)</span> són els vectors d’una altra xarxa cristallina coneguda com <em>xarxa recíproca</em>. Els  vectors recíprocs, i els vectors de translació cristallina recíprocs, tenen dimensions de inversa de longitud i es representen en l”<em>espaci recíproc</em> o de números d’ona. <strong>Les xarxes cristallines real y recíproca són dues descripcions equivalents del matexi sistema físic: el sòlido cristallí</strong> que s’està estudiant.</p>
-<p>Tenim que tindre present que l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és el fonamental en l’estudi de la Física de l’Estado Sòlid ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l’espai de vectors d’ona.</p>
-<p>Podem interpretar que</p>
-<div class="math notranslate nohighlight" id="equation-rec-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-rec-3" title="Permalink to this equation">¶</a></span>\[\vec K_{h_1h_2h_3}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}+h_3\vec a_3^{*}\right)\]</div>
-<p>són els vectors de translació cristallina que defineixen una xarxa cristallina en aquest espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc (sols es diferencia de l’espai recíproc en un factor d’escala <span class="math notranslate nohighlight">\(2\pi\)</span>). En termes físics, l’espai <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproc és l”/espai de vectors d’ona/ <span class="math notranslate nohighlight">\(\vec k\)</span>, i a falta d’un factors d’escala <span class="math notranslate nohighlight">\(\hbar\)</span>, coincideix amb l’espai de moments  <span class="math notranslate nohighlight">\(\vec p=\hbar\vec k\)</span>.</p>
-<div class="section" id="celles-de-wigner-seitz-ws">
-<h3>Cel·les de Wigner-Seitz (WS)<a class="headerlink" href="#celles-de-wigner-seitz-ws" title="Link permanent a aquest títol">¶</a></h3>
-<p>Para descrire la xarxa 2<span class="math notranslate nohighlight">\(\pi\)</span>-recíproca, emprarem el criteri de <em>Wigner-Seitz</em>. Les <em>cel·les de Wigner-Seitz</em> estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d’un nuc qualsevol com a origen, construim els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d’estos segments: la cel·la de WS és la cel·la de menor volum al voltant de l’origen que està delimitada per estos plans (rectes en el caso d’una xarxa bidimensional).</p>
-<p>Notem que en l’espai de <span class="math notranslate nohighlight">\(\vec k\)</span> emprarem cel·les unitat de WS mentre que en l’espai de posicions sempre emprem cel·les unitat de Bravais.
-La cel·la de WS de la xarxa <span class="math notranslate nohighlight">\(2\pi\)</span>-recíproca es coneix com <strong>primera zona de Brillouin</strong> (ZB)</p>
-</div>
-</div>
+<p>Les vibracions cristal·lines estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d’equilibri. La primera hipòtesi és que cada àtom té una posició d’equilibri en el cristall, que denotem per <span class="math notranslate nohighlight">\(\vec r^{(0)}_{\vec l,\vec\alpha}=\vec R_\vec l+\vec d_{\alpha}\quad \)</span>, y considerarem que estos àtoms vibren al voltant d’esta posició d’equilibri, <span class="math notranslate nohighlight">\(\vec r_{\vec l,\vec\alpha}=\vec r^{(0)}_{\vec l,\vec\alpha}+\vec u_{\vec l,\alpha}(t)\quad\)</span>, amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d’aquesta,   de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament elàstic lineal}, on es verifica la llei de Hooke.</p>
+<p>Podem, per tant, aproximar l’energia potencial de interacció pel terme harmònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9f5fbcfa-8323-4e97-86ed-25b577e4e8de">
+<span class="eqno">(4)<a class="headerlink" href="#equation-9f5fbcfa-8323-4e97-86ed-25b577e4e8de" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+ V=\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\frac{1}{2}\vec u_{\vec l'\alpha'}\cdot\underbrace{\mathbf\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})}_\text{matriu de constants de forces}\cdot\vec u_{\vec l,\alpha}
+\end{equation}\]</div>
+<p>Les equacions de moviment en l’aproximació harmònica s’escriuen en la coneguda forma:</p>
+<div class="math notranslate nohighlight" id="equation-movharmonic">
+<span class="eqno">(5)<a class="headerlink" href="#equation-movharmonic" title="Permalink to this equation">¶</a></span>\[ M_{\alpha'}\vec{\ddot{u}}_{\vec l,\alpha'}(t)=-\sum_{\vec l',\alpha}\mathbf\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)\cdot\vec u_{\vec l,\alpha}(t)\]</div>
+<p>Aquesta equació representa un sistema  d’oscil·ladors harmònics acoblats, on <span class="math notranslate nohighlight">\(\alpha\)</span> i <span class="math notranslate nohighlight">\(\alpha'\)</span> fan referència al àtoms de la base considerats, l’índex vectorial <span class="math notranslate nohighlight">\(\vec l\)</span> (que sol aparèixer en la literatura com <span class="math notranslate nohighlight">\(n\)</span>) índica el nuc considerat i <span class="math notranslate nohighlight">\(\vec R_\vec l\)</span> és el vector de translació cristal·lina.</p>
 <div class="section" id="matriu-dinamica">
-<h2>Matriu dinàmica<a class="headerlink" href="#matriu-dinamica" title="Link permanent a aquest títol">¶</a></h2>
-<p>La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{\alpha\prime}D_{\alpha\alpha\prime}\cdot\vec e_{\alpha\prime}(\vec q)=\omega^{2}\vec e_{\alpha}(\vec q)\]</div>
+<h3>Matriu dinàmica<a class="headerlink" href="#matriu-dinamica" title="Link permanent a aquest títol">¶</a></h3>
+<p>Realitzant la transformada de Fourier de l’equació <a class="reference internal" href="#equation-movharmonic">(5)</a>, passem al conegut problema d’autovalors:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-edf8aee2-1051-4222-8099-f0e4bc90c85c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-edf8aee2-1051-4222-8099-f0e4bc90c85c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\sum_{\alpha}\mathbf D^{\alpha'\alpha}(\vec q)\cdot\vec e_{\alpha}(\vec q)={\omega'}^{2}\vec e_{\alpha'}(\vec q)
+\end{equation}\]</div>
+<p>La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica.</p>
 <p>Per tant, les freqüències <span class="math notranslate nohighlight">\(\omega\)</span> com funció del vector d’ones <span class="math notranslate nohighlight">\(\vec q\)</span> del fonó són solució de l’equació secular:</p>
-<div class="math notranslate nohighlight">
-\[\det\left|\frac{1}{\sqrt{M_\alpha M_{\alpha\prime}}}D^{ij}_{\alpha\alpha\prime}\left(\vec q\right)-\omega^2\left(\vec q\right)\right|=0 \]</div>
-<p>on <span class="math notranslate nohighlight">\(M_{\alpha}\)</span> es la massa de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> y la matriu dinàmica ve definida por:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7f076629-720e-45aa-9d81-f758d7a0f4f9">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7f076629-720e-45aa-9d81-f758d7a0f4f9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\label{eq:secular}
+\det\left|\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
+\end{equation}\]</div>
+<p>on <span class="math notranslate nohighlight">\(M_{\alpha}\)</span> es la massa de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> y la matriu dinàmica ve definida per:</p>
 <div class="math notranslate nohighlight" id="equation-matriu-dinamica">
-<span class="eqno">(4)<a class="headerlink" href="#equation-matriu-dinamica" title="Permalink to this equation">¶</a></span>\[D_{\alpha,\alpha\prime}^{i,j}=\frac{\partial^2 E}{\partial u_{\alpha}^{*i}(\vec q)\partial u_{\alpha\prime}^{j}(\vec q)}\]</div>
-<p>on <span class="math notranslate nohighlight">\(u_{\alpha}^{i}\)</span> representa el desplaçament de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>La segona derivada de l’energia de l’equació <a class="reference internal" href="#equation-matriu-dinamica">(4)</a> correspon al canvi en la força que actua sobre l’àtom <span class="math notranslate nohighlight">\(\alpha\prime\)</span> en la direcció <span class="math notranslate nohighlight">\(j\)</span> quan es desplaça l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span></p>
-<div class="math notranslate nohighlight">
-\[D_{\alpha\alpha\prime}^{ij}(\vec q)=\frac{\partial}{\partial u^{*\alpha}_{i}}F^{j}_{\alpha\prime}(\vec q)\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-matriu-dinamica" title="Permalink to this equation">¶</a></span>\[\mathbf D^{\alpha',\alpha}_{i,j}=\frac{\partial^2 E}{\partial u^{\alpha'*}_i(\vec q)\partial u^{\alpha}_{j}(\vec q)}\]</div>
+<p>on <span class="math notranslate nohighlight">\(u^{\alpha}_{i}\)</span> representa el desplaçament de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>La segona derivada de l’energia de l’equació <a class="reference internal" href="#equation-matriu-dinamica">(8)</a> correspon al canvi en la força que actua sobre l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(j\)</span> quan es desplaça l’àtom <span class="math notranslate nohighlight">\(\alpha'\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="amsmath math notranslate nohighlight" id="equation-8345040b-0648-4a1d-84d0-cf6d34bf8709">
+<span class="eqno">(9)<a class="headerlink" href="#equation-8345040b-0648-4a1d-84d0-cf6d34bf8709" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\mathbf D^{\alpha',\alpha}_{i,j}=\frac{\partial}{\partial u^{\alpha*}_{i}}\vec F^{j}_{\alpha}(\vec q)
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-matriu-dinamica1">
+<span class="eqno">(10)<a class="headerlink" href="#equation-matriu-dinamica1" title="Permalink to this equation">¶</a></span>\[ \boxed{
+ \mathbf D^{\alpha',\alpha}(\vec q)=\frac{1'}{\sqrt{M_\alpha' M_{\alpha}}}\sum_\vec l\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)e^{-i\vec q\cdot\vec R_\vec l}}\]</div>
+<p>Per calcular la matriu dinàmica <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a> emprant el model de constants de forces necessitem, per tant, constuir el tensor de constants de forces. Anem a suposar que les forces entre àtoms sols depenen del tipus d’elements químics que interaccionen i de la seua distància relativa.</p>
+<p>Considerem un àtom <span class="math notranslate nohighlight">\(\alpha\)</span> situat en la cel·la <span class="math notranslate nohighlight">\(\vec l\)</span> , (<span class="math notranslate nohighlight">\(\alpha, \vec l\)</span>),a una certa distància, <span class="math notranslate nohighlight">\(|\vec R_{\alpha,\vec l}-\vec R_{\alpha',\vec{l'}}|\)</span> de l’àtom  (<span class="math notranslate nohighlight">\(\alpha'\)</span>,<span class="math notranslate nohighlight">\(\vec l'\)</span>), i escollint el sistema de coordenades cartesianes de manera que la direcció del vector que uneix ambdós àtoms coincideix amb l’eix de les <span class="math notranslate nohighlight">\(x\)</span>, l’eix <span class="math notranslate nohighlight">\(y\)</span> com la coordenada transversal en el plànol, <span class="math notranslate nohighlight">\(ti\)</span>, i <span class="math notranslate nohighlight">\(z\)</span> la coordenada perpendicular al plànol <span class="math notranslate nohighlight">\(to\)</span>.</p>
+<p>Podem escriure el tensor de forces d’este àtom, que segons el mòdul de la distància a l’àtom <span class="math notranslate nohighlight">\((\alpha',\vec l\)</span>) classificarem com <span class="math notranslate nohighlight">\(n\)</span>-èssim veí, de la forma <span id="id6">[<a class="reference internal" href="zbibliografia.html#id4">WR04</a>]</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-15f35147-dbaa-4df3-9855-c8010ffa4ab6">
+<span class="eqno">(11)<a class="headerlink" href="#equation-15f35147-dbaa-4df3-9855-c8010ffa4ab6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\mathbf \Phi_n^{\alpha',\alpha}=\begin{pmatrix}
+\phi_{n,r}^{\alpha',\alpha}&amp;\xi_n^{\alpha',\alpha} &amp;0\\
+-\xi_n^{\alpha',\alpha} &amp; \phi_{n,ti}^{\alpha',\alpha} &amp; 0 \\
+0 &amp; 0 &amp; \phi_{n,to}^{\alpha',\alpha}
+\end{pmatrix}
+\label{eq:tensordeforces}
+\end{equation}\]</div>
+<p>L’estructura diagonal a blocs de la matriu reflexa el fet que estem supossant que  les vibracions interplanars y les de fora de pla, <span class="math notranslate nohighlight">\(to\)</span>, (en la direcció <span class="math notranslate nohighlight">\(z\)</span>) estan completament desacoblades.</p>
+<p>Anem a suposar (simplificant encara més com són les interaccions entre àtoms) que un desplaçament longitudinal (radial, que estarà contés en el planol del cristall) o transversal en el planol, sols genera una força radial o transversal, respectivament, es a dir, <span class="math notranslate nohighlight">\(\xi_n^{\alpha,\alpha'}=0\)</span> tal y com es realitza en <span id="id7">[<a class="reference internal" href="zbibliografia.html#id3">Bal00</a>]</span>.</p>
+<p>Per tant, anem a considerar que el tensor de constants de forces  d’un àtom <span class="math notranslate nohighlight">\(\alpha\)</span> classificat com <span class="math notranslate nohighlight">\(n\)</span>-èssim veí, situat en la direcció <span class="math notranslate nohighlight">\(\hat x\)</span> respecte de l’átom  <span class="math notranslate nohighlight">\(\alpha'\)</span>, té la forma diagonal (notem que en la xarxa real que estem estudiant no té perque haver cap <span class="math notranslate nohighlight">\(n\)</span>-èssim vei en aquesta posició):</p>
+<div class="math notranslate nohighlight" id="equation-tensordeforcessimplificat">
+<span class="eqno">(12)<a class="headerlink" href="#equation-tensordeforcessimplificat" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf\Phi_n^{\alpha'\alpha}=\begin{pmatrix}
+\phi_{n,r}^{\alpha',\alpha}&amp;0 &amp;0\\
+0&amp; \phi_{n,ti}^{\alpha',\alpha} &amp; 0 \\
+0 &amp; 0 &amp; \phi_{n,to}^{\alpha',\alpha}
+\end{pmatrix}\end{split}\]</div>
+<p>Per calcular el tensor de constants de forces de cadascun dels <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(n\)</span>-èssim veï real de l’àtom <span class="math notranslate nohighlight">\(\alpha'\)</span>, que formen un angle <span class="math notranslate nohighlight">\(\theta\)</span> respecte de l’eix escollit com <span class="math notranslate nohighlight">\(x\)</span>, tenim que rotar la matriu de l’equació <a class="reference internal" href="#equation-tensordeforcessimplificat">(12)</a>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-17877846-7549-45de-9fd9-3ca4a1f8bfc4">
+<span class="eqno">(13)<a class="headerlink" href="#equation-17877846-7549-45de-9fd9-3ca4a1f8bfc4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+ \mathbf\Phi_{n,i}^{\alpha'\alpha}(\theta)=\mathbf U^{-1}(\theta)\mathbf\Phi_n^{\alpha'\alpha}(0)\mathbf U(\theta)
+\end{equation}\]</div>
+<p>on <span class="math notranslate nohighlight">\(\mathbf U(\theta)\)</span> ve donada per:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0538e2dc-119f-4fb9-9ffe-6b0475e73d5d">
+<span class="eqno">(14)<a class="headerlink" href="#equation-0538e2dc-119f-4fb9-9ffe-6b0475e73d5d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+\mathbf U(\theta)=
+\begin{pmatrix}
+\cos(\theta)  &amp; \sin(\theta) &amp; 0 \\
+-\sin(\theta) &amp; \cos(\theta) &amp; 0  \\
+0             &amp; 0            &amp; 1
+\end{pmatrix}
+\end{equation}\]</div>
+<p>Una vegada que sabem com tenim que construir el tensor de constants de forces, el càlcul de la matriu dinàmica és directe, ja que sols tenim que fer ús de l’equació <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a>, és a dir multipliquem el tensor de constants de forces associat a la interacció entre els àtoms (<span class="math notranslate nohighlight">\(\alpha', \vec l'=\vec 0\)</span>) i (<span class="math notranslate nohighlight">\(\alpha,\vec l\)</span>) per la fase, <span class="math notranslate nohighlight">\(e^{i \vec q\cdot \vec R_\vec l}\)</span>, on recordem, <span class="math notranslate nohighlight">\(\vec R_\vec l=l_1 \vec a_1+ l_2 \vec a_2\)</span></p>
+<p>En el cas considerat, com la base esta constituida per dos àtoms, la dimensió del tensor de constants de forces (i de la matriu dinàmica) és <span class="math notranslate nohighlight">\(3\cdot 2\times 3\cdot 2= 6\times 6\)</span>. Observem que esta matriu està escrita en termes de <span class="math notranslate nohighlight">\(4\)</span> matris <span class="math notranslate nohighlight">\(3\times 3\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1064eba9-d28a-44ac-969c-379a1b0c5873">
+<span class="eqno">(15)<a class="headerlink" href="#equation-1064eba9-d28a-44ac-969c-379a1b0c5873" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+ \label{eq:formamatriudinamica}
+ \mathbf D=
+ \begin{pmatrix}
+  \mathbf D^{BB} &amp;&amp; \mathbf D^{BN}\\
+  \mathbf D^{NB} &amp;&amp; \mathbf D^{NN}
+ \end{pmatrix}
+\end{equation}\]</div>
+<p>recalquem que hem indexat el àtoms de la base pel tipus d’element al que pertanyen, pero en cas que els <span class="math notranslate nohighlight">\(2\)</span> àtoms de la base pertanyeren al mateix tipus d’element químic la matriu dinàmica també seria <span class="math notranslate nohighlight">\(6x6\)</span> (i podriem, per exemple, classificar-los com <span class="math notranslate nohighlight">\(A\)</span> i <span class="math notranslate nohighlight">\(B\)</span> per distingir-los).</p>
+<p>Un punt important és que tenim que considerar (en les submatrius <span class="math notranslate nohighlight">\(D^{BB}\)</span> i <span class="math notranslate nohighlight">\(D^{NN}\)</span>) les contribucions a la matriu dinàmica degudes a la interacció de l’àtom (<span class="math notranslate nohighlight">\(\alpha',0\)</span>) amb sí mateix. Ara bé, no necessitem escriure <span class="math notranslate nohighlight">\(\vec D_0^{BB}\)</span> i <span class="math notranslate nohighlight">\(\vec D_0^{NN}\)</span> explícitament, podem emprar el fet que si traslladem el conjunt d’àtoms en la mateixa direcció la força total és nul·la (si es desplaça el cristall com un tot no canvia l’energia potencial) i tal com ve indicat en <span id="id8">[<a class="reference internal" href="zbibliografia.html#id5">Fal08</a>]</span> a partir de l’equació <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a>, obtenim que (considerant fins a 3ers veïns):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9ee91837-947f-4519-8717-a55d58f3e20d">
+<span class="eqno">(16)<a class="headerlink" href="#equation-9ee91837-947f-4519-8717-a55d58f3e20d" title="Permalink to this equation">¶</a></span>\[\begin{equation}\begin{split}
+\mathbf D_0^{BB}&amp;=-\sum_{i=1}^3\mathbf \Phi_{1,i}^{BN}-\sum_{i=1}^6\mathbf \Phi_{2,i}^{BB}-\sum_{i=1}^3\mathbf \Phi_{3,i}^{BN} \\
+\mathbf D_0^{NN}&amp;=-\sum_{i=1}^3\mathbf \Phi_{1,i}^{NB}-\sum_{i=1}^6\mathbf \Phi_{2,i}^{NN}-\sum_{i=1}^3\mathbf \Phi_{3,i}^{NB}
+\end{split}
+\end{equation}\]</div>
+<p>Es podrien tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components, tal com es fa en <span id="id9">[<a class="reference internal" href="zbibliografia.html#id5">Fal08</a>]</span>) però sols he emprat el fet que donat que l’energía es una funció quadràtica dels desplaçaments atòmics <span class="math notranslate nohighlight">\(u_{\alpha',\vec l'}, u_{\alpha,\vec l}\)</span>, la matriu de constants de forces té que ser simètrica,  i la seua transformada de Fourier, la matriu dinàmica té que ser una matriu hermítica, i per tant els seus valors propis, <span class="math notranslate nohighlight">\(\omega^2\)</span> seran nombres reals.</p>
+<p>Tenim per tant que la matriu dinàmica serà una matriu <span class="math notranslate nohighlight">\(6x6\)</span> hermítica. Però, donat que les components en <span class="math notranslate nohighlight">\(z\)</span> d’esta matriu es troben desacoblades, podem tractar aquestes vibracions de manera independent, de manera que en compte de treballar directament sobre una matriu <span class="math notranslate nohighlight">\(6x6\)</span> de la forma</p>
+<div class="amsmath math notranslate nohighlight" id="equation-908a5d7b-5d6d-469c-8790-59850a263fdd">
+<span class="eqno">(17)<a class="headerlink" href="#equation-908a5d7b-5d6d-469c-8790-59850a263fdd" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+  \mathbf D(\vec q)=
+  \begin{pmatrix}
+   D_{xx}^{BB} &amp; D_{xy}^{BB} &amp; 0 &amp;              &amp; D_{xx}^{BN} &amp; D_{xy}^{BN} &amp; 0 \\
+   D_{yx}^{BB} &amp; D_{yy}^{BB} &amp; 0 &amp;              &amp; D_{xx}^{BN} &amp; D_{xy}^{BN} &amp; 0 \\
+       0       &amp;     0       &amp; D_{zz}^{BB} &amp;    &amp; 0  &amp; 0  &amp; D_{zz}^{BN}        \\
+    &amp;  &amp;  &amp;  &amp;  &amp;  \\
+   D_{xx}^{NB} &amp; D_{xy}^{NB} &amp; 0 &amp;              &amp; D_{xx}^{NN} &amp; D_{xy}^{NN} &amp; 0 \\
+   D_{yx}^{NB} &amp; D_{yy}^{NB} &amp; 0 &amp;              &amp; D_{xx}^{NN} &amp; D_{xy}^{NN} &amp; 0 \\
+       0       &amp;     0       &amp; D_{zz}^{NB} &amp;    &amp; 0  &amp; 0  &amp; D_{zz}^{NN} 
+  \end{pmatrix}
+\end{equation}\]</div>
+<p>treballarem sobre dues matrius</p>
+<ul class="simple">
+<li><p>Primer tractarem les vibracions transversal al pla del cristall mitjançant una matriu <span class="math notranslate nohighlight">\(2x2\)</span>:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-5ea677c6-e38b-4cbd-b610-f8fc0d3020c8">
+<span class="eqno">(18)<a class="headerlink" href="#equation-5ea677c6-e38b-4cbd-b610-f8fc0d3020c8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+  \mathbf D_z(\vec q)=
+  \begin{pmatrix}
+    D_{zz}^{BB}  &amp; D_{zz}^{BN}        \\
+    D_{zz}^{NB}  &amp; D_{zz}^{NN} 
+  \end{pmatrix}
+\end{equation}\]</div>
+<ul class="simple">
+<li><p>Després tractarem les vibracions al pla del cristall emprant una matriu <span class="math notranslate nohighlight">\(4x4\)</span>:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-4c20385b-969b-43cf-aaea-730ea8f3e6d9">
+<span class="eqno">(19)<a class="headerlink" href="#equation-4c20385b-969b-43cf-aaea-730ea8f3e6d9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+  \mathbf D_{xy}(\vec q)=
+  \begin{pmatrix}
+   D_{xx}^{BB} &amp; D_{xy}^{BB} &amp; D_{xx}^{BN} &amp; D_{xy}^{BN}  \\
+   D_{yx}^{BB} &amp; D_{yy}^{BB} &amp; D_{xx}^{BN} &amp; D_{xy}^{BN}  \\
+   D_{xx}^{NB} &amp; D_{xy}^{NB} &amp; D_{xx}^{NN} &amp; D_{xy}^{NN} \\
+   D_{yx}^{NB} &amp; D_{yy}^{NB} &amp; D_{xx}^{NN} &amp; D_{xy}^{NN} \\
+  \end{pmatrix}
+\end{equation}\]</div>
+</div>
 </div>
 </div>
 
@@ -346,8 +494,7 @@ La cel·la de WS de la xarxa <span class="math notranslate nohighlight">\(2\pi\)
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page"><!-- #region -->
-Sobre este TFG</a>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">Sobre este treball</a>
     <a class='right-next' id="next-link" href="formulacio_matriu_dinamica.html" title="next page">Descripció del cristall de BN</a>
 
         </div>
