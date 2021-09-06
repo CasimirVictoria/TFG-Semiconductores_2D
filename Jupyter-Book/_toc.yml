@@ -3,3 +3,5 @@ root: index.md
 sections:
 - file: introduccio.md
 - file: formulacio_matriu_dinamica.md
+- file: Conclusions.md
+- file: zbibliografia.md

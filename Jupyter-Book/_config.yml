@@ -7,14 +7,14 @@ logo: logo_tfg.png
 
 # Short description about the book
 description: >-
-  Este treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevant per a la interpretació dels experiments de la dispersió de la llum.
+  Este treball de Fi de Grau consisteix en la computació dels modes vibracionals de materials semiconductors 2D y la seua correlació amb els observables rellevants per a la interpretació dels experiments de la dispersió de la llum.
 
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: cache # auto cache
-  timeout: 100 #Execution timeout defines the maximum time (in seconds) each notebook cell is allowed to run for.
+  timeout: 60 #Execution timeout defines the maximum time (in seconds) each notebook cell is allowed to run for.
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
@@ -22,7 +22,7 @@ latex:
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
-    - references.bib
+    - TFG-Casimir.bib
 
 # Information about where the book exists on the web
 repository:

@@ -76,7 +76,7 @@
  
  Els materials bidimensionals ($2D$) com el grafè són de gran interès tant per les seues propietats físiques exclusives com per les seues aplicacions potencials. L'estudi de la dinàmica de la xarxa cristal·lina (\textit{fonons}) d'estos materials és un requisit previ per entendre la seua estabilitat estructural i propietats tèrmiques, així com les seues propietats de transport i òptiques. 
  
- En este treball es calculen els modes vibracionals de un material semiconductor 2D model, el nitrur de bor monocapa. Emprant un model clàssic i senzill, el model de constants de força, s'obtenen les expressions analítiques per als modes de vibració als punts crítics de la zona de Brillouin. Evidentment, un model tan senzill com l'emprat, on sols es consideren les interaccions amb uns pocs veïns i on s'assumeix a més una forma diagonal per al tensor de constants de força, té moltes limitacions, però ajustant les constants de força emprant la relació de dispersió calculada a partir de primers principis mitjançant el mètode de \emph{Density Functional Perturbation Theory} observem que, almenys, obtenim resultats acceptables per a baixes freqüències.
+ En este treball es calculen els modes vibracionals  d'un  material semiconductor 2D model, el nitrur de bor monocapa. Emprant un model clàssic i senzill, el model de constants de força, s'obtenen les expressions analítiques per als modes de vibració als punts crítics de la zona de Brillouin. Evidentment, un model tan senzill com l'emprat, on sols es consideren les interaccions amb uns pocs veïns i on s'assumeix a més una forma diagonal per al tensor de constants de força, té moltes limitacions, però ajustant les constants de força emprant la relació de dispersió calculada a partir de primers principis mitjançant el mètode de \emph{Density Functional Perturbation Theory} observem que, almenys, obtenim resultats acceptables per a baixes freqüències.
 
 \vspace{\baselineskip}
 
@@ -84,7 +84,7 @@
 
 Two-dimensional materials ($2D$) like graphene are of great interest for both their unique physical properties and their potential applications. The study of the dynamics of the crystal lattice (\textit {phonons}) of these materials is a prerequisite for understanding their structural stability and thermal properties, as well as their transport and optical properties.
  
- In this work the vibrational modes of a 2D model semiconductor material, the monolayer boron nitride, are calculated. Using a classical and simple model, the model of force constants, analytical expressions for the modes at the critical points of the Brillouin zone are obtained. Obviously, a model as simple, where only interactions with a few neighbors are considered and where a diagonal shape is assumed for the force constant tensor, has many limitations, however by fitting the force-constants to the ab initio  dispersion relation, calculated using the method of \ emph {Density Functional Perturbation Theory} we observe that, at least, we obtain acceptable results for low frequencies.
+ In this work the vibrational modes of a 2D model semiconductor material, the monolayer boron nitride, are calculated. Using a classical and simple model, the model of force constants, analytical expressions for the modes at the critical points of the Brillouin zone are obtained. Obviously, a model as simple, where only interactions with a few neighbors are considered and where a diagonal shape is assumed for the force constant tensor, has many limitations, however by fitting the force-constants to the ab initio  dispersion relation, calculated using the method of \emph{Density Functional Perturbation Theory} we observe that, at least, we obtain acceptable results for low frequencies.
 
 \noindent 
 
@@ -97,15 +97,15 @@ Two-dimensional materials ($2D$) like graphene are of great interest for both th
 
 \section{Introducció teòrica}
 
-En este treball s'empra el model de constants de força (\emph{FCM} per les seues sigles en anglés, \emph{\foreignlanguage{english}{force-constant method})}, per descriure la dinàmica de la xarxa cristal·lina de un material bidimensional, el nitrur de bor monocapa, \emph{BN}. La metodología emprada per realitzar els càlculs es basa sobretot en els articles recomanats pels tutors, en particular \cite{wirtz04_phonon_disper_graph_revis} i \cite{falkovsky08_symmet_const_phonon_disper_graph}, si bé en aquest articles es tracta el grafé, i en el present treball estudiem el nitrur de bor.
+En este treball s'empra el model de constants de força (\emph{FCM} pel seu acrònim en anglés, \emph{\foreignlanguage{english}{force-constant method})}, per descriure la dinàmica de la xarxa cristal·lina d'un material bidimensional, el nitrur de bor monocapa, \emph{BN}. La metodología emprada per realitzar els càlculs es basa sobretot en els articles recomanats pels tutors, en particular \cite{wirtz04_phonon_disper_graph_revis} i \cite{falkovsky08_symmet_const_phonon_disper_graph}, tot i que en estos articles es tracta el grafé, i en el present treball estudiem el nitrur de bor.
 
-En este model la dinàmica dels àtoms es descriu considerant que cada àtom interacciona amb els del seu entorn fins a un determinat nombre de veïns (els veïns es classifiquen segons la seua distància), caracteritzant les interaccions amb els veïns mitjançant un tensor de constants de forces, una manera visual de representar el model seria considerar que els àtoms estan conectats per molls. Altres mètodes, com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoria del funcional densitat (DFT, per les seues sigles en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs (i donen resultats molt més precissos, clar). El mètode de constants de força empra un conjunt reduït de paràmetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis, pel mètode de \emph{Density Functional Perturbation Theory}.  Notem que encara que estem tractant amb un mètode senzill, este ha demostrat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
+En este model la dinàmica dels àtoms es descriu considerant que cada àtom interacciona amb els del seu entorn fins a un determinat nombre de veïns (els veïns es classifiquen segons la seua distància), caracteritzant les interaccions amb els veïns mitjançant un tensor de constants de forces, una manera visual de representar el model seria considerar que els àtoms estan conectats per molls. Altres mètodes, com els càlculs realitzats a partir de primers principis (\emph{ab initio}) emprant la teoria del funcional densitat (DFT, pel seu acrònim en anglés \foreignlanguage{english}{density-functional density}) o el mètode de camp de força de valència (\emph{VFF}, \foreignlanguage{english}{valence force field}) necessiten temps de càlcul molt més llargs (i donen resultats molt més precissos, clar). El mètode de constants de força empra un conjunt reduït de paràmetres que poden ajustar-se a les mesures experimentals o bé, com s'ha fet en este treball, a la relació de dispersió calculada per primers principis, pel mètode de \emph{Density Functional Perturbation Theory} en este treball.  Notem que encara que estem tractant amb un mètode senzill, este ha demostrat que pot proporcionar resultats fiables \cite{wirtz04_phonon_disper_graph_revis}.
 
-Abans d'explicar en detall el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
+Abans d'explicar amb detall el mètode emprat en este treball repassem alguns conceptes i aclarim la notació emprada.
 
 \subsection{Xarxa cristal·lina}
 
-Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts de una manera regular en l'espai, y per descriure esta distribució regular s'empra el concepte matemàtic de \emph{xarxa cristal·lina}, introduït per A. Bravais en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts (\emph{nucs}) que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.
+Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts d'una manera regular en l'espai, y per descriure esta distribució regular s'empra el concepte matemàtic de \emph{xarxa cristal·lina}, introduït per A. Bravais en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts (\emph{nucs}) que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.
 
 En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina bidimensional pot generar-se a partir de dos vectors base, de manera que els vectors de posició dels \emph{nucs de la xarxa}, els vectors de translació cristal·lina,  tenen la forma:
 \begin{equation}
@@ -114,12 +114,12 @@ En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina 
 
 on $\vec l$ es denomina índex del nuc (notem que en la literatura sobre el tema sol emprar-se com a índex la lletra $n$, però crec que un índex vectorial especifica millor els nucs). Si tots els nucs de la xarxa tenen índexs enters llavors els vectors base s'anomenen \emph{primitius}.
 
-Els cristalls o \emph{estructures cristal·lines} són distribucions regulars d'àtoms en l'espai de posicions i els podem descriure associant a cadascun dels nucs d'una xarxa cristal·lina en l'espai de posicions un conjunt d'àtoms o base ({matemàticament és el producte de \emph{convolució} de la base y la xarxa de nucs). En el cas del \emph{BN} tractem amb una base diatòmica, formada per un nucli de bor, $B$ i un de nitrogen, $N$. 
+Els cristalls o \emph{estructures cristal·lines} són distribucions regulars d'àtoms en l'espai de posicions i els podem descriure associant a cadascun dels nucs d'una xarxa cristal·lina en l'espai de posicions un conjunt d'àtoms o base (matemàticament és el producte de \emph{convolució} de la base y la xarxa de nucs). En el cas del \emph{BN} tractem amb una base diatòmica, formada per un nucli de bor, $B$, i un de nitrogen, $N$. 
 
 En dues dimensions, els paral·lelograms amb els quals podem omplir completament l'espai per translació cristal·lina i que contenen almenys un nuc de la xarxa es coneixen com cel·les unitat. La cel·la unitat més sencilla és la que té per costats el vectors base, i es coneixen com \emph{cel·les de Bravais}.
 
 \subsubsection{Xarxa recíproca. Primera zona de Brillouin.}
-Donat un conjunt de vectors base, $p_i$, de la xarxa cristalina en l'espai de posicions, la condició:
+Donat un conjunt de vectors base, $p_i$, de la xarxa cristal·lina en l'espai de posicions, la condició:
 
 \begin{equation}
 \label{eq:rec1}
@@ -134,14 +134,14 @@ Podem interpretar que
 \vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
 \end{equation}
 
-són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en l'espai $2\pi$-recíproc (sóls es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En térmes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$.
+són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en l'espai $2\pi$-recíproc (sols es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En termes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$.
 
 Cal tenir present que l'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l'espai de vectors d'ona, $\vec k$.
 
 
 \paragraph{Cel·les de Wigner-Seitz (WS) y primera zona de Brillouin (ZB)}
 
-Per descriure la xarxa $2\pi$-recíproca, s'empra el criteri de \textit{Wigner-Seitz}. Las \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de \emph{WS} és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el caso d'una xarxa bidimensional).
+Per descriure la xarxa $2\pi$-recíproca, s'empra el criteri de \textit{Wigner-Seitz}. Les \textit{cel·les de Wigner-Seitz} estan centrades en un nuc de la xarxa i es defineixen com la regió més pròxima a un nuc (el del centre de la cel·la) que a qualsevol altre. Per determinar la seua forma, partim d'un nuc qualsevol com a origen, construïm els segments que uneixen este nuc amb els seus veïns i es tracen els plans que bisecten cadascun d'estos segments: la cel·la de \emph{WS} és la cel·la de menor volum al voltant de l'origen que està delimitada per estos plans (rectes en el cas d'una xarxa bidimensional).
 
 Notem que en l'espai de $\vec k$ s'empren ce\l.les unitat de \emph{WS} mentre que en l'espai de posicions sempre emprem ce\l.les unitat de Bravais.
 La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zona de Brillouin} (ZB)
@@ -150,12 +150,18 @@ La ce\l.la de WS de la xarxa $2\pi$-recíproca es coneix com \textbf{primera zon
 \subsection{Vibracions atòmiques en cristalls}
 Passem ara a descriure el model emprat per descriure les vibracions dels àtoms del cristall.
 \subsubsection{Model de BORN i VON KARMAN}
-Els àtoms constituents de un sòlid cristal·lí no estan immòbils sino que vibren al voltant de la seua posició de equilibri.
+Els àtoms constituents de un sòlid cristal·lí no estan immòbils sinó que vibren al voltant de la seua posició de equilibri.
 
-En 1912, Born y Von Karman \cite{Born:1912:SRG} introduiren un model per explicar la dinámica cristal·lina, on la idea fonamental es que cada mode normal té l'energia de un oscil·lador de Planck. La dinámica del sistema es descriu de manera sencilla, no en termes de les vibracions de àtoms individuals, sino en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines \emph{(\foreignlanguage{english}{lattice vibrations})} per Born. Cada vibració cristal·lina es caracteritza per una freqüencia y un vector de ona.
-La vibració cristal·lina quantitzada, o mode normal, s'anomena fonó per analogía amb el fotó. %i te propietats de quasi-partícula
+En 1912, Born y Von Karman \cite{Born:1912:SRG} introduïren un model per explicar la dinàmica cristal·lina, on la idea fonamental és que cada mode normal té l'energia de un oscil·lador de Planck.
 
-%Explicar el concepte de fonó i la seua importància: Un fonó és un mode de vibració quantitzat que té lloc en una xarxa cristal·lina. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. Los fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència. Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa.
+Assumiren que els àtoms es troben disposats en una matriu tridimensional periòdica, i que la força sobre un àtom depèn no del desplaçament d'este respecte de la seua posició d'equilibri, sinó del desplaçament relatiu d'este àtom respecte als seus veïns. Introduïren també les condicions de contorn periòdiques que simplifiquen considerablement els càlculs. 
+ 
+La dinàmica del sistema es descriu de manera senzilla, no en termes de les vibracions de àtoms individuals, sinó en termes de moviments col·lectius en forma de ones viatgeres anomenades vibracions cristal·lines \emph{(\foreignlanguage{english}{lattice vibrations})} per Born. Cada vibració cristal·lina es caracteritza per una freqüència y un vector de ona.
+La vibració cristal·lina quantitzada, o mode normal, s'anomena fonó per analogia amb el fotó. %i te propietats de quasi-partícula
+
+Un fonó és un mode normal de vibració quantitzat que té lloc en una xarxa cristal·lina.  Aquests modes normals són importants perquè qualsevol moviment vibracional de la xarxa pot descriure's com una superposició de modes normals de distinta freqüència, en este sentit són la base de les vibracions de la xarxa. Els fonons tenen una gran importància en moltes propietats físiques dels sòlids. 
+
+%Els fonons son una version mecano-quàntica dels modes normals de vibració de la mecànica clàssica, on cada par de la xarxa osci\l.la amb la mateixa freqüència.
 
 \subsubsection{Aproximació adiabàtica}
 
@@ -175,14 +181,14 @@ Les vibracions reticulars estan regides per les forces que experimenten els àto
 Podem per tant aproximar l'energia potencial de interacció pel terme harmònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament:
 
 \begin{equation}
- V=\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\frac{1}{2}\vec u_{\vec l'\alpha'}\cdot\underbrace{\vec\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})}_\text{matriu de constants de forces}\cdot\vec u_{\vec l\alpha}
+ V=\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\frac{1}{2}\vec u_{\vec l'\alpha'}\cdot\underbrace{\vec\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})}_\text{matriu de constants de forces}\cdot\vec u_{\vec l,\alpha}
 \end{equation}
 
 Les equacions de moviment en l'aproximació harmònica s'escriuen en la coneguda forma:
 
 \begin{equation}
 \label{eq:movharmonic}
- M_\alpha'\vec{\ddot{u}}_{\vec l,\alpha'}(t)=-\sum_{\vec l',\alpha}\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_\vec l'\right)\cdot\vec u_{\vec n',\alpha'}(t)
+ M_{\alpha'}\vec{\ddot{u}}_{\vec l,\alpha'}(t)=-\sum_{\vec l',\alpha}\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)\cdot\vec u_{\vec n,\alpha}(t)
 \end{equation}
  Aquesta equació representa un sistema  d'oscil·ladors harmònics acoblats, on $\alpha$ i $\alpha'$ fan referència al àtoms de la base considerats, l'índex vectorial $\vec l$ (que sol aparèixer en la literatura com $n$) índica el nuc considerat i $\vec R_\vec l$ és el vector de translació cristal·lina.
  
@@ -199,7 +205,7 @@ Per tant, les freqüències $\omega$ com funció del vector d'ones $\vec q$ del 
 
 \begin{equation}
 \label{eq:secular}
-\det\left|\frac{1}{\sqrt{M'_\alpha M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
+\det\left|\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
 \end{equation}
 
 on $M_{\alpha}$ es la massa de l'àtom $\alpha$ y la matriu dinàmica ve definida per:
@@ -221,7 +227,7 @@ D^{\alpha',\alpha}_{i,j}=\frac{\partial}{\partial u^{\alpha*}_{i}}F^{j}_{\alpha}
 \begin{equation}
  \label{eq:matriu_dinàmica}
  \boxed{
- \vec D^{\alpha',\alpha}(q)=\frac{1'}{\sqrt{M_\alpha' M_{\alpha}}}\sum_\vec l\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l\right)e^{-i\vec q\cdot\vec R_\vec l}}
+ \vec D^{\alpha',\alpha}(\vec q)=\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\sum_\vec l\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)e^{-i\vec q\cdot\vec R_\vec l}}
 \end{equation}
 
 
@@ -237,7 +243,7 @@ Podem escriure el tensor de forces d'este àtom, que segons el mòdul de la dist
 
 \begin{equation}
 \vec\Phi_n^{\alpha',\alpha}=\begin{pmatrix}
-\phi_{n,to}^{\alpha',\alpha}&\xi_n^{\alpha',\alpha} &0\\
+\phi_{n,r}^{\alpha',\alpha}&\xi_n^{\alpha',\alpha} &0\\
 -\xi_n^{\alpha',\alpha} & \phi_{n,ti}^{\alpha',\alpha} & 0 \\
 0 & 0 & \phi_{n,to}^{\alpha',\alpha}
 \end{pmatrix}
@@ -246,7 +252,7 @@ Podem escriure el tensor de forces d'este àtom, que segons el mòdul de la dist
 
 L'estructura diagonal a blocs de la matriu reflexa el fet que estem supossant que  les vibracions interplanars y les de fora de pla, $to$, (en la direcció $z$) estan completament desacoblades.
 
-Anem a suposar (simplificant encara més com són les interaccions entre àtoms) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal en el planol sols genera una for\c{c}a radial o transversal també, es a dir, $\xi_n^{\alpha,\alpha'}=0$ tal y com es realitza en \cite{Balkanski_2000}. %Esta aproximació es coneix com la aproximació dels quatre veïns més pròxims \textit{4NNFC},% i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
+Anem a suposar (simplificant encara més com són les interaccions entre àtoms) que un despla\c{c}ament longitudinal (radial, que estarà contés en el planol del cristall) o transversal en el plànol, sols genera una força radial o transversal també, es a dir, $\xi_n^{\alpha,\alpha'}=0$ tal y com es realitza en \cite{Balkanski_2000}. %Esta aproximació es coneix com la aproximació dels quatre veïns més pròxims \textit{4NNFC},% i es necessita considerar fins els cuarts veïns per donar compte dels resultats experimentals.
 
 %\missingfigure{Ací va imatge mostrant el cristall i les forces}
 
@@ -264,7 +270,7 @@ Per tant, anem a considerar que el tensor de constants de forces  d'un àtom $\a
 
 \begin{equation}
 \vec\Phi_n^{\alpha'\alpha}=\begin{pmatrix}
-\phi_{n,to}^{\alpha',\alpha}&0 &0\\
+\phi_{n,r}^{\alpha',\alpha}&0 &0\\
 0& \phi_{n,ti}^{\alpha',\alpha} & 0 \\
 0 & 0 & \phi_{n,to}^{\alpha',\alpha}
 \end{pmatrix}
@@ -291,14 +297,14 @@ on $\vec U(\theta)$ ve donada per:
 
 Una vegada que sabem com tenim que construir el tensor de constants de forces, el càlcul de la matriu dinàmica és directe, ja que sols tenim que fer ús de l'equació \ref{eq:matriu_dinàmica}, és a dir multipliquem el tensor de constants de forces associat a la interacció entre els àtoms ($\alpha', \vec l'=\vec 0$) i ($\alpha,\vec l$) per la fase, $e^{i \vec q\cdot \vec R_\vec l}$, on recordem, $\vec R_\vec l=l_1 \vec a_1+ l_2 \vec a_2$
 
-En el cas considerat, com la base esta constituida per dos àtoms, la dimensió del tensor de constants de forces (i de la matriu dinàmica) és $3\cdot 2\times 3\cdot 2= 6\times 6$. Observem que esta matriu esta escrita en termes de $4$ matris $3\times 3$:
+En el cas considerat, com la base esta constituïda per dos àtoms, la dimensió del tensor de constants de forces (i de la matriu dinàmica) és $3\cdot 2\times 3\cdot 2= 6\times 6$. Observem que esta matriu està escrita en termes de $4$ matrius $3\times 3$:
 
 \begin{equation}
  \label{eq:formamatriudinamica}
- D=
+ \mathbf D=
  \begin{pmatrix}
-  D^{BB} && D^{BN}\\
-  D^{NB} && D^{NN}
+  \mathbf D^{BB} && \mathbf D^{BN}\\
+  \mathbf D^{NB} && \mathbf D^{NN}
  \end{pmatrix}
 \end{equation}
 
@@ -310,12 +316,12 @@ Un punt important és que tenim que considerar (en les submatrius $D^{BB}$ i $D^
 
 \begin{equation}\begin{split}
 \vec D_0^{BB}&=-\sum_{i=1}^3\vec \Phi_{1,i}^{BN}-\sum_{i=1}^6\vec \Phi_{2,i}^{BB}-\sum_{i=1}^3\vec \Phi_{3,i}^{BN} \\
-\vec D_0^{NN}&=-\sum_{i=1}^3\vec \Phi_{1,i}^{NB}-\sum_{i=1}^3\vec \Phi_{2,i}^{NN}-\sum_{i=1}^3\vec \Phi_{3,i}^{NB}
+\vec D_0^{NN}&=-\sum_{i=1}^3\vec \Phi_{1,i}^{NB}-\sum_{i=1}^6\vec \Phi_{2,i}^{NN}-\sum_{i=1}^3\vec \Phi_{3,i}^{NB}
 \end{split}
 \end{equation}
 
 
-Es podrien tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica (certes relacions entre les components) però sol he emprat el fet que donat que l'energía es una funció quadràtica dels desplaçaments atòmics $u_{\alpha',\vec l'}, u_{\alpha,\vec l}$, la matriu de constants de forces té que ser simètrica,  i la seua transformada de Fourier, la matriu dinàmica té que ser una matriu hermítica, i per tant els seus valors propis, $\omega^2$ seran nombres reals.
+Es podrien tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components, com es fa en \cite{falkovsky08_symmet_const_phonon_disper_graph}) però sol he emprat el fet que donat que l'energía es una funció quadràtica dels desplaçaments atòmics $\vec u_{\alpha',\vec l'}, \vec u_{\alpha,\vec l}$, la matriu de constants de forces té que ser simètrica,  i la seua transformada de Fourier, la matriu dinàmica té que ser una matriu hermítica, i per tant els seus valors propis, $\omega^2$ seran nombres reals.
 
 
 Tenim per tant que la matriu dinàmica serà una matriu $6x6$ hermítica. Però, donat que les components en $z$ d'esta matriu es troben desacoblades, podem tractar aquestes vibracions de manera independent, de manera que en compte de treballar directament sobre una matriu $6x6$ de la forma
@@ -360,23 +366,22 @@ treballarem sobre dues matrius
 
 
  
-%En este treball, per constuir la matriu de constants de forces $\vec\Phi_{\alpha,\alpha'}$, el que faig es classificar els àtoms per la seua distància i sumar els tensors segons està distància 
+\newpage
 
 
+\section{Eines emprades}
 
-\subsection{Eines emprades}
-
-Els càlculs s'han realitzat en el llenguatge de programació \href{https://www.python.org/}{python} \cite{4160250}, emprant el software matemàtic \href{https://www.sagemath.org/}{Sagemath} \cite{sagemath}. Sagemath està construït sobre python i facilita un accés unificat a biblioteques orientades a càlcul numeric com \href{https://numpy.org/}{numpy} \cite{harris2020array} , \href{https://scipy.org/}{scipy} \cite{2020SciPy-NMeth}, biblioteques orientades a càlcul simbòlic com \href{https://www.sympy.org/}{sympy} i el sistema d'àlgebra computacional \href{https://maxima.sourceforge.io/}{Maxima}, molts entre altres. Si es necessita emprar python y qualsevol de les seues biblioteques es poden emprar directament també, en este treball, per exemple he emprat també la biblioteca \href{https://pandas.pydata.org/}{pandas}\cite{reback2020pandas} 
+Els càlculs s'han realitzat en el llenguatge de programació \href{https://www.python.org/}{python} \cite{4160250}, emprant el software matemàtic \href{https://www.sagemath.org/}{Sagemath} \cite{sagemath}. Sagemath està construït sobre python i facilita un accés unificat a biblioteques orientades a càlcul numeric com \href{https://numpy.org/}{numpy} \cite{harris2020array} , \href{https://scipy.org/}{scipy} \cite{2020SciPy-NMeth}, biblioteques orientades a càlcul simbòlic com \href{https://www.sympy.org/}{sympy} i el sistema d'àlgebra computacional \href{https://maxima.sourceforge.io/}{Maxima}, entre molts altres. Si es necessita emprar python o qualsevol de les seues biblioteques es poden emprar directament també; en este treball, per exemple, he emprat també la biblioteca \href{https://pandas.pydata.org/}{pandas}\cite{reback2020pandas} 
 
 Com a entorn de desenvolupament s'ha emprat \href{https://jupyter.org/}{jupyterlab} i \href{https://git-scm.com/}{git} com sistema de control de versions distribuït. 
 
 El projecte, incloent els \textit{\foreignlanguage{english}{jupyter notebooks}} amb els càlculs, es troba accessible al repositori públic de github \href{https://github.com/CasimirVictoria/TFG-Semiconductores\_2D}{TFG-Semiconductores\_2D}. Així mateix, una versió en línia, orientada a mostrar els càlculs realitzats, es troba publicada en \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{github pages}; la creació i publicació d'esta versió online s'ha realitzat automàticament a partir dels \textit{Jupyter notebooks} emprant \href{https://jupyterbook.org/intro.html}{jupyterbook}.
 
-Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no treballar sobre fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com git. Per aquesta raó s’ha emprat també el plugin \href{https://jupytext.readthedocs.io/en/latest/}{jupytext} per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla (amb el codi en python, markdown, etc.). En este projecte he decidit emprar el format \href{https://jupyterbook.org/content/myst.html}{myst markdown}, de manera que des de jupyterlab obric un fitxer markdown i la extensió jupytext sincronitza un fitxer en format \textit{.ipynb} amb este fitxer, que és amb el realment que treballa jupyterlab. Este \emph{notebook} l'exporte després a un fitxer python que carregue posteriorment al fitxer .tex on he escrit la memòria, emprant el paquet \href{https://ctan.org/pkg/sagetex}{sagetex}, de manera que puc incloure tots els càlculs realitzats (incloent expressions analítiques, no sols numèriques i gràfics) de manera automàtica en la memòria sense tindre que escriure-les manualment, aprofitant l'excel·lent suport que té sagemath de \LaTeX . 
+Jupyter/Jupyterlab ha demostrat ser un entorn fantàstic (i molt popular) per a programar en python (i altres llenguatges), però al no treballar sobre fitxers de text pla (en este cas fitxers amb codi python), dificulta emprar eines de control de versions de codi com git. Per aquesta raó s’ha emprat també el plugin \href{https://jupytext.readthedocs.io/en/latest/}{jupytext} per a Jupyter, que permet tindre sincronitzat el notebook amb un fitxer en text pla (amb el codi en python, markdown, etc.). En este projecte he decidit emprar el format \href{https://jupyterbook.org/content/myst.html}{myst markdown}, de manera que des de jupyterlab obric un fitxer markdown i la extensió jupytext sincronitza un fitxer en format \textit{.ipynb} amb este fitxer, que és amb el qual realment treballa jupyterlab. Este \emph{notebook} l'exporte després a un fitxer python que carregue posteriorment al fitxer .tex on he escrit la memòria, emprant el paquet \href{https://ctan.org/pkg/sagetex}{sagetex}, de manera que puc incloure tots els càlculs realitzats (incloent expressions analítiques, no sols numèriques i gràfics) de manera automàtica en la memòria sense tindre que escriure-les manualment, aprofitant l'excel·lent suport que té sagemath de \LaTeX . 
 
 Al repositori de github, dins de la carpeta \textit{Memoria} es troba un petit \textit{script} en \textit{bash} que automatitza la generació d'esta memòria si realitze algun canvi sobre el notebook amb els càlculs.
 
-Notem que tot els software emprat per a la realització del treball es de codi obert i gratuït.
+Notem que tot els software emprat per a la realització del treball és de codi obert i gratuït.
 
 
 \newpage
@@ -384,7 +389,7 @@ Notem que tot els software emprat per a la realització del treball es de codi o
 
 Passem ara a descriure el sistema que s'ha estudiat i els resultats dels càlculs realitzats.
 
-Donat que el càlcul dels modes de vibració comen\c{c}a per establir la geomeria del cristall en equilibri, comprobem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatòmica, la ce\l.la unitat del qual ve donada per (dades proporcionades):
+Donat que el càlcul dels modes de vibració comença per establir la geometria del cristall en equilibri, comprovem amb les dades proporcionades que el $BN$ monocapa es tracta d'un cristall bidimensional hexagonal de base diatòmica, la cel·la unitat del qual ve donada per (dades proporcionades):
 
 \begin{sagesilent}
 load("formulacio_matriu_dinamica.sage")
@@ -424,8 +429,6 @@ Les posicions atòmiques d'equilibri en la ce\l.la unitat són:
 \end{subfigure}
 \end{figure}
 
-%Per construir la matriu dinàmica necessitem com a pas previ classificar el átoms del cristall segons la seua distància als àtoms de la ce\l.la unitat, ja que els clasificarem com primers, segons, tercers ... veïns segons aquesta distància i els asignarem un tensor de constants de forces que dependrá de a quina familia de veïns pertanyen. 
-
 
 \paragraph{Xarxa $2\pi$-recíproca}
 Passe ara a mostrar la xarxa $2\pi$-recíproca associada a la xarxa de nucs del cristall de $BN$, y calcular els punts de màxima simetria de la primera zona de Brillouin:
@@ -455,7 +458,7 @@ Els punts crítics de la zona de Brillouin són:
 
 
 Passem ja a estudiar les vibracions en el $BN$.
-\subsection{Vibracions transversales fora de pla}
+\subsection{Vibracions transversals fora de pla}
 Donat que en el nostre model, per com hem construït la matriu dinàmica, les vibracions fora de pla són independents de les interplanars passem a estudiar les primeres, ja que són més senzilles (treballarem amb una matriu 2x2). Considere sols fins a tercers veïns.
 
 En este cas es poden realitzar els càlculs analíticament.
@@ -501,6 +504,7 @@ són:
 \end{equation}
 
 on el valor més baix correspon a la rama \emph{ZA} i la freqüencia més alta a la rama òptica $ZO$.
+Podem comprobar que si considerem que els àtoms foren del mateix tipus obtenim exactament les mateixes expresions que en \cite{falkovsky08_symmet_const_phonon_disper_graph}
 
 \subsubsection{En K}
 
@@ -515,20 +519,30 @@ Els valors propios de la matriu $ \vec D_z(K) $ són (no es mostra l'expressió 
  \end{split}}
 \end{equation}
 
-Observerm també que les equacions per als modes al punt $K$ són formalment idèntiques a les que trobem en \cite{falkovsky08_symmet_const_phonon_disper_graph} per al grafé, sols que en aquest cas, com estem tractant amb una base amb dos àtoms des distint tipus no tenim degeneració en este punt (el segon terme d'ambdues equacions es diferent en este cas).
-Tenim que tindre en compte que en no sabem, a priori, a quina rama correspon cada valor propi, segons l'elecció que realitzem obtindrem els valors de les constants $\phi_{2,to}^{NN}$ i $\phi_{2,to}^{BB}$ intercambiades.
-\newpage
+Observerm també que les equacions per als modes al punt $K$ són formalment idèntiques a les que trobem en \cite{falkovsky08_symmet_const_phonon_disper_graph} per al grafè, sols que en aquest cas, com estem tractant amb una base amb dos àtoms des distint tipus no tenim degeneració en este punt (el segon terme d'ambdues equacions es diferent en este cas).
+Tenim que tindre en compte que en no sabem, a priori, a quina rama correspon cada valor propi, segons l'elecció que realitzem obtindrem els valors de les constants $\phi_{2,to}^{NN}$ i $\phi_{2,to}^{BB}$ intercanviades.
+
+\paragraph{Si considerem fins els quarts veïns}
+Si en compte de fins als tercers veïns tenim en compte fins els quarts, les expressions que obtinc són (no es mostren les expressions per al punt $M$ ja que són massa llargues, però es poden consultar en la versió en línia):
+
+\begin{equation}\footnotesize{
+ \begin{split}
+ \sage{Eq_Gamma_ZO4ts}\\
+ \sage{Eq_K_ZO4ts}\\
+ \sage{Eq_K_ZA4ts}
+ \end{split}}
+\end{equation}
 
 \subsubsection{Determinació de les constants de força}
 
-Passem a resoldre el sistema d'equacions que hem obtés per determinar les constants de força.
+Passem a resoldre el sistema d'equacions que hem obtés per determinar les constants de força (considerant fins als 3ers veins).
 Tenim més equacions que incògnites, i segons les ecuacions escollides obtenim valors diferents. El sistema d'equacions que obtenim el podem resoldre, en este cas, tant analítica com numèricament.
-En la \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{versió en línia del notebook amb els càlculs}) es mostren diferents solucions trobades (tan analítiques com numèriques), ací es mostra la solució que millor ajusta a les corbes de dispersió proporcionades.
+En la \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}{versió en línia del notebook amb els càlculs} es mostren diferents solucions trobades (tan analítiques com numèriques), ací es mostra la solució que millor ajusta a les corbes de dispersió proporcionades.
 
 Les constants de forces s'han obtés minimitzant:
 
 \begin{equation}
-\chi^2=\sum_{n=1}^3\sum_{i=1}^2\left(\omega_{i,n}^\text{model}-\omega_{i, n}^\text{DFPT}\right)
+\sqrt{\sum_{n=1}^3\sum_{i=1}^2\left((\omega_{i,n}^\text{model})^2-(\omega_{i, n}^\text{DFPT})^2\right)}
 \end{equation}
 
 
@@ -542,7 +556,9 @@ Les dues corbes de dispersió que obtenim amb aquesta solució es mostren a cont
 \includegraphics[width=10cm]{../Grafiques/DisZ3ers.pdf}
 \end{center}
 
-Si en compte de fins 3ers veïns considerem fins als 4ts, conseguim obtindre els autovalors de la matriu dinàmica analíticament, però el sistema d'equacions que obtenim no puc resoldre'l algebraicament (emprant \textit{sagemath}, que al seu torn permet emprar tant la biblioteca \textit{sympy} com \textit{maxima} per realitzar els càlculs).  Resolguent el problema numèricament obtenim un millor ajust a estes dues corbes (els càlculs es poden consultar en línia):
+\paragraph{Si considerem fins els quarts veins}
+
+Conseguim obtindre els autovalors de la matriu dinàmica analíticament, però el sistema d'equacions que obtenim no puc resoldre'l algebraicament (emprant \textit{sagemath}, que al seu torn permet emprar tant la biblioteca \textit{sympy} com \textit{maxima} per realitzar els càlculs).  Resolguent el problema numèricament obtenim un millor ajust a estes dues corbes (els càlculs es poden consultar en línia):
 
 \begin{equation}\small{
  \sage{Solucions4ts}}
@@ -565,14 +581,14 @@ Al punt $\Gamma$ obtinc 2 valors propis, de multiplicitat $2$ cadascun, els que 
 
 \begin{equation}
  \begin{split}
-\sage{Eq_Gamma_TO3ers}\\
+\sage{Eq_Gamma_LO3ers}\\
 \sage{Eq_Gamma_TO3ers}
  \end{split}
 \end{equation}
 
 \subsubsection{Als punts $M$ i $K$}
 
-Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica, però si abans simplifique el problema supossant que els àtoms de la base son iguals:
+Per als punts $M$ i $K$, sagemath (tant mitjançant \href{https://maxima.sourceforge.io/}{maxima} com \textit{sympy}) no obté una expressió analítica, però si abans simplifique el problema suposant que els àtoms de la base son iguals:
 
 \begin{itemize}
 
@@ -593,7 +609,7 @@ Sols mostre dues de les solucions trobades, al punt $K$, perquè les altres tene
  \end{split}}
 \end{equation}
 
-Podem observar que els valors propis trobats en $\Gamma$ i estos dos en $K$ són també idèntics als que apareixen en les equacions (10) de \cite{falkovsky08_symmet_const_phonon_disper_graph}, sols que en este cas al tindre dos àtoms distints en la base no hi ha degeneració per als valors propis mostrats en $K$ (i que correspondrien a $\omega_{1,2}^\text{in-pl}(K)$ de l'esmentada referència. Podem observar en la relació de dispersió de dita referència que el valor degenerat en $K$ correspon a les branques TO i LA, i ens serveix per assignar tals valors en este treball. Com en el cas de $K$ per a les vibracions fora de pla, no sabem a quina rama correspon a priori (prove i segons isca l'ajust escollisc). Les equacions per als valors propis $\omega_{3,4}^\text{in-pl}(K)$ de dit conjunt d'equacións de \cite{falkovsky08_symmet_const_phonon_disper_graph} podem vore que també es corresponen a les que hem calculat en este treball, ja que si bé les que obtenim ací són més complicades, si sumem ambdos valors propis al quadrat, com estos difereixen, igual que en \cite{falkovsky08_symmet_const_phonon_disper_graph} en que un dels termes de l'equació apareix sumant en un cas i restant en l'altre l'equació que obtenim:
+Podem observar que els valors propis trobats en $\Gamma$ i estos dos en $K$ són també idèntics als que apareixen en les equacions (10) de \cite{falkovsky08_symmet_const_phonon_disper_graph}, sols que en este cas al tindre dos àtoms distints en la base no hi ha degeneració per als valors propis mostrats en $K$ (i que correspondrien a $\omega_{1,2}^\text{in-pl}(K)$ de l'esmentada referència. Podem observar en la relació de dispersió de dita referència que el valor degenerat en $K$ correspon a les branques TO i LA, i ens serveix per assignar tals valors en este treball. Com en el cas de $K$ per a les vibracions fora de pla, no sabem a quina rama correspon a priori (prove i segons isca l'ajust escollisc). Les equacions per als valors propis $\omega_{3,4}^\text{in-pl}(K)$ de dit conjunt d'equacions de \cite{falkovsky08_symmet_const_phonon_disper_graph} podem vore que també es corresponen a les que hem calculat en este treball, ja que si bé les que obtenim ací són més complicades, si sumem ambdós valors propis al quadrat, com estos difereixen, igual que en \cite{falkovsky08_symmet_const_phonon_disper_graph} en que un dels termes de l'equació apareix sumant en un cas i restant en l'altre l'equació que obtenim:
 
 \begin{equation}\small{\begin{split}
 \label{sumaktaiklo3ers}
@@ -634,12 +650,12 @@ $\sage{Solucions4ts[4].lhs()}$ & $\sage{Solucions4ts[4].rhs()}$ & $\sage{Solucio
 \end{center}
 
 
-Podem observar que el model  proporciona un bon ajust per a les branques fora de pla, ZO i ZA, així com per a les acústiques en el pla, sobretot la TA. Per a la branca LA, sobretot en la part central, a altes freqüències, els resultats no són bons. 
+Podem observar que el model  proporciona un bon ajust per a les branques fora de pla, ZO i ZA, així com per a les acústiques en el pla, sobretot la TA. Per a la branca LA, sobretot en la part central, a altes freqüències, els resultats no són bons, però la corba té la forma pertinent (encara que les freqüències estan infravalorades).
 
 A altes freqüències, per a les branques TO i sobretot LO el model no ajusta bé, el TO podem considerar que el model el descriu qualitativament.
 
 
-Substituïm aquestes constants en la matriu $\vec D(\vec q)$ $6x6$ calcule els autovalors i autovectors per a 524 punts en que he discretitzat el recorregut per la primera zona de Brillouin. Tenim 6 autovalors i 6 autovectors en cadascun d'estos punts, de 6 components cada autovector (les 3 primeres son les components cartesianes del vector desplaçament per l'àtom de bor i les 3 últimes del de nitrogen). El resultat es guarda en un fitxer \attachfile[author=Casimir]{../Resultats/matdyn_casi_4ts.modes}} amb el qual podem, emprant \href{https://henriquemiranda.github.io/phononwebsite/index.html}{TSS Physics - Home}, visualitzar interactivament els modes de propagació al cristall de BN: polsant sobre qualsevol punt del diagrama de dispersió obtenim una simulació del moviment del àtoms del cristall:
+Substituïm aquestes constants en la matriu $\vec D(\vec q)$ $6x6$ calcule els autovalors i autovectors per a 524 punts en que he discretitzat el recorregut per la primera zona de Brillouin. Tenim 6 autovalors i 6 autovectors en cadascun d'estos punts, de 6 components cada autovector (les 3 primeres son les components cartesianes del vector desplaçament per l'àtom de bor i les 3 últimes del de nitrogen). El resultat es guarda en un fitxer \attachfile[author=Casimir]{../Resultats/matdyn_casi_4ts.modes} amb el qual podem, emprant \href{https://henriquemiranda.github.io/phononwebsite/index.html}{TSS Physics - Home}, visualitzar interactivament els modes de propagació al cristall de BN: polsant sobre qualsevol punt del diagrama de dispersió obtenim una simulació del moviment del àtoms del cristall:
 
 \begin{center}
  \includegraphics[width=15cm]{../Resultats/Captura_animacio.png}
