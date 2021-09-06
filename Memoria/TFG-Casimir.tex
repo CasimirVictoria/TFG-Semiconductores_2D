@@ -231,54 +231,68 @@ Considerarem que estos àtoms vibren al voltant d'esta posició d'equilibri, $\v
 Podem per tant aproximar l'energia potencial de interacció pel terme harmònic del seu desenvolupament en sèrie de potencies del desplaçament, $\vec u_{\vec l,\alpha}=\vec R_{\vec l,\alpha}-\vec R^{(0)}_{\vec l,\alpha}$:
 
 \begin{equation}
- V=\frac{1}{2}\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\vec u_{\vec l'\alpha'}\cdot\vec u_{\vec l,\alpha}
+ V=\frac{1}{2}\sum_{\vec l',\alpha',i}\sum_{\vec l,\alpha,j}u_{\vec l'\alpha'}^i\frac{\partial^2E}{\partial R_{\vec l',\alpha'}^i \partial R_{\vec l,\alpha}^j} u_{\vec l,\alpha}^j
 \end{equation}
 
-Notem que el terme d'ordre $0$ del desenvolupament en sèrie de Taylor correspon a un nombre arbitrari (què escollim com $0$ per conveniència) i el terme de primer ordre tambè l'escollim nul, ja que el desenvolupament el realitzem escollint el sistema en l'equilibri a temperatura nul·la, i en este estat l'energia total es mínima. El termes de major ordre els negligim.
+Notem que el terme d'ordre $0$ del desenvolupament en sèrie de Taylor correspon a una constant arbitraria (què escollim com $0$ per conveniència) i el terme de primer ordre també l'escollim nul, ja que el desenvolupament el realitzem escollint el sistema en l'equilibri a temperatura zero, i en este estat l'energia total es mínima. El termes de major ordre que $2$ els negligim.
+
+Es defineix l'anomenada matriu de constants de forces com:
 
 \begin{equation}
- V=\frac{1}{2}\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\vec u_{\vec l'\alpha'}\cdot\underbrace{\vec\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})}_\text{matriu de constants de forces}\cdot\vec u_{\vec l,\alpha}
+ \label{eq:matphi}
+ \phi_{\vec l',\alpha',i;\vec l,\alpha,j}=\frac{\partial^2E}{\partial R_{\vec l',\alpha'}^i \partial R_{\vec l,\alpha}^j}
+\end{equation}
+
+que podem expressar també com:
+
+\begin{equation}
+ \label{eq:matphi2}
+ \mathbf\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})=\frac{\partial^2E}{\partial \vec R_{\vec l',\alpha'} \partial \vec R_{\vec l,\alpha}}
+\end{equation}
+
+on hem escrit què el tensor de constants de forces depèn explícitament de la distancia  $\vec R_{\vec l}-\vec R_{\vec l'}$ i no dels valors específics de $\vec l$ i $\vec l'$ ja que si desplaçem ambdós un mateix vector de translació cristal·lina $\vec R''$ en l'equació (\ref{eq:matphi}) el resultat de la diferenciació de l'energia respecte de les posicions iòniques té que ser la mateixa degut a la invariança translacional del hamiltonià.
+
+Per tant, l'aproximació harmònica implica que l'energía potencial la podem escriure com:
+\begin{equation}\boxed{
+ V=\frac{1}{2}\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\vec u_{\vec l'\alpha'}\cdot\vec\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})\cdot\vec u_{\vec l,\alpha}}
 \end{equation}
 
 Les equacions de moviment en l'aproximació harmònica s'escriuen en la coneguda forma:
 
+
 \begin{equation}
 \label{eq:movharmonic}
- M_{\alpha'}\vec{\ddot{u}}_{\vec l,\alpha'}(t)=-\sum_{\vec l',\alpha}\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)\cdot\vec u_{\vec n,\alpha}(t)
+ M_{\alpha'}\vec{\ddot{u}}_{\vec l,\alpha'}(t)=-\sum_{\vec l,\alpha}\vec\Phi^{\alpha',\alpha}\left(\vec R_{\vec l}-\vec R_{\vec l'}\right)\cdot\vec u_{\vec l,\alpha}(t)
 \end{equation}
- Aquesta equació representa un sistema  d'oscil·ladors harmònics acoblats, on $\alpha$ i $\alpha'$ fan referència al àtoms de la base considerats, l'índex vectorial $\vec l$ (que sol aparèixer en la literatura com $n$) índica el nuc considerat i $\vec R_\vec l$ és el vector de translació cristal·lina.
+ Aquesta equació representa un sistema  d'oscil·ladors harmònics acoblats, on $\alpha$ i $\alpha'$ fan referència al àtoms de la base considerats, l'índex vectorial $\vec l$ (que sol aparèixer en la literatura com $n$) índica el nuc considerat i $\vec R_\vec l$ és el vector de translació cristal·lina. La suma sobre $(\vec l, \alpha)$ en la pràctica es realitza sols fins a certs veïns (i no sobre tots els $N$ nucs de la xarxa), caracteritzats per les seues distàncies relatives a l'àtom $(\vec l',\alpha')$.
  
 \subsubsection{Matriu dinàmica}
-Realitzant la transformada de Fourier de l'equació \ref{eq:movharmonic}, passem al conegut problema d'autovalors:
+
+L'equació \ref{eq:movharmonic}, per simetria la reescrivim com:
+\begin{equation}
+\label{eq:sim}
+ \sqrt{M_\alpha'}\vec{\ddot{u}}_{\vec l',\alpha'}(t)=-\frac{1}{\sqrt{M_\alpha'}}\frac{1}{\sqrt{M_\alpha}}\sum_{\vec l,\alpha}\vec\Phi^{\alpha',\alpha}\left(\vec R_{\vec l}-\vec R_{\vec l'}\right)\cdot\sqrt{M_\alpha} \vec u_{\vec l,\alpha}(t)
+\end{equation}
+
+busquem solucions amb una dependència temporal harmònica dels desplaçaments; de fet, degut a la periodicitat de la xarxa esta equació és satisfeta per ones planes harmòniques de la forma:
 
 \begin{equation}
-\sum_{\alpha}\vec D^{\alpha'\alpha}(\vec q)\cdot\vec e_{\alpha}(\vec q)={\omega'}^{2}\vec e_{\alpha'}(\vec q)
+\label{eq:ue}
+ \sqrt{M_\alpha} \vec u_{\vec l,\alpha}=\vec e_\alpha(\vec q)e^{i\left(\vec q\cdot\vec r_\alpha-\omega t\right)}
+\end{equation}
+
+on $\omega$ és la freqüència angular de l'ona i $\vec q$ el vector d'ona en la direcció de propagació.
+
+Substituïnt les solucions (\ref{eq:ue}) en (\ref{eq:sim}) passem al conegut problema d'autovalors:
+
+\begin{equation}
+{\omega'}^{2}\vec e_{\alpha'}(\vec q)=\sum_{\alpha}\vec D^{\alpha'\alpha}(\vec q)\cdot\vec e_{\alpha}(\vec q)
 \end{equation}   
 
-La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica.
+observem que hem reduït el problema de $3N$ equacions acoblades (\ref{eq:movharmonic})
+a un problema d'autovalors $(\nu\alpha\times\nu\alpha)$ on $\nu$ fa referencia a les dimensions en que poden realitzar-se els desplaçaments (en el nostre cas, encara que anem a tractar un cristall bidimensional, els àtoms poden moure's en les $3$ direccions espacials), i $\alpha$ al nombre d'àtoms de la base:
 
-Per tant, les freqüències $\omega$ com funció del vector d'ones $\vec q$ del fonó són solució de l'equació secular:
-
-\begin{equation}
-\label{eq:secular}
-\det\left|\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
-\end{equation}
-
-on $M_{\alpha}$ es la massa de l'àtom $\alpha$ i la matriu dinàmica ve definida per:
-
-\begin{equation}
-D^{\alpha',\alpha}_{i,j}=\frac{\partial^2 E}{\partial u^{\alpha'*}_i(\vec q)\partial u^{\alpha}_{j}(\vec q)}
-\label{eq:Matriz_Dinámica}
-\end{equation}
-
-on $u^{\alpha}_{i}$ representa el despla\c{c}ament de l'àtom $\alpha$ en la direcció $i$.
-
-La segona derivada de l'energia de l'equació \ref{eq:Matriz_Dinámica} correspon al canvi en la for\c{c}a que actua sobre l'àtom $\alpha$ en la direcció $j$ quan es despla\c{c}a l'àtom $\alpha'$ en la direcció $i$
-
-\begin{equation}
-D^{\alpha',\alpha}_{i,j}=\frac{\partial}{\partial u^{\alpha*}_{i}}F^{j}_{\alpha}(\vec q)
-\end{equation}
-
+La matriu $\mathbf D^{\alpha',\alpha}(\vec q)$
 
 \begin{equation}
  \label{eq:matriu_dinàmica}
@@ -286,13 +300,22 @@ D^{\alpha',\alpha}_{i,j}=\frac{\partial}{\partial u^{\alpha*}_{i}}F^{j}_{\alpha}
  \vec D^{\alpha',\alpha}(\vec q)=\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\sum_\vec l\vec\Phi^{\alpha',\alpha}\left(\vec R_\vec l-\vec R_{\vec l'}\right)e^{-i\vec q\cdot\vec R_\vec l}}
 \end{equation}
 
+coneguda com matriu dinàmica és la magnitud central de la dinàmica cristal·lina. Notem que \textit{la matriu dinàmica és la transformada de Fourier de la matriu de constants de forces}.
 
-%Obtesses les posicions dels àtoms y classificats estos com primers, segons, etc. veïns, segons la distància al respectiu àtom de la ce\l.la $\vec 0$, procedim a calcular la contribució a la matriu dinàmica de cadascun dels àtoms, per la qual cosa necessitem conèixer el tensor de constants de for\c{c}a que correspon a la interacció de cada àtom amb el seu n-èssim veí.
+Les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica, per tant, $\omega$ com funció del vector d'ones $\vec q$ del fonó són solució de l'equació secular:
 
+\begin{equation}
+\label{eq:secular}
+\det\left|\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
+\end{equation}
+
+
+\paragraph{Resolució del problema}
+Una vegada definit el problema que volem resoldre (un problema d'autovalors), passem a vore el mètode que hem emprat en el present treball:
 
 Per calcular la matriu dinàmica emprant el model de constants de forces necessitem, per tant, construir el tensor de constants de forces. Anem a suposar que les forces entre àtoms sols depenen del tipus d'elements químics que interaccionen i de la seua distància relativa.
 
-Considerem un àtom $\alpha$ situat en la cel·la $\vec l$ , ($\alpha, \vec l$),a una certa distància, $|\vec R_{\alpha,\vec l}-\vec R_{\alpha',\vec{l'}}|$ de l'àtom  ($\alpha'$,$\vec l'$), i escollint el sistema de coordenades cartesianes de manera que la direcció del vector que uneix ambdós àtoms coincideix amb l'eix de les $x$, l'eix $y$ com la coordenada transversal en el plànol, $ti$, i $z$ la coordenada perpendicular al plànol $to$.
+Considerem un àtom $\alpha$ situat en la cel·la $\vec l$, ($\alpha, \vec l$),a una certa distància, $|\vec R_{\vec l,\alpha}-\vec R_{\vec{l'},\alpha'}|$ de l'àtom  ($\alpha'$,$\vec l'$), i escollint el sistema de coordenades cartesianes de manera que la direcció del vector que uneix ambdós àtoms coincideix amb l'eix de les $x$, l'eix $y$ com la coordenada transversal en el plànol, $ti$, i $z$ la coordenada perpendicular al plànol $to$.
 
 Podem escriure el tensor de forces d'este àtom, que segons el mòdul de la distància a l'àtom $(\alpha',\vec l$) classificarem com $n$-èssim veí, de la forma \cite{wirtz04_phonon_disper_graph_revis}:
 
@@ -502,15 +525,25 @@ Els punts crítics de la zona de Brillouin són:
 
 \begin{equation}
  \label{puntsbrillouin}
- \Gamma=(0,0)\quad M=\left(q_x=\pi/a,q_y=\frac{\pi}{\sqrt{3 a}}\right)\quad K=\left(q_x=\frac{4\pi}{3 a}, q_y=0\right)
+ \Gamma=(0,0)\quad M=\left(q_x=\pi/a,q_y=\frac{\pi}{\sqrt{3} a}\right)\quad K=\left(q_x=\frac{4\pi}{3 a}, q_y=0\right)
 \end{equation}
 
 \newpage
+
 \begin{figure}[h]
 \centering
-\sageplot[width=6cm]{xarxaR, figsize=4}
+\begin{subfigure}[b]{0.4\textwidth}
+\centering
+\sageplot[width=7cm]{xarxaR, figsize=4}
 \caption{Xarxa $2\pi$-recíproca}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6cm]{../Grafiques/zona_brillouin.png}
+\caption{Primera zona de Brillouin d'una xarxa hexagonal}
+\end{subfigure}
 \end{figure}
+
 
 
 Passem ja a estudiar les vibracions en el $BN$.
@@ -598,7 +631,7 @@ En la \href{https://casimirvictoria.github.io/TFG-Semiconductores_2D/index.html}
 Les constants de forces s'han obtès minimitzant:
 
 \begin{equation}
-\sqrt{\sum_{n=1}^3\sum_{i=1}^2\left((\omega_{i,n}^\text{model})^2-(\omega_{i, n}^\text{DFPT})^2\right)}
+\sqrt{\sum_{n=1}^3\sum_{i=1}^2\left((\omega_{i,n}^\text{model})^2-(\omega_{i, n}^\text{DFPT})^2\right)^2}
 \end{equation}
 
 
