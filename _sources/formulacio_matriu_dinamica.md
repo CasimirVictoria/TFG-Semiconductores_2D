@@ -1542,7 +1542,13 @@ with open(filename, "x") as f:
 Solucionspla4ts
 ```
 
+Podem visualitzar els modes de vibració que obtenim gràcies a la web de henrique miranda en http://henriquemiranda.github.io/phononwebsite/index.html:<br>
+[Visualització dels modes de vibració que obtenim per al BN](http://henriquemiranda.github.io/phononwebsite/phonon.html?json=https://casimirvictoria.github.io/TFG-Semiconductores_2D/BN_a_4ts.json), on polsant en cada punt de la relació de dispersió poden vore com vibren els àtoms (notem que es pot activar la visualització dels vectors)
+
++++
+
+Per finalitzar, fer notar que encara que he particularitzar per al cas del BN, les solucons analítiques que obtenim per als valors propis són independents de B i N, és a dir, si quan substitueix els valors numèrics de les mases possem les masses d'altres elements (i els valors de les freqüències als punts critics són substituits pels valors pertinents, clar), podem obtindre la relació de dispersió de qualsevol material bidimensional de base diatòmica que proporciona el model de constants de forces (hi hauria que jugar un poc amb els valors inicials que emprem per minimitzar la funció que emprem per trobar els valors numèrics de les constants de força, això sí).
+
 ```{code-cell} ipython3
-%%html
-<iframe src="https://henriquemiranda.github.io/phononwebsite/phonon.html" width="100%" height="640" allowfullscreen="true"></iframe>
+
 ```
