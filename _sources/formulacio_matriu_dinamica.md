@@ -1547,7 +1547,7 @@ Podem visualitzar els modes de vibració que obtenim gràcies a la web de henriq
 
 +++
 
-Per finalitzar, fer notar que encara que he particularitzar per al cas del BN, les solucons analítiques que obtenim per als valors propis són independents de B i N, és a dir, si quan substitueix els valors numèrics de les mases possem les masses d'altres elements (i els valors de les freqüències als punts critics són substituits pels valors pertinents, clar), podem obtindre la relació de dispersió de qualsevol material bidimensional de base diatòmica que proporciona el model de constants de forces (hi hauria que jugar un poc amb els valors inicials que emprem per minimitzar la funció que emprem per trobar els valors numèrics de les constants de força, això sí).
+Per finalitzar, fer notar que encara que he particularitzar per al cas del BN, les solucons analítiques que obtenim per als valors propis són independents de B i N, és a dir, si quan substitueix els valors numèrics de les mases possem les masses d'altres elements (i els valors de les freqüències als punts critics són substituits pels valors pertinents, clar), podem obtindre la relació de dispersió de qualsevol material bidimensional (en principi hexagonal, però falta probar que si funciona també per altres tipus de xarxes) de base diatòmica que proporciona el model de constants de forces (hi hauria que jugar un poc amb els valors inicials que emprem per minimitzar la funció que emprem per trobar els valors numèrics de les constants de força, això sí).
 
 ```{code-cell} ipython3
 
