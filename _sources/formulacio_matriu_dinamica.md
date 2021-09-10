@@ -11,7 +11,7 @@ kernelspec:
   name: sagemath
 ---
 
-+++ {"tags": [], "slideshow": {"slide_type": "slide"}}
++++ {"tags": [], "slideshow": {"slide_type": "skip"}}
 
 # Descripció del cristall de BN
 
@@ -110,6 +110,7 @@ xarxa=nucs+\
      line([(2*a_1/a+a_2/a),(a_1/a)],linestyle="--")
 
 show(xarxa, figsize=4)
+save(xarxa,figsize=9,filename="../Grafiques/Xarxa.svg")
 ```
 
 Les posicions atòmiques d'equilibri en la cel·la unitat són (també proporcionades com a dades):
@@ -131,6 +132,12 @@ cela=arrow((0,0),(a_1/a),color="blue")+\
       point(r_N/a, size=100,color="red")
 
 show(cela, frame=False, figsize=4)
+save(cela,figsize=9,filename="../Grafiques/Cela.svg")
+```
+
+```{code-cell} ipython3
+show(r_B)
+show(r_N)
 ```
 
 +++ {"tags": []}
@@ -154,7 +161,8 @@ def RN(l_1,l_2):
 AtomsB=points([RB(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='blue')
 AtomsN=points([RN(l_1,l_2)/a for l_1 in range(-3, 4) for l_2 in range(-3,4)],size=20,color='red')
 
-show(AtomsB+AtomsN, figsize=4)
+show(AtomsB+AtomsN, figsize=6)
+save(AtomsB+AtomsN,figsize=14,filename="../Grafiques/Cristall.svg")
 ```
 
 ```{code-cell} ipython3
@@ -220,14 +228,16 @@ Podem vore que la xarxa $2\pi$-recíproca es també una xarxa hexagonal
 :tags: [hide-input]
 
 var('b', domain='positive')
-b_1=b*vector([1,1/sqrt(3)])
-b_2=b*vector([0,2/sqrt(3)])
+b_1=2*pi*b*vector([1,1/sqrt(3)])
+b_2=2*pi*b*vector([0,2/sqrt(3)])
 nucsR=points([l_1*b_1/b+l_2*b_2/b for l_1 in range(-3, 4) for l_2 in range(-3,4)], 
              size=40, color="blue", frame=False)
 
-xarxaR=nucsR
-
-show(xarxaR, figsize=4)
+xarxaR=nucsR+\
+     line([(0,0),(b_1/b)],color="red")+\
+     line([(0,0),(b_2/b)],color="red") 
+show(xarxaR ,figsize=4)
+save(xarxaR,figsize=14,filename="../Grafiques/XarxaR.svg")
 ```
 
 ```{code-cell} ipython3
@@ -469,8 +479,6 @@ D4NB_zz=D4NB[2,2]
 D_zz3ers=Matrix([[D2BB3ers_zz,D1BN_zz+D3BN_zz],        [D1NB_zz+D3NB_zz,D2NN3ers_zz]])
 
 D_zz4ts=Matrix([[D2BB4ts_zz,D1BN_zz+D3BN_zz+D4BN_zz], [D1NB_zz+D3NB_zz+D4BN_zz,D2NN4ts_zz]])
-
-show(D_zz3ers)
 ```
 
 ### Primer considerem fins 3ers veïns
@@ -1256,6 +1264,8 @@ show(dispersio3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\G
      axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True)
 save(dispersio3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio3ers.pdf")
+save(dispersio3ers,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència $cm^{-1}$'],axes_labels_size=1.2, frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio3ers.svg")
 ```
 
 ### Fins 4ts veïns
@@ -1450,6 +1460,8 @@ show(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Ga
 
 save(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
      axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.pdf")
+save(dispersio4ts,figsize=9,ticks=[[0,200,300,524],500], tick_formatter=[[r"$\Gamma$","$M$", "$K$",r"$\Gamma$"],500],\
+     axes_labels=['vector d\'ona reduït','freqüència, $cm^{-1}$'],axes_labels_size=1.,frame=True, filename="/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.svg")
 ```
 
 Podem observar que el model  proporciona un bon ajust per a les branques fora de pla, ZO i ZA, així com per a les acústiques en el pla, sobretot la TA. Per a la branca LA, sobretot en la part central, a altes freqüències, els resultats no són bons, però la corba té la forma pertinent (encara que les freqüències estan infravalorades).
@@ -1531,15 +1543,6 @@ Solucionspla4ts
 ```
 
 ```{code-cell} ipython3
-from IPython.display import IFrame
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
-IFrame("https://henriquemiranda.github.io/phononwebsite/phonon.html",width="1680", height="800")
-```
-
-```{code-cell} ipython3
-
+%%html
+<iframe src="https://henriquemiranda.github.io/phononwebsite/phonon.html" width="100%" height="640" allowfullscreen="true"></iframe>
 ```

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introducció teòrica &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
+    <title>Introducció teòrica &#8212; Fonons en semiconductors bidimensionals</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -77,7 +77,7 @@
       <img src="_static/logo_tfg.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
+      <h1 class="site-logo" id="site-title">Fonons en semiconductors bidimensionals</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -284,8 +284,8 @@
 <h2>Xarxa cristal·lina<a class="headerlink" href="#xarxa-cristallina" title="Link permanent a aquest títol">¶</a></h2>
 <p>Sabem que els àtoms que constitueixen un sòlid cristal·lí estan distribuïts d’una manera regular en l’espai, y per descriure esta distribució regular s’empra el concepte matemàtic de <em>xarxa cristal·lina</em>, introduït per <em>A. Bravais</em> en 1845: una xarxa cristal·lina es defineix com una distribució discreta i regular de punts (<em>nucs</em>) que té sempre la mateixa aparença independentment de quin punt escollim com origen de coordenades.</p>
 <p>En el cas que anem a tractar, un cristall bidimensional, la xarxa cristal·lina bidimensional pot generar-se a partir de dos vectors base, de manera que els vectors de posició dels <em>nucs de la xarxa</em>, els vectors de translació cristal·lina,  tenen la forma:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c7900223-e8f3-4d82-a777-1f682877ee7a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c7900223-e8f3-4d82-a777-1f682877ee7a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-533d7eab-bf95-4960-9d9e-fcf88e4e5fc5">
+<span class="eqno">(1)<a class="headerlink" href="#equation-533d7eab-bf95-4960-9d9e-fcf88e4e5fc5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \vec R_\vec l=\vec R_{l_1 l_2}=l_1 \vec a_1 +l_2\vec a_2
 \end{equation}\]</div>
 <p>on <span class="math notranslate nohighlight">\(\vec l\)</span> es denomina índex del nuc (notem que en la literatura sobre el tema sol emprar-se com a índex la lletra <span class="math notranslate nohighlight">\(n\)</span>, però crec que un índex vectorial especifica millor els nucs). Si tots els nucs de la xarxa tenen índexs enters llavors els vectors base s’anomenen <em>primitius</em>.</p>
@@ -294,15 +294,15 @@
 <div class="section" id="xarxa-reciproca-primera-zona-de-brillouin">
 <h3>Xarxa recíproca. Primera zona de Brillouin<a class="headerlink" href="#xarxa-reciproca-primera-zona-de-brillouin" title="Link permanent a aquest títol">¶</a></h3>
 <p>Donat un conjunt de vectors base, <span class="math notranslate nohighlight">\(p_i\)</span>, de la xarxa cristal·lina en l’espai de posicions, la condició:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d26e73d7-2c30-432f-a50e-2e04c79c60a0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d26e73d7-2c30-432f-a50e-2e04c79c60a0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f4f6c21c-34a3-42a1-b78a-843f39885f70">
+<span class="eqno">(2)<a class="headerlink" href="#equation-f4f6c21c-34a3-42a1-b78a-843f39885f70" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \label{eq:rec1}
 \vec p_i\cdot\vec p_j^{*}=\delta_{ij}
 \end{equation}\]</div>
 <p>on <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> és la delta de Kronecker, defineix un altre conjunt de vectors <span class="math notranslate nohighlight">\(p_j^*\)</span>, coneguts com vectors recíprocs, i què són els vectors base que defineixen una altra xarxa coneguda com <em>xarxa recíproca</em>. Els  vectors base recíprocs, i els vectors de translació cristal·lina recíprocs, tenen dimensions de inversa de longitud i es representen en l”<em>espai recíproc</em> o de nombres d’ona. <strong>Les xarxes cristal·lines real y recíproca són dues descripcions equivalents</strong> del mateix sistema físic: el sòlid cristal·lí que s’està estudiant.</p>
 <p>Podem interpretar que</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e2789791-2577-44cc-ae58-e2bb0d700a99">
-<span class="eqno">(3)<a class="headerlink" href="#equation-e2789791-2577-44cc-ae58-e2bb0d700a99" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-038b61b7-6f96-44fc-9628-3e6c41539fc5">
+<span class="eqno">(3)<a class="headerlink" href="#equation-038b61b7-6f96-44fc-9628-3e6c41539fc5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \label{eq:rec3}
 \vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
 \end{equation}\]</div>
@@ -336,8 +336,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <h2>Aproximació harmònica<a class="headerlink" href="#aproximacio-harmonica" title="Link permanent a aquest títol">¶</a></h2>
 <p>Les vibracions cristal·lines estan regides per les forces que experimenten els àtoms quan es desplacen de la seua posició d’equilibri. La primera hipòtesi és que cada àtom té una posició d’equilibri en el cristall, que denotem per <span class="math notranslate nohighlight">\(\vec r^{(0)}_{\vec l,\vec\alpha}=\vec R_\vec l+\vec d_{\alpha}\quad \)</span>, y considerarem que estos àtoms vibren al voltant d’esta posició d’equilibri, <span class="math notranslate nohighlight">\(\vec r_{\vec l,\vec\alpha}=\vec r^{(0)}_{\vec l,\vec\alpha}+\vec u_{\vec l,\alpha}(t)\quad\)</span>, amb una amplitud menuda (en comparació amb la distància interatòmica) al voltant d’aquesta,   de manera que el sòlid es troba en estats que corresponen al que macroscòpicament es coneix com \textit{la regió de comportament elàstic lineal}, on es verifica la llei de Hooke.</p>
 <p>Podem, per tant, aproximar l’energia potencial de interacció pel terme harmònic del seu desenvolupament en sèrie de potencies del despla\c{c}ament:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9f5fbcfa-8323-4e97-86ed-25b577e4e8de">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9f5fbcfa-8323-4e97-86ed-25b577e4e8de" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1a86bcb0-5657-4e8e-b101-65c68e576267">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1a86bcb0-5657-4e8e-b101-65c68e576267" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  V=\sum_{\vec l',\alpha'}\sum_{\vec l,\alpha}\frac{1}{2}\vec u_{\vec l'\alpha'}\cdot\underbrace{\mathbf\Phi^{\alpha',\alpha}(\vec R_{\vec l}-\vec R_{\vec l'})}_\text{matriu de constants de forces}\cdot\vec u_{\vec l,\alpha}
 \end{equation}\]</div>
 <p>Les equacions de moviment en l’aproximació harmònica s’escriuen en la coneguda forma:</p>
@@ -347,14 +347,14 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <div class="section" id="matriu-dinamica">
 <h3>Matriu dinàmica<a class="headerlink" href="#matriu-dinamica" title="Link permanent a aquest títol">¶</a></h3>
 <p>Realitzant la transformada de Fourier de l’equació <a class="reference internal" href="#equation-movharmonic">(5)</a>, passem al conegut problema d’autovalors:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-edf8aee2-1051-4222-8099-f0e4bc90c85c">
-<span class="eqno">(6)<a class="headerlink" href="#equation-edf8aee2-1051-4222-8099-f0e4bc90c85c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5539c4c9-b5ab-437c-aca4-51a33d85b193">
+<span class="eqno">(6)<a class="headerlink" href="#equation-5539c4c9-b5ab-437c-aca4-51a33d85b193" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \sum_{\alpha}\mathbf D^{\alpha'\alpha}(\vec q)\cdot\vec e_{\alpha}(\vec q)={\omega'}^{2}\vec e_{\alpha'}(\vec q)
 \end{equation}\]</div>
 <p>La matriu dinàmica és la magnitud central de la dinàmica reticular: les freqüències dels fonons es calculen a partir dels valors propis de la matriu dinàmica.</p>
 <p>Per tant, les freqüències <span class="math notranslate nohighlight">\(\omega\)</span> com funció del vector d’ones <span class="math notranslate nohighlight">\(\vec q\)</span> del fonó són solució de l’equació secular:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7f076629-720e-45aa-9d81-f758d7a0f4f9">
-<span class="eqno">(7)<a class="headerlink" href="#equation-7f076629-720e-45aa-9d81-f758d7a0f4f9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da22ecad-83d5-4d94-bfbd-f0112c465a71">
+<span class="eqno">(7)<a class="headerlink" href="#equation-da22ecad-83d5-4d94-bfbd-f0112c465a71" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \label{eq:secular}
 \det\left|\frac{1}{\sqrt{M_{\alpha'} M_{\alpha}}}\vec D^{\alpha'\alpha}\left(\vec q\right)-{\omega'}^2\left(\vec q\right)\right|=0 
 \end{equation}\]</div>
@@ -363,8 +363,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <span class="eqno">(8)<a class="headerlink" href="#equation-matriu-dinamica" title="Permalink to this equation">¶</a></span>\[\mathbf D^{\alpha',\alpha}_{i,j}=\frac{\partial^2 E}{\partial u^{\alpha'*}_i(\vec q)\partial u^{\alpha}_{j}(\vec q)}\]</div>
 <p>on <span class="math notranslate nohighlight">\(u^{\alpha}_{i}\)</span> representa el desplaçament de l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>La segona derivada de l’energia de l’equació <a class="reference internal" href="#equation-matriu-dinamica">(8)</a> correspon al canvi en la força que actua sobre l’àtom <span class="math notranslate nohighlight">\(\alpha\)</span> en la direcció <span class="math notranslate nohighlight">\(j\)</span> quan es desplaça l’àtom <span class="math notranslate nohighlight">\(\alpha'\)</span> en la direcció <span class="math notranslate nohighlight">\(i\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-8345040b-0648-4a1d-84d0-cf6d34bf8709">
-<span class="eqno">(9)<a class="headerlink" href="#equation-8345040b-0648-4a1d-84d0-cf6d34bf8709" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-63e8aa81-9112-4aeb-b64c-165cf3319823">
+<span class="eqno">(9)<a class="headerlink" href="#equation-63e8aa81-9112-4aeb-b64c-165cf3319823" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \mathbf D^{\alpha',\alpha}_{i,j}=\frac{\partial}{\partial u^{\alpha*}_{i}}\vec F^{j}_{\alpha}(\vec q)
 \end{equation}\]</div>
 <div class="math notranslate nohighlight" id="equation-matriu-dinamica1">
@@ -373,8 +373,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <p>Per calcular la matriu dinàmica <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a> emprant el model de constants de forces necessitem, per tant, constuir el tensor de constants de forces. Anem a suposar que les forces entre àtoms sols depenen del tipus d’elements químics que interaccionen i de la seua distància relativa.</p>
 <p>Considerem un àtom <span class="math notranslate nohighlight">\(\alpha\)</span> situat en la cel·la <span class="math notranslate nohighlight">\(\vec l\)</span> , (<span class="math notranslate nohighlight">\(\alpha, \vec l\)</span>),a una certa distància, <span class="math notranslate nohighlight">\(|\vec R_{\alpha,\vec l}-\vec R_{\alpha',\vec{l'}}|\)</span> de l’àtom  (<span class="math notranslate nohighlight">\(\alpha'\)</span>,<span class="math notranslate nohighlight">\(\vec l'\)</span>), i escollint el sistema de coordenades cartesianes de manera que la direcció del vector que uneix ambdós àtoms coincideix amb l’eix de les <span class="math notranslate nohighlight">\(x\)</span>, l’eix <span class="math notranslate nohighlight">\(y\)</span> com la coordenada transversal en el plànol, <span class="math notranslate nohighlight">\(ti\)</span>, i <span class="math notranslate nohighlight">\(z\)</span> la coordenada perpendicular al plànol <span class="math notranslate nohighlight">\(to\)</span>.</p>
 <p>Podem escriure el tensor de forces d’este àtom, que segons el mòdul de la distància a l’àtom <span class="math notranslate nohighlight">\((\alpha',\vec l\)</span>) classificarem com <span class="math notranslate nohighlight">\(n\)</span>-èssim veí, de la forma <span id="id6">[<a class="reference internal" href="zbibliografia.html#id4">WR04</a>]</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-15f35147-dbaa-4df3-9855-c8010ffa4ab6">
-<span class="eqno">(11)<a class="headerlink" href="#equation-15f35147-dbaa-4df3-9855-c8010ffa4ab6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-926ad237-6dda-48b7-a176-fac3b671ba33">
+<span class="eqno">(11)<a class="headerlink" href="#equation-926ad237-6dda-48b7-a176-fac3b671ba33" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \mathbf \Phi_n^{\alpha',\alpha}=\begin{pmatrix}
 \phi_{n,r}^{\alpha',\alpha}&amp;\xi_n^{\alpha',\alpha} &amp;0\\
 -\xi_n^{\alpha',\alpha} &amp; \phi_{n,ti}^{\alpha',\alpha} &amp; 0 \\
@@ -392,13 +392,13 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 0 &amp; 0 &amp; \phi_{n,to}^{\alpha',\alpha}
 \end{pmatrix}\end{split}\]</div>
 <p>Per calcular el tensor de constants de forces de cadascun dels <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(n\)</span>-èssim veï real de l’àtom <span class="math notranslate nohighlight">\(\alpha'\)</span>, que formen un angle <span class="math notranslate nohighlight">\(\theta\)</span> respecte de l’eix escollit com <span class="math notranslate nohighlight">\(x\)</span>, tenim que rotar la matriu de l’equació <a class="reference internal" href="#equation-tensordeforcessimplificat">(12)</a>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-17877846-7549-45de-9fd9-3ca4a1f8bfc4">
-<span class="eqno">(13)<a class="headerlink" href="#equation-17877846-7549-45de-9fd9-3ca4a1f8bfc4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0870617a-0afd-4e67-9681-d76eeaad050f">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0870617a-0afd-4e67-9681-d76eeaad050f" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \mathbf\Phi_{n,i}^{\alpha'\alpha}(\theta)=\mathbf U^{-1}(\theta)\mathbf\Phi_n^{\alpha'\alpha}(0)\mathbf U(\theta)
 \end{equation}\]</div>
 <p>on <span class="math notranslate nohighlight">\(\mathbf U(\theta)\)</span> ve donada per:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0538e2dc-119f-4fb9-9ffe-6b0475e73d5d">
-<span class="eqno">(14)<a class="headerlink" href="#equation-0538e2dc-119f-4fb9-9ffe-6b0475e73d5d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f17bae5a-5393-4af6-ab0c-dc50630bacd0">
+<span class="eqno">(14)<a class="headerlink" href="#equation-f17bae5a-5393-4af6-ab0c-dc50630bacd0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \mathbf U(\theta)=
 \begin{pmatrix}
 \cos(\theta)  &amp; \sin(\theta) &amp; 0 \\
@@ -408,8 +408,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 \end{equation}\]</div>
 <p>Una vegada que sabem com tenim que construir el tensor de constants de forces, el càlcul de la matriu dinàmica és directe, ja que sols tenim que fer ús de l’equació <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a>, és a dir multipliquem el tensor de constants de forces associat a la interacció entre els àtoms (<span class="math notranslate nohighlight">\(\alpha', \vec l'=\vec 0\)</span>) i (<span class="math notranslate nohighlight">\(\alpha,\vec l\)</span>) per la fase, <span class="math notranslate nohighlight">\(e^{i \vec q\cdot \vec R_\vec l}\)</span>, on recordem, <span class="math notranslate nohighlight">\(\vec R_\vec l=l_1 \vec a_1+ l_2 \vec a_2\)</span></p>
 <p>En el cas considerat, com la base esta constituida per dos àtoms, la dimensió del tensor de constants de forces (i de la matriu dinàmica) és <span class="math notranslate nohighlight">\(3\cdot 2\times 3\cdot 2= 6\times 6\)</span>. Observem que esta matriu està escrita en termes de <span class="math notranslate nohighlight">\(4\)</span> matris <span class="math notranslate nohighlight">\(3\times 3\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1064eba9-d28a-44ac-969c-379a1b0c5873">
-<span class="eqno">(15)<a class="headerlink" href="#equation-1064eba9-d28a-44ac-969c-379a1b0c5873" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f60c402b-9b57-4ca8-8f41-288e5262cf82">
+<span class="eqno">(15)<a class="headerlink" href="#equation-f60c402b-9b57-4ca8-8f41-288e5262cf82" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \label{eq:formamatriudinamica}
  \mathbf D=
  \begin{pmatrix}
@@ -419,16 +419,16 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 \end{equation}\]</div>
 <p>recalquem que hem indexat el àtoms de la base pel tipus d’element al que pertanyen, pero en cas que els <span class="math notranslate nohighlight">\(2\)</span> àtoms de la base pertanyeren al mateix tipus d’element químic la matriu dinàmica també seria <span class="math notranslate nohighlight">\(6x6\)</span> (i podriem, per exemple, classificar-los com <span class="math notranslate nohighlight">\(A\)</span> i <span class="math notranslate nohighlight">\(B\)</span> per distingir-los).</p>
 <p>Un punt important és que tenim que considerar (en les submatrius <span class="math notranslate nohighlight">\(D^{BB}\)</span> i <span class="math notranslate nohighlight">\(D^{NN}\)</span>) les contribucions a la matriu dinàmica degudes a la interacció de l’àtom (<span class="math notranslate nohighlight">\(\alpha',0\)</span>) amb sí mateix. Ara bé, no necessitem escriure <span class="math notranslate nohighlight">\(\vec D_0^{BB}\)</span> i <span class="math notranslate nohighlight">\(\vec D_0^{NN}\)</span> explícitament, podem emprar el fet que si traslladem el conjunt d’àtoms en la mateixa direcció la força total és nul·la (si es desplaça el cristall com un tot no canvia l’energia potencial) i tal com ve indicat en <span id="id8">[<a class="reference internal" href="zbibliografia.html#id5">Fal08</a>]</span> a partir de l’equació <a class="reference internal" href="#equation-matriu-dinamica1">(10)</a>, obtenim que (considerant fins a 3ers veïns):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ee91837-947f-4519-8717-a55d58f3e20d">
-<span class="eqno">(16)<a class="headerlink" href="#equation-9ee91837-947f-4519-8717-a55d58f3e20d" title="Permalink to this equation">¶</a></span>\[\begin{equation}\begin{split}
+<div class="amsmath math notranslate nohighlight" id="equation-6501eb19-8c4f-4c82-ab90-eed616b508ed">
+<span class="eqno">(16)<a class="headerlink" href="#equation-6501eb19-8c4f-4c82-ab90-eed616b508ed" title="Permalink to this equation">¶</a></span>\[\begin{equation}\begin{split}
 \mathbf D_0^{BB}&amp;=-\sum_{i=1}^3\mathbf \Phi_{1,i}^{BN}-\sum_{i=1}^6\mathbf \Phi_{2,i}^{BB}-\sum_{i=1}^3\mathbf \Phi_{3,i}^{BN} \\
 \mathbf D_0^{NN}&amp;=-\sum_{i=1}^3\mathbf \Phi_{1,i}^{NB}-\sum_{i=1}^6\mathbf \Phi_{2,i}^{NN}-\sum_{i=1}^3\mathbf \Phi_{3,i}^{NB}
 \end{split}
 \end{equation}\]</div>
 <p>Es podrien tindre en compte altres simetries del cristall per determinar certes propietats del tensor de forces o de la seua transformada de Fourier, la matriu dinàmica, (certes relacions entre les components, tal com es fa en <span id="id9">[<a class="reference internal" href="zbibliografia.html#id5">Fal08</a>]</span>) però sols he emprat el fet que donat que l’energía es una funció quadràtica dels desplaçaments atòmics <span class="math notranslate nohighlight">\(u_{\alpha',\vec l'}, u_{\alpha,\vec l}\)</span>, la matriu de constants de forces té que ser simètrica,  i la seua transformada de Fourier, la matriu dinàmica té que ser una matriu hermítica, i per tant els seus valors propis, <span class="math notranslate nohighlight">\(\omega^2\)</span> seran nombres reals.</p>
 <p>Tenim per tant que la matriu dinàmica serà una matriu <span class="math notranslate nohighlight">\(6x6\)</span> hermítica. Però, donat que les components en <span class="math notranslate nohighlight">\(z\)</span> d’esta matriu es troben desacoblades, podem tractar aquestes vibracions de manera independent, de manera que en compte de treballar directament sobre una matriu <span class="math notranslate nohighlight">\(6x6\)</span> de la forma</p>
-<div class="amsmath math notranslate nohighlight" id="equation-908a5d7b-5d6d-469c-8790-59850a263fdd">
-<span class="eqno">(17)<a class="headerlink" href="#equation-908a5d7b-5d6d-469c-8790-59850a263fdd" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-48c871c8-3d8b-4f11-966d-59381494203a">
+<span class="eqno">(17)<a class="headerlink" href="#equation-48c871c8-3d8b-4f11-966d-59381494203a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mathbf D(\vec q)=
   \begin{pmatrix}
    D_{xx}^{BB} &amp; D_{xy}^{BB} &amp; 0 &amp;              &amp; D_{xx}^{BN} &amp; D_{xy}^{BN} &amp; 0 \\
@@ -444,8 +444,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <ul class="simple">
 <li><p>Primer tractarem les vibracions transversal al pla del cristall mitjançant una matriu <span class="math notranslate nohighlight">\(2x2\)</span>:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-5ea677c6-e38b-4cbd-b610-f8fc0d3020c8">
-<span class="eqno">(18)<a class="headerlink" href="#equation-5ea677c6-e38b-4cbd-b610-f8fc0d3020c8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-93f6ddbe-a751-4ac1-9777-adbd9ee75a8e">
+<span class="eqno">(18)<a class="headerlink" href="#equation-93f6ddbe-a751-4ac1-9777-adbd9ee75a8e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mathbf D_z(\vec q)=
   \begin{pmatrix}
     D_{zz}^{BB}  &amp; D_{zz}^{BN}        \\
@@ -455,8 +455,8 @@ La vibració cristal·lina quantitzada, o mode normal, s’anomena fonó per ana
 <ul class="simple">
 <li><p>Després tractarem les vibracions al pla del cristall emprant una matriu <span class="math notranslate nohighlight">\(4x4\)</span>:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-4c20385b-969b-43cf-aaea-730ea8f3e6d9">
-<span class="eqno">(19)<a class="headerlink" href="#equation-4c20385b-969b-43cf-aaea-730ea8f3e6d9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f67bf2bd-f83c-488c-aa46-e84f44504af6">
+<span class="eqno">(19)<a class="headerlink" href="#equation-f67bf2bd-f83c-488c-aa46-e84f44504af6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mathbf D_{xy}(\vec q)=
   \begin{pmatrix}
    D_{xx}^{BB} &amp; D_{xy}^{BB} &amp; D_{xx}^{BN} &amp; D_{xy}^{BN}  \\

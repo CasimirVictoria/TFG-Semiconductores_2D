@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Descripció del cristall de BN &#8212; Fonons i espectròpia Raman en semiconductors bidimensionals</title>
+    <title>Descripció del cristall de BN &#8212; Fonons en semiconductors bidimensionals</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -77,7 +77,7 @@
       <img src="_static/logo_tfg.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Fonons i espectròpia Raman en semiconductors bidimensionals</h1>
+      <h1 class="site-logo" id="site-title">Fonons en semiconductors bidimensionals</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -457,6 +457,7 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
      <span class="n">line</span><span class="p">([(</span><span class="mi">2</span><span class="o">*</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="o">+</span><span class="n">a_2</span><span class="o">/</span><span class="n">a</span><span class="p">),(</span><span class="n">a_1</span><span class="o">/</span><span class="n">a</span><span class="p">)],</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 
 <span class="n">show</span><span class="p">(</span><span class="n">xarxa</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">xarxa</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;../Grafiques/Xarxa.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -481,12 +482,23 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
       <span class="n">point</span><span class="p">(</span><span class="n">r_N</span><span class="o">/</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 
 <span class="n">show</span><span class="p">(</span><span class="n">cela</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">cela</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;../Grafiques/Cela.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/formulacio_matriu_dinamica_11_0.png" src="_images/formulacio_matriu_dinamica_11_0.png" />
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">r_B</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">r_N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left(0,\,\frac{1}{3} \, \sqrt{3} a\right)</script></html></div><div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left(\frac{1}{2} \, a,\,\frac{1}{6} \, \sqrt{3} a\right)</script></html></div></div>
 </div>
 <div class="section" id="identificacio-dels-veins-segons-la-seua-distancia">
 <h2>Identificació dels veins segons la seua distància<a class="headerlink" href="#identificacio-dels-veins-segons-la-seua-distancia" title="Link permanent a aquest títol">¶</a></h2>
@@ -503,12 +515,13 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <span class="n">AtomsB</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">RB</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">/</span><span class="n">a</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">AtomsN</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">RN</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span><span class="n">l_2</span><span class="p">)</span><span class="o">/</span><span class="n">a</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
-<span class="n">show</span><span class="p">(</span><span class="n">AtomsB</span><span class="o">+</span><span class="n">AtomsN</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">AtomsB</span><span class="o">+</span><span class="n">AtomsN</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">AtomsB</span><span class="o">+</span><span class="n">AtomsN</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;../Grafiques/Cristall.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_14_0.png" src="_images/formulacio_matriu_dinamica_14_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_15_0.png" src="_images/formulacio_matriu_dinamica_15_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input tag_output_scroll docutils container">
@@ -1396,19 +1409,21 @@ Visualitzem una regió de la xarxa hexagonal, amb els corresponents nucs (que no
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">)</span>
-<span class="n">b_1</span><span class="o">=</span><span class="n">b</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
-<span class="n">b_2</span><span class="o">=</span><span class="n">b</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">b_1</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">b_2</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
 <span class="n">nucsR</span><span class="o">=</span><span class="n">points</span><span class="p">([</span><span class="n">l_1</span><span class="o">*</span><span class="n">b_1</span><span class="o">/</span><span class="n">b</span><span class="o">+</span><span class="n">l_2</span><span class="o">*</span><span class="n">b_2</span><span class="o">/</span><span class="n">b</span> <span class="k">for</span> <span class="n">l_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">l_2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span> 
              <span class="n">size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">xarxaR</span><span class="o">=</span><span class="n">nucsR</span>
-
-<span class="n">show</span><span class="p">(</span><span class="n">xarxaR</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">xarxaR</span><span class="o">=</span><span class="n">nucsR</span><span class="o">+</span>\
+     <span class="n">line</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">b_1</span><span class="o">/</span><span class="n">b</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">+</span>\
+     <span class="n">line</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">b_2</span><span class="o">/</span><span class="n">b</span><span class="p">)],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span> 
+<span class="n">show</span><span class="p">(</span><span class="n">xarxaR</span> <span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">xarxaR</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;../Grafiques/XarxaR.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_17_0.png" src="_images/formulacio_matriu_dinamica_17_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_18_0.png" src="_images/formulacio_matriu_dinamica_18_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1648,16 +1663,9 @@ Notar que la contribució a la matriu dinàmica, en les submatrius de la diagona
 <span class="n">D_zz3ers</span><span class="o">=</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">D2BB3ers_zz</span><span class="p">,</span><span class="n">D1BN_zz</span><span class="o">+</span><span class="n">D3BN_zz</span><span class="p">],</span>        <span class="p">[</span><span class="n">D1NB_zz</span><span class="o">+</span><span class="n">D3NB_zz</span><span class="p">,</span><span class="n">D2NN3ers_zz</span><span class="p">]])</span>
 
 <span class="n">D_zz4ts</span><span class="o">=</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">D2BB4ts_zz</span><span class="p">,</span><span class="n">D1BN_zz</span><span class="o">+</span><span class="n">D3BN_zz</span><span class="o">+</span><span class="n">D4BN_zz</span><span class="p">],</span> <span class="p">[</span><span class="n">D1NB_zz</span><span class="o">+</span><span class="n">D3NB_zz</span><span class="o">+</span><span class="n">D4BN_zz</span><span class="p">,</span><span class="n">D2NN4ts_zz</span><span class="p">]])</span>
-
-<span class="n">show</span><span class="p">(</span><span class="n">D_zz3ers</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\left(\begin{array}{rr}
-\frac{{\phi_{2,to}^{BB}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{M_{B}} + \frac{{\phi_{2,to}^{BB}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{M_{B}} + \frac{{\phi_{2,to}^{BB}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{M_{B}} + \frac{{\phi_{2,to}^{BB}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{M_{B}} + \frac{{\phi_{2,to}^{BB}} e^{\left(i \, a q_{x}\right)}}{M_{B}} + \frac{{\phi_{2,to}^{BB}} e^{\left(-i \, a q_{x}\right)}}{M_{B}} - \frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{6 \, {\phi_{2,to}^{BB}}}{M_{B}} & \frac{{\phi_{3,to}^{BN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{3,to}^{BN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{3}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{3,to}^{BN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}} e^{\left(-i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} \\
-\frac{{\phi_{3,to}^{BN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{3,to}^{BN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{3}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{3,to}^{BN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}} e^{\left(i \, a q_{x}\right)}}{\sqrt{M_{B} M_{N}}} + \frac{{\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} & \frac{{\phi_{2,to}^{NN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{M_{N}} + \frac{{\phi_{2,to}^{NN}} e^{\left(\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{M_{N}} + \frac{{\phi_{2,to}^{NN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} + \frac{1}{2} i \, a q_{x}\right)}}{M_{N}} + \frac{{\phi_{2,to}^{NN}} e^{\left(-\frac{1}{2} i \, \sqrt{3} a q_{y} - \frac{1}{2} i \, a q_{x}\right)}}{M_{N}} + \frac{{\phi_{2,to}^{NN}} e^{\left(i \, a q_{x}\right)}}{M_{N}} + \frac{{\phi_{2,to}^{NN}} e^{\left(-i \, a q_{x}\right)}}{M_{N}} - \frac{3 \, {\phi_{1,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{3 \, {\phi_{3,to}^{BN}}}{\sqrt{M_{B} M_{N}}} - \frac{6 \, {\phi_{2,to}^{NN}}}{M_{N}}
-\end{array}\right)</script></html></div></div>
 </div>
 <div class="section" id="primer-considerem-fins-3ers-veins">
 <h3>Primer considerem fins 3ers veïns<a class="headerlink" href="#primer-considerem-fins-3ers-veins" title="Link permanent a aquest títol">¶</a></h3>
@@ -1956,7 +1964,7 @@ Així mateix, si emprem un altre sistema d’equacions les solucions són difere
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_56_0.png" src="_images/formulacio_matriu_dinamica_56_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_57_0.png" src="_images/formulacio_matriu_dinamica_57_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -2130,7 +2138,7 @@ Així mateix, si emprem un altre sistema d’equacions les solucions són difere
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_68_0.png" src="_images/formulacio_matriu_dinamica_68_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_69_0.png" src="_images/formulacio_matriu_dinamica_69_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -2515,11 +2523,13 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
      <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vector d</span><span class="se">\&#39;</span><span class="s1">ona reduït&#39;</span><span class="p">,</span><span class="s1">&#39;freqüència $cm^{-1}$&#39;</span><span class="p">],</span><span class="n">axes_labels_size</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">save</span><span class="p">(</span><span class="n">dispersio3ers</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">524</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span> <span class="n">tick_formatter</span><span class="o">=</span><span class="p">[[</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">,</span><span class="s2">&quot;$M$&quot;</span><span class="p">,</span> <span class="s2">&quot;$K$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span>\
      <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vector d</span><span class="se">\&#39;</span><span class="s1">ona reduït&#39;</span><span class="p">,</span><span class="s1">&#39;freqüència $cm^{-1}$&#39;</span><span class="p">],</span><span class="n">axes_labels_size</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio3ers.pdf&quot;</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">dispersio3ers</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">524</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span> <span class="n">tick_formatter</span><span class="o">=</span><span class="p">[[</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">,</span><span class="s2">&quot;$M$&quot;</span><span class="p">,</span> <span class="s2">&quot;$K$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span>\
+     <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vector d</span><span class="se">\&#39;</span><span class="s1">ona reduït&#39;</span><span class="p">,</span><span class="s1">&#39;freqüència $cm^{-1}$&#39;</span><span class="p">],</span><span class="n">axes_labels_size</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio3ers.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_92_0.png" src="_images/formulacio_matriu_dinamica_92_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_93_0.png" src="_images/formulacio_matriu_dinamica_93_0.png" />
 </div>
 </div>
 </div>
@@ -2711,13 +2721,15 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/formulacio_matriu_dinamica_97_0.png" src="_images/formulacio_matriu_dinamica_97_0.png" />
+<img alt="_images/formulacio_matriu_dinamica_98_0.png" src="_images/formulacio_matriu_dinamica_98_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save</span><span class="p">(</span><span class="n">dispersio4ts</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">524</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span> <span class="n">tick_formatter</span><span class="o">=</span><span class="p">[[</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">,</span><span class="s2">&quot;$M$&quot;</span><span class="p">,</span> <span class="s2">&quot;$K$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span>\
      <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vector d</span><span class="se">\&#39;</span><span class="s1">ona reduït&#39;</span><span class="p">,</span><span class="s1">&#39;freqüència, $cm^{-1}$&#39;</span><span class="p">],</span><span class="n">axes_labels_size</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.pdf&quot;</span><span class="p">)</span>
+<span class="n">save</span><span class="p">(</span><span class="n">dispersio4ts</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">524</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span> <span class="n">tick_formatter</span><span class="o">=</span><span class="p">[[</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">,</span><span class="s2">&quot;$M$&quot;</span><span class="p">,</span> <span class="s2">&quot;$K$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\Gamma$&quot;</span><span class="p">],</span><span class="mi">500</span><span class="p">],</span>\
+     <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vector d</span><span class="se">\&#39;</span><span class="s1">ona reduït&#39;</span><span class="p">,</span><span class="s1">&#39;freqüència, $cm^{-1}$&#39;</span><span class="p">],</span><span class="n">axes_labels_size</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;/home/casimir/Documents/Fisica/TFG/TFG-Semiconductores_2D/Grafiques/Dispersio4ts.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2805,19 +2817,13 @@ Per una altra banda els termes de fora de l’arrel sols difereixen en 2 i 3 res
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IFrame</span><span class="p">(</span><span class="s2">&quot;https://henriquemiranda.github.io/phononwebsite/phonon.html&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;1680&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;800&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://henriquemiranda.github.io/phononwebsite/phonon.html&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100%&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;640&quot;</span> <span class="na">allowfullscreen</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\verb|<IPython.lib.display.IFrame|\phantom{\verb!x!}\verb|object|\phantom{\verb!x!}\verb|at|\phantom{\verb!x!}\verb|0x7f2f4681d730>|</script></html></div></div>
+<div class="output text_html"><html><script type="math/tex; mode=display">\newcommand{\Bold}[1]{\mathbf{#1}}\verb|<IPython.core.display.HTML|\phantom{\verb!x!}\verb|object>|</script></html></div></div>
 </div>
 </div>
 </div>

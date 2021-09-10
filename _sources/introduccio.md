@@ -270,5 +270,3 @@ treballarem sobre dues matrius
    D_{yx}^{NB} & D_{yy}^{NB} & D_{xx}^{NN} & D_{xy}^{NN} \\
   \end{pmatrix}
 \end{equation}
-
-
