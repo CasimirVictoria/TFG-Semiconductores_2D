@@ -1,7 +1,7 @@
 \documentclass[12pt]{article} %,twoside,a4paper
 
 %\usepackage[a4paper,margin=24.5mm]{geometry} %margin=24.5mm
-\usepackage[left=2.5cm,right=2.5cm,top=2.5cm, bottom=3.3cm]{geometry}
+\usepackage[left=2.5cm,right=2.5cm,top=3cm, bottom=3.3cm]{geometry}
 %\usepackage{geometry}
 
 \usepackage[utf8]{inputenc}
@@ -137,7 +137,7 @@ Podem interpretar que
 \vec K_{h_1h_2}=2\pi\left(h_1\vec a_1^{*}+h_2\vec a_2^{*}\right)
 \end{equation}
 
-són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en l'espai $2\pi$-recíproc (sols es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En termes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments  $\vec p=\hbar\vec k$.
+són els vectors de translació cristal·lina que defineixen una xarxa cristal·lina en l'espai $2\pi$-recíproc (sols es diferencia de l'espai recíproc en un factor d'escala $2\pi$). En termes físics, l'espai $2\pi$-recíproc és l'\emph{espai de vectors d'ona} $\vec k$, i a falta d'un factors d'escala $\hbar$, coincideix amb l'espai de moments,  $\vec p=\hbar\vec k$.
 
 Cal tenir present que l'espai $2\pi$-recíproc és el fonamental en l'estudi dels sòlids cristal·lins, ja que els estats de les partícules i les interaccions físiques de interès es descriuen en l'espai de vectors d'ona, $\vec k$.
 
@@ -174,7 +174,7 @@ Moltes propietats físiques dels sòlids poden classificar-se bé com electròni
 Notem, però, que estem tractant amb una primera aproximació al problema i algunes propietats físiques venen determinades per la interacció entre els electrons i les vibracions atòmiques.
 
 A continuació es mostra una breu descripció d'esta aproximació, basada en l'explicació que trobem a \cite{brueesch82_phonon}
-La idea essencial es que donat els ions són entre $2\times 10^3$ a $10^5$ vegades més pesats es mouen molt més lentament que els electrons.
+La idea essencial es que donat que els ions són entre $2\times 10^3$ a $10^5$ vegades més pesats es mouen molt més lentament que els electrons.
 
 Considerem el Hamiltonià total per al cristall, denotat per $r$ com el símbol col·lectiu per a les coordenades dels electrons de valència i $R$ per a les coordenades dels ions. Podem escriure:
 \begin{equation}
@@ -204,13 +204,14 @@ Si considerem que la funció d'ona és separable:
  \Xi(r,R)=\chi_R(r)\psi(R)
 \end{equation}
 
-Substituïnt \ref{eq:Xichipsi} en \ref{eq:HXi} i emprant \ref{eq:Eechi}, pot comprovar-se que \ref{eq:Xichipsi} es també solució de \ref{eq:HXi} sempre que certs termes puguen negligir-se i la funció dóna $\psi(R)$ complisca:
+Substituïnt \ref{eq:Xichipsi} en \ref{eq:HXi} i emprant \ref{eq:Eechi}, pot comprovar-se que \ref{eq:Xichipsi} es també solució de \ref{eq:HXi} sempre que certs termes puguen negligir-se i la funció d'ona $\psi(R)$ satisfà la següent relació:
 
 \begin{equation}
+ \label{eq:solspsi}
  \left[T_i+V_{ii}(R)+E_e(R)\right]\psi(R)=E \psi(R)
 \end{equation}
 
-L'equació involucra únicament la funció d'ona dels ions. Per tant, que per al moviment iònic podem considerar una \emph{energia potencial efectiva}
+L'equació (\ref{eq:solspsi}) involucra únicament la funció d'ona dels ions. Per tant, per al moviment iònic podem considerar una \emph{energia potencial efectiva}
 
 \begin{equation}
  V(R)=V_{ii}(R)+E_e(R)
@@ -444,10 +445,6 @@ treballarem sobre dues matrius
 \end{enumerate}
 
 
- 
-\newpage
-
-
 \section{Eines emprades}
 
 Els càlculs s'han realitzat en el llenguatge de programació \href{https://www.python.org/}{python} \cite{4160250}, emprant el software matemàtic \href{https://www.sagemath.org/}{Sagemath} \cite{sagemath}. Sagemath està construït sobre python i facilita un accés unificat a biblioteques orientades a càlcul numèric com \href{https://numpy.org/}{numpy} \cite{harris2020array} , \href{https://scipy.org/}{scipy} \cite{2020SciPy-NMeth}, biblioteques orientades a càlcul simbòlic com \href{https://www.sympy.org/}{sympy} i el sistema d'àlgebra computacional \href{https://maxima.sourceforge.io/}{Maxima}, entre molts altres. Si es necessita emprar python o qualsevol de les seues biblioteques es poden emprar directament també; en este treball, per exemple, he emprat també la biblioteca \href{https://pandas.pydata.org/}{pandas}\cite{reback2020pandas} 
@@ -462,8 +459,6 @@ Al repositori de github, dins de la carpeta \textit{Memoria} es troba un petit \
 
 Notem que tot els software emprat per a la realització del treball és de codi obert i gratuït.
 
-
-\newpage
 \section{Descripció del cristall de BN}
 
 Passem ara a descriure el sistema que s'ha estudiat i els resultats dels càlculs realitzats.
@@ -528,18 +523,16 @@ Els punts crítics de la zona de Brillouin són:
  \Gamma=(0,0)\quad M=\left(q_x=\pi/a,q_y=\frac{\pi}{\sqrt{3} a}\right)\quad K=\left(q_x=\frac{4\pi}{3 a}, q_y=0\right)
 \end{equation}
 
-\newpage
-
 \begin{figure}[h]
 \centering
 \begin{subfigure}[b]{0.4\textwidth}
 \centering
-\sageplot[width=7cm]{xarxaR, figsize=4}
+\sageplot[width=6.5cm]{xarxaR, figsize=4}
 \caption{Xarxa $2\pi$-recíproca}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
 \centering
-\includegraphics[width=6cm]{../Grafiques/zona_brillouin.png}
+\includegraphics[width=6.5cm]{../Grafiques/zona_brillouin.png}
 \caption{Primera zona de Brillouin d'una xarxa hexagonal}
 \end{subfigure}
 \end{figure}
@@ -714,7 +707,7 @@ Podem observar que els valors propis trobats en $\Gamma$ i estos dos en $K$ són
 Finalment, assignant a cadascuna de les equacions obtesses per als valors propis el valor numèric corresponent, obtenim el següent ajust:
 
 \begin{center}
-\includegraphics[width=10cm]{../Grafiques/Dispersio3ers.pdf}
+\includegraphics[width=14cm]{../Grafiques/Dispersio3ers.pdf}
 \end{center}
 
 Ampliant lleugerament el codi emprat per considerar fins el quarts veïns millorem un poc l'ajust:
@@ -775,9 +768,9 @@ Nota: en este pdf s'inclou el codi font en \LaTeX  del document:\attachfile{TFG-
 
 \noindent \begin{itemize}
 
-\item Observing the obtained results we can conclude that the force-constants model is a really simple model with evident limitations: we can observe that at high frequencies the model is unable to reproduce the dispersion relation calculated by first principles using the \emph{Density Functional Perturbation Theory} method, this model is capable of providing a good description of the  dispersion relation at low freqüències and a qualitative description at high freqüències (except for the mode LO where totally fails)
+\item Observing the obtained results we can conclude that the force-constants model is a really simple model with evident limitations: we can observe that at high frequencies the model is unable to reproduce the dispersion relation calculated by first principles using the \emph{Density Functional Perturbation Theory} method, this model is capable of providing a good description of the  dispersion relation at low frequencies and a qualitative description at high frequencies (except for the LO branch where totally fails)
 
-\item We must keep in mind that we have chosen the simplest possible model, with a diagonal force-constant tensor, and also that to make the adjustment to the data provided  only $3$ points have been used out of the more than  $524$ available (although they are the critical points of the Brillouin area).
+\item We must keep in mind that we have chosen the simplest possible model, with a diagonal force-constant tensor, and also that to make the adjustment to the data provided  only $3$ points have been used out of the more than $524$ available (although they are the critical points of the Brillouin area).
 
 \item We can conclude, therefore, that this force-constants model is useful to obtain a quick adjustment if we have experimental data, and that with almost total certainty it can be improved considering more points, for which it I would not proceed calculating the analytical expressions at the critical points as I did here, I would directly make use of numpy and scipy to perform the optimization of the experimental eigenvalues.
 
