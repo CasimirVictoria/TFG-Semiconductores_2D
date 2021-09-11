@@ -1,4 +1,4 @@
-* Fonons i espectroscòpia Raman en semiconductors bidimensionals
+* Fonons en semiconductors bidimensionals
 
 ** Objectius del treball proposat
 
